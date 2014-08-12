@@ -1,0 +1,189 @@
+<Screen
+	CID = "1"
+	AppID = "2"
+	AppVer = "4.2.111.0"
+	DocID = ""
+	HasCanvas = "0"
+	Width = "800"
+	Height = "600"
+	NextCID = "6"
+	RepresentativeRefID = "0"
+	UseDefRepresentative = "0">
+	<Elements
+		CID = "1">
+		<Element
+			CID = "1"
+			Type = "FrameWindow"
+			X = "158"
+			Y = "76"
+			Width = "528"
+			Height = "469"
+			Flags = "0"
+			WindowColour = "172,168,153,0,13"
+			Typeface = ""
+			FontAttributes = "1"
+			TextSize = "Normal"
+			Title = "Browser Window"
+			TitleBarHeight = "18"
+			IconMargin = "0"
+			BorderSize = "1"
+			IsBorderless = "0"
+			IsActive = "1"
+			IsDocWindow = "0"
+			HasSunkenWindow = "1"
+			CentreText = "0"
+			UseMutedColours = "0"
+			Mirror = "0"
+			Buttons = "1"
+			Icon = "DefaultApp"/>
+		<Element
+			CID = "2"
+			Type = "WebPage"
+			X = "164"
+			Y = "101"
+			Width = "516"
+			Height = "438"
+			Flags = "0"
+			BackgroundColour = "255,255,255,0,0"
+			BorderColour = "160,160,160,0,0"
+			MarginLeft = "0"
+			MarginRight = "0"
+			MarginTop = "0"
+			MarginBottom = "0"
+			BorderWidth = "0"
+			PageHeight = "400"/>
+		<Element
+			CID = "3"
+			Type = "DesignGrid"
+			X = "164"
+			Y = "101"
+			Width = "516"
+			Height = "406"
+			Flags = "0"
+			HorzLineColour = "28,81,128,0,7"
+			VertLineColour = "28,81,128,0,7"
+			ShadowColour = "28,81,128,0,7"
+			HighlightColour = "28,81,128,0,7"
+			FillColour = "255,255,255,0,6"
+			UnderlayColour = "192,192,255,0,0"
+			OuterMarginLeft = "12"
+			OuterMarginRight = "12"
+			OuterMarginTop = "12"
+			OuterMarginBottom = "15"
+			InnerMarginLeft = "0"
+			InnerMarginRight = "0"
+			InnerMarginTop = "0"
+			InnerMarginBottom = "0"
+			ColumnType = "Count"
+			Columns = "1"
+			ColumnEvery = "40"
+			ColumnSpacing = "8"
+			RowType = "Count"
+			Rows = "1"
+			RowEvery = "30"
+			RowSpacing = "5"
+			ShowHorzLines = "0"
+			ShowVertLines = "0"
+			ShowCellBorders = "0"
+			FillCells = "0"
+			ManualUnderlay = "0"/>
+		<Element
+			CID = "4"
+			Type = "StaticText"
+			X = "176"
+			Y = "113"
+			Width = "180"
+			Height = "26"
+			Flags = "0"
+			FillColour = "236,233,216,0,16"
+			TextColour = "0,0,0,0,19"
+			Typeface = ""
+			FontAttributes = "1"
+			TextSize = "Large"
+			Text = "Privacy Policy"
+			IsDisabled = "0"
+			Fill = "None"
+			HorzAlign = "Left"
+			VertAlign = "Top"/>
+		<Element
+			CID = "5"
+			Type = "StaticText"
+			X = "176"
+			Y = "139"
+			Width = "492"
+			Height = "353"
+			Flags = "0"
+			FillColour = "236,233,216,0,16"
+			TextColour = "0,0,0,0,19"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi vitaenunc eget orci hendrerit tempor. Vivamus erat massa, euismod sit amet, aliquet eget, dictum a, felis. Curabitur diam massa, laciniacondimentum, blandit non, porta et, risus. Integer mollis molestienisi. Sed vel nunc quis sapien posuere porta. Sed mattis mi. Ut leo. Nam venenatis tellus vitae orci. Morbi mollis. Nullam varius dolor quismi fermentum laoreet. Mauris facilisis iaculis nunc. Sed viverraeuismod lorem. Quisque interdum, lectus non aliquet rutrum, risus nislpulvinar ligula, eget suscipit tellus elit at odio.&#13;&#10;&#13;&#10;Maecenas nonummy eleifend dolor. Aliquam vel urna. Ut et quam. Vivamus nunc erat, malesuada et, euismod sed, interdum ac, quam. Morbifringilla cursus odio. Suspendisse aliquam. Integer luctus, ipsum nonvehicula molestie, purus neque gravida pede, sit amet accumsan nuncarcu ac nunc. Maecenas ac urna vel massa sagittis elementum. Classaptent taciti sociosqu ad litora torquent per conubia nostra, perinceptos hymenaeos. Vestibulum ultrices nunc eu erat pretium iaculis. Mauris sem enim, interdum sed, posuere at, lobortis in, sem. Morbi diamtellus, sollicitudin varius, iaculis in, malesuada ullamcorper, nunc.Morbi quis lacus non diam sodales pretium.&#13;&#10;&#13;&#10;Cras adipiscing tristique orci. Aliquam euismod, nisl nec nonummy malesuada, lacus lectus lacinia ipsum, tincidunt cursus est augue suscipit arcu. Vivamus magna est, vestibulum eu, imperdiet quis, tempor eu, eros. Quisque mauris diam, varius sed, nonummy sit amet, vehicula ac, felis. Suspendisse vel lorem. Lorem ipsumdolor sit amet, consectetuer adipiscing elit. Aliquam velit pede, hendrerit in, viverra nec, tincidunt vitaeleo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin pretiumvenenatis velit. Nulla aliquam aliquet purus. Maecenas dapibus urna sed purus. Duis iaculis. Nullapellentesque elit a sapien. Integer vestibulum semper sem. In fringilla sem at nisl. Praesent lacus sem, ullamcorper vitae, eleifend a, elementum ut, ipsum. Nulla vehicula, sapien eget suscipit ultricies, maurisdolor vehicula elit, sit amet porta odio nisi in sapien. Nulla sollicitudin, dolor nec adipiscingullamcorper, eros ligula blandit lacus, at molestie dui nulla sed pede. Aliquam in dui ut turpis mollisiaculis. Etiam nonummy, nibh ac ultricies tempus, lectus arcu iaculis quam, a laoreet nisl neque facilisissapien."
+			IsDisabled = "0"
+			Fill = "None"
+			HorzAlign = "Left"
+			VertAlign = "Top"/>
+		<Element
+			CID = "6"
+			Type = "WebButton"
+			X = "365"
+			Y = "506"
+			Width = "115"
+			Height = "21"
+			Flags = "0"
+			FillColour = "0,128,255,0,0"
+			LineColour = "113,111,100,0,22"
+			TextColour = "255,255,255,0,0"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			MarginLeft = "0"
+			MarginRight = "0"
+			MarginTop = "0"
+			MarginBottom = "0"
+			Text = "Close Window"
+			Depth = "3"
+			LineWidth = "1"
+			Shape = "Rounded"
+			HorzAlign = "Centre"
+			VertAlign = "Centre"/>
+		<Element
+			CID = "7"
+			Type = "StoryboardAcceptBox"
+			X = "334"
+			Y = "589"
+			Width = "180"
+			Height = "30"
+			Flags = "3"/>
+	</Elements>
+	<Connections
+		CID = "2">
+		<Connection
+			CID = "1"
+			Layer = "Storyboard"
+			Trigger = "LeftClick"
+			Type = "Accept"
+			SubType = ""
+			SourceSubItemID = ""
+			SourceRefID = "6"
+			TargetRefID = "7"
+			ConLineWidth = "2"
+			ConLineColour = "0,0,0,0,0"/>
+	</Connections>
+	<Groups
+		CID = "3"/>
+	<SelectionGroups
+		CID = "4"/>
+	<Notes
+		CID = "5">
+		<Note
+			CID = "1"
+			Name = "Description"
+			NextCID = "2">
+			<Text
+				CID = "1">
+				
+			</Text>
+		</Note>
+	</Notes>
+</Screen>

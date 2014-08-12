@@ -1,0 +1,44 @@
+<Workspace
+	CID = "1"
+	NextCID = "2"
+	IconCategory = "Documents">
+	<OpenFiles
+		CID = "1"
+		LastActive = "3">
+		<File
+			FileID = "0D7EA32B-CE10-48F2-A37509FA1E5B461D"
+			RootPath = "$Container"
+			RelativePathname = "Home.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "26D493D2-6638-4076-92C4D0BB0CC52227"
+			RootPath = "$Container"
+			RelativePathname = "Masters\Footer.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "2BAA5933-0457-4BCE-93C03AC3C5A9DDD5"
+			RootPath = "$Container"
+			RelativePathname = "Masters\Header.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "EB1A1A2E-29EB-4C73-826604B8DBBE5C1D"
+			RootPath = "$Container"
+			RelativePathname = "Downloads.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "3C32BFF9-D09B-4C93-80341152A679F4D6"
+			RootPath = "$Container"
+			RelativePathname = "Product A Detail.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "D14D2C39-A120-4D57-B0E54C2520BF02A6"
+			RootPath = "$Container"
+			RelativePathname = "About Us.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "C13A43D5-F011-4B02-9A34F26CAD2EF632"
+			RootPath = "$Container"
+			RelativePathname = "Products.gui"
+			ViewSettings = ""/>
+	</OpenFiles>
+</Workspace>

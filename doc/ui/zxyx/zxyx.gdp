@@ -1,0 +1,34 @@
+<Project
+	CID = "1"
+	NextCID = "4">
+	<MainDesign
+		CID = "1"
+		FileID = "AE22B3DE-F36A-4E78-AE1F993064FF6868"
+		RootPath = "$Container"
+		RelativePathname = "login.gui"/>
+	<Options
+		CID = "2"
+		UseProjectVisualStyle = "0"
+		DesignVisualStyle = "Windows Vista"
+		DesignColourScheme = "Vista Default"
+		DesignDefTypeface = "Microsoft Sans Serif"
+		DesignDefFontScale = "1.000000"
+		SimulationVisualStyle = "Windows Vista"
+		SimulationColourScheme = "Vista Default"
+		SimulationDefTypeface = "Microsoft Sans Serif"
+		SimulationDefFontScale = "1.000000"
+		SimBrowserBarOption = "Auto"
+		SimBackgroundFill = "Default"
+		SimBackgroundColour1 = "255,255,255,0,0"
+		SimBackgroundColour2 = "255,255,255,0,0"
+		SimBackgroundText = "Prototype"
+		SimBackgroundTextPosition = "TopLeft"
+		SimShowBackgroundStartDesignName = "1"
+		SimBackgroundTextColour = "48,128,48,0,0"
+		NextCID = "2">
+		<DataSets
+			CID = "1"/>
+	</Options>
+	<Links
+		CID = "3"/>
+</Project>

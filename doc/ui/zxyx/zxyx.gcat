@@ -1,0 +1,130 @@
+<Catalogue
+	CID = "1"
+	NextCID = "2">
+	<Files
+		CID = "1">
+		<FileInfo
+			ID = "16E48201-D9C4-472B-BFC10FA580D82B8C"
+			RelativePath = "Downloads01.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Downloads01.gui"
+			IsDeleted = "1"/>
+		<FileInfo
+			ID = "18CA87D2-1499-41D8-8F7CD78628B01E5E"
+			RelativePath = "Products.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Products.gui"
+			IsDeleted = "1"/>
+		<FileInfo
+			ID = "35982591-80E0-4215-8D12379968FEE750"
+			RelativePath = "About Us01.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "About Us01.gui"
+			IsDeleted = "1"/>
+		<FileInfo
+			ID = "3ED7EB8E-CAA5-48F9-BA91AF02638C92DF"
+			RelativePath = "Privacy Policy01.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Privacy Policy01.gui"
+			IsDeleted = "1"/>
+		<FileInfo
+			ID = "501E52A9-8005-4965-B58BC77C275468ED"
+			RelativePath = "Masters\Header01.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Masters\Header01.gui"
+			IsDeleted = "1"/>
+		<FileInfo
+			ID = "556B58FE-C9DE-4F52-954A9A34C2C4586D"
+			RelativePath = "Downloads.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Downloads.gui"
+			IsDeleted = "1"/>
+		<FileInfo
+			ID = "5F75522E-FBC7-4E76-815D0814CE909AD5"
+			RelativePath = "Masters\Header.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Masters\Header.gui"
+			IsDeleted = "1"/>
+		<FileInfo
+			ID = "668045AD-6B61-4804-84AE55B87F1153AF"
+			RelativePath = "index.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "index.gui"
+			IsDeleted = "1"/>
+		<FileInfo
+			ID = "6DBB4EA4-92D8-4A56-859A879402411217"
+			RelativePath = "Privacy Policy.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Privacy Policy.gui"
+			IsDeleted = "1"/>
+		<FileInfo
+			ID = "6E0D8EF9-163A-4B50-9B65086035F25EAE"
+			RelativePath = "tree.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "tree.gui"/>
+		<FileInfo
+			ID = "6EEF5914-491C-4D64-A9698EC73E180E04"
+			RelativePath = "out.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "out.gui"/>
+		<FileInfo
+			ID = "7AA88628-5C34-4717-B87CBFF0D5FF5898"
+			RelativePath = "in.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "in.gui"/>
+		<FileInfo
+			ID = "88C00581-DD59-4D2D-8552CC96E7CE081C"
+			RelativePath = "Home01.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Home01.gui"
+			IsDeleted = "1"/>
+		<FileInfo
+			ID = "979B68F9-9D5A-41D9-BF7679F03A7A0B89"
+			RelativePath = "Home.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Home.gui"
+			IsDeleted = "1"/>
+		<FileInfo
+			ID = "A5C51A5A-FC15-4742-834D581A04766F40"
+			RelativePath = "Masters\Footer.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Masters\Footer.gui"
+			IsDeleted = "1"/>
+		<FileInfo
+			ID = "AE22B3DE-F36A-4E78-AE1F993064FF6868"
+			RelativePath = "login.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "login.gui"
+			IsDeleted = "1"/>
+		<FileInfo
+			ID = "B6C676A7-CE75-4FB2-A8C654B5DFFE8B12"
+			RelativePath = "About Us.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "About Us.gui"
+			IsDeleted = "1"/>
+		<FileInfo
+			ID = "C875566F-33A0-4B36-AF89E106C23E9CA0"
+			RelativePath = "Product A Detail.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Product A Detail.gui"
+			IsDeleted = "1"/>
+		<FileInfo
+			ID = "C8F97C51-B8C2-49D5-8FD474E91522E93C"
+			RelativePath = "Product A Detail01.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Product A Detail01.gui"
+			IsDeleted = "1"/>
+		<FileInfo
+			ID = "DFDA493C-1640-4AFC-8B2D1FE2C80DA472"
+			RelativePath = "Masters\Footer01.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Masters\Footer01.gui"
+			IsDeleted = "1"/>
+		<FileInfo
+			ID = "E06988F0-81A3-4EF5-A27F292C4417FAF2"
+			RelativePath = "Products01.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Products01.gui"
+			IsDeleted = "1"/>
+	</Files>
+</Catalogue>

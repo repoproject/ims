@@ -1,0 +1,47 @@
+<Catalogue
+	CID = "1"
+	NextCID = "2">
+	<Files
+		CID = "1">
+		<FileInfo
+			ID = "078EDC1A-FED5-4AA7-86D32BAE2E37B6EE"
+			RelativePath = "Privacy Policy.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Privacy Policy.gui"/>
+		<FileInfo
+			ID = "0D7EA32B-CE10-48F2-A37509FA1E5B461D"
+			RelativePath = "Home.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Home.gui"/>
+		<FileInfo
+			ID = "26D493D2-6638-4076-92C4D0BB0CC52227"
+			RelativePath = "Masters\Footer.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Masters\Footer.gui"/>
+		<FileInfo
+			ID = "2BAA5933-0457-4BCE-93C03AC3C5A9DDD5"
+			RelativePath = "Masters\Header.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Masters\Header.gui"/>
+		<FileInfo
+			ID = "3C32BFF9-D09B-4C93-80341152A679F4D6"
+			RelativePath = "Product A Detail.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Product A Detail.gui"/>
+		<FileInfo
+			ID = "C13A43D5-F011-4B02-9A34F26CAD2EF632"
+			RelativePath = "Products.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Products.gui"/>
+		<FileInfo
+			ID = "D14D2C39-A120-4D57-B0E54C2520BF02A6"
+			RelativePath = "About Us.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "About Us.gui"/>
+		<FileInfo
+			ID = "EB1A1A2E-29EB-4C73-826604B8DBBE5C1D"
+			RelativePath = "Downloads.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "Downloads.gui"/>
+	</Files>
+</Catalogue>

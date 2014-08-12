@@ -1,0 +1,211 @@
+<Screen
+	CID = "1"
+	AppID = "2"
+	AppVer = "4.2.111.0"
+	DocID = ""
+	HasCanvas = "0"
+	Width = "800"
+	Height = "600"
+	NextCID = "6"
+	RepresentativeRefID = "0"
+	UseDefRepresentative = "0">
+	<Elements
+		CID = "1">
+		<Element
+			CID = "1"
+			Type = "WebPage"
+			X = "0"
+			Y = "0"
+			Width = "700"
+			Height = "399"
+			Flags = "0"
+			BackgroundColour = "255,255,255,0,0"
+			BorderColour = "160,160,160,0,0"
+			MarginLeft = "0"
+			MarginRight = "0"
+			MarginTop = "0"
+			MarginBottom = "0"
+			BorderWidth = "0"
+			PageHeight = "400"/>
+		<Element
+			CID = "2"
+			Type = "Component"
+			X = "0"
+			Y = "0"
+			Width = "700"
+			Height = "100"
+			Flags = "3"
+			BackgroundColour = "255,255,255,0,6"
+			FileID = "2BAA5933-0457-4BCE-93C03AC3C5A9DDD5"
+			RootPath = "$Container"
+			Filename = "Masters\Header.gui"
+			Background = "Transparent"
+			HorzAlign = "Left"
+			VertAlign = "Top"
+			MaintainSize = "0">
+			<Overrides>
+				<Override
+					Type = "WebTab"
+					SubItemID = "37;">
+					<PropertyStore
+						FillColour = "0,128,255,0,0"
+						TextColour = "255,255,255,0,0"
+						FontAttributes = "1"/>
+				</Override>
+			</Overrides>
+		</Element>
+		<Element
+			CID = "3"
+			Type = "DesignGrid"
+			X = "0"
+			Y = "108"
+			Width = "700"
+			Height = "181"
+			Flags = "0"
+			HorzLineColour = "28,81,128,0,7"
+			VertLineColour = "28,81,128,0,7"
+			ShadowColour = "28,81,128,0,7"
+			HighlightColour = "28,81,128,0,7"
+			FillColour = "255,255,255,0,6"
+			UnderlayColour = "192,192,255,0,0"
+			OuterMarginLeft = "12"
+			OuterMarginRight = "12"
+			OuterMarginTop = "12"
+			OuterMarginBottom = "0"
+			InnerMarginLeft = "0"
+			InnerMarginRight = "0"
+			InnerMarginTop = "0"
+			InnerMarginBottom = "0"
+			ColumnType = "Count"
+			Columns = "4"
+			ColumnEvery = "40"
+			ColumnSpacing = "8"
+			RowType = "Count"
+			Rows = "1"
+			RowEvery = "30"
+			RowSpacing = "5"
+			ShowHorzLines = "0"
+			ShowVertLines = "0"
+			ShowCellBorders = "0"
+			FillCells = "0"
+			ManualUnderlay = "0"/>
+		<Element
+			CID = "4"
+			Type = "StaticText"
+			X = "12"
+			Y = "120"
+			Width = "229"
+			Height = "26"
+			Flags = "0"
+			FillColour = "236,233,216,0,16"
+			TextColour = "75,0,130,0,0"
+			Typeface = "Verdana"
+			FontAttributes = "1"
+			TextSize = "140"
+			Text = "About Us"
+			IsDisabled = "0"
+			Fill = "None"
+			HorzAlign = "Left"
+			VertAlign = "Top"/>
+		<Element
+			CID = "5"
+			Type = "StaticText"
+			X = "12"
+			Y = "146"
+			Width = "505"
+			Height = "143"
+			Flags = "0"
+			FillColour = "236,233,216,0,16"
+			TextColour = "0,0,0,0,19"
+			Typeface = "Verdana"
+			FontAttributes = "0"
+			TextSize = "100"
+			Text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi vitaenunc eget orci hendrerit tempor. Vivamus erat massa, euismod sit amet,aliquet eget, dictum a, felis. Curabitur diam massa, laciniacondimentum, blandit non, porta et, risus. Integer mollis molestienisi. Sed vel nunc quis sapien posuere porta. Sed mattis mi. Ut leo.Nam venenatis tellus vitae orci. Morbi mollis. Nullam varius dolor quismi fermentum laoreet. Mauris facilisis iaculis nunc. Sed viverraeuismod lorem. Quisque interdum, lectus non aliquet rutrum, risus nislpulvinar ligula, eget suscipit tellus elit at odio.&#13;&#10;&#13;&#10;Maecenas nonummy eleifend dolor. Aliquam vel urna. Ut et quam.Vivamus nunc erat, malesuada et, euismod sed, interdum ac, quam. Morbifringilla cursus odio. Suspendisse aliquam. Integer luctus, ipsum nonvehicula molestie, purus neque gravida pede, sit amet accumsan nuncarcu ac nunc. Maecenas ac urna vel massa sagittis elementum. Classaptent taciti sociosqu ad litora torquent per conubia nostra, perinceptos hymenaeos. Vestibulum ultrices nunc eu erat pretium iaculis.Mauris sem enim, interdum sed, posuere at, lobortis in, sem. Morbi diamtellus, sollicitudin varius, iaculis in, malesuada ullamcorper, nunc.Morbi quis lacus non diam sodales pretium.&#13;&#10;&#13;&#10;Cras adipiscing tristique orci. Aliquam euismod, nisl nec nonummy malesuada, lacus lectus lacinia ipsum,tincidunt cursus est augue suscipit arcu. Vivamus magna est, vestibulum eu, imperdiet quis, tempor eu, eros.Quisque mauris diam, varius sed, nonummy sit amet, vehicula ac, felis. Suspendisse vel lorem. Lorem ipsumdolor sit amet, consectetuer adipiscing elit. Aliquam velit pede, hendrerit in, viverra nec, tincidunt vitaeleo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin pretiumvenenatis velit. Nulla aliquam aliquet purus. Maecenas dapibus urna sed purus. Duis iaculis. Nullapellentesque elit a sapien. Integer vestibulum semper sem. In fringilla sem at nisl. Praesent lacus sem,ullamcorper vitae, eleifend a, elementum ut, ipsum. Nulla vehicula, sapien eget suscipit ultricies, maurisdolor vehicula elit, sit amet porta odio nisi in sapien. Nulla sollicitudin, dolor nec adipiscingullamcorper, eros ligula blandit lacus, at molestie dui nulla sed pede. Aliquam in dui ut turpis mollisiaculis. Etiam nonummy, nibh ac ultricies tempus, lectus arcu iaculis quam, a laoreet nisl neque facilisissapien.&#13;&#10;"
+			IsDisabled = "0"
+			Fill = "None"
+			HorzAlign = "Left"
+			VertAlign = "Top"/>
+		<Element
+			CID = "11"
+			Type = "Component"
+			X = "0"
+			Y = "335"
+			Width = "700"
+			Height = "64"
+			Flags = "3"
+			BackgroundColour = "255,255,255,0,6"
+			FileID = "26D493D2-6638-4076-92C4D0BB0CC52227"
+			RootPath = "$Container"
+			Filename = "Masters\Footer.gui"
+			Background = "Transparent"
+			HorzAlign = "Left"
+			VertAlign = "Top"
+			MaintainSize = "0"/>
+		<Element
+			CID = "12"
+			Type = "TextAnnotation"
+			X = "45"
+			Y = "-76"
+			Width = "611"
+			Height = "63"
+			Flags = "0"
+			BorderColour = "0,0,128,0,0"
+			FillColour = "204,255,204,0,0"
+			TitleColour = "0,0,128,0,0"
+			AnnotationColour = "0,0,128,0,0"
+			TitleTypeface = ""
+			TitleFontAttributes = "1"
+			TitleSize = "Normal"
+			AnnotationTypeface = ""
+			AnnotationFontAttributes = "0"
+			AnnotationSize = "Normal"
+			Title = "Component Overrides"
+			Annotation = "This page uses the Header and Footer component designs and overrides Header element properties to indicate which page this is. Use the &quot;Component Item Selection Mode&quot; button on the toolbar to select sub-elements to modify."
+			BorderWidth = "2"
+			ShadowDepth = "5"
+			HasBorder = "1"
+			HasShadow = "1"
+			Fill = "Solid"
+			HorzAlign = "Left"
+			VertAlign = "Top"/>
+		<Element
+			CID = "13"
+			Type = "ImagePlaceholder"
+			X = "525"
+			Y = "150"
+			Width = "163"
+			Height = "97"
+			Flags = "0"
+			FillColour = "255,255,255,0,6"
+			LineColour = "172,168,153,0,17"
+			TextColour = "0,0,0,0,9"
+			Typeface = ""
+			FontAttributes = "2"
+			TextSize = "Large"
+			BorderSize = "2"
+			MarginLeft = "0"
+			MarginRight = "0"
+			MarginTop = "0"
+			MarginBottom = "0"
+			Text = "Company Photo"
+			Fill = "None"/>
+	</Elements>
+	<Connections
+		CID = "2"/>
+	<Groups
+		CID = "3"/>
+	<SelectionGroups
+		CID = "4"/>
+	<Notes
+		CID = "5">
+		<Note
+			CID = "1"
+			Name = "Description"
+			NextCID = "2">
+			<Text
+				CID = "1">
+				
+			</Text>
+		</Note>
+	</Notes>
+</Screen>

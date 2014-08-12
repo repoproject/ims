@@ -1,0 +1,252 @@
+<Screen
+	CID = "70085210"
+	AppID = "2"
+	AppVer = "4.2.111.0"
+	DocID = ""
+	HasCanvas = "0"
+	Width = "791"
+	Height = "590"
+	NextCID = "6"
+	RepresentativeRefID = "0"
+	UseDefRepresentative = "1">
+	<Elements
+		CID = "1">
+		<Element
+			CID = "1096121051"
+			Type = "WebPage"
+			X = "0"
+			Y = "0"
+			Width = "791"
+			Height = "590"
+			Flags = "0"
+			BackgroundColour = "255,255,255,0,0"
+			BorderColour = "160,160,160,0,0"
+			MarginLeft = "0"
+			MarginRight = "0"
+			MarginTop = "0"
+			MarginBottom = "0"
+			BorderWidth = "0"
+			PageHeight = "400"/>
+		<Element
+			CID = "1096089606"
+			Type = "WebPagePart"
+			X = "0"
+			Y = "0"
+			Width = "791"
+			Height = "83"
+			Flags = "0"
+			FillColour = "255,255,255,0,0"
+			MarginLeft = "12"
+			MarginRight = "12"
+			MarginTop = "12"
+			MarginBottom = "12"
+			Fill = "None"/>
+		<Element
+			CID = "1096107730"
+			Type = "Tree"
+			X = "0"
+			Y = "83"
+			Width = "194"
+			Height = "507"
+			Flags = "0"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			NextItemID = "15"
+			IsDisabled = "0"
+			HasBorder = "1"
+			HasButtons = "1"
+			HasLines = "1"
+			HasLinesAtRoot = "0"
+			HasHorzScrollBar = "0"
+			HasVertScrollBar = "1"
+			Mirror = "0"
+			WordWrap = "0"
+			IconMargin = "0"
+			ItemHeight = "16"
+			Icons = "Folders">
+			<TreeItem
+				ItemID = "1"
+				Text = "出入库管理"
+				IsBold = "1"
+				IsChecked = "0"
+				IsExpanded = "1"
+				IsSelected = "0">
+				<TreeItem
+					ItemID = "2"
+					Text = "出入库管理"
+					IsBold = "1"
+					IsChecked = "0"
+					IsExpanded = "1"
+					IsSelected = "0">
+					<TreeItem
+						ItemID = "5"
+						Text = "入库"
+						IsBold = "0"
+						IsChecked = "0"
+						IsExpanded = "0"
+						IsSelected = "0"/>
+					<TreeItem
+						ItemID = "6"
+						Text = "出库"
+						IsBold = "0"
+						IsChecked = "0"
+						IsExpanded = "0"
+						IsSelected = "0"/>
+					<TreeItem
+						ItemID = "11"
+						Text = "数据维护"
+						IsBold = "1"
+						IsChecked = "1"
+						IsExpanded = "1"
+						IsSelected = "0">
+						<TreeItem
+							ItemID = "13"
+							Text = "试剂"
+							IsBold = "1"
+							IsChecked = "1"
+							IsExpanded = "0"
+							IsSelected = "0"/>
+					</TreeItem>
+					<TreeItem
+						ItemID = "12"
+						Text = "系统业务统计"
+						IsBold = "1"
+						IsChecked = "1"
+						IsExpanded = "1"
+						IsSelected = "0">
+						<TreeItem
+							ItemID = "14"
+							Text = "R统计"
+							IsBold = "1"
+							IsChecked = "1"
+							IsExpanded = "0"
+							IsSelected = "0"/>
+					</TreeItem>
+				</TreeItem>
+				<TreeItem
+					ItemID = "3"
+					Text = "用户管理"
+					IsBold = "1"
+					IsChecked = "0"
+					IsExpanded = "1"
+					IsSelected = "0">
+					<TreeItem
+						ItemID = "7"
+						Text = "用户维护"
+						IsBold = "0"
+						IsChecked = "0"
+						IsExpanded = "0"
+						IsSelected = "0"/>
+				</TreeItem>
+			</TreeItem>
+		</Element>
+		<Element
+			CID = "1203968369"
+			Type = "Component"
+			X = "-935"
+			Y = "-13"
+			Width = "791"
+			Height = "590"
+			Flags = "3"
+			BackgroundColour = "255,255,255,0,6"
+			FileID = "7AA88628-5C34-4717-B87CBFF0D5FF5898"
+			RootPath = "$Container"
+			Filename = "in.gui"
+			Background = "Transparent"
+			HorzAlign = "Left"
+			VertAlign = "Top"
+			MaintainSize = "0"/>
+		<Element
+			CID = "701237334"
+			Type = "Bitmap"
+			X = "0"
+			Y = "0"
+			Width = "791"
+			Height = "78"
+			Flags = "0"
+			RootPath = "$Absolute"
+			Filename = "C:\Documents and Settings\ab038094\桌面\f8c23117565d273b-13c13ce17525a788-848ef8d164a72272a6ca4ae9235b7c81.jpg"
+			Placement = "Stretch"
+			HorzAlign = "Left"
+			VertAlign = "Top"
+			ClipLeft = "0"
+			ClipRight = "0"
+			ClipTop = "0"
+			ClipBottom = "0"/>
+		<Element
+			CID = "1012341398"
+			Type = "Component"
+			X = "-867"
+			Y = "257"
+			Width = "791"
+			Height = "590"
+			Flags = "3"
+			BackgroundColour = "255,255,255,0,6"
+			FileID = "6EEF5914-491C-4D64-A9698EC73E180E04"
+			RootPath = "$Container"
+			Filename = "out.gui"
+			Background = "Transparent"
+			HorzAlign = "Left"
+			VertAlign = "Top"
+			MaintainSize = "0"/>
+		<Element
+			CID = "1492664295"
+			Type = "Bitmap"
+			X = "194"
+			Y = "79"
+			Width = "597"
+			Height = "507"
+			Flags = "0"
+			RootPath = "$Absolute"
+			Filename = "C:\Documents and Settings\ab038094\桌面\20121010145739531.jpg"
+			Placement = "Stretch"
+			HorzAlign = "Left"
+			VertAlign = "Top"
+			ClipLeft = "0"
+			ClipRight = "0"
+			ClipTop = "0"
+			ClipBottom = "0"/>
+	</Elements>
+	<Connections
+		CID = "2">
+		<Connection
+			CID = "1203962728"
+			Layer = "DesignElements"
+			Trigger = "LeftClick"
+			Type = "Navigation"
+			SubType = "ModelessSwitchTop"
+			SourceSubItemID = "5"
+			SourceRefID = "1096107730"
+			TargetRefID = "1203968369"
+			ConLineWidth = "2"
+			ConLineColour = "0,0,0,0,0"/>
+		<Connection
+			CID = "1012343940"
+			Layer = "DesignElements"
+			Trigger = "LeftClick"
+			Type = "Navigation"
+			SubType = "ModelessSwitchTop"
+			SourceSubItemID = "6"
+			SourceRefID = "1096107730"
+			TargetRefID = "1012341398"
+			ConLineWidth = "2"
+			ConLineColour = "0,0,0,0,0"/>
+	</Connections>
+	<Groups
+		CID = "3"/>
+	<SelectionGroups
+		CID = "4"/>
+	<Notes
+		CID = "5">
+		<Note
+			CID = "70067777"
+			Name = "Description"
+			NextCID = "2">
+			<Text
+				CID = "1">
+				
+			</Text>
+		</Note>
+	</Notes>
+</Screen>
