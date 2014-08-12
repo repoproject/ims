@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <context-param>
+    <param-name>configpath</param-name>
+    <param-value>classpath{/reportconfig}</param-value>
+  </context-param>
+  <!-- 数据库驱动 -->
+  <context-param>
+  	<param-name>driver</param-name>
+  	<param-value>oracle.jdbc.driver.OracleDriver</param-value>
+  </context-param>
+  <!-- 数据库连接 -->
+  <context-param>
+  	<param-name>url</param-name>
+  	<!-- <param-value>jdbc:oracle:thin:@192.168.14.151:1521:WJQW</param-value> -->
+    <param-value>jdbc:oracle:thin:@(DESCRIPTION =  
+          (ADDRESS_LIST =  
+                    (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.14.41)(PORT = 1521))  
+                    (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.14.41)(PORT = 1521))  
+                    (FAILOVER=yes)   
+                    (LOAD_BALANCE =yes)  
+         )  
+         (CONNECT_DATA =  
+                 (SERVER = DEDICATED)  
+                (SERVICE_NAME = gq)  
+          )  
+)</param-value>
+  </context-param>
+  <!-- 数据库用户名 -->
+  <context-param>
+  	<param-name>user</param-name>
+  	<param-value>cpzh</param-value>
+  </context-param>
+  <!-- 数据库密码  -->
+  <context-param>
+  	<param-name>password</param-name>
+  	<param-value>cpzhdb</param-value>
+  </context-param> 
+  <!-- 接收数据组播IP地址  -->
+  <context-param>
+  	<param-name>RecvIP</param-name>
+  	<param-value>225.57.3.1</param-value>
+  </context-param>
+  <!-- 接收数据端口  -->
+  <context-param>
+  	<param-name>RecvPort</param-name>
+  	<param-value>7000</param-value>
+  </context-param>
+   <!-- 发送数据组播IP地址  -->
+  <context-param>
+  	<param-name>SendIP</param-name>
+  	<param-value>225.57.6.1</param-value>
+  </context-param>
+  <!-- 发送数据端口  -->
+  <context-param>
+  	<param-name>SendPort</param-name>
+  	<param-value>7000</param-value>
+  </context-param>
+ 
+  <!-- SJJS软件“计划”状态更新时间 -->
+  <context-param>
+  	<param-name>minute1</param-name>
+  	<param-value>27</param-value>
+  </context-param> 
+  <context-param>
+  	<param-name>second1</param-name>
+  	<param-value>30</param-value>
+  </context-param> 
+  <!-- SJJS软件“计划”状态更新周期(单位 minute) -->
+  <context-param>
+  	<param-name>period1</param-name>
+  	<param-value>1</param-value> 
+  </context-param> 
+  
+  <!-- CPGL软件“计划”状态更新时间 -->
+  <context-param>
+  	<param-name>minute2</param-name>
+  	<param-value>27</param-value>
+  </context-param> 
+  <context-param>
+  	<param-name>second2</param-name>
+  	<param-value>30</param-value>
+  </context-param> 
+  <!-- CPGL软件“计划”状态更新周期(单位 minute) -->
+  <context-param>
+  	<param-name>period2</param-name>
+  	<param-value>1</param-value>
+  </context-param> 
+   
+   <!-- FXZZ软件“计划”状态更新时间 -->
+  <context-param>
+  	<param-name>minute3</param-name>
+  	<param-value>27</param-value>
+  </context-param> 
+  <context-param>
+  	<param-name>second3</param-name>
+  	<param-value>30</param-value>
+  </context-param> 
+  <!-- FXZZ软件“计划”状态更新周期(单位 minute) -->
+  <context-param>
+  	<param-name>period3</param-name>
+  	<param-value>1</param-value>
+  </context-param> 
+   
+  <!-- YXGL软件“计划”状态更新时间 -->
+  <context-param>
+  	<param-name>minute4</param-name>
+  	<param-value>27</param-value>
+  </context-param> 
+  <context-param>
+  	<param-name>second4</param-name>
+  	<param-value>30</param-value>
+  </context-param> 
+  <!-- YXGL软件“计划”状态更新周期(单位 minute) -->
+  <context-param>
+  	<param-name>period4</param-name>
+  	<param-value>1</param-value>
+  </context-param> 
+   
+    
+  <filter>
+    <filter-name>Encoding</filter-name>
+    <filter-class>
+			com.wabacusdemo.util.SetCharacterEncodingFilter
+		</filter-class>
+  </filter>
+  <filter>
+    <filter-name>LoginFilter</filter-name>
+    <filter-class>com.zxyx.service.LoginFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+    <filter-name>Encoding</filter-name>
+    <url-pattern>*.jsp</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>Encoding</filter-name>
+    <url-pattern>*.wx</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>LoginFilter</filter-name>
+    <url-pattern>*.jsp</url-pattern>
+  </filter-mapping>
+  
+  <listener>
+    <listener-class>com.wabacus.WabacusServlet</listener-class>
+  </listener>
+  <servlet>
+    <servlet-name>reportservlet</servlet-name>
+    <servlet-class>com.wabacus.WabacusServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>RecvData</servlet-name>
+    <servlet-class>com.zxyx.util.RecvData</servlet-class>
+    <load-on-startup>1</load-on-startup>   
+  </servlet>
+  <servlet>
+    <servlet-name>GetServerState</servlet-name>
+    <servlet-class>com.zxyx.service.GetServerState</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetServerInfo</servlet-name>
+    <servlet-class>com.zxyx.service.GetServerInfo</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetWarningInfo</servlet-name>
+    <servlet-class>com.zxyx.service.GetWarningInfo</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetControlCommandInfo</servlet-name>
+    <servlet-class>com.zxyx.service.GetControlCommandInfo</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>com.zxyx.service.Login</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>com.zxyx.service.Logout</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ModifyPassword</servlet-name>
+    <servlet-class>com.zxyx.service.ModifyPassword</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SendProcCommand</servlet-name>
+    <servlet-class>com.zxyx.service.SendProcCommand</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ConfigMsgWarning</servlet-name>
+    <servlet-class>com.zxyx.service.ConfigMsgWarning</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ConfigVoiceWarning</servlet-name>
+    <servlet-class>com.zxyx.service.ConfigVoiceWarning</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetVoiceWarningConfig</servlet-name>
+    <servlet-class>com.zxyx.service.GetVoiceWarningConfig</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetMsgWarningConfig</servlet-name>
+    <servlet-class>com.zxyx.service.GetMsgWarningConfig</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetSoftwareType</servlet-name>
+    <servlet-class>com.zxyx.service.GetSoftwareType</servlet-class>
+  </servlet> 
+
+
+
+  <servlet-mapping>
+    <servlet-name>reportservlet</servlet-name>
+    <url-pattern>/ShowReport.wx</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetServerState</servlet-name>
+    <url-pattern>/servlet/GetServerState</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetServerInfo</servlet-name>
+    <url-pattern>/servlet/GetServerInfo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetWarningInfo</servlet-name>
+    <url-pattern>/servlet/GetWarningInfo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetControlCommandInfo</servlet-name>
+    <url-pattern>/servlet/GetControlCommandInfo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/servlet/Login</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/servlet/Logout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  <servlet-name>ModifyPassword</servlet-name>
+    <url-pattern>/servlet/ModifyPassword</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SendProcCommand</servlet-name>
+    <url-pattern>/servlet/SendProcCommand</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ConfigMsgWarning</servlet-name>
+    <url-pattern>/servlet/ConfigMsgWarning</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ConfigVoiceWarning</servlet-name>
+    <url-pattern>/servlet/ConfigVoiceWarning</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetVoiceWarningConfig</servlet-name>
+    <url-pattern>/servlet/GetVoiceWarningConfig</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetMsgWarningConfig</servlet-name>
+    <url-pattern>/servlet/GetMsgWarningConfig</url-pattern>
+  </servlet-mapping>
+    <servlet-mapping>
+    <servlet-name>GetSoftwareType</servlet-name>
+    <url-pattern>/servlet/GetSoftwareType</url-pattern>
+  </servlet-mapping>
+
+
+  <jsp-config>
+    <taglib>
+      <taglib-uri>wabacus</taglib-uri>
+      <taglib-location>/WEB-INF/wabacus.tld</taglib-location>
+    </taglib>
+  </jsp-config>
+</web-app>

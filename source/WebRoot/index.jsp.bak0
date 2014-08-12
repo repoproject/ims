@@ -1,0 +1,21 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>主页</title>
+</head>
+<body>
+
+<ul><a href="dhgl.jsp">电话</a></ul>
+<ul><a href="dxgl.jsp">短信</a></ul>
+<ul><a href="gjrz.jsp">告警</a></ul>
+<ul><a href="gwgl.jsp">公文</a></ul>
+<ul><a href="yhgl.jsp">用户</a></ul>
+<ul><a href="yxrz.jsp">运行</a></ul>
+<ul><a href="ftp.jsp">FTP</a></ul>
+
+
+</body>
+</html>

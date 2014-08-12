@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications xmlns="http://www.wabacus.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
+	<page id="user" js="/webresources/script/validate.js,/webresources/script/demo.js">
+		<header>
+			<![CDATA[<p align="center"><font size="6"><b>用户基础信息管理</b></font></p>]]>
+		</header>
+		<report id="userlist" parenttitle="用户基础信息管理" type="editablelist" cellresize="1" rowselect="multiple-checkbox" pagesize="13" interceptor="com.wabacusdemo.DeleteUser">
+				
+			  <!--interceptor>
+				<beforedisplay-perrow>
+					if(rowDataBean.getRowindex()==-1) return ;//标题行
+					if(rowDataBean.getRowindex()%2==1)
+					{
+						String style=rowDataBean.getRowstyleproperty();
+						if(style==null) style="";
+						style+=" style='background:#CFDFF8'";
+						rowDataBean.setRowstyleproperty(style);
+					}
+				</beforedisplay-perrow>
+
+			</interceptor-->
+				<display mouseoverbgcolor="CCCCCC" colselect="false">
+				<col column="{col-rowselect}" width="20"></col>
+					<col column="{sequence:1}" label="序号" width="3%"/>
+					<col column="id" label="编号"  clickorderby="true" width="10%"/>
+					<col column="name" label="用户名称" clickorderby="true" width="40%"></col>
+					<col column="nickname" label="昵称" clickorderby="true" width="40%"></col>
+				</display>
+				<sql>
+					<select>
+						<value>
+							<![CDATA[SELECT id,name,nickname FROM t_user order by name]]>
+						</value>
+					</select>				
+				</sql>
+				<buttons>
+					<button name="button1" position="title" label="重置密码" extends="${wabacus.button2.default}">
+						<!-- invokeServerActionForComponent('yhglpage','yhgl','com.wabacusdemo.TestServerCallBack1',{name:'SELECTEDROW',value:true},true,testInvokeCallbackMethod1) -->
+						
+					</button>
+			        <!--  <button extends="${wabacus.button2.default}" name="button1" class="com.wabacus.system.buttons.ServerSQLActionButton" position="title" label="重置密码" successprompt="重置成功" failedprompt="重置失败"  confirmessage="是否重置该用户的密码？" positionorder="3"> 
+					<value>
+					<![CDATA[
+						update yxgluser(password = 'ecf6e9a713c8533bbad5393ec4a9dab4') where id=@{id__old};
+					]]>
+					</value>
+					</button-->
+			    </buttons>
+
+			</report>
+	</page>
+</applications>

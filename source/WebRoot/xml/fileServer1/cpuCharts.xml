@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chart caption="" subCaption="" dataStreamURL="cpuCharts.jsp" refreshInterval="5" numberSuffix="%" setAdaptiveYMin="1" xAxisName="" showRealTimeValue="0" labelDisplay="Rotate" slantLabels="1">
+  <categories/>
+  <dataset seriesName="CPU1" showValues="0"/>
+  <dataset seriesName="CPU2" showValues="0"/>
+  <styles>
+    <definition>
+      <style type="font" name="captionFont" size="14"/>
+    </definition>
+    <application>
+      <apply toObject="Realtimevalue" styles="captionFont"/>
+    </application>
+  </styles>
+</chart>

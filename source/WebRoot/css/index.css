@@ -1,0 +1,141 @@
+@charset "utf-8";
+#loginmsg,#beidouTime{
+	float:left;
+	font-size: 14px;
+	color: white;
+	padding-top: 10px;
+	font-family: "楷体";
+	font-weight: bold;
+}
+#beidouTime{
+	margin-left: 28px;
+	margin-right: 95px;
+}
+#logo{
+	line-height: 49px;
+	font-size: 19px;
+	margin-left: 74px;
+	color: white;
+	font-weight: bold;
+}
+img{
+	border:none;
+}
+.serverPic_top{
+	position: absolute;
+	top: 20%;
+}
+#server0{
+	left:24%;
+}
+#server1{
+	left:35.5%;
+}
+#server2{
+	/*left:53.4%;*/
+	left:57%;
+}
+#server3{
+	/*left:62.4%;*/
+	left:71%;
+}
+#server4{
+	left:73%;
+}
+.softPic_left{
+	position:absolute;
+	left:13%;
+	
+}
+#soft0,#soft4{
+	top: 20%;
+}
+#soft1,#soft5{
+	top: 30%;
+}
+#soft2,#soft7{
+	top: 50%;
+}
+#soft3,#soft8{
+	top: 62%;
+}
+#dbserver0{
+	position: absolute;
+	left: 23%;
+	top: 51%;
+}
+#dbserver1{
+	position: absolute;
+	left: 32%;
+	top: 51%;
+}
+#nasgate{
+	position: absolute;
+	left: 40%;
+	top: 54%;
+}
+#appserver0{
+	position: absolute;
+	left: 57%;
+	top: 51%;
+}
+#appserver1{
+	position: absolute;
+	left: 66.4%;
+	top: 51%;
+}
+.softPic_right{
+	position: absolute;
+	left: 81%;
+}
+/*
+#soft4{
+	top:64px;
+}
+#soft5{
+	top:107px;
+}
+#soft6{
+	top:150px;
+}
+#soft7{
+	top:240px;
+}
+#soft8{
+	top:300px;
+}*/
+#switch0{
+	position: absolute;
+	left: 20%;
+	top: 71%;
+}
+#switch1{
+	position: absolute;
+	left: 40%;
+	top: 71%;
+}
+#sanpic{
+	position: absolute;
+	left: 28%;
+	top: 82%;
+}
+#flashArea{
+	width: 800px;
+	height: 155px;
+	background-color: #DCD2E2;
+	float: left;
+	z-index: 99;
+	position: absolute;
+	left: 269px;
+	top: 200px;
+	border: 14px solid #060C09;
+}
+#flashArea h4{
+	font-size: 14px;
+    padding-top: 54px;
+}
+#flashArea p a{
+	color: #1212E9;
+	text-decoration: underline;
+	line-height: 94px;
+}

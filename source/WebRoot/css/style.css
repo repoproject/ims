@@ -1,0 +1,163 @@
+@charset "utf-8";
+
+body{
+	background-color:#B3E9F7;
+}
+h2{
+	margin-bottom:0;
+}
+#capture{
+	text-align:center;
+}
+.systemInfo{
+	width:19%;
+	height:330px;
+	float:left;
+	margin-left:10px;
+}
+dl{
+	padding-left:0;
+}
+dt{
+	float:left;
+	font-weight:bold;
+	font-size:12px;
+	padding:0;width:32%;
+	text-align:center;
+	margin-top:4px;
+}
+dd{
+	text-align:left;
+	height:auto;
+	padding:0;
+}
+input{
+	vertical-align:middle;
+	color:#000000;
+	background-color:#ffffff;
+	width:74%;	
+}
+.usageTop{
+	float: right;
+	display: block;
+}
+#totalUsageLabel{
+	font-size: 12px;
+	display: inline;
+	float: right;
+	overflow: hidden;
+	line-height: 24px;
+}
+#totalMemUsageValue,#totalCPUUsageValue{
+	overflow: hidden;
+	display: block;
+	float: right;
+	width: 20%;
+}
+#cpuUsage,#memUsage{
+	width:100%;
+	height:88%;
+}
+/*#cpuUsage{
+	background-image:url(../Images/cpuPic.png);
+	background-size: 100%;
+	background-repeat:no-repeat;
+}
+#memUsage{
+	background-image:url(../Images/memPic.png);
+}*/
+/*CPU和内存使用情况*/
+.usage{
+	float:left;
+	width:34%;
+	height:330px;
+	position:relative;
+	margin-left:10px;
+}
+/*磁盘使用情况和进程信息*/
+.displayInfo{
+	float:left;
+	width:95%;
+	position:relative;
+	margin-left:10px;
+}
+/*磁盘使用和进程数据展示样式*/
+.displayData{
+	width:100%;
+	padding:2px 20px;
+	overflow-y: scroll;
+}
+#diskUsage{
+	height:130px;
+}
+#processData{
+	height:200px;
+}
+td,th{
+	font-size:13px;
+}
+.dbTableInfo{
+	float:left;
+	width:95%;
+	position:relative;
+	margin-left:10px;
+}
+#tableSize,#tableUsage{
+	float: left;
+	overflow: hidden;
+	display: block;
+	font-size: 12px;
+}
+#tableSize{
+	padding-left:10%;
+}
+#tableUsage{
+	padding-left:42%;
+}
+#tableSize input{
+	width:30%;
+}
+#tableUsage input{
+	width:45%;
+}
+.TRHover{
+	background-color:#CCFAFF;
+}
+.errorFontColor{
+	color:red;
+}
+.disableselect{
+	color: #887C7C;
+}
+/*
+table{
+	width: 100%;
+	height:100%;
+	font-size: 14px;
+	table-layout: fixed;
+	empty-cells: show;
+	border-collapse: seperate;
+	margin: 0 auto;
+	border: 1px solid #000000;
+	color: #666666;
+	text-align:center;
+}
+tr{
+	font-size:13px;
+	background-color:#cad9ea;
+	color:#000000;
+}
+td{
+	padding:5px;
+	background-color:#ffffff;
+}
+tr:hover td{
+	background-color:#7CB5C4;
+}
+thead tr{
+	height:40px;
+}
+
+tr:nth-child(even){
+	background-color:#A2CFDB;
+}*/

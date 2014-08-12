@@ -1,0 +1,35 @@
+@charset "utf-8";
+body{
+	margin:0 auto;
+	text-align:center;
+	background-color: #B3E9F7;
+}
+label{
+	line-height:50px;
+	font-size:12px;
+}
+#outer{
+	width: 20%;
+	margin: 0 auto;
+}
+.level1{
+	height: 58%;
+}
+.level1,.level2,.level3{
+	text-align:center;
+	margin-top:2%;
+}
+.disableselect{
+	color: #887C7C;
+}
+#footer{
+	float: left;
+	width: 20%;
+	margin-left: 36%;
+}
+#seconds input{
+	width:18%;
+}
+.save_reset{
+	margin:10px;
+}

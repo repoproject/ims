@@ -1,0 +1,15 @@
+@charset "utf-8";
+
+body{
+	background-color:#B3E9F7;
+}
+td,th{
+	font-size:13px;
+}
+
+.TRHover{
+	background-color:#CCFAFF;
+}
+#softType{
+	width:200px;
+}

@@ -1,0 +1,69 @@
+@charset "utf-8";
+body{
+	margin:0 auto;
+	text-align:center;
+	background-color: #15171F;
+}
+.outer{
+	/*margin: 189px auto;
+	background-image:url(../Images/loginBackgroundPic.gif);
+	width: 600px;
+	height: 400px;
+	margin-left: 32%; Chrome*/
+	
+	
+	position: absolute;
+	background-image: url(../Images/login.gif);
+	width: 1024px;
+	height: 600px;
+	left: 10%;
+	top: 10%;
+}
+#username{
+	/*position: relative;
+	left: 146px;
+	top: 228px;
+	height: 28px;
+	width:160px;*/
+	position: absolute;
+	left: 295px;
+	top: 310px;
+	height: 24px;
+	width: 260px;
+}
+#password{
+	/*position: relative;
+	left: -18px;
+	top: 281px;
+	height: 28px;
+	width:160px;*/
+	position: absolute;
+	left: 295px;
+	top: 350px;
+	height: 24px;
+	width: 260px;
+}
+.submit,.reset{
+	width: 63px;
+	opacity: 0;
+	filter:alpha(opacity=0);
+	cursor:pointer;
+}
+#submit{
+	/*position: relative;
+	left: -190px;
+	top: 351px;*/
+	position: absolute;
+	left: 570px;
+	top: 300px;
+	height: 85px;
+	width: 110px;
+}
+#reset{
+	/*position: relative;
+	left: -136px;
+	top: 350px;*/
+	position: absolute;
+	left: 330px;
+	top: 350px;
+}
