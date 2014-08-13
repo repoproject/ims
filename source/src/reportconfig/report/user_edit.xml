@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
 	<page id="user_edit" js="/webresources/script/validate.js">
-		<report id="report1" title="request{txtname}详细信息" type="editabledetail" interceptor="com.wabacusdemo.AddUser">
+		<report id="report1" title="request{txtname}详细信息" type="editabledetail" interceptor="com.ims.interceptor.AddUser">
 			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
 				<col column="ID" displaytype="hidden">
 					

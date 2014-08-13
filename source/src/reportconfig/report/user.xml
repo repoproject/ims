@@ -6,7 +6,7 @@
 		<header>
 			<![CDATA[<p align="center"><font size="6"><b>用户基础信息管理</b></font></p>]]>
 		</header>
-		<report id="userlist" parenttitle="用户基础信息管理" type="editablelist" cellresize="1" rowselect="multiple-checkbox" pagesize="13" interceptor="com.wabacusdemo.DeleteUser">
+		<report id="userlist" parenttitle="用户基础信息管理" type="editablelist" cellresize="1" rowselect="multiple-checkbox" pagesize="13" interceptor="com.ims.interceptor.DeleteUser">
 				
 			  <!--interceptor>
 				<beforedisplay-perrow>
