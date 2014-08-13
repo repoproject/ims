@@ -4,7 +4,7 @@
 	IconCategory = "Miscellaneous">
 	<OpenFiles
 		CID = "1"
-		LastActive = "4">
+		LastActive = "9">
 		<File
 			FileID = "979B68F9-9D5A-41D9-BF7679F03A7A0B89"
 			RootPath = "$Container"
@@ -19,11 +19,6 @@
 			FileID = "18CA87D2-1499-41D8-8F7CD78628B01E5E"
 			RootPath = "$Container"
 			RelativePathname = "Products.gui"
-			ViewSettings = ""/>
-		<File
-			FileID = "668045AD-6B61-4804-84AE55B87F1153AF"
-			RootPath = "$Container"
-			RelativePathname = "index.gui"
 			ViewSettings = ""/>
 		<File
 			FileID = "7AA88628-5C34-4717-B87CBFF0D5FF5898"
@@ -44,6 +39,16 @@
 			FileID = "AE22B3DE-F36A-4E78-AE1F993064FF6868"
 			RootPath = "$Container"
 			RelativePathname = "login.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "668045AD-6B61-4804-84AE55B87F1153AF"
+			RootPath = "$Container"
+			RelativePathname = "index.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "A4CD0032-41E3-4F22-8EA5E3C9BA620F86"
+			RootPath = "$Container"
+			RelativePathname = "test.gui"
 			ViewSettings = ""/>
 	</OpenFiles>
 </Workspace>

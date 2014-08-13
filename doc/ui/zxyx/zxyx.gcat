@@ -85,6 +85,11 @@
 			OriginalPath = "Home.gui"
 			IsDeleted = "1"/>
 		<FileInfo
+			ID = "A4CD0032-41E3-4F22-8EA5E3C9BA620F86"
+			RelativePath = "test.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "test.gui"/>
+		<FileInfo
 			ID = "A5C51A5A-FC15-4742-834D581A04766F40"
 			RelativePath = "Masters\Footer.gui"
 			OriginalRoot = "$Project"
