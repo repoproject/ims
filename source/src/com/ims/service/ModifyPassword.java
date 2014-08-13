@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSONObject;
-import com.zxyx.util.DBUtil;
+import com.ims.util.DBUtil;
 
 /**
  * 修改密码
