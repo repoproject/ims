@@ -147,7 +147,7 @@ $(function(){
 					</div>
 					<div class="accordionContent">
 						<ul class="tree treeFolder">
-							<li><a href="ShowReport.wx?PAGEID=in" target="navTab" rel="ftpserverstat" external="true" fresh="false">入库</a></li>
+							<li><a href="ShowReport.wx?PAGEID=yhglpage" target="navTab" rel="ftpserverstat" external="true" fresh="false">入库</a></li>
 							<li><a href="ShowReport.wx?PAGEID=out" target="navTab" rel="ftpserverstat" external="true" fresh="false">出库</a></li>
 							<li><a>数据维护</a>
 							    <ul>
