@@ -1,4 +1,4 @@
-package com.zxyx.service;
+package com.ims.service;
 
 import java.io.IOException;
 import java.io.PrintWriter;

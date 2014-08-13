@@ -1,4 +1,4 @@
-package com.zxyx.util;
+package com.ims.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

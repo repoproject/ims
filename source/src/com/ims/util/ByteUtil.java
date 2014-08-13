@@ -1,4 +1,4 @@
-package com.zxyx.util;
+package com.ims.util;
 /**
  * Byte字节转换工具，用于基本类型数据和byte数组之间的转换
  * @创建者 yyy
