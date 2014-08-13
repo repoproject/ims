@@ -13,7 +13,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
-<title>中心运行管理软件</title>
+<title>管理软件</title>
 
 <link href="themes/default/style.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="css/core.css" rel="stylesheet" type="text/css" media="screen"/>
@@ -158,7 +158,7 @@ $(function(){
 									
 							<li><a>系统业务统计</a>
 								<ul>
-									<li><a href="ShowReport.wx?PAGEID=ftppage" target="navTab" rel="ftpserverstat" external="true" fresh="false">R统计</a></li>
+									<li><a href="excel.jsp" target="navTab" rel="ftpserverstat" external="true" fresh="false">R统计</a></li>
 									<li><a href="ShowReport.wx?PAGEID=webmhpage" target="navTab" rel="webpagestat" external="true" fresh="false">invertory</a></li>
 									<li><a href="ShowReport.wx?PAGEID=webjpage" target="navTab" rel="webserverstat" external="true" fresh="false">ttt</a></li>
 								</ul>

@@ -50,7 +50,7 @@ public class LoginFilter implements Filter {
 		if (username == null || "".equals(username)) {
 			// 尚未登录，跳转到登录页面
 			//dispatcher.forward(req, res);
-			response.sendRedirect("/zxyx/relogin.jsp");
+			response.sendRedirect("/ims/relogin.jsp");
 		} else {
 			// 已经登录，继续此次请求
 			chain.doFilter(request, response);

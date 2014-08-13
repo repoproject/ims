@@ -3,10 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
 	<page id="user_edit" js="/webresources/script/validate.js">
-		<report id="report1" title="request{txtname}详细信息" type="editabledetail" interceptor="com.ims.interceptor.AddUser">
+		<report id="report1" title="request{txtname}详细信息" type="editabledetail" >
 			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
 				<col column="ID" displaytype="hidden">
-					
 				</col>
 				<col column="userID" label="工号*" br="true">
 					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
@@ -21,14 +20,14 @@
 				</col>
 				<col column="role" label="角色" br="true">
 					<inputbox type="selectbox">
-						<option value="1" label="普通用户"></option>
-						<option value="0" label="高级用户"></option>
+						<option value="0" label="普通用户"></option>
+						<option value="1" label="高级用户"></option>
 					</inputbox>
 				</col>
 				<col column="sex" label="性别" br="true">
 					<inputbox type="selectbox">
-						<option value="1" label="男"></option>
 						<option value="0" label="女"></option>
+						<option value="1" label="男"></option>
 					</inputbox>
 				</col>
 				<col column="remark" label="备注">
@@ -38,7 +37,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT ID,name,userID,nickName,password,role,sex，remark FROM tbl_user where  {#condition#}]]>
+						<![CDATA[SELECT ID,name,userID,nickName,password,role,sex,remark FROM t_user where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -47,11 +46,11 @@
 					</condition>
 				</select>
 				<insert>
-					insert into tbl_user(name,userID,nickName,password,role,sex，remark)
-					values(trim(@{name}),trim(@{userID}),trim(@{nickName}),'ecf6e9a713c8533bbad5393ec4a9dab4',@{role},@{sex},trim(@{remark}));
+					insert into t_user(userID,name,nickName,password,role,sex,remark)
+					values(trim(@{userID}),trim(@{name}),trim(@{nickName}),'ecf6e9a713c8533bbad5393ec4a9dab4',@{role},@{sex},trim(@{remark}));
 				</insert>
 				<update>
-					update tbl_user set name=trim(@{name}),nikeName=trim(@{name}),password=@{password},role=@{role},sex=@{sex},remark=trim(@{remark}) 
+					update t_user set name=trim(@{name}),nickName=trim(@{nickName}),password=@{password},role=@{role},sex=@{sex},remark=trim(@{remark}) 
 					where ID=@{ID__old};
 				</update>
 			</sql>

@@ -52,6 +52,15 @@
 		<servlet-name>ModifyPassword</servlet-name>
 		<servlet-class>com.zxyx.service.ModifyPassword</servlet-class>
 	</servlet>
+	
+	<servlet>
+		<servlet-name>ExcelExport</servlet-name>
+		<servlet-class>com.ims.service.ExcelExport</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ExcelExport</servlet-name>
+		<url-pattern>/excel/ExcelExport</url-pattern>
+	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>reportservlet</servlet-name>

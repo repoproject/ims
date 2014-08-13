@@ -24,29 +24,6 @@
 		<!-- 提示组件类型 ymprompt;artdialog-->
 	</system>
 	<datasources default="ds_mysql">
-		<datasource name="ds_oracle" type="com.wabacus.config.database.datasource.C3P0DataSource" dbtype="com.wabacus.config.database.type.Oracle">
-			<property name="driver">oracle.jdbc.driver.OracleDriver</property>
-			<property name="url">jdbc:oracle:thin:@(DESCRIPTION =  
-			          (ADDRESS_LIST =  
-			                    (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.14.41)(PORT = 1521))  
-			                    (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.14.41)(PORT = 1521))  
-			                    (FAILOVER=yes)   
-			                    (LOAD_BALANCE =yes)  
-			         )  
-			         (CONNECT_DATA =  
-			                 (SERVER = DEDICATED)  
-			                (SERVICE_NAME = gq)  
-			          )  
-			)</property>
-			<property name="user">cpzh</property>
-			<property name="password">cpzhdb</property>
-			<property name="max_size">20</property>
-			<property name="min_size">5</property>
-			<property name="timeout">100</property>
-			<property name="max_statements">100</property>
-			<property name="idle_test_period">50</property>
-			<property name="acquire_increment">2</property>
-		</datasource>
 		<datasource name="ds_mysql" type="com.wabacus.config.database.datasource.C3P0DataSource" dbtype="com.wabacus.config.database.type.MySql">
 			<property name="driver">com.mysql.jdbc.Driver</property>
 			<property name="url"><![CDATA[jdbc:mysql://localhost:3306/ims?useUnicode=true&characterEncoding=GBK]]></property>
@@ -93,7 +70,6 @@
 	<report-files>
 		<report-file>report/user.xml</report-file>
 		<report-file>report/user_edit.xml</report-file>
-		<report-file>report/yhgl.xml</report-file>
 		<!--
 		<report-file pattern="true">report/(report_)(\S*?)(\.xml)</report-file>
 		<report-file>report/in.xml</report-file>
