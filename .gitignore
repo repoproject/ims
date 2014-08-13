@@ -9,8 +9,6 @@
 *.ear
 
 # Eclipse project files
-.classpath
-.project
 .mymetadata
 .settings/
 
