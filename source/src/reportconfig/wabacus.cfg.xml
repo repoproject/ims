@@ -92,6 +92,7 @@
 	<!-- 注册所有报表配置文件 -->
 	<report-files>
 		<report-file>report/user.xml</report-file>
+		<report-file>report/user_edit.xml</report-file>
 		<!--
 		<report-file>report/in.xml</report-file>
 		<report-file>report/out.xml</report-file>-->

@@ -33,7 +33,8 @@
 						<value>
 							<![CDATA[SELECT id,name,nickname FROM t_user order by name]]>
 						</value>
-					</select>				
+					</select>	
+					<insert pageurl="report{user_edit.report1}" popupparams="{title:'新增用户',width:400,height:300}"></insert>			
 				</sql>
 				<buttons>
 					<button name="button1" position="title" label="重置密码" extends="${wabacus.button2.default}">
