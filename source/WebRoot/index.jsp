@@ -159,7 +159,7 @@ $(function(){
 							<li><a>系统业务统计</a>
 								<ul>
 									<li><a href="excel.jsp" target="navTab" rel="ftpserverstat" external="true" fresh="false">R统计</a></li>
-									<li><a href="ShowReport.wx?PAGEID=webmhpage" target="navTab" rel="webpagestat" external="true" fresh="false">invertory</a></li>
+									<li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="webpagestat" external="true" fresh="false">invertory</a></li>
 									<li><a href="ShowReport.wx?PAGEID=webjpage" target="navTab" rel="webserverstat" external="true" fresh="false">ttt</a></li>
 								</ul>
 							</li>
