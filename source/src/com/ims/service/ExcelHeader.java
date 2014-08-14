@@ -4,8 +4,11 @@
 package com.ims.service;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
+
+import com.itextpdf.text.List;
 
 /**
  * @author ChengNing
@@ -21,11 +24,24 @@ public class ExcelHeader {
 		this.sheet = sheet;
 	}
 	
+	/**
+	 * 
+	 */
 	public void createHeader() {
-		
-		//sheet.createFreezePane(100, 7);
-		sheet.createFreezePane(3, 7);
-
+		setData();
+		setStyle();
+	}
+	
+//	private List<List> getData()
+//	{
+//		List<List> list = new List<List>();
+//		return list;
+//	}
+	
+	/**
+	 * 
+	 */
+	private void setData(){
 		HSSFRow r3= sheet.createRow(2);
 		HSSFRow r4= sheet.createRow(3);
 		HSSFRow r5= sheet.createRow(4);
@@ -35,9 +51,9 @@ public class ExcelHeader {
 		//===row4
 		HSSFCell cell =  r4.createCell(3);
 		cell.setCellValue("Opening");
-		cell = r4.createCell(6);
+		cell = r4.createCell(4);
 		cell.setCellValue("QTY IN ");
-		cell = r4.createCell(12);
+		cell = r4.createCell(9);
 		cell.setCellValue("QTY OUT ");
 		
 		//====row5
@@ -76,7 +92,13 @@ public class ExcelHeader {
 		cell.setCellValue(" Other Cost");
 		cell = r5.createCell(15);
 		cell.setCellValue("  TOTAL ");
-		
-		
+	}
+	
+	/**
+	 * http://blog.csdn.net/npp616/article/details/8546737
+	 */
+	private void setStyle(){
+		sheet.createFreezePane(3, 7);//设定冻结区域
+
 	}
 }
