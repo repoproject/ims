@@ -42,18 +42,19 @@ public class ExcelExport  extends HttpServlet{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		logger.info("excelExport");
+		logger.info("enter excelExport");
 		String path = ExcelExport.class.getResource("").getPath() + "template.xls";
-		//logger.info(path);
-		System.out.println(path);
-        //createExcel();
+		logger.info("template:" + path);
         
 		FileInputStream fileInputStream = new FileInputStream(path);
 		createExcel(fileInputStream);
-		
-		//
+
+		logger.info("Excel创建完毕，开始下载输出");
 		response.setContentType("application/vnd.ms-excel");	
 		
 		ServletOutputStream out = response.getOutputStream();
