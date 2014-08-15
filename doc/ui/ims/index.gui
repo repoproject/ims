@@ -299,7 +299,7 @@
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "200"
-			Text = "Invertory Manager System"
+			Text = "Inventory Manager System"
 			IsDisabled = "0"
 			Fill = "None"
 			HorzAlign = "Centre"
