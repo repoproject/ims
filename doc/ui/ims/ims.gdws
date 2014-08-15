@@ -67,5 +67,25 @@
 			RootPath = "$Container"
 			RelativePathname = "index.gui"
 			ViewSettings = ""/>
+		<File
+			FileID = "1CFC3597-DE95-4CDC-B744DEC5DA233F92"
+			RootPath = "$Container"
+			RelativePathname = "queryOut.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "E93C6654-0D29-476F-9EE1DEB78A8E0C3D"
+			RootPath = "$Container"
+			RelativePathname = "queryIn.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "0E5A4878-44CD-42AF-AA1B6E6BCC97F48C"
+			RootPath = "$Container"
+			RelativePathname = "QueryDiscard.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "156449EF-03FC-4803-91952FCBEAC05B42"
+			RootPath = "$Container"
+			RelativePathname = "RStatic.gui"
+			ViewSettings = ""/>
 	</OpenFiles>
 </Workspace>

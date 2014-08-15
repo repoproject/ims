@@ -4,6 +4,16 @@
 	<Files
 		CID = "1">
 		<FileInfo
+			ID = "0E5A4878-44CD-42AF-AA1B6E6BCC97F48C"
+			RelativePath = "QueryDiscard.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "QueryDiscard.gui"/>
+		<FileInfo
+			ID = "156449EF-03FC-4803-91952FCBEAC05B42"
+			RelativePath = "RStatic.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "RQuery.gui"/>
+		<FileInfo
 			ID = "157BBA5F-D832-49B6-9DCB79517DDE581D"
 			RelativePath = "news.gui"
 			OriginalRoot = "$Project"
@@ -20,6 +30,11 @@
 			OriginalRoot = "$Project"
 			OriginalPath = "Products.gui"
 			IsDeleted = "1"/>
+		<FileInfo
+			ID = "1CFC3597-DE95-4CDC-B744DEC5DA233F92"
+			RelativePath = "queryOut.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "queryOut.gui"/>
 		<FileInfo
 			ID = "35982591-80E0-4215-8D12379968FEE750"
 			RelativePath = "About Us01.gui"
@@ -143,6 +158,11 @@
 			OriginalRoot = "$Project"
 			OriginalPath = "Products01.gui"
 			IsDeleted = "1"/>
+		<FileInfo
+			ID = "E93C6654-0D29-476F-9EE1DEB78A8E0C3D"
+			RelativePath = "queryIn.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "queryIn.gui"/>
 		<FileInfo
 			ID = "EE19F96E-A2BD-4B6F-9928F74AD0E69377"
 			RelativePath = "index.gui"
