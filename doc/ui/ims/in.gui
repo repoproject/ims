@@ -12,15 +12,15 @@
 	<Elements
 		CID = "1">
 		<Element
-			CID = "427896022"
+			CID = "436432496"
 			Type = "Component"
-			X = "-610"
-			Y = "-165"
+			X = "-678"
+			Y = "-140"
 			Width = "791"
 			Height = "590"
 			Flags = "3"
 			BackgroundColour = "255,255,255,0,6"
-			FileID = "668045AD-6B61-4804-84AE55B87F1153AF"
+			FileID = "EE19F96E-A2BD-4B6F-9928F74AD0E69377"
 			RootPath = "$Container"
 			Filename = "index.gui"
 			Background = "Transparent"
@@ -30,8 +30,8 @@
 		<Element
 			CID = "1276120000"
 			Type = "WebPagePart"
-			X = "-405"
-			Y = "-81"
+			X = "-472"
+			Y = "-50"
 			Width = "573"
 			Height = "498"
 			Flags = "0"
@@ -42,12 +42,29 @@
 			MarginBottom = "12"
 			Fill = "None"/>
 		<Element
+			CID = "281743341"
+			Type = "GroupBox"
+			X = "-417"
+			Y = "155"
+			Width = "477"
+			Height = "54"
+			Flags = "0"
+			TextColour = "153,84,10,0,34"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			TextPlacement = "None"
+			HorzAlign = "Left"
+			Text = "单价"
+			TextOutsideExtent = "0"
+			IsDisabled = "0"/>
+		<Element
 			CID = "1276135175"
 			Type = "Table"
-			X = "-379"
-			Y = "160"
-			Width = "530"
-			Height = "245"
+			X = "-472"
+			Y = "283"
+			Width = "573"
+			Height = "165"
 			Flags = "0"
 			HeaderBackgroundColour = "236,233,216,0,16"
 			HeaderBorderColour = "172,168,153,0,17"
@@ -62,7 +79,7 @@
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			NextColumnID = "3"
+			NextColumnID = "11"
 			IsFlat = "0"
 			IsHeaderBold = "0"
 			IsTransparent = "0"
@@ -97,8 +114,22 @@
 					EvenBackgroundColour = "255,255,255,0,6"
 					TextColour = "0,0,0,0,9"
 					ColumnID = "1"
-					Heading = "Table"
-					Width = "80"
+					Heading = "入库日期"
+					Width = "60"
+					HeaderMargin = "0"
+					CellMargin = "0"
+					HasCustomOddBgColour = "0"
+					HasCustomEvenBgColour = "0"
+					HasCustomTextColour = "0"
+					HeadingAlignment = "Left"
+					CellAlignment = "Left"/>
+				<ColumnItem
+					OddBackgroundColour = "255,255,255,0,6"
+					EvenBackgroundColour = "255,255,255,0,6"
+					TextColour = "0,0,0,0,9"
+					ColumnID = "4"
+					Heading = "供应商"
+					Width = "60"
 					HeaderMargin = "0"
 					CellMargin = "0"
 					HasCustomOddBgColour = "0"
@@ -111,7 +142,91 @@
 					EvenBackgroundColour = "255,255,255,0,6"
 					TextColour = "0,0,0,0,9"
 					ColumnID = "2"
-					Heading = "Grid"
+					Heading = "试剂/耗材名"
+					Width = "80"
+					HeaderMargin = "0"
+					CellMargin = "0"
+					HasCustomOddBgColour = "0"
+					HasCustomEvenBgColour = "0"
+					HasCustomTextColour = "0"
+					HeadingAlignment = "Left"
+					CellAlignment = "Left"/>
+				<ColumnItem
+					OddBackgroundColour = "255,255,255,0,6"
+					EvenBackgroundColour = "255,255,255,0,6"
+					TextColour = "0,0,0,0,9"
+					ColumnID = "9"
+					Heading = "数量"
+					Width = "40"
+					HeaderMargin = "0"
+					CellMargin = "0"
+					HasCustomOddBgColour = "0"
+					HasCustomEvenBgColour = "0"
+					HasCustomTextColour = "0"
+					HeadingAlignment = "Left"
+					CellAlignment = "Left"/>
+				<ColumnItem
+					OddBackgroundColour = "255,255,255,0,6"
+					EvenBackgroundColour = "255,255,255,0,6"
+					TextColour = "0,0,0,0,9"
+					ColumnID = "10"
+					Heading = "单价（RMB）"
+					Width = "84"
+					HeaderMargin = "0"
+					CellMargin = "0"
+					HasCustomOddBgColour = "0"
+					HasCustomEvenBgColour = "0"
+					HasCustomTextColour = "0"
+					HeadingAlignment = "Left"
+					CellAlignment = "Left"/>
+				<ColumnItem
+					OddBackgroundColour = "255,255,255,0,6"
+					EvenBackgroundColour = "255,255,255,0,6"
+					TextColour = "0,0,0,0,9"
+					ColumnID = "5"
+					Heading = "发票号"
+					Width = "60"
+					HeaderMargin = "0"
+					CellMargin = "0"
+					HasCustomOddBgColour = "0"
+					HasCustomEvenBgColour = "0"
+					HasCustomTextColour = "0"
+					HeadingAlignment = "Left"
+					CellAlignment = "Left"/>
+				<ColumnItem
+					OddBackgroundColour = "255,255,255,0,6"
+					EvenBackgroundColour = "255,255,255,0,6"
+					TextColour = "0,0,0,0,9"
+					ColumnID = "6"
+					Heading = "批号"
+					Width = "60"
+					HeaderMargin = "0"
+					CellMargin = "0"
+					HasCustomOddBgColour = "0"
+					HasCustomEvenBgColour = "0"
+					HasCustomTextColour = "0"
+					HeadingAlignment = "Left"
+					CellAlignment = "Left"/>
+				<ColumnItem
+					OddBackgroundColour = "255,255,255,0,6"
+					EvenBackgroundColour = "255,255,255,0,6"
+					TextColour = "0,0,0,0,9"
+					ColumnID = "7"
+					Heading = "有效期"
+					Width = "60"
+					HeaderMargin = "0"
+					CellMargin = "0"
+					HasCustomOddBgColour = "0"
+					HasCustomEvenBgColour = "0"
+					HasCustomTextColour = "0"
+					HeadingAlignment = "Left"
+					CellAlignment = "Left"/>
+				<ColumnItem
+					OddBackgroundColour = "255,255,255,0,6"
+					EvenBackgroundColour = "255,255,255,0,6"
+					TextColour = "0,0,0,0,9"
+					ColumnID = "8"
+					Heading = "生产商"
 					Width = "60"
 					HeaderMargin = "0"
 					CellMargin = "0"
@@ -125,6 +240,57 @@
 				<Row
 					IsSelected = "0">
 					<Cell>
+						2014/8/10
+					</Cell>
+					<Cell>
+						万岚世途
+					</Cell>
+					<Cell>
+						GN Test Kit革兰氏阴性杆菌鉴定卡
+					</Cell>
+					<Cell>
+						10
+					</Cell>
+					<Cell>
+						469.23
+					</Cell>
+					<Cell>
+						ISC12354133
+					</Cell>
+					<Cell>
+						ISC123544
+					</Cell>
+					<Cell>
+						20
+					</Cell>
+					<Cell>
+						BD
+					</Cell>
+				</Row>
+				<Row
+					IsSelected = "0">
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
 						
 					</Cell>
 					<Cell>
@@ -139,6 +305,27 @@
 					<Cell>
 						
 					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
 				</Row>
 				<Row
 					IsSelected = "0">
@@ -148,6 +335,27 @@
 					<Cell>
 						
 					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
 				</Row>
 				<Row
 					IsSelected = "0">
@@ -157,9 +365,21 @@
 					<Cell>
 						
 					</Cell>
-				</Row>
-				<Row
-					IsSelected = "0">
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
 					<Cell>
 						
 					</Cell>
@@ -172,8 +392,8 @@
 		<Element
 			CID = "1276129930"
 			Type = "StaticText"
-			X = "-363"
-			Y = "75"
+			X = "-430"
+			Y = "88"
 			Width = "100"
 			Height = "21"
 			Flags = "0"
@@ -182,7 +402,7 @@
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "Centre Text"
+			Text = "数    量*："
 			IsDisabled = "0"
 			Fill = "None"
 			HorzAlign = "Centre"
@@ -190,8 +410,8 @@
 		<Element
 			CID = "1276126314"
 			Type = "StaticText"
-			X = "-79"
-			Y = "74"
+			X = "-436"
+			Y = "179"
 			Width = "100"
 			Height = "21"
 			Flags = "0"
@@ -200,7 +420,7 @@
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "Centre Text"
+			Text = "人民币："
 			IsDisabled = "0"
 			Fill = "None"
 			HorzAlign = "Centre"
@@ -208,17 +428,17 @@
 		<Element
 			CID = "1276136516"
 			Type = "StaticText"
-			X = "-154"
-			Y = "-54"
-			Width = "100"
-			Height = "21"
+			X = "-293"
+			Y = "-48"
+			Width = "203"
+			Height = "49"
 			Flags = "0"
 			FillColour = "236,233,216,0,16"
-			TextColour = "0,0,0,0,19"
+			TextColour = "33,161,33,0,2"
 			Typeface = ""
-			FontAttributes = "0"
-			TextSize = "Normal"
-			Text = "入库管理"
+			FontAttributes = "1"
+			TextSize = "240"
+			Text = "入    库"
 			IsDisabled = "0"
 			Fill = "None"
 			HorzAlign = "Centre"
@@ -226,8 +446,8 @@
 		<Element
 			CID = "1276136500"
 			Type = "StaticText"
-			X = "-365"
-			Y = "-24"
+			X = "-152"
+			Y = "59"
 			Width = "100"
 			Height = "21"
 			Flags = "0"
@@ -236,7 +456,7 @@
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "Centre Text"
+			Text = "入库时间*："
 			IsDisabled = "0"
 			Fill = "None"
 			HorzAlign = "Centre"
@@ -244,15 +464,15 @@
 		<Element
 			CID = "1276139035"
 			Type = "EditBox"
-			X = "-276"
-			Y = "-24"
+			X = "-63"
+			Y = "59"
 			Width = "120"
 			Height = "21"
 			Flags = "2"
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "Edit Box"
+			Text = "2014-8-10"
 			IsDisabled = "0"
 			IsReadOnly = "0"
 			HorzAlign = "Left"
@@ -274,8 +494,8 @@
 		<Element
 			CID = "1276119734"
 			Type = "StaticText"
-			X = "-82"
-			Y = "-24"
+			X = "-433"
+			Y = "61"
 			Width = "100"
 			Height = "21"
 			Flags = "0"
@@ -284,7 +504,7 @@
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "Centre Text"
+			Text = "批    号*："
 			IsDisabled = "0"
 			Fill = "None"
 			HorzAlign = "Centre"
@@ -292,17 +512,17 @@
 		<Element
 			CID = "1276143522"
 			Type = "EditBox"
-			X = "7"
-			Y = "-24"
+			X = "-342"
+			Y = "29"
 			Width = "120"
 			Height = "21"
 			Flags = "2"
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "Edit Box"
+			Text = "ISE Cleaning Solution"
 			IsDisabled = "0"
-			IsReadOnly = "0"
+			IsReadOnly = "1"
 			HorzAlign = "Left"
 			EditType = "Text"
 			OverrideTextColour = "0"
@@ -322,8 +542,8 @@
 		<Element
 			CID = "1276136340"
 			Type = "StaticText"
-			X = "-365"
-			Y = "9"
+			X = "-152"
+			Y = "120"
 			Width = "100"
 			Height = "21"
 			Flags = "0"
@@ -332,7 +552,7 @@
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "Centre Text"
+			Text = "供应商："
 			IsDisabled = "0"
 			Fill = "None"
 			HorzAlign = "Centre"
@@ -340,8 +560,8 @@
 		<Element
 			CID = "1276128973"
 			Type = "StaticText"
-			X = "-82"
-			Y = "7"
+			X = "-432"
+			Y = "0"
 			Width = "100"
 			Height = "21"
 			Flags = "0"
@@ -350,7 +570,7 @@
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "Centre Text"
+			Text = "设备名称："
 			IsDisabled = "0"
 			Fill = "None"
 			HorzAlign = "Centre"
@@ -358,8 +578,8 @@
 		<Element
 			CID = "1276123750"
 			Type = "StaticText"
-			X = "-365"
-			Y = "40"
+			X = "-447"
+			Y = "30"
 			Width = "100"
 			Height = "21"
 			Flags = "0"
@@ -368,16 +588,16 @@
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "Centre Text"
+			Text = "试剂/耗材名称："
 			IsDisabled = "0"
 			Fill = "None"
-			HorzAlign = "Centre"
+			HorzAlign = "Right"
 			VertAlign = "Centre"/>
 		<Element
 			CID = "1276121209"
 			Type = "StaticText"
-			X = "-82"
-			Y = "38"
+			X = "-152"
+			Y = "28"
 			Width = "100"
 			Height = "21"
 			Flags = "0"
@@ -386,7 +606,7 @@
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "Centre Text"
+			Text = "有效期*："
 			IsDisabled = "0"
 			Fill = "None"
 			HorzAlign = "Centre"
@@ -394,15 +614,15 @@
 		<Element
 			CID = "1276139931"
 			Type = "EditBox"
-			X = "-277"
-			Y = "9"
+			X = "-63"
+			Y = "123"
 			Width = "120"
 			Height = "21"
 			Flags = "2"
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "Edit Box"
+			Text = "万岚世途"
 			IsDisabled = "0"
 			IsReadOnly = "0"
 			HorzAlign = "Left"
@@ -424,15 +644,15 @@
 		<Element
 			CID = "1276131927"
 			Type = "EditBox"
-			X = "-277"
-			Y = "40"
+			X = "-347"
+			Y = "61"
 			Width = "120"
 			Height = "21"
 			Flags = "2"
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "Edit Box"
+			Text = "ASX12345"
 			IsDisabled = "0"
 			IsReadOnly = "0"
 			HorzAlign = "Left"
@@ -454,45 +674,15 @@
 		<Element
 			CID = "1276143914"
 			Type = "EditBox"
-			X = "-277"
-			Y = "71"
+			X = "-344"
+			Y = "90"
 			Width = "120"
 			Height = "21"
 			Flags = "2"
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "Edit Box"
-			IsDisabled = "0"
-			IsReadOnly = "0"
-			HorzAlign = "Left"
-			EditType = "Text"
-			OverrideTextColour = "0"
-			OverrideDisabledTextColour = "0"
-			OverrideFillColour = "0"
-			OverrideDisabledFillColour = "0"
-			OverrideBorderColour = "0"
-			MarginLeft = "0"
-			MarginRight = "0"
-			MarginTop = "0"
-			MarginBottom = "0"
-			TextColour = "0,0,0,0,9"
-			DisabledTextColour = "161,161,146,0,18"
-			FillColour = "255,255,153,0,0"
-			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "164,185,127,0,12"/>
-		<Element
-			CID = "1276123465"
-			Type = "EditBox"
-			X = "8"
-			Y = "7"
-			Width = "120"
-			Height = "21"
-			Flags = "2"
-			Typeface = ""
-			FontAttributes = "0"
-			TextSize = "Normal"
-			Text = "Edit Box"
+			Text = "10"
 			IsDisabled = "0"
 			IsReadOnly = "0"
 			HorzAlign = "Left"
@@ -514,15 +704,15 @@
 		<Element
 			CID = "1276118038"
 			Type = "EditBox"
-			X = "9"
-			Y = "38"
+			X = "-61"
+			Y = "28"
 			Width = "120"
 			Height = "21"
 			Flags = "2"
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "Edit Box"
+			Text = "2015-12-31"
 			IsDisabled = "0"
 			IsReadOnly = "0"
 			HorzAlign = "Left"
@@ -544,15 +734,15 @@
 		<Element
 			CID = "1276149602"
 			Type = "EditBox"
-			X = "9"
-			Y = "70"
-			Width = "120"
+			X = "-350"
+			Y = "220"
+			Width = "415"
 			Height = "21"
 			Flags = "2"
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "Edit Box"
+			Text = "今天刚刚入的新试剂，请大家试用。"
 			IsDisabled = "0"
 			IsReadOnly = "0"
 			HorzAlign = "Left"
@@ -574,8 +764,8 @@
 		<Element
 			CID = "1276121813"
 			Type = "TextButton"
-			X = "52"
-			Y = "119"
+			X = "-120"
+			Y = "252"
 			Width = "75"
 			Height = "23"
 			Flags = "0"
@@ -583,7 +773,7 @@
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "insert"
+			Text = "确定"
 			Depth = "2"
 			IsDefault = "0"
 			IsDisabled = "0"
@@ -592,6 +782,401 @@
 			MarginTop = "0"
 			MarginBottom = "0"
 			AutoNavType = ""/>
+		<Element
+			CID = "281741332"
+			Type = "WebButton"
+			X = "-215"
+			Y = "35"
+			Width = "25"
+			Height = "14"
+			Flags = "0"
+			FillColour = "172,168,153,0,17"
+			LineColour = "139,161,105,0,3"
+			TextColour = "0,0,0,0,8"
+			Typeface = ""
+			FontAttributes = "1"
+			TextSize = "Normal"
+			MarginLeft = "0"
+			MarginRight = "0"
+			MarginTop = "0"
+			MarginBottom = "0"
+			Text = "选"
+			Depth = "3"
+			LineWidth = "1"
+			Shape = "Rectangle"
+			HorzAlign = "Centre"
+			VertAlign = "Centre"/>
+		<Element
+			CID = "281761061"
+			Type = "StaticText"
+			X = "-275"
+			Y = "180"
+			Width = "100"
+			Height = "21"
+			Flags = "0"
+			FillColour = "236,233,216,0,16"
+			TextColour = "0,0,0,0,19"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "新元："
+			IsDisabled = "1"
+			Fill = "None"
+			HorzAlign = "Centre"
+			VertAlign = "Centre"/>
+		<Element
+			CID = "281763809"
+			Type = "StaticText"
+			X = "-121"
+			Y = "180"
+			Width = "100"
+			Height = "21"
+			Flags = "0"
+			FillColour = "236,233,216,0,16"
+			TextColour = "0,0,0,0,19"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "英镑："
+			IsDisabled = "1"
+			Fill = "None"
+			HorzAlign = "Centre"
+			VertAlign = "Centre"/>
+		<Element
+			CID = "281747059"
+			Type = "StaticText"
+			X = "-194"
+			Y = "180"
+			Width = "100"
+			Height = "21"
+			Flags = "0"
+			FillColour = "236,233,216,0,16"
+			TextColour = "0,0,0,0,19"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "美元："
+			IsDisabled = "1"
+			Fill = "None"
+			HorzAlign = "Centre"
+			VertAlign = "Centre"/>
+		<Element
+			CID = "281754774"
+			Type = "StaticText"
+			X = "-41"
+			Y = "180"
+			Width = "100"
+			Height = "21"
+			Flags = "0"
+			FillColour = "236,233,216,0,16"
+			TextColour = "0,0,0,0,19"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "欧元："
+			IsDisabled = "1"
+			Fill = "None"
+			HorzAlign = "Centre"
+			VertAlign = "Centre"/>
+		<Element
+			CID = "691754748"
+			Type = "StaticText"
+			X = "-432"
+			Y = "218"
+			Width = "100"
+			Height = "21"
+			Flags = "0"
+			FillColour = "236,233,216,0,16"
+			TextColour = "0,0,0,0,19"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "备    注："
+			IsDisabled = "0"
+			Fill = "None"
+			HorzAlign = "Centre"
+			VertAlign = "Centre"/>
+		<Element
+			CID = "1253537804"
+			Type = "TextButton"
+			X = "-24"
+			Y = "251"
+			Width = "75"
+			Height = "23"
+			Flags = "0"
+			TextColour = "0,0,0,0,19"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "取消"
+			Depth = "2"
+			IsDefault = "0"
+			IsDisabled = "0"
+			MarginLeft = "0"
+			MarginRight = "0"
+			MarginTop = "0"
+			MarginBottom = "0"
+			AutoNavType = ""/>
+		<Element
+			CID = "1253513252"
+			Type = "StaticText"
+			X = "-149"
+			Y = "91"
+			Width = "100"
+			Height = "21"
+			Flags = "0"
+			FillColour = "236,233,216,0,16"
+			TextColour = "0,0,0,0,19"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "生产商："
+			IsDisabled = "0"
+			Fill = "None"
+			HorzAlign = "Centre"
+			VertAlign = "Centre"/>
+		<Element
+			CID = "1253515729"
+			Type = "EditBox"
+			X = "-62"
+			Y = "91"
+			Width = "120"
+			Height = "21"
+			Flags = "2"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "BD"
+			IsDisabled = "0"
+			IsReadOnly = "0"
+			HorzAlign = "Left"
+			EditType = "Text"
+			OverrideTextColour = "0"
+			OverrideDisabledTextColour = "0"
+			OverrideFillColour = "0"
+			OverrideDisabledFillColour = "0"
+			OverrideBorderColour = "0"
+			MarginLeft = "0"
+			MarginRight = "0"
+			MarginTop = "0"
+			MarginBottom = "0"
+			TextColour = "0,0,0,0,9"
+			DisabledTextColour = "161,161,146,0,18"
+			FillColour = "255,255,153,0,0"
+			DisabledFillColour = "236,233,216,0,16"
+			BorderColour = "164,185,127,0,12"/>
+		<Element
+			CID = "513490997"
+			Type = "StaticText"
+			X = "-433"
+			Y = "117"
+			Width = "100"
+			Height = "21"
+			Flags = "0"
+			FillColour = "236,233,216,0,16"
+			TextColour = "0,0,0,0,19"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "入库人*："
+			IsDisabled = "0"
+			Fill = "None"
+			HorzAlign = "Centre"
+			VertAlign = "Centre"/>
+		<Element
+			CID = "513490791"
+			Type = "StaticText"
+			X = "-147"
+			Y = "1"
+			Width = "100"
+			Height = "21"
+			Flags = "0"
+			FillColour = "236,233,216,0,16"
+			TextColour = "0,0,0,0,19"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "入库原因："
+			IsDisabled = "0"
+			Fill = "None"
+			HorzAlign = "Centre"
+			VertAlign = "Centre"/>
+		<Element
+			CID = "513479283"
+			Type = "EditBox"
+			X = "-347"
+			Y = "119"
+			Width = "120"
+			Height = "21"
+			Flags = "2"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "wls"
+			IsDisabled = "0"
+			IsReadOnly = "0"
+			HorzAlign = "Left"
+			EditType = "Text"
+			OverrideTextColour = "0"
+			OverrideDisabledTextColour = "0"
+			OverrideFillColour = "0"
+			OverrideDisabledFillColour = "0"
+			OverrideBorderColour = "0"
+			MarginLeft = "0"
+			MarginRight = "0"
+			MarginTop = "0"
+			MarginBottom = "0"
+			TextColour = "0,0,0,0,9"
+			DisabledTextColour = "161,161,146,0,18"
+			FillColour = "255,255,153,0,0"
+			DisabledFillColour = "236,233,216,0,16"
+			BorderColour = "164,185,127,0,12"/>
+		<Element
+			CID = "513477337"
+			Type = "ComboBox"
+			X = "-62"
+			Y = "1"
+			Width = "127"
+			Height = "21"
+			Flags = "2"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "From Vendor"
+			IsDisabled = "0"
+			IsEditable = "1"
+			IsFlat = "0"
+			Mirror = "0"
+			CustomStyle = "0"
+			HorzAlign = "Left"
+			OverrideTextColour = "0"
+			OverrideDisabledTextColour = "0"
+			OverrideFillColour = "0"
+			OverrideDisabledFillColour = "0"
+			OverrideBorderColour = "0"
+			TextColour = "0,0,0,0,9"
+			DisabledTextColour = "161,161,146,0,18"
+			FillColour = "240,240,255,0,0"
+			DisabledFillColour = "236,233,216,0,16"
+			BorderColour = "192,192,255,0,0"/>
+		<Element
+			CID = "212955841"
+			Type = "EllipseShape"
+			X = "89"
+			Y = "71"
+			Width = "160"
+			Height = "44"
+			Flags = "0"
+			TextColour = "0,0,0,0,0"
+			FillColour = "255,255,224,0,0"
+			BorderColour = "0,0,0,0,0"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "注释：填第一个RMB自动换算出其他几种货币。这个是否复杂？可能要用JS了"
+			BorderWidth = "2"
+			Fill = "Solid"
+			Border = "Single"
+			HorzAlign = "Centre"
+			VertAlign = "Centre"
+			MarginLeft = "0"
+			MarginRight = "0"
+			MarginTop = "0"
+			MarginBottom = "0"/>
+		<Element
+			CID = "539576043"
+			Type = "EllipseShape"
+			X = "73"
+			Y = "-15"
+			Width = "160"
+			Height = "44"
+			Flags = "0"
+			TextColour = "0,0,0,0,0"
+			FillColour = "255,255,224,0,0"
+			BorderColour = "0,0,0,0,0"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "注释：同货号的试剂有新的有效期时对大家进行提示"
+			BorderWidth = "2"
+			Fill = "Solid"
+			Border = "Single"
+			HorzAlign = "Centre"
+			VertAlign = "Centre"
+			MarginLeft = "0"
+			MarginRight = "0"
+			MarginTop = "0"
+			MarginBottom = "0"/>
+		<Element
+			CID = "76496271"
+			Type = "StaticText"
+			X = "-357"
+			Y = "180"
+			Width = "100"
+			Height = "21"
+			Flags = "4096"
+			FillColour = "236,233,216,0,16"
+			TextColour = "0,0,0,0,19"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "人民币（含）："
+			IsDisabled = "1"
+			Fill = "None"
+			HorzAlign = "Centre"
+			VertAlign = "Centre"/>
+		<Element
+			CID = "1913221888"
+			Type = "ComboBox"
+			X = "-344"
+			Y = "0"
+			Width = "127"
+			Height = "21"
+			Flags = "2"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "E411"
+			IsDisabled = "0"
+			IsEditable = "1"
+			IsFlat = "0"
+			Mirror = "0"
+			CustomStyle = "0"
+			HorzAlign = "Left"
+			OverrideTextColour = "0"
+			OverrideDisabledTextColour = "0"
+			OverrideFillColour = "0"
+			OverrideDisabledFillColour = "0"
+			OverrideBorderColour = "0"
+			TextColour = "0,0,0,0,9"
+			DisabledTextColour = "161,161,146,0,18"
+			FillColour = "240,240,255,0,0"
+			DisabledFillColour = "236,233,216,0,16"
+			BorderColour = "192,192,255,0,0"/>
+		<Element
+			CID = "1913206254"
+			Type = "EllipseShape"
+			X = "-526"
+			Y = "-6"
+			Width = "160"
+			Height = "44"
+			Flags = "0"
+			TextColour = "0,0,0,0,0"
+			FillColour = "255,255,224,0,0"
+			BorderColour = "0,0,0,0,0"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "注释：“选”代表可以弹出试剂/耗材库页面进行选择，并同时维护"
+			BorderWidth = "2"
+			Fill = "Solid"
+			Border = "Single"
+			HorzAlign = "Centre"
+			VertAlign = "Centre"
+			MarginLeft = "0"
+			MarginRight = "0"
+			MarginTop = "0"
+			MarginBottom = "0"/>
 	</Elements>
 	<Connections
 		CID = "2"/>

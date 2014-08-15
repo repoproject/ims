@@ -1,0 +1,138 @@
+<Screen
+	CID = "70085210"
+	AppID = "2"
+	AppVer = "4.2.111.0"
+	DocID = ""
+	HasCanvas = "0"
+	Width = "791"
+	Height = "590"
+	NextCID = "6"
+	RepresentativeRefID = "0"
+	UseDefRepresentative = "1">
+	<Elements
+		CID = "1">
+		<Element
+			CID = "139556122"
+			Type = "Component"
+			X = "-61"
+			Y = "-30"
+			Width = "791"
+			Height = "590"
+			Flags = "3"
+			BackgroundColour = "255,255,255,0,6"
+			FileID = "EE19F96E-A2BD-4B6F-9928F74AD0E69377"
+			RootPath = "$Container"
+			Filename = "index.gui"
+			Background = "Transparent"
+			HorzAlign = "Left"
+			VertAlign = "Top"
+			MaintainSize = "0"/>
+		<Element
+			CID = "627641248"
+			Type = "StaticText"
+			X = "155"
+			Y = "85"
+			Width = "136"
+			Height = "21"
+			Flags = "0"
+			FillColour = "236,233,216,0,16"
+			TextColour = "0,0,255,0,0"
+			Typeface = ""
+			FontAttributes = "4"
+			TextSize = "Normal"
+			Text = "新入库********试剂"
+			IsDisabled = "0"
+			Fill = "None"
+			HorzAlign = "Left"
+			VertAlign = "Centre"/>
+		<Element
+			CID = "627638647"
+			Type = "StaticText"
+			X = "155"
+			Y = "119"
+			Width = "202"
+			Height = "21"
+			Flags = "0"
+			FillColour = "236,233,216,0,16"
+			TextColour = "0,0,255,0,0"
+			Typeface = ""
+			FontAttributes = "4"
+			TextSize = "Normal"
+			Text = "********试剂有新批次"
+			IsDisabled = "0"
+			Fill = "None"
+			HorzAlign = "Left"
+			VertAlign = "Centre"/>
+		<Element
+			CID = "627665065"
+			Type = "StaticText"
+			X = "155"
+			Y = "159"
+			Width = "202"
+			Height = "21"
+			Flags = "0"
+			FillColour = "236,233,216,0,16"
+			TextColour = "0,0,255,0,0"
+			Typeface = ""
+			FontAttributes = "4"
+			TextSize = "Normal"
+			Text = "********试剂有新批次"
+			IsDisabled = "0"
+			Fill = "None"
+			HorzAlign = "Left"
+			VertAlign = "Centre"/>
+		<Element
+			CID = "627644127"
+			Type = "StaticText"
+			X = "155"
+			Y = "203"
+			Width = "202"
+			Height = "21"
+			Flags = "0"
+			FillColour = "236,233,216,0,16"
+			TextColour = "0,0,255,0,0"
+			Typeface = ""
+			FontAttributes = "4"
+			TextSize = "Normal"
+			Text = "********试剂有新批次"
+			IsDisabled = "0"
+			Fill = "None"
+			HorzAlign = "Left"
+			VertAlign = "Centre"/>
+		<Element
+			CID = "627664650"
+			Type = "Bitmap"
+			X = "264"
+			Y = "87"
+			Width = "48"
+			Height = "19"
+			Flags = "0"
+			RootPath = "$Absolute"
+			Filename = "C:\Documents and Settings\ab038094\桌面\En-new.png"
+			Placement = "Stretch"
+			HorzAlign = "Left"
+			VertAlign = "Top"
+			ClipLeft = "0"
+			ClipRight = "0"
+			ClipTop = "0"
+			ClipBottom = "0"/>
+	</Elements>
+	<Connections
+		CID = "2"/>
+	<Groups
+		CID = "3"/>
+	<SelectionGroups
+		CID = "4"/>
+	<Notes
+		CID = "5">
+		<Note
+			CID = "70067777"
+			Name = "Description"
+			NextCID = "2">
+			<Text
+				CID = "1">
+				
+			</Text>
+		</Note>
+	</Notes>
+</Screen>

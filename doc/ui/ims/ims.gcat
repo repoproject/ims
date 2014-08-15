@@ -4,6 +4,11 @@
 	<Files
 		CID = "1">
 		<FileInfo
+			ID = "157BBA5F-D832-49B6-9DCB79517DDE581D"
+			RelativePath = "news.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "news.gui"/>
+		<FileInfo
 			ID = "16E48201-D9C4-472B-BFC10FA580D82B8C"
 			RelativePath = "Downloads01.gui"
 			OriginalRoot = "$Project"
@@ -47,7 +52,7 @@
 			IsDeleted = "1"/>
 		<FileInfo
 			ID = "668045AD-6B61-4804-84AE55B87F1153AF"
-			RelativePath = "index.gui"
+			RelativePath = "main.gui"
 			OriginalRoot = "$Project"
 			OriginalPath = "index.gui"
 			IsDeleted = "1"/>
@@ -61,12 +66,19 @@
 			ID = "6E0D8EF9-163A-4B50-9B65086035F25EAE"
 			RelativePath = "tree.gui"
 			OriginalRoot = "$Project"
-			OriginalPath = "tree.gui"/>
+			OriginalPath = "tree.gui"
+			IsDeleted = "1"/>
 		<FileInfo
 			ID = "6EEF5914-491C-4D64-A9698EC73E180E04"
+			RelativePath = "reagent.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "out.gui"
+			IsDeleted = "1"/>
+		<FileInfo
+			ID = "7449B92E-1261-4B51-9B529DD32017F91D"
 			RelativePath = "out.gui"
 			OriginalRoot = "$Project"
-			OriginalPath = "out.gui"/>
+			OriginalPath = "out1.gui"/>
 		<FileInfo
 			ID = "7AA88628-5C34-4717-B87CBFF0D5FF5898"
 			RelativePath = "in.gui"
@@ -131,5 +143,15 @@
 			OriginalRoot = "$Project"
 			OriginalPath = "Products01.gui"
 			IsDeleted = "1"/>
+		<FileInfo
+			ID = "EE19F96E-A2BD-4B6F-9928F74AD0E69377"
+			RelativePath = "index.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "index.gui"/>
+		<FileInfo
+			ID = "FFE77E35-1494-40D4-AAA0AE44AC065319"
+			RelativePath = "regent.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "regent.gui"/>
 	</Files>
 </Catalogue>

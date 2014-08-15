@@ -1,5 +1,5 @@
 <Screen
-	CID = "1610155397"
+	CID = "44831634"
 	AppID = "2"
 	AppVer = "4.2.111.0"
 	DocID = ""
@@ -20,7 +20,7 @@
 	<Notes
 		CID = "5">
 		<Note
-			CID = "1610177110"
+			CID = "44854925"
 			Name = "Description"
 			NextCID = "2">
 			<Text
