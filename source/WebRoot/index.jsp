@@ -106,7 +106,7 @@ $(function(){
 	<div id="layout">
 		<div id="header">
 			<div class="headerNav">
-				<span id="logo">出入库管理</span>
+				<span id="logo">出入库管理系统（IMS）</span>
 				<ul class="nav">
 					  <%
 					  		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -138,54 +138,39 @@ $(function(){
 				</div>
 			</div>
 			<div id="sidebar">
-				<div class="toggleCollapse"><h2>出入库管理</h2><div>收缩</div></div>
-
-				<div class="accordion" fillSpace="sidebar">
-					<!-- 中心运行管理模块 -->
+				<div class="accordion" fillSpace="sidebar" >
+					
 					<div class="accordionHeader">
-						<h2><span>Folder</span>出入库管理</h2>
+						<h2><span>Folder</span></h2>
 					</div>
 					<div class="accordionContent">
-						<ul class="tree treeFolder">
-							<li><a href="ShowReport.wx?PAGEID=yhglpage" target="navTab" rel="ftpserverstat" external="true" fresh="false">入库</a></li>
-							<li><a href="ShowReport.wx?PAGEID=out" target="navTab" rel="ftpserverstat" external="true" fresh="false">出库</a></li>
-							<li><a>数据维护</a>
+						<ul class=  "tree treeFolder expand">
+							<li><a>出入库管理</a>
 							    <ul>
-								    <li><a href="ShowReport.wx?PAGEID=ftppage" target="navTab" rel="ftpserverstat" external="true" fresh="false">试剂</a></li>
-								    <li><a href="ShowReport.wx?PAGEID=ftppage" target="navTab" rel="ftpserverstat" external="true" fresh="false">原因</a></li>
+								  <li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo" external="true" fresh="false">出库操作</a></li>
+							      <li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo" external="true" fresh="false">入库操作</a></li>
+								  <li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo" external="true" fresh="false">试剂/耗材库</a></li>
+								    
 								</ul>
-							</li>
-									
-							<li><a>系统业务统计</a>
+							</li>									
+							<li><a>查询统计</a>
 								<ul>
-									<li><a href="excel.jsp" target="navTab" rel="ftpserverstat" external="true" fresh="false">R统计</a></li>
-									<li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="webpagestat" external="true" fresh="false">invertory</a></li>
-									<li><a href="ShowReport.wx?PAGEID=webjpage" target="navTab" rel="webserverstat" external="true" fresh="false">ttt</a></li>
+									<li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo" external="true" fresh="false">出库查询</a></li>
+									<li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo" external="true" fresh="false">入库查询</a></li>
+									<li><a href="ShowReport.wx?PAGEID=navTab" target="navTab" rel="userbaseinfo" external="true" fresh="false">查询过期</a></li>
+									<li><a href="excel.jsp" target="navTab" rel="ftpserverstat" external="true" fresh="false">库存统计</a></li>									
+								</ul>
+							</li>
+							<li><a>基础信息维护</a>
+								<ul>
+									<li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo" external="true" fresh="false">用户信息</a></li>
+									<li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo" external="true" fresh="false">设备信息</a></li>
+									<li><a href="ChangePWD.jsp" target="dialog" rel="changepassword" width="600" mask="true">修改密码</a></li>
+												
 								</ul>
 							</li>
 						</ul>
 					</div>
-					
-					<!-- 用户管理模块 -->
-					<div class="accordionHeader">
-						<h2><span>Folder</span>用户管理</h2>
-					</div>
-					<div class="accordionContent">
-						<ul class="tree treeFolder">
-							<li>
-                              <a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo" external="true" fresh="false">用户基础信息维护</a>
-							</li>
-							<!--<li><a href="ShowReport.wx?PAGEID=listpage1" target="navTab" rel="pagination1" external="true" fresh="false">用户管理</a></li>-->
-							<li id="msgParamNumberConfig">
-							<!--<a href="ShowReport.wx?PAGEID=dxglpage" target="navTab" rel="textmsgparamsetting" external="true" fresh="false">短信用户号码参数配置</a>
-								-->
-							</li>
-							<li>
-							<a href="ChangePWD.jsp" target="dialog" rel="changepassword" width="600" mask="true">修改密码</a>
-							</li>		
-						</ul>
-					</div>
-					
 				</div>
 			</div>
 		</div>
