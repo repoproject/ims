@@ -68,9 +68,9 @@
 		<Element
 			CID = "2021803715"
 			Type = "Bitmap"
-			X = "-387"
+			X = "-385"
 			Y = "-20"
-			Width = "594"
+			Width = "592"
 			Height = "498"
 			Flags = "0"
 			RootPath = "$Container"

@@ -11,19 +11,13 @@
 	RecentIcon7 = "">
 	<OpenFiles
 		CID = "1"
-		LastActive = "2">
+		LastActive = "1">
 		<File
 			FileID = "AE22B3DE-F36A-4E78-AE1F993064FF6868"
 			RootPath = "$Container"
 			RelativePathname = "login.gui"
 			ViewSettings = ""/>
 		<File
-			FileID = "EE19F96E-A2BD-4B6F-9928F74AD0E69377"
-			RootPath = "$Container"
-			RelativePathname = "index.gui"
-			ViewSettings = ""/>
-		<File
-			FileID = "6E534198-D024-4C3B-8F34246BDD5D6D51"
 			RootPath = "$Container"
 			RelativePathname = "112.gui"
 			ViewSettings = ""/>
@@ -48,9 +42,48 @@
 			RelativePathname = "out.gui"
 			ViewSettings = ""/>
 		<File
-			FileID = "2319D6AE-4DCB-48DB-A8A70B799DEB8436"
 			RootPath = "$Container"
 			RelativePathname = "123.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "156449EF-03FC-4803-91952FCBEAC05B42"
+			RootPath = "$Container"
+			RelativePathname = "RStatic.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "7AA88628-5C34-4717-B87CBFF0D5FF5898"
+			RootPath = "$Container"
+			RelativePathname = "in.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "157BBA5F-D832-49B6-9DCB79517DDE581D"
+			RootPath = "$Container"
+			RelativePathname = "news.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "B1930405-90FF-4EB3-8D34E7DF82FB0416"
+			RootPath = "$Container"
+			RelativePathname = "UserEdit.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "420F6447-FD54-4FEA-AD4FD1FD6683C43B"
+			RootPath = "$Container"
+			RelativePathname = "InstrumentEdit.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "E93C6654-0D29-476F-9EE1DEB78A8E0C3D"
+			RootPath = "$Container"
+			RelativePathname = "queryIn.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "41AD7401-1560-4854-999BCDF183259F24"
+			RootPath = "$Container"
+			RelativePathname = "ChangePSW.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "EE19F96E-A2BD-4B6F-9928F74AD0E69377"
+			RootPath = "$Container"
+			RelativePathname = "index.gui"
 			ViewSettings = ""/>
 	</OpenFiles>
 </Workspace>

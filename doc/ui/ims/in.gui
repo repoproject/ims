@@ -375,7 +375,7 @@
 		<Element
 			CID = "1276129930"
 			Type = "StaticText"
-			X = "-430"
+			X = "-455"
 			Y = "88"
 			Width = "100"
 			Height = "21"
@@ -393,7 +393,7 @@
 		<Element
 			CID = "1276126314"
 			Type = "StaticText"
-			X = "-429"
+			X = "-455"
 			Y = "149"
 			Width = "100"
 			Height = "21"
@@ -429,7 +429,7 @@
 		<Element
 			CID = "1276136500"
 			Type = "StaticText"
-			X = "-152"
+			X = "-147"
 			Y = "59"
 			Width = "100"
 			Height = "21"
@@ -447,7 +447,7 @@
 		<Element
 			CID = "1276139035"
 			Type = "EditBox"
-			X = "-63"
+			X = "-64"
 			Y = "59"
 			Width = "120"
 			Height = "21"
@@ -477,7 +477,7 @@
 		<Element
 			CID = "1276119734"
 			Type = "StaticText"
-			X = "-433"
+			X = "-455"
 			Y = "61"
 			Width = "100"
 			Height = "21"
@@ -495,7 +495,7 @@
 		<Element
 			CID = "1276136340"
 			Type = "StaticText"
-			X = "-152"
+			X = "-147"
 			Y = "120"
 			Width = "100"
 			Height = "21"
@@ -513,7 +513,7 @@
 		<Element
 			CID = "1276128973"
 			Type = "StaticText"
-			X = "-432"
+			X = "-455"
 			Y = "0"
 			Width = "100"
 			Height = "21"
@@ -531,7 +531,7 @@
 		<Element
 			CID = "1276123750"
 			Type = "StaticText"
-			X = "-447"
+			X = "-455"
 			Y = "30"
 			Width = "100"
 			Height = "21"
@@ -549,7 +549,7 @@
 		<Element
 			CID = "1276121209"
 			Type = "StaticText"
-			X = "-152"
+			X = "-147"
 			Y = "28"
 			Width = "100"
 			Height = "21"
@@ -567,7 +567,7 @@
 		<Element
 			CID = "1276139931"
 			Type = "EditBox"
-			X = "-63"
+			X = "-64"
 			Y = "123"
 			Width = "120"
 			Height = "21"
@@ -597,7 +597,7 @@
 		<Element
 			CID = "1276131927"
 			Type = "EditBox"
-			X = "-347"
+			X = "-350"
 			Y = "61"
 			Width = "120"
 			Height = "21"
@@ -627,7 +627,7 @@
 		<Element
 			CID = "1276143914"
 			Type = "EditBox"
-			X = "-344"
+			X = "-350"
 			Y = "90"
 			Width = "120"
 			Height = "21"
@@ -657,7 +657,7 @@
 		<Element
 			CID = "1276118038"
 			Type = "EditBox"
-			X = "-61"
+			X = "-64"
 			Y = "28"
 			Width = "120"
 			Height = "21"
@@ -738,13 +738,13 @@
 		<Element
 			CID = "281741332"
 			Type = "WebButton"
-			X = "-215"
+			X = "-217"
 			Y = "35"
 			Width = "25"
 			Height = "14"
 			Flags = "0"
-			FillColour = "172,168,153,0,17"
-			LineColour = "139,161,105,0,3"
+			FillColour = "236,233,216,0,16"
+			LineColour = "172,168,153,0,11"
 			TextColour = "0,0,0,0,8"
 			Typeface = ""
 			FontAttributes = "1"
@@ -753,7 +753,7 @@
 			MarginRight = "0"
 			MarginTop = "0"
 			MarginBottom = "0"
-			Text = "加"
+			Text = "新"
 			Depth = "3"
 			LineWidth = "1"
 			Shape = "Rectangle"
@@ -762,7 +762,7 @@
 		<Element
 			CID = "691754748"
 			Type = "StaticText"
-			X = "-432"
+			X = "-455"
 			Y = "218"
 			Width = "100"
 			Height = "21"
@@ -801,7 +801,7 @@
 		<Element
 			CID = "1253513252"
 			Type = "StaticText"
-			X = "-149"
+			X = "-147"
 			Y = "91"
 			Width = "100"
 			Height = "21"
@@ -819,7 +819,7 @@
 		<Element
 			CID = "1253515729"
 			Type = "EditBox"
-			X = "-62"
+			X = "-64"
 			Y = "91"
 			Width = "120"
 			Height = "21"
@@ -849,7 +849,7 @@
 		<Element
 			CID = "513490997"
 			Type = "StaticText"
-			X = "-433"
+			X = "-455"
 			Y = "117"
 			Width = "100"
 			Height = "21"
@@ -885,7 +885,7 @@
 		<Element
 			CID = "513479283"
 			Type = "EditBox"
-			X = "-347"
+			X = "-350"
 			Y = "119"
 			Width = "120"
 			Height = "21"
@@ -915,7 +915,7 @@
 		<Element
 			CID = "513477337"
 			Type = "ComboBox"
-			X = "-62"
+			X = "-64"
 			Y = "1"
 			Width = "127"
 			Height = "21"
@@ -939,7 +939,7 @@
 			DisabledTextColour = "161,161,146,0,18"
 			FillColour = "240,240,255,0,0"
 			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "153,51,0,0,0"/>
+			BorderColour = "0,0,255,0,0"/>
 		<Element
 			CID = "212955841"
 			Type = "EllipseShape"
@@ -967,7 +967,7 @@
 		<Element
 			CID = "1913221888"
 			Type = "ComboBox"
-			X = "-344"
+			X = "-350"
 			Y = "0"
 			Width = "127"
 			Height = "21"
@@ -991,12 +991,12 @@
 			DisabledTextColour = "161,161,146,0,18"
 			FillColour = "240,240,255,0,0"
 			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "153,51,0,0,0"/>
+			BorderColour = "0,0,255,0,0"/>
 		<Element
 			CID = "1913206254"
 			Type = "EllipseShape"
-			X = "-588"
-			Y = "21"
+			X = "-453"
+			Y = "-50"
 			Width = "160"
 			Height = "44"
 			Flags = "0"
@@ -1019,7 +1019,7 @@
 		<Element
 			CID = "1769820408"
 			Type = "EditBox"
-			X = "-346"
+			X = "-350"
 			Y = "154"
 			Width = "120"
 			Height = "21"
@@ -1049,7 +1049,7 @@
 		<Element
 			CID = "1769805609"
 			Type = "StaticText"
-			X = "-155"
+			X = "-147"
 			Y = "156"
 			Width = "100"
 			Height = "21"
@@ -1091,11 +1091,11 @@
 			DisabledTextColour = "161,161,146,0,18"
 			FillColour = "240,240,255,0,0"
 			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "153,51,0,0,0"/>
+			BorderColour = "0,0,255,0,0"/>
 		<Element
 			CID = "1769817427"
 			Type = "StaticText"
-			X = "-434"
+			X = "-455"
 			Y = "185"
 			Width = "100"
 			Height = "21"
@@ -1113,7 +1113,7 @@
 		<Element
 			CID = "1769821307"
 			Type = "ComboBox"
-			X = "-346"
+			X = "-350"
 			Y = "185"
 			Width = "127"
 			Height = "21"
@@ -1137,11 +1137,11 @@
 			DisabledTextColour = "161,161,146,0,18"
 			FillColour = "240,240,255,0,0"
 			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "153,51,0,0,0"/>
+			BorderColour = "0,0,255,0,0"/>
 		<Element
 			CID = "1312358665"
 			Type = "ComboBox"
-			X = "-347"
+			X = "-350"
 			Y = "30"
 			Width = "127"
 			Height = "21"
@@ -1165,7 +1165,7 @@
 			DisabledTextColour = "161,161,146,0,18"
 			FillColour = "240,240,255,0,0"
 			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "153,51,0,0,0"/>
+			BorderColour = "0,0,255,0,0"/>
 		<Element
 			CID = "539576043"
 			Type = "EllipseShape"

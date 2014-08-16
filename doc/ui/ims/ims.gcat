@@ -48,6 +48,16 @@
 			OriginalPath = "Privacy Policy01.gui"
 			IsDeleted = "1"/>
 		<FileInfo
+			ID = "41AD7401-1560-4854-999BCDF183259F24"
+			RelativePath = "ChangePSW.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "ChangePSW.gui"/>
+		<FileInfo
+			ID = "420F6447-FD54-4FEA-AD4FD1FD6683C43B"
+			RelativePath = "InstrumentEdit.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "InstrumentEdit.gui"/>
+		<FileInfo
 			ID = "501E52A9-8005-4965-B58BC77C275468ED"
 			RelativePath = "Masters\Header01.gui"
 			OriginalRoot = "$Project"
@@ -128,6 +138,11 @@
 			OriginalRoot = "$Project"
 			OriginalPath = "login.gui"
 			IsDeleted = "1"/>
+		<FileInfo
+			ID = "B1930405-90FF-4EB3-8D34E7DF82FB0416"
+			RelativePath = "UserEdit.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "UserEdit.gui"/>
 		<FileInfo
 			ID = "B6C676A7-CE75-4FB2-A8C654B5DFFE8B12"
 			RelativePath = "About Us.gui"
