@@ -103,7 +103,7 @@ $(function(){
 		<h4 style="">您的系统没有安装flash播放软件，服务器下的图表数据需要flash才能显示，请先下载安装Adobe flash player</h4>
 		<p><a href="download/flash/flashplayer12.0win_ax.exe">下载Flash_player12 flash播放(支持64位系统)</a></p>
 	</div>
-	<div id="layout">
+	<div id="layout" >
 		<div id="header">
 			<div class="headerNav">
 				<span id="logo">出入库管理</span>
@@ -215,7 +215,6 @@ $(function(){
 			</div>
 			
 		</div>
-		<div id="warning" width="80%" height="200px"></div>
 	
 	</div>
 	
@@ -225,9 +224,6 @@ $(function(){
 		 
 		 <a href="currentWarnInfo.jsp" target="dialog" external="true" mask="false" width="1000" height="300"><h2>实时信息显示</h2></a>
 	 </div-->
-	 <div style="width:50px;height:50px;background-color:#000000;position:absolute;left:10px;top:2px;z-index: 999;">
-	 	<a href="CurrentWarnInfo.jsp" target="dialog" mask="false" height="260" title="实时信息显示" rel="warnInfoDialog" id="realTimeWarning"><img id="warningPic" src="Images/bitBrown.bmp" alt="" /></a>
-	 </div>
 	 
 <script src="js/localJS/index.js" type="text/javascript"></script>
 
