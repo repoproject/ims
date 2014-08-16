@@ -11,56 +11,11 @@
 	RecentIcon7 = "">
 	<OpenFiles
 		CID = "1"
-		LastActive = "11">
-		<File
-			FileID = "979B68F9-9D5A-41D9-BF7679F03A7A0B89"
-			RootPath = "$Container"
-			RelativePathname = "Home.gui"
-			ViewSettings = ""/>
-		<File
-			FileID = "B6C676A7-CE75-4FB2-A8C654B5DFFE8B12"
-			RootPath = "$Container"
-			RelativePathname = "About Us.gui"
-			ViewSettings = ""/>
-		<File
-			FileID = "18CA87D2-1499-41D8-8F7CD78628B01E5E"
-			RootPath = "$Container"
-			RelativePathname = "Products.gui"
-			ViewSettings = ""/>
+		LastActive = "2">
 		<File
 			FileID = "AE22B3DE-F36A-4E78-AE1F993064FF6868"
 			RootPath = "$Container"
 			RelativePathname = "login.gui"
-			ViewSettings = ""/>
-		<File
-			FileID = "668045AD-6B61-4804-84AE55B87F1153AF"
-			RootPath = "$Container"
-			RelativePathname = "main.gui"
-			ViewSettings = ""/>
-		<File
-			FileID = "7449B92E-1261-4B51-9B529DD32017F91D"
-			RootPath = "$Container"
-			RelativePathname = "out.gui"
-			ViewSettings = ""/>
-		<File
-			FileID = "FFE77E35-1494-40D4-AAA0AE44AC065319"
-			RootPath = "$Container"
-			RelativePathname = "regent.gui"
-			ViewSettings = ""/>
-		<File
-			FileID = "7AA88628-5C34-4717-B87CBFF0D5FF5898"
-			RootPath = "$Container"
-			RelativePathname = "in.gui"
-			ViewSettings = ""/>
-		<File
-			FileID = "6E0D8EF9-163A-4B50-9B65086035F25EAE"
-			RootPath = "$Container"
-			RelativePathname = "tree.gui"
-			ViewSettings = ""/>
-		<File
-			FileID = "157BBA5F-D832-49B6-9DCB79517DDE581D"
-			RootPath = "$Container"
-			RelativePathname = "news.gui"
 			ViewSettings = ""/>
 		<File
 			FileID = "EE19F96E-A2BD-4B6F-9928F74AD0E69377"
@@ -68,14 +23,19 @@
 			RelativePathname = "index.gui"
 			ViewSettings = ""/>
 		<File
+			FileID = "6E534198-D024-4C3B-8F34246BDD5D6D51"
+			RootPath = "$Container"
+			RelativePathname = "112.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "FFE77E35-1494-40D4-AAA0AE44AC065319"
+			RootPath = "$Container"
+			RelativePathname = "regent.gui"
+			ViewSettings = ""/>
+		<File
 			FileID = "1CFC3597-DE95-4CDC-B744DEC5DA233F92"
 			RootPath = "$Container"
 			RelativePathname = "queryOut.gui"
-			ViewSettings = ""/>
-		<File
-			FileID = "E93C6654-0D29-476F-9EE1DEB78A8E0C3D"
-			RootPath = "$Container"
-			RelativePathname = "queryIn.gui"
 			ViewSettings = ""/>
 		<File
 			FileID = "0E5A4878-44CD-42AF-AA1B6E6BCC97F48C"
@@ -83,9 +43,14 @@
 			RelativePathname = "QueryDiscard.gui"
 			ViewSettings = ""/>
 		<File
-			FileID = "156449EF-03FC-4803-91952FCBEAC05B42"
+			FileID = "7449B92E-1261-4B51-9B529DD32017F91D"
 			RootPath = "$Container"
-			RelativePathname = "RStatic.gui"
+			RelativePathname = "out.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "2319D6AE-4DCB-48DB-A8A70B799DEB8436"
+			RootPath = "$Container"
+			RelativePathname = "123.gui"
 			ViewSettings = ""/>
 	</OpenFiles>
 </Workspace>

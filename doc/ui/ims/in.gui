@@ -417,7 +417,7 @@
 			Height = "49"
 			Flags = "0"
 			FillColour = "236,233,216,0,16"
-			TextColour = "33,161,33,0,2"
+			TextColour = "0,0,0,0,9"
 			Typeface = ""
 			FontAttributes = "1"
 			TextSize = "240"
@@ -464,7 +464,7 @@
 			OverrideDisabledTextColour = "0"
 			OverrideFillColour = "0"
 			OverrideDisabledFillColour = "0"
-			OverrideBorderColour = "0"
+			OverrideBorderColour = "1"
 			MarginLeft = "0"
 			MarginRight = "0"
 			MarginTop = "0"
@@ -473,7 +473,7 @@
 			DisabledTextColour = "161,161,146,0,18"
 			FillColour = "255,255,153,0,0"
 			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "164,185,127,0,12"/>
+			BorderColour = "153,84,10,0,34"/>
 		<Element
 			CID = "1276119734"
 			Type = "StaticText"
@@ -584,7 +584,7 @@
 			OverrideDisabledTextColour = "0"
 			OverrideFillColour = "0"
 			OverrideDisabledFillColour = "0"
-			OverrideBorderColour = "0"
+			OverrideBorderColour = "1"
 			MarginLeft = "0"
 			MarginRight = "0"
 			MarginTop = "0"
@@ -593,7 +593,7 @@
 			DisabledTextColour = "161,161,146,0,18"
 			FillColour = "255,255,153,0,0"
 			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "164,185,127,0,12"/>
+			BorderColour = "153,84,10,0,34"/>
 		<Element
 			CID = "1276131927"
 			Type = "EditBox"
@@ -614,7 +614,7 @@
 			OverrideDisabledTextColour = "0"
 			OverrideFillColour = "0"
 			OverrideDisabledFillColour = "0"
-			OverrideBorderColour = "0"
+			OverrideBorderColour = "1"
 			MarginLeft = "0"
 			MarginRight = "0"
 			MarginTop = "0"
@@ -623,7 +623,7 @@
 			DisabledTextColour = "161,161,146,0,18"
 			FillColour = "255,255,153,0,0"
 			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "164,185,127,0,12"/>
+			BorderColour = "153,84,10,0,34"/>
 		<Element
 			CID = "1276143914"
 			Type = "EditBox"
@@ -644,7 +644,7 @@
 			OverrideDisabledTextColour = "0"
 			OverrideFillColour = "0"
 			OverrideDisabledFillColour = "0"
-			OverrideBorderColour = "0"
+			OverrideBorderColour = "1"
 			MarginLeft = "0"
 			MarginRight = "0"
 			MarginTop = "0"
@@ -653,7 +653,7 @@
 			DisabledTextColour = "161,161,146,0,18"
 			FillColour = "255,255,153,0,0"
 			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "164,185,127,0,12"/>
+			BorderColour = "153,84,10,0,34"/>
 		<Element
 			CID = "1276118038"
 			Type = "EditBox"
@@ -674,7 +674,7 @@
 			OverrideDisabledTextColour = "0"
 			OverrideFillColour = "0"
 			OverrideDisabledFillColour = "0"
-			OverrideBorderColour = "0"
+			OverrideBorderColour = "1"
 			MarginLeft = "0"
 			MarginRight = "0"
 			MarginTop = "0"
@@ -683,7 +683,7 @@
 			DisabledTextColour = "161,161,146,0,18"
 			FillColour = "255,255,153,0,0"
 			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "164,185,127,0,12"/>
+			BorderColour = "153,84,10,0,34"/>
 		<Element
 			CID = "1276149602"
 			Type = "EditBox"
@@ -704,7 +704,7 @@
 			OverrideDisabledTextColour = "0"
 			OverrideFillColour = "0"
 			OverrideDisabledFillColour = "0"
-			OverrideBorderColour = "0"
+			OverrideBorderColour = "1"
 			MarginLeft = "0"
 			MarginRight = "0"
 			MarginTop = "0"
@@ -713,7 +713,7 @@
 			DisabledTextColour = "161,161,146,0,18"
 			FillColour = "255,255,153,0,0"
 			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "164,185,127,0,12"/>
+			BorderColour = "153,84,10,0,34"/>
 		<Element
 			CID = "1276121813"
 			Type = "TextButton"
@@ -836,7 +836,7 @@
 			OverrideDisabledTextColour = "0"
 			OverrideFillColour = "0"
 			OverrideDisabledFillColour = "0"
-			OverrideBorderColour = "0"
+			OverrideBorderColour = "1"
 			MarginLeft = "0"
 			MarginRight = "0"
 			MarginTop = "0"
@@ -845,7 +845,7 @@
 			DisabledTextColour = "161,161,146,0,18"
 			FillColour = "255,255,153,0,0"
 			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "164,185,127,0,12"/>
+			BorderColour = "153,84,10,0,34"/>
 		<Element
 			CID = "513490997"
 			Type = "StaticText"
@@ -902,7 +902,7 @@
 			OverrideDisabledTextColour = "0"
 			OverrideFillColour = "0"
 			OverrideDisabledFillColour = "0"
-			OverrideBorderColour = "0"
+			OverrideBorderColour = "1"
 			MarginLeft = "0"
 			MarginRight = "0"
 			MarginTop = "0"
@@ -911,7 +911,7 @@
 			DisabledTextColour = "161,161,146,0,18"
 			FillColour = "255,255,153,0,0"
 			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "164,185,127,0,12"/>
+			BorderColour = "153,84,10,0,34"/>
 		<Element
 			CID = "513477337"
 			Type = "ComboBox"
@@ -934,12 +934,12 @@
 			OverrideDisabledTextColour = "0"
 			OverrideFillColour = "0"
 			OverrideDisabledFillColour = "0"
-			OverrideBorderColour = "0"
+			OverrideBorderColour = "1"
 			TextColour = "0,0,0,0,9"
 			DisabledTextColour = "161,161,146,0,18"
 			FillColour = "240,240,255,0,0"
 			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "192,192,255,0,0"/>
+			BorderColour = "153,51,0,0,0"/>
 		<Element
 			CID = "212955841"
 			Type = "EllipseShape"
@@ -986,12 +986,12 @@
 			OverrideDisabledTextColour = "0"
 			OverrideFillColour = "0"
 			OverrideDisabledFillColour = "0"
-			OverrideBorderColour = "0"
+			OverrideBorderColour = "1"
 			TextColour = "0,0,0,0,9"
 			DisabledTextColour = "161,161,146,0,18"
 			FillColour = "240,240,255,0,0"
 			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "192,192,255,0,0"/>
+			BorderColour = "153,51,0,0,0"/>
 		<Element
 			CID = "1913206254"
 			Type = "EllipseShape"
@@ -1036,7 +1036,7 @@
 			OverrideDisabledTextColour = "0"
 			OverrideFillColour = "0"
 			OverrideDisabledFillColour = "0"
-			OverrideBorderColour = "0"
+			OverrideBorderColour = "1"
 			MarginLeft = "0"
 			MarginRight = "0"
 			MarginTop = "0"
@@ -1045,7 +1045,7 @@
 			DisabledTextColour = "161,161,146,0,18"
 			FillColour = "255,255,153,0,0"
 			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "164,185,127,0,12"/>
+			BorderColour = "153,84,10,0,34"/>
 		<Element
 			CID = "1769805609"
 			Type = "StaticText"
@@ -1086,12 +1086,12 @@
 			OverrideDisabledTextColour = "0"
 			OverrideFillColour = "0"
 			OverrideDisabledFillColour = "0"
-			OverrideBorderColour = "0"
+			OverrideBorderColour = "1"
 			TextColour = "0,0,0,0,9"
 			DisabledTextColour = "161,161,146,0,18"
 			FillColour = "240,240,255,0,0"
 			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "192,192,255,0,0"/>
+			BorderColour = "153,51,0,0,0"/>
 		<Element
 			CID = "1769817427"
 			Type = "StaticText"
@@ -1132,12 +1132,12 @@
 			OverrideDisabledTextColour = "0"
 			OverrideFillColour = "0"
 			OverrideDisabledFillColour = "0"
-			OverrideBorderColour = "0"
+			OverrideBorderColour = "1"
 			TextColour = "0,0,0,0,9"
 			DisabledTextColour = "161,161,146,0,18"
 			FillColour = "240,240,255,0,0"
 			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "192,192,255,0,0"/>
+			BorderColour = "153,51,0,0,0"/>
 		<Element
 			CID = "1312358665"
 			Type = "ComboBox"
@@ -1160,12 +1160,12 @@
 			OverrideDisabledTextColour = "0"
 			OverrideFillColour = "0"
 			OverrideDisabledFillColour = "0"
-			OverrideBorderColour = "0"
+			OverrideBorderColour = "1"
 			TextColour = "0,0,0,0,9"
 			DisabledTextColour = "161,161,146,0,18"
 			FillColour = "240,240,255,0,0"
 			DisabledFillColour = "236,233,216,0,16"
-			BorderColour = "192,192,255,0,0"/>
+			BorderColour = "153,51,0,0,0"/>
 		<Element
 			CID = "539576043"
 			Type = "EllipseShape"

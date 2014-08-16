@@ -1,0 +1,134 @@
+<Screen
+	CID = "423391272"
+	AppID = "2"
+	AppVer = "4.2.111.0"
+	DocID = ""
+	HasCanvas = "0"
+	Width = "640"
+	Height = "480"
+	NextCID = "6"
+	RepresentativeRefID = "0"
+	UseDefRepresentative = "1">
+	<Elements
+		CID = "1">
+		<Element
+			CID = "427896022"
+			Type = "Component"
+			X = "-584"
+			Y = "-104"
+			Width = "791"
+			Height = "590"
+			Flags = "3"
+			BackgroundColour = "255,255,255,0,6"
+			FileID = "EE19F96E-A2BD-4B6F-9928F74AD0E69377"
+			RootPath = "$Container"
+			Filename = "index.gui"
+			Background = "Transparent"
+			HorzAlign = "Left"
+			VertAlign = "Top"
+			MaintainSize = "0"/>
+		<Element
+			CID = "1276120000"
+			Type = "WebPagePart"
+			X = "-374"
+			Y = "-15"
+			Width = "573"
+			Height = "498"
+			Flags = "0"
+			FillColour = "255,255,255,0,0"
+			MarginLeft = "12"
+			MarginRight = "12"
+			MarginTop = "12"
+			MarginBottom = "12"
+			Fill = "None"/>
+		<Element
+			CID = "1824025794"
+			Type = "WebButton"
+			X = "-639"
+			Y = "92"
+			Width = "25"
+			Height = "14"
+			Flags = "0"
+			FillColour = "172,168,153,0,17"
+			LineColour = "139,161,105,0,3"
+			TextColour = "0,0,0,0,8"
+			Typeface = ""
+			FontAttributes = "1"
+			TextSize = "Normal"
+			MarginLeft = "0"
+			MarginRight = "0"
+			MarginTop = "0"
+			MarginBottom = "0"
+			Text = "选"
+			Depth = "3"
+			LineWidth = "1"
+			Shape = "Rectangle"
+			HorzAlign = "Centre"
+			VertAlign = "Centre"/>
+		<Element
+			CID = "2021803715"
+			Type = "Bitmap"
+			X = "-387"
+			Y = "-20"
+			Width = "594"
+			Height = "498"
+			Flags = "0"
+			RootPath = "$Container"
+			Filename = "images\RStatic.png"
+			Placement = "Stretch"
+			HorzAlign = "Left"
+			VertAlign = "Top"
+			ClipLeft = "0"
+			ClipRight = "0"
+			ClipTop = "0"
+			ClipBottom = "0"/>
+		<Element
+			CID = "2021802839"
+			Type = "EditBox"
+			X = "-387"
+			Y = "-24"
+			Width = "415"
+			Height = "21"
+			Flags = "2"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "只有系统管理员能够查询每月的统计表"
+			IsDisabled = "0"
+			IsReadOnly = "0"
+			HorzAlign = "Left"
+			EditType = "Text"
+			OverrideTextColour = "0"
+			OverrideDisabledTextColour = "0"
+			OverrideFillColour = "0"
+			OverrideDisabledFillColour = "0"
+			OverrideBorderColour = "1"
+			MarginLeft = "0"
+			MarginRight = "0"
+			MarginTop = "0"
+			MarginBottom = "0"
+			TextColour = "0,0,0,0,9"
+			DisabledTextColour = "161,161,146,0,18"
+			FillColour = "255,255,153,0,0"
+			DisabledFillColour = "236,233,216,0,16"
+			BorderColour = "153,84,10,0,34"/>
+	</Elements>
+	<Connections
+		CID = "2"/>
+	<Groups
+		CID = "3"/>
+	<SelectionGroups
+		CID = "4"/>
+	<Notes
+		CID = "5">
+		<Note
+			CID = "423392404"
+			Name = "Description"
+			NextCID = "2">
+			<Text
+				CID = "1">
+				
+			</Text>
+		</Note>
+	</Notes>
+</Screen>
