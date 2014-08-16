@@ -182,7 +182,7 @@
 			</TreeItem>
 			<TreeItem
 				ItemID = "11"
-				Text = "用户维护"
+				Text = "基础信息维护"
 				IsBold = "1"
 				IsChecked = "1"
 				IsExpanded = "1"
