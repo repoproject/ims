@@ -11,12 +11,7 @@
 	RecentIcon7 = "">
 	<OpenFiles
 		CID = "1"
-		LastActive = "1">
-		<File
-			FileID = "AE22B3DE-F36A-4E78-AE1F993064FF6868"
-			RootPath = "$Container"
-			RelativePathname = "login.gui"
-			ViewSettings = ""/>
+		LastActive = "2">
 		<File
 			RootPath = "$Container"
 			RelativePathname = "112.gui"
@@ -84,6 +79,16 @@
 			FileID = "EE19F96E-A2BD-4B6F-9928F74AD0E69377"
 			RootPath = "$Container"
 			RelativePathname = "index.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "AE22B3DE-F36A-4E78-AE1F993064FF6868"
+			RootPath = "$Container"
+			RelativePathname = "login.gui"
+			ViewSettings = ""/>
+		<File
+			FileID = "668045AD-6B61-4804-84AE55B87F1153AF"
+			RootPath = "$Container"
+			RelativePathname = "main.gui"
 			ViewSettings = ""/>
 	</OpenFiles>
 </Workspace>

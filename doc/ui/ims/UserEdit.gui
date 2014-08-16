@@ -338,7 +338,7 @@
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "Discard"
+			Text = "部门1"
 			IsDisabled = "0"
 			IsEditable = "1"
 			IsFlat = "0"
