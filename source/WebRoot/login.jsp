@@ -10,7 +10,7 @@
   <head>
     <base href="<%=basePath%>">
     
-    <title>管理系统</title>
+    <title>QUINTILES库存管理系统</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
