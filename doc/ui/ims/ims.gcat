@@ -184,6 +184,11 @@
 			OriginalRoot = "$Project"
 			OriginalPath = "index.gui"/>
 		<FileInfo
+			ID = "F5E2C327-B861-48AB-ABCC8B97774D16FD"
+			RelativePath = "ExportOut.gui"
+			OriginalRoot = "$Project"
+			OriginalPath = "ExportOut.gui"/>
+		<FileInfo
 			ID = "FFE77E35-1494-40D4-AAA0AE44AC065319"
 			RelativePath = "regent.gui"
 			OriginalRoot = "$Project"

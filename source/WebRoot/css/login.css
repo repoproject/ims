@@ -20,6 +20,14 @@ body{
 	left: 6%;
 	top: 0%;
 }
+.inputField{
+border-top-width:0px;
+border-bottom-width:1px;
+border-left-width:0px;
+border-right-width:0px;
+border-bottom-color: #000000;
+}
+
 #username{
 	/*position: relative;
 	left: 146px;

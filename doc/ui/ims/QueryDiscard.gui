@@ -227,8 +227,8 @@
 		<Element
 			CID = "1895052494"
 			Type = "TextButton"
-			X = "91"
-			Y = "-20"
+			X = "22"
+			Y = "0"
 			Width = "59"
 			Height = "23"
 			Flags = "0"
