@@ -10,7 +10,7 @@
   <head>
     <base href="<%=basePath%>">
     
-    <title>管理系统</title>
+    <title>QUINTILES库存管理系统</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -28,7 +28,7 @@
   <body>
     <div class="outer">
     	<form action="servlet/Login" method="post" onsubmit="return loginSubmit(this,loginCallBack)">
-    		<input type="text" name="username" size="20" class="login_input" id="username"/>
+    		<input type="text" name="username" size="20" class="inputField" id="username"/>
     		<input type="password" name="password" size="20" class="login_input" id="password"/>
     		<input class="submit" type="submit" value=" "  id="submit"/>
     		<!-- <input class="reset" type="reset" value=" " id="reset"/> -->

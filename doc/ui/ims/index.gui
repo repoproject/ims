@@ -102,7 +102,7 @@
 			Typeface = "隶书"
 			FontAttributes = "0"
 			TextSize = "160"
-			NextItemID = "26"
+			NextItemID = "27"
 			IsDisabled = "0"
 			HasBorder = "1"
 			HasButtons = "1"
@@ -168,6 +168,13 @@
 				<TreeItem
 					ItemID = "24"
 					Text = "过期查询"
+					IsBold = "0"
+					IsChecked = "1"
+					IsExpanded = "0"
+					IsSelected = "0"/>
+				<TreeItem
+					ItemID = "26"
+					Text = "导出出库"
 					IsBold = "0"
 					IsChecked = "1"
 					IsExpanded = "0"
@@ -457,6 +464,22 @@
 			HorzAlign = "Left"
 			VertAlign = "Top"
 			MaintainSize = "0"/>
+		<Element
+			CID = "1920234390"
+			Type = "Component"
+			X = "2268"
+			Y = "596"
+			Width = "791"
+			Height = "590"
+			Flags = "3"
+			BackgroundColour = "255,255,255,0,6"
+			FileID = "F5E2C327-B861-48AB-ABCC8B97774D16FD"
+			RootPath = "$Container"
+			Filename = "ExportOut.gui"
+			Background = "Transparent"
+			HorzAlign = "Left"
+			VertAlign = "Top"
+			MaintainSize = "0"/>
 	</Elements>
 	<Connections
 		CID = "2">
@@ -568,6 +591,17 @@
 			SourceSubItemID = "25"
 			SourceRefID = "677933625"
 			TargetRefID = "128984323"
+			ConLineWidth = "2"
+			ConLineColour = "0,0,0,0,0"/>
+		<Connection
+			CID = "1920232731"
+			Layer = "DesignElements"
+			Trigger = "LeftClick"
+			Type = "Navigation"
+			SubType = "ModelessSwitchTop"
+			SourceSubItemID = "26"
+			SourceRefID = "677933625"
+			TargetRefID = "1920234390"
 			ConLineWidth = "2"
 			ConLineColour = "0,0,0,0,0"/>
 	</Connections>

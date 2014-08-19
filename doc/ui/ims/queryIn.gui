@@ -447,7 +447,7 @@
 		<Element
 			CID = "1895052494"
 			Type = "TextButton"
-			X = "94"
+			X = "45"
 			Y = "-5"
 			Width = "59"
 			Height = "23"
@@ -702,7 +702,7 @@
 		<Element
 			CID = "163132488"
 			Type = "StaticText"
-			X = "-110"
+			X = "-123"
 			Y = "-4"
 			Width = "100"
 			Height = "21"
@@ -720,7 +720,7 @@
 		<Element
 			CID = "163132840"
 			Type = "ComboBox"
-			X = "-29"
+			X = "-42"
 			Y = "-4"
 			Width = "83"
 			Height = "21"

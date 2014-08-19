@@ -112,6 +112,30 @@
 			FillColour = "255,255,153,0,0"
 			DisabledFillColour = "236,233,216,0,16"
 			BorderColour = "153,84,10,0,34"/>
+		<Element
+			CID = "783304857"
+			Type = "EllipseShape"
+			X = "50"
+			Y = "-41"
+			Width = "214"
+			Height = "70"
+			Flags = "0"
+			TextColour = "0,0,0,0,0"
+			FillColour = "255,255,224,0,0"
+			BorderColour = "0,0,0,0,0"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "Inventory表必须完全按照模板导出，以方便将来给财务电子版对账。"
+			BorderWidth = "2"
+			Fill = "Solid"
+			Border = "Single"
+			HorzAlign = "Centre"
+			VertAlign = "Centre"
+			MarginLeft = "0"
+			MarginRight = "0"
+			MarginTop = "0"
+			MarginBottom = "0"/>
 	</Elements>
 	<Connections
 		CID = "2"/>
