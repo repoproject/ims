@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications xmlns="http://www.wabacus.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
+	<page id="out_edit" js="/webresources/script/validate.js">
+		<report id="report1" title="request{txtname}详细信息" type="editabledetail" >
+			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
+				<col column="ID" displaytype="hidden">
+				</col>
+				<col column="machinename" label="工号*" br="true">
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				</col>
+				<col column="machineno" label="姓名" br="true">
+					<inputbox jsvalidate="isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				</col>
+				<col column="batchno" label="昵称*" br="true">
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				</col>
+				<col column="username" label="密码" br="true" displaytype="hidden" >
+				</col>
+				<col column="useDate" label="角色" br="true">
+					<inputbox type="selectbox">
+						<option value="0" label="普通用户"></option>
+						<option value="1" label="高级用户"></option>
+					</inputbox>
+				</col>
+				<col column="reason" label="性别" br="true">
+					<inputbox type="selectbox">
+						<option value="0" label="女"></option>
+						<option value="1" label="男"></option>
+					</inputbox>
+				</col>
+				<col column="num" label="备注">
+					<inputbox type="textareabox" styleproperty="rows='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+			</display>
+			<sql>
+				<select>
+					<value>
+						<![CDATA[SELECT machinename,machineno,batchno,username,useDate,num,reason FROM b_catuse where  {#condition#}]]>
+					</value>
+					<condition name="txtid" hidden="true">
+						<value>
+						<![CDATA[(ID = '#data#' )]]>
+						</value>
+					</condition>
+				</select>
+				<insert>
+					insert into b_catuse(machinename,machineno,batchno,username,useDate,num,reason,remark,operator)
+					values(trim(@{machinename}),trim(@{machineno}),trim(@{batchno}),trim(@{username}),@{useDate},,trim(@{reason}),'001'));
+				</insert>
+				<update>
+					update b_catuse set machinename=trim(@{machinename}),machineno=trim(@{machineno}),batchno=@{batchno},username=@{username},useDate=@{useDate},num=trim(@{num}) 
+					where ID=@{ID__old};
+				</update>
+			</sql>
+			<format><!--
+				<value>
+					rrequest.getRequest().setAttribute("txtname",name);//存放request，以便显示标题时能取到
+				</value>
+			--></format>
+		</report>
+	</page>
+	
+</applications>
