@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-08-20 17:10:52
+Date: 2014-08-20 23:03:47
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -37,10 +37,10 @@ CREATE TABLE `b_cat` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for b_catorder
+-- Table structure for b_in
 -- ----------------------------
-DROP TABLE IF EXISTS `b_catorder`;
-CREATE TABLE `b_catorder` (
+DROP TABLE IF EXISTS `b_in`;
+CREATE TABLE `b_in` (
   `id` int(11) NOT NULL COMMENT '货号，试剂号耗材号',
   `catId` varchar(50) NOT NULL,
   `batchNo` varchar(255) DEFAULT NULL COMMENT '批号',
@@ -63,32 +63,9 @@ CREATE TABLE `b_catorder` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='试剂表';
 
 -- ----------------------------
--- Records of b_catorder
+-- Records of b_in
 -- ----------------------------
-
--- ----------------------------
--- Table structure for b_catuse
--- ----------------------------
-DROP TABLE IF EXISTS `b_catuse`;
-CREATE TABLE `b_catuse` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `machineName` varchar(255) DEFAULT NULL COMMENT '设备名称',
-  `machineNo` int(11) DEFAULT NULL COMMENT '设备编号',
-  `batchno` int(11) NOT NULL COMMENT '批号',
-  `username` varchar(255) NOT NULL COMMENT '出库人',
-  `userDate` datetime DEFAULT NULL COMMENT '出库日期',
-  `num` int(11) DEFAULT NULL COMMENT '数量',
-  `reason` varchar(255) DEFAULT NULL COMMENT '出库原因，codetype=''userreason''',
-  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
-  `operator` varchar(255) DEFAULT NULL COMMENT '操作者',
-  `makedate` datetime DEFAULT NULL COMMENT '创建日期',
-  `modifydate` datetime DEFAULT NULL COMMENT '修改日期',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='出库记录';
-
--- ----------------------------
--- Records of b_catuse
--- ----------------------------
+INSERT INTO `b_in` VALUES ('1', '1', '1', 'www', 'dddd', '2014-08-20 22:56:45', 'fe', '2014-10-23 22:56:51', '10', '个', '10.00', 'USD', '60.00', '0.0000', '2014-08-20 22:57:41', '111', 'R1', 'vendor');
 
 -- ----------------------------
 -- Table structure for b_machine
@@ -106,6 +83,31 @@ CREATE TABLE `b_machine` (
 
 -- ----------------------------
 -- Records of b_machine
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for b_out
+-- ----------------------------
+DROP TABLE IF EXISTS `b_out`;
+CREATE TABLE `b_out` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `machineName` varchar(255) DEFAULT NULL COMMENT '设备名称',
+  `machineNo` int(11) DEFAULT NULL COMMENT '设备编号',
+  `catname` varchar(100) DEFAULT NULL,
+  `batchno` int(11) NOT NULL COMMENT '批号',
+  `person` varchar(255) NOT NULL COMMENT '出库人',
+  `outDate` datetime DEFAULT NULL COMMENT '出库日期',
+  `num` int(11) DEFAULT NULL COMMENT '数量',
+  `reason` varchar(255) DEFAULT NULL COMMENT '出库原因，codetype=''userreason''',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `operator` varchar(255) DEFAULT NULL COMMENT '操作者',
+  `makedate` datetime DEFAULT NULL COMMENT '创建日期',
+  `modifydate` datetime DEFAULT NULL COMMENT '修改日期',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='出库记录';
+
+-- ----------------------------
+-- Records of b_out
 -- ----------------------------
 
 -- ----------------------------

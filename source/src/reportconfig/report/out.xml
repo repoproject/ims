@@ -3,41 +3,23 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
 	<page id="out" js="/webresources/script/validate.js">
-		<report id="report1" title="request{txtname}详细信息" type="editabledetail" >
-			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
-				<col column="ID" displaytype="hidden">
-				</col>
-				<col column="userID" label="工号*" br="true">
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
-				</col>
-				<col column="name" label="姓名" br="true">
-					<inputbox jsvalidate="isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
-				</col>
-				<col column="nickName" label="昵称*" br="true">
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
-				</col>
-				<col column="password" label="密码" br="true" displaytype="hidden" >
-				</col>
-				<col column="role" label="角色" br="true">
-					<inputbox type="selectbox">
-						<option value="0" label="普通用户"></option>
-						<option value="1" label="高级用户"></option>
-					</inputbox>
-				</col>
-				<col column="sex" label="性别" br="true">
-					<inputbox type="selectbox">
-						<option value="0" label="女"></option>
-						<option value="1" label="男"></option>
-					</inputbox>
-				</col>
-				<col column="remark" label="备注">
-					<inputbox type="textareabox" styleproperty="rows='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
-				</col>
-			</display>
+		<report id="report1" title="request{txtname}详细信息" rowselect="multiple-checkbox" type="editablelist" >
+				<display mouseoverbgcolor="CCCCCC" >
+				<col column="{col-rowselect}" width="20"></col>
+					<col column="id" label="编号"  displaytype="hidden"/>
+					<col column="{sequence:1}" label="序号" width="3%"/>
+					<col column="machinename" label="机器"  clickorderby="true" width="5%"/>
+					<col column="machineno" label="机器编号"  clickorderby="true" width="5%"/>
+					<col column="batchno" label="批次" clickorderby="true" width="20%"></col>
+					<col column="username" label="出库人" clickorderby="true" width="20%"></col>
+					<col column="useDate" label="出库日期" clickorderby="true" width="10%"></col>
+					<col column="num" label="数量" clickorderby="true" width="10%"></col>
+					<col column="reason" label="原因" clickorderby="true" width="20%"></col>
+				</display>
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT ID,name,userID,nickName,password,role,sex,remark FROM d_user where  {#condition#}]]>
+						<![CDATA[SELECT machinename,machineno,batchno,username,useDate,num,reason FROM b_catuse  where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -45,14 +27,12 @@
 						</value>
 					</condition>
 				</select>
-				<insert>
-					insert into d_user(userID,name,nickName,password,role,sex,remark)
-					values(trim(@{userID}),trim(@{name}),trim(@{nickName}),'ecf6e9a713c8533bbad5393ec4a9dab4',@{role},@{sex},trim(@{remark}));
-				</insert>
-				<update>
-					update d_user set name=trim(@{name}),nickName=trim(@{nickName}),password=@{password},role=@{role},sex=@{sex},remark=trim(@{remark}) 
-					where ID=@{ID__old};
-				</update>
+				<insert pageurl="report{out_edit.report1}" popupparams="{title:'出库',width:400,height:300}"></insert>
+				<update pageurl="report{out_edit.report1}" urlparams="txtid=@{id}"
+						popupparams="{title:'编辑用户',width:400,height:300}"></update>  
+				<delete confirmessage="是否删除[@{batchno}]对应的记录？">
+						delete from b_catuse where id=@{id__old};
+					  </delete>		
 			</sql>
 			<format><!--
 				<value>
