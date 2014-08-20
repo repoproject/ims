@@ -75,13 +75,13 @@ A:link {
 	padding-bottom: 0px;
 }
 .cls-data-content-list{/*如果cellresize配置为1或者显示了垂直滚动条，则会将单元格内容自动包在一个<div/>中，下面就是设置这个div的样式*/
-	white-space:nowrap;
+	/*white-space:nowrap;*/
 	overflow:hidden;
 	text-overflow:ellipsis;
 	width:100%	
 }
 .cls-data-td-editlist{/*可编辑数据自动列表报表数据行每个<td/>的样式*/
-	white-space:nowrap;
+	/*white-space:nowrap;*/
 	overflow:hidden;
 	text-overflow:ellipsis;
 	border:1px solid #BDDFFF; 
@@ -91,7 +91,7 @@ A:link {
 }
 
 .cls-data-td-listform{/*列表表单数据行每个<td/>的样式*/
-	white-space:nowrap;
+	/*white-space:nowrap;*/
 	overflow:hidden;
 	text-overflow:ellipsis;
 	border:1px solid #BDDFFF; 
@@ -303,12 +303,17 @@ A:link {
 	MARGIN:0px 0 0px 0; 
 	TEXT-ALIGN:right;
 }
-
-.colSelectedLabel_img{
+.colSelectedLabel_leftimg{
+	float:left;
+	MARGIN:0 0px 0 0;
+	cursor:pointer;	
+	TEXT-ALIGN:left
+}
+.colSelectedLabel_rightimg{
 	float:right;
 	MARGIN:0 0px 0 0;
 	cursor:pointer;	
-	TEXT-ALIGN:right
+	TEXT-ALIGN:right;
 }
 .titletree_container {/*列选择树所在容器的样式*/
 	position:absolute;
@@ -366,7 +371,7 @@ span.spanOutputHighElement{
 	color:white;
 	cursor:pointer;
 }
-span.spanJsValidateErrorTip{
+span.spanTipContainer{
   padding: 3px; 
   border: 1px solid #666;
   border-right-width: 2px;
@@ -689,4 +694,42 @@ span.spanJsValidateErrorTip{
 	text-align:center;
 	border:0;
 	cursor:pointer;
+}
+
+.cls-dataexport-success
+{/*采用只落地不导出的方式导出数据文件成功时的提示信息样式*/
+	text-align:center;
+	font-weight:bold;
+	color:#006400;
+	font-size:20px;
+}
+.cls-dataexport-path
+{/*采用只落地不导出的方式导出数据文件成功时的提示路径的样式*/
+	text-align:center;
+	color:#00008B;
+	font-size:16px;
+	margin-top:20px;
+}
+.cls-dataexport-failed
+{/*采用只落地不导出的方式导出数据文件失败时的提示信息样式*/
+	text-align:center;
+	font-weight:bold;
+	color:#DC143C;
+	font-size:16px;
+}
+
+/*正在加载的提示层样式*/
+.loading-indicator 
+{
+	height: 20px;
+	width: 220px;
+	background: url( 'images/loading.gif' );
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.loading-indicator-overlay 
+{
+	background-color: #FFFFFF;
+	opacity: 0.6;
+	filter: alpha(opacity = 60);
 }

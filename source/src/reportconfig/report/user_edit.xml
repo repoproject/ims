@@ -37,7 +37,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT ID,name,userID,nickName,password,role,sex,remark FROM t_user where  {#condition#}]]>
+						<![CDATA[SELECT ID,name,userID,nickName,password,role,sex,remark FROM d_user where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -46,11 +46,11 @@
 					</condition>
 				</select>
 				<insert>
-					insert into t_user(userID,name,nickName,password,role,sex,remark)
+					insert into d_user(userID,name,nickName,password,role,sex,remark)
 					values(trim(@{userID}),trim(@{name}),trim(@{nickName}),'ecf6e9a713c8533bbad5393ec4a9dab4',@{role},@{sex},trim(@{remark}));
 				</insert>
 				<update>
-					update t_user set name=trim(@{name}),nickName=trim(@{nickName}),password=@{password},role=@{role},sex=@{sex},remark=trim(@{remark}) 
+					update d_user set name=trim(@{name}),nickName=trim(@{nickName}),password=@{password},role=@{role},sex=@{sex},remark=trim(@{remark}) 
 					where ID=@{ID__old};
 				</update>
 			</sql>

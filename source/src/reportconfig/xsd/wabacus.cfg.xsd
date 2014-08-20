@@ -77,6 +77,48 @@
     				</xs:complexType>
     			</xs:element>
     			
+    			<xs:element name="report-datasetvalue-providers" minOccurs="0">
+    				<xs:complexType>
+    					<xs:sequence>
+    						<xs:element name="dataset-provider" minOccurs="0" maxOccurs="unbounded">
+    							<xs:complexType>
+    								<xs:attribute name="name" type="wxs:keyType" use="required"/>
+    								<xs:attribute name="class" type="xs:string" use="required"/>
+    							</xs:complexType>
+    						</xs:element>
+    					</xs:sequence>
+    					<xs:attribute name="default" type="xs:string"/>
+    				</xs:complexType>
+    			</xs:element>
+    			
+    			<xs:element name="common-datasetvalue-providers" minOccurs="0">
+    				<xs:complexType>
+    					<xs:sequence>
+    						<xs:element name="dataset-provider" minOccurs="0" maxOccurs="unbounded">
+    							<xs:complexType>
+    								<xs:attribute name="name" type="xs:string" use="required"/>
+    								<xs:attribute name="class" type="xs:string" use="required"/>
+    							</xs:complexType>
+    						</xs:element>
+    					</xs:sequence>
+    					<xs:attribute name="default" type="xs:string"/>
+    				</xs:complexType>
+    			</xs:element>
+    			
+    			<xs:element name="update-dataset-providers" minOccurs="0">
+    				<xs:complexType>
+    					<xs:sequence>
+    						<xs:element name="dataset-provider" minOccurs="0" maxOccurs="unbounded">
+    							<xs:complexType>
+    								<xs:attribute name="name" type="xs:string" use="required"/>
+    								<xs:attribute name="class" type="xs:string" use="required"/>
+    							</xs:complexType>
+    						</xs:element>
+    					</xs:sequence>
+    					<xs:attribute name="default" type="xs:string"/>
+    				</xs:complexType>
+    			</xs:element>
+    			
     			<xs:element name="container-types" minOccurs="0">
     				<xs:complexType>
     					<xs:sequence>

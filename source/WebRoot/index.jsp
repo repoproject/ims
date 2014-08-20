@@ -147,8 +147,8 @@ $(function(){
 						<ul class=  "tree treeFolder expand">
 							<li><a>出入库管理</a>
 							    <ul>
-								  <li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo" external="true" fresh="false">出库操作</a></li>
-							      <li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo" external="true" fresh="false">入库操作</a></li>
+								  <li><a href="ShowReport.wx?PAGEID=out" target="navTab" rel="userbaseinfo" external="true" fresh="false">出库操作</a></li>
+							      <li><a href="ShowReport.wx?PAGEID=in" target="navTab" rel="userbaseinfo" external="true" fresh="false">入库操作</a></li>
 								  <li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo" external="true" fresh="false">试剂/耗材库</a></li>
 								    
 								</ul>

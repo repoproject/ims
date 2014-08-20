@@ -14,7 +14,6 @@ import com.wabacus.config.component.application.report.ReportBean;
 import com.wabacus.system.ReportRequest;
 import com.wabacus.system.assistant.WabacusAssistant;
 import com.wabacus.system.buttons.EditableReportSQLButtonDataBean;
-import com.wabacus.system.component.application.report.configbean.editablereport.AbsEditActionBean;
 import com.wabacus.system.component.application.report.configbean.editablereport.AbsEditableReportEditDataBean;
 import com.wabacus.system.component.application.report.configbean.editablereport.EditableReportDeleteDataBean;
 import com.wabacus.system.component.application.report.configbean.editablereport.EditableReportInsertDataBean;
@@ -47,7 +46,7 @@ public class AddUser extends AbsInterceptorDefaultAdapter{
 			    	rs = pstmt.executeQuery();
 			    	while (rs.next()) {	
 			        	 if (usernameString.equals(rs.getString("name"))) {
-			        		 rrequest.getWResponse().getMessageCollector().alert("用户名已经存在，请重新输入！",false);
+			        		 rrequest.getWResponse().getMessageCollector().alert("用户名已经存在，请重新输入！",null,false);
 								return WX_RETURNVAL_TERMINATE;
 						}
 			        }
@@ -91,7 +90,7 @@ public class AddUser extends AbsInterceptorDefaultAdapter{
 			//删除操作
 			String usernameString = mRowData.get("name");
 			if (usernameString.equalsIgnoreCase("admin")) {
-				rrequest.getWResponse().getMessageCollector().alert("admin用户禁止删除",false);
+				rrequest.getWResponse().getMessageCollector().alert("admin用户禁止删除",null,false);
 				return WX_RETURNVAL_SKIP;
 			}else {
 				super.doSavePerRow(rrequest, rbean, mRowData, mParamValues,editbean);

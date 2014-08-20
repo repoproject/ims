@@ -143,10 +143,12 @@
    	<xs:complexType>
    		<xs:all>
    			<xs:element ref="wxs:interceptor" minOccurs="0"/>
+   			<xs:element name="outerheader" type="wxs:headerfooter" minOccurs="0"/>
    			<xs:element name="header" type="wxs:headerfooter" minOccurs="0"/>
    			<xs:element name="display" type="wxs:displayType" minOccurs="0"/>
    			<xs:element ref="wxs:subdisplay" minOccurs="0"/>
    			<xs:element name="footer" type="wxs:headerfooter" minOccurs="0"/>
+   			<xs:element name="outerfooter" type="wxs:headerfooter" minOccurs="0"/>
    			<xs:element ref="wxs:sql" minOccurs="0"/>
    			<xs:element ref="wxs:buttons" minOccurs="0"/>
    			<xs:element ref="wxs:print" minOccurs="0"/>
@@ -241,7 +243,18 @@
     		<xs:attribute name="roworderclass" type="xs:string"/>
     		<xs:attribute name="personalizeclass" type="xs:string"/>
     		<xs:attribute name="refreshid" type="xs:string"/>
+    		<xs:attribute name="pagelazyloadata" type="xs:integer"/>
+    		<xs:attribute name="dataexportlazyloadata" type="xs:integer"/>
+    		<xs:attribute name="batchouputcount" type="xs:integer"/>
     		<xs:attribute name="checkdirtydata" type="wxs:booleanType"/>
+    		<xs:attribute name="savedatatype">
+    			<xs:simpleType>
+    				<xs:restriction base="xs:string">
+    					<xs:enumeration value="all"/>
+    					<xs:enumeration value="changed"/>
+  					</xs:restriction>
+    			</xs:simpleType>
+    		</xs:attribute>
     		<xs:attribute name="datatype">
     			<xs:simpleType>
     				<xs:restriction base="xs:string">
@@ -362,8 +375,10 @@
    			<xs:element ref="wxs:buttons" minOccurs="0"/>
    			<xs:element ref="wxs:print" minOccurs="0"/>
    			<xs:element ref="wxs:dataexports" minOccurs="0"/>
+   			<xs:element name="outerheader" type="wxs:headerfooter" minOccurs="0"/>
    			<xs:element name="header" type="wxs:headerfooter" minOccurs="0"/>
    			<xs:element name="footer" type="wxs:headerfooter" minOccurs="0"/>
+   			<xs:element name="outerfooter" type="wxs:headerfooter" minOccurs="0"/>
    		</xs:choice>
    	</xs:sequence>
    </xs:group>
@@ -426,6 +441,7 @@
 		  						 <xs:attribute name="interceptor" type="xs:string"/>
 		  						 <xs:attribute name="include" type="xs:string"/>
 		  						 <xs:attribute name="filename" type="xs:string"/>
+		  						 <xs:attribute name="rowselect" type="xs:string"/>
 		  						 <xs:attribute name="plainexceltitle">
 					    			<xs:simpleType>
 					    				<xs:restriction base="xs:string">
@@ -443,12 +459,16 @@
 					    		<xs:attribute name="titlefontsize" type="xs:string"/>
 					    		<xs:attribute name="dataheaderfontsize" type="xs:string"/>
 					    		<xs:attribute name="datafontsize" type="xs:string"/>
+					    		<xs:attribute name="localstorage" type="wxs:booleanType"/>
+					    		<xs:attribute name="download" type="wxs:booleanType"/>
+					    		<xs:attribute name="autodelete" type="wxs:booleanType"/>
+					    		<xs:attribute name="zip" type="wxs:booleanType"/>
+					    		<xs:attribute name="directorydateformat" type="xs:string"/>
 				    		</xs:extension>
 			    		</xs:simpleContent>
   					</xs:complexType>
   				</xs:element>
    		</xs:sequence>
-	 	 	<xs:attribute name="batchselectcount" type="xs:integer"/>
 	 	 	<xs:attribute name="filename" type="xs:string"/>
    	</xs:complexType>
    </xs:element>

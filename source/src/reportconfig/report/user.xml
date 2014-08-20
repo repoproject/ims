@@ -21,7 +21,7 @@
 				</beforedisplay-perrow>
 
 			</interceptor-->
-				<display mouseoverbgcolor="CCCCCC" colselect="false">
+				<display mouseoverbgcolor="CCCCCC" >
 				<col column="{col-rowselect}" width="20"></col>
 					<col column="{sequence:1}" label="序号" width="3%"/>
 					<col column="id" label="编号"  displaytype="hidden"/>
@@ -33,9 +33,10 @@
 					<col column="remark" label="备注" clickorderby="true" width="20%"></col>
 				</display>
 				<sql>
+				
 					<select>
 						<value>
-							<![CDATA[SELECT id,userid,name,nickname,(select codename from t_code where codetype='role' and code = a.role ) role,(select codename from t_code where codetype='sex' and  code = a.sex ) sex,remark FROM t_user a  order by a.name]]>
+							<![CDATA[SELECT id,userid,name,nickname,(select codename from d_code where codetype='role' and code = a.role ) role,(select codename from d_code where codetype='sex' and  code = a.sex ) sex,remark FROM d_user a  order by a.name]]>
 						</value>
 					</select>	
 					<insert pageurl="report{user_edit.report1}" popupparams="{title:'新增用户',width:400,height:300}"></insert>

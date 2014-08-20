@@ -1,20 +1,16 @@
 package com.ims.interceptor;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Map;
 
 import com.wabacus.config.component.application.report.ReportBean;
 import com.wabacus.system.ReportRequest;
 import com.wabacus.system.buttons.EditableReportSQLButtonDataBean;
-import com.wabacus.system.component.application.report.configbean.editablereport.AbsEditActionBean;
 import com.wabacus.system.component.application.report.configbean.editablereport.AbsEditableReportEditDataBean;
 import com.wabacus.system.component.application.report.configbean.editablereport.EditableReportDeleteDataBean;
 import com.wabacus.system.component.application.report.configbean.editablereport.EditableReportInsertDataBean;
 import com.wabacus.system.component.application.report.configbean.editablereport.EditableReportUpdateDataBean;
+import com.wabacus.system.dataset.update.action.AbsUpdateAction;
 import com.wabacus.system.intercept.AbsInterceptorDefaultAdapter;
-import com.wabacus.system.intercept.AbsPageInterceptor;
 import com.wabacus.system.intercept.RowDataBean;
 /**
  * 测试用
@@ -55,7 +51,7 @@ public class DeleteUser extends AbsInterceptorDefaultAdapter{
 	@Override
 	public int doSavePerAction(ReportRequest rrequest, ReportBean rbean,
 			Map<String, String> mRowData, Map<String, String> mParamValues,
-			AbsEditActionBean actionbean, AbsEditableReportEditDataBean editbean) {
+			AbsUpdateAction actionbean, AbsEditableReportEditDataBean editbean) {
 		// TODO Auto-generated method stub
 		return super.doSavePerAction(rrequest, rbean, mRowData, mParamValues,
 				actionbean, editbean);
@@ -110,7 +106,7 @@ public class DeleteUser extends AbsInterceptorDefaultAdapter{
 			//删除操作
 			String usernameString = mRowData.get("name");
 			if (usernameString.equalsIgnoreCase("admin")) {
-				rrequest.getWResponse().getMessageCollector().alert("admin用户禁止删除",false);
+				rrequest.getWResponse().getMessageCollector().alert("admin用户禁止删除",null,false);
 				return WX_RETURNVAL_SKIP;
 			}else {
 				super.doSavePerRow(rrequest, rbean, mRowData, mParamValues,editbean);

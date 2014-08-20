@@ -37,11 +37,6 @@
     	<rtexprvalue>true</rtexprvalue>
     </attribute>
     <attribute>
-    	<name>inputbox</name>
-    	<required>false</required>
-    	<rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
     	<name>styleproperty</name>
     	<required>false</required>
     	<rtexprvalue>true</rtexprvalue>
@@ -114,11 +109,6 @@
     </attribute>
     <attribute>
     	<name>showdata</name>
-    	<required>false</required>
-    	<rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-    	<name>inputbox</name>
     	<required>false</required>
     	<rtexprvalue>true</rtexprvalue>
     </attribute>
@@ -238,6 +228,32 @@
     	<required>false</required>
     	<rtexprvalue>true</rtexprvalue>
     </attribute>
+    
+    <attribute>
+    	<name>localstroage</name>
+    	<required>false</required>
+    	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+    	<name>download</name>
+    	<required>false</required>
+    	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+    	<name>autodelete</name>
+    	<required>false</required>
+    	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+    	<name>zip</name>
+    	<required>false</required>
+    	<rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+    	<name>directorydateformat</name>
+    	<required>false</required>
+    	<rtexprvalue>true</rtexprvalue>
+    </attribute>
   </tag>
   
   <!--tag>
@@ -279,6 +295,11 @@
     	<required>true</required>
     	<rtexprvalue>true</rtexprvalue>
    </attribute>
+   <attribute>
+    	<name>rooturl</name>
+    	<required>false</required>
+    	<rtexprvalue>true</rtexprvalue>
+   </attribute>
 	<attribute>
     	<name>maxsize</name>
     	<required>false</required>
@@ -286,6 +307,11 @@
    </attribute>
 	<attribute>
     	<name>allowtypes</name>
+    	<required>false</required>
+    	<rtexprvalue>true</rtexprvalue>
+   </attribute>
+   <attribute>
+    	<name>disallowtypes</name>
     	<required>false</required>
     	<rtexprvalue>true</rtexprvalue>
    </attribute>
@@ -300,12 +326,12 @@
     	<rtexprvalue>true</rtexprvalue>
    </attribute>
    <attribute>
-    	<name>rooturl</name>
+    	<name>popupparams</name>
     	<required>false</required>
     	<rtexprvalue>true</rtexprvalue>
    </attribute>
    <attribute>
-    	<name>popupparams</name>
+    	<name>beforepopup</name>
     	<required>false</required>
     	<rtexprvalue>true</rtexprvalue>
    </attribute>

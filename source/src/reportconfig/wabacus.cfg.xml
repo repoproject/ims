@@ -70,6 +70,8 @@
 	<report-files>
 		<report-file>report/user.xml</report-file>
 		<report-file>report/user_edit.xml</report-file>
+		<report-file>report/in.xml</report-file>
+		<report-file>report/out.xml</report-file>
 		<!--
 		<report-file pattern="true">report/(report_)(\S*?)(\.xml)</report-file>
 		<report-file>report/in.xml</report-file>
