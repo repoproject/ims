@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-08-19 23:12:50
+Date: 2014-08-20 17:10:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -48,7 +48,7 @@ CREATE TABLE `b_catorder` (
   `dealer` varchar(200) DEFAULT NULL COMMENT '经销商',
   `producerDate` datetime DEFAULT NULL COMMENT '生产日期',
   `reason` varchar(200) DEFAULT NULL COMMENT '入库原因 codetype=''orderreason''',
-  `expire` varchar(255) DEFAULT NULL COMMENT '失效日',
+  `expire` datetime DEFAULT NULL COMMENT '失效日',
   `num` int(11) DEFAULT NULL COMMENT '数量',
   `numUnit` varchar(255) DEFAULT NULL COMMENT '数量单位',
   `price` decimal(10,2) DEFAULT NULL COMMENT '单价，原始单价',
@@ -188,7 +188,10 @@ CREATE TABLE `d_codetype` (
 -- Records of d_codetype
 -- ----------------------------
 INSERT INTO `d_codetype` VALUES ('money', '货币', null);
+INSERT INTO `d_codetype` VALUES ('role', '角色', null);
 INSERT INTO `d_codetype` VALUES ('sex', '性别', null);
+INSERT INTO `d_codetype` VALUES ('orderreason', '入库原因', null);
+INSERT INTO `d_codetype` VALUES ('usereason', '出库原因', null);
 
 -- ----------------------------
 -- Table structure for d_dept
