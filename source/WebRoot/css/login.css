@@ -5,52 +5,37 @@ body{
 	/*background-color: #15171F;*/
 }
 .outer{
-	/*margin: 189px auto;
-	background-image:url(../Images/login_CH.png);
-	width: 600px;
-	height: 400px;
-	margin-left: 32%; Chrome
-	*/
-	
-	position: absolute;
-	
+	position: relative;
 	background-image: url(../Images/login_CH.png);
 	width: 1200px;
-	height:570px;
+	height:650px;
 	left: 6%;
 	top: 0%;
 }
 .inputField{
-border-top-width:0px;
-border-bottom-width:1px;
-border-left-width:0px;
-border-right-width:0px;
+border-top-width: 0px;
+border-bottom-width: 0px;
+border-left-width: 0px;
+border-right-width: 0px;
 border-bottom-color: #000000;
+filter: alpha(opacity=40);
+opacity: 0.4;
 }
 
 #username{
-	/*position: relative;
-	left: 146px;
-	top: 228px;
-	height: 28px;
-	width:160px;*/
-	position: absolute;
-	left: 48%;
-	top: 54.5%;
-	height: 46px;
-	width: 200px;
+position: relative;
+left: 24.5%;
+top: 310;
+height: 48px;
+width: 308px;
 }
+
 #password{
-	/*position: relative;
-	left: -18px;
-	top: 281px;
-	height: 28px;
-	width:160px;*/
-	position: absolute;
-	left: 48%;
-	top: 67%;
-	height: 46px;
-	width: 200px;
+position: relative;
+left: -2%;
+top: 385;
+height: 48px;
+width: 308px;
 }
 .submit,.reset{
 	width: 63px;
@@ -59,22 +44,9 @@ border-bottom-color: #000000;
 	cursor:pointer;
 }
 #submit{
-	/*position: relative;
-	left: -190px;
-	top: 351px;*/
-	position: absolute;
-	left: 45%;
-	top: 75%;
-	height: 65px;
-	width: 120px;
-}
-#reset{
-	/*position: relative;
-	left: -136px;
-	top: 350px;*/
-	position: absolute;
-	left: 55%;
-	top: 75%;
-	height: 65px;
-	width: 120px;
+position: absolute;
+left: 45.5%;
+top: 451;
+width: 112;
+height: 41;
 }

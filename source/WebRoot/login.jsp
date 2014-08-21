@@ -29,7 +29,7 @@
     <div class="outer">
     	<form action="servlet/Login" method="post" onsubmit="return loginSubmit(this,loginCallBack)">
     		<input type="text" name="username" size="20" class="inputField" id="username"/>
-    		<input type="password" name="password" size="20" class="login_input" id="password"/>
+    		<input type="password" name="password" size="20" class="inputField" id="password"/>
     		<input class="submit" type="submit" value=" "  id="submit"/>
     		<!-- <input class="reset" type="reset" value=" " id="reset"/> -->
     	</form>

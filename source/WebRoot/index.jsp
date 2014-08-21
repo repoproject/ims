@@ -18,7 +18,7 @@
 <link href="themes/default/style.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="css/core.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="themes/css/print.css" rel="stylesheet" type="text/css" media="print"/>
-<link href="uploadify/css/uploadify.css" rel="stylesheet" type="text/css" media="screen"/>
+
 <link href="css/index.css" rel="stylesheet" type="text/css" media="screen"/>
 <!-- link href="css/systemmonitor.css" rel="stylesheet" type="text/css" media="screen"/> -->
 <!--[if IE]>
@@ -77,7 +77,7 @@
 <script src="js/dwz.print.js" type="text/javascript"></script>
 <script src="js/dwz.regional.zh.js" type="text/javascript"></script>
 
-<script src="js/localJS/systemMonitor.js" type="text/javascript"></script>
+
 
 <script type="text/javascript">
 

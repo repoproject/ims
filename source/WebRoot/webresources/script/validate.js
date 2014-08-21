@@ -184,3 +184,570 @@ function isEmpty( strValue,boxObj,paramsObj )
 	else
 		return false;
 }
+
+/**
+ * 含空格后比较15个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan15( strValue,boxObj,paramsObj )
+{
+	//strValue=trim(strValue);
+	if( strValue.length <= 15 )
+		return true;
+	else
+		return false;
+}
+
+/**
+ * 自动去掉空格后比较15个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan15Trim( strValue,boxObj,paramsObj )
+{
+	strValue=trim(strValue);
+	if( strValue.length <= 15 )
+		return true;
+	else
+		return false;
+}
+/**
+ * 含空格后比较20个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan20( strValue,boxObj,paramsObj )
+{
+	//strValue=trim(strValue);
+	if( strValue.length <= 20 )
+		return true;
+	else
+		return false;
+}
+
+/**
+ * 自动去掉空格后比较20个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan20Trim( strValue,boxObj,paramsObj )
+{
+	strValue=trim(strValue);
+	if( strValue.length <= 20 )
+		return true;
+	else
+		return false;
+}
+
+/**
+ * 含空格后比较40个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan40( strValue,boxObj,paramsObj )
+{
+	//strValue=trim(strValue);
+	if( strValue.length <= 40 )
+		return true;
+	else
+		return false;
+}
+
+/**
+ * 自动去掉空格后比较40个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan40Trim( strValue,boxObj,paramsObj )
+{
+	strValue=trim(strValue);
+	if( strValue.length <= 40 )
+		return true;
+	else
+		return false;
+}
+
+
+/**
+ * 含空格后比较50个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan50( strValue,boxObj,paramsObj )
+{
+	//strValue=trim(strValue);
+	if( strValue.length <= 50 )
+		return true;
+	else
+		return false;
+}
+
+/**
+ * 自动去掉空格后比较50个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan50Trim( strValue,boxObj,paramsObj )
+{
+	strValue=trim(strValue);
+	if( strValue.length <= 50 )
+		return true;
+	else
+		return false;
+}
+
+/**
+ * 含空格后比较100个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan100( strValue,boxObj,paramsObj )
+{
+	//strValue=trim(strValue);
+	if( strValue.length <= 100 )
+		return true;
+	else
+		return false;
+}
+/**
+ * 自动去掉空格后比较100个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan100Trim( strValue,boxObj,paramsObj )
+{
+	strValue=trim(strValue);
+	if( strValue.length <= 100 )
+		return true;
+	else
+		return false;
+}
+
+/**
+ * 含空格后比较200个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan200( strValue,boxObj,paramsObj )
+{
+	//strValue=trim(strValue);
+	if( strValue.length <= 200 )
+		return true;
+	else
+		return false;
+}
+
+/**
+ * 自动去掉空格后比较200个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan200Trim( strValue,boxObj,paramsObj )
+{
+	strValue=trim(strValue);
+	if( strValue.length <= 200 )
+		return true;
+	else
+		return false;
+}
+
+
+/**
+ * 含空格后比较256个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan256( strValue,boxObj,paramsObj )
+{
+	//strValue=trim(strValue);
+	if( strValue.length <= 256 )
+		return true;
+	else
+		return false;
+}
+
+/**
+ * 自动去掉空格后比较256个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan256Trim( strValue,boxObj,paramsObj )
+{
+	strValue=trim(strValue);
+	if( strValue.length <= 256 )
+		return true;
+	else
+		return false;
+}
+
+/**
+ * 含空格后比较300个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan300( strValue,boxObj,paramsObj )
+{
+	//strValue=trim(strValue);
+	if( strValue.length <= 300 )
+		return true;
+	else
+		return false;
+}
+
+/**
+ * 自动去掉空格后比较300个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan300Trim( strValue,boxObj,paramsObj )
+{
+	strValue=trim(strValue);
+	if( strValue.length <= 300 )
+		return true;
+	else
+		return false;
+}
+
+/**
+ * 含空格后比较500个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan500( strValue,boxObj,paramsObj )
+{
+	//strValue=trim(strValue);
+	if( strValue.length <= 500 )
+		return true;
+	else
+		return false;
+}
+
+/**
+ * 自动去掉空格后比较500个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan500Trim( strValue,boxObj,paramsObj )
+{
+	strValue=trim(strValue);
+	if( strValue.length <= 500 )
+		return true;
+	else
+		return false;
+}
+
+/**
+ * 含空格后比较1024个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan1024( strValue,boxObj,paramsObj )
+{
+	//strValue=trim(strValue);
+	if( strValue.length <= 1024 )
+		return true;
+	else
+		return false;
+}
+
+/**
+ * 自动去掉空格后比较1024个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan1024Trim( strValue,boxObj,paramsObj )
+{
+	strValue=trim(strValue);
+	if( strValue.length <= 1024 )
+		return true;
+	else
+		return false;
+}
+
+/**
+ * 针对获取的文件的时间查询条件的校验
+ * @param strValue 开始时间
+ * @param boxObj
+ * @param paramsObj结束时间的输入框对象
+ * @return 开始时间晚于结束时间则返回false，否则返回true
+ */
+function isStartTimeLargerEnd1(strValue,boxObj,paramsObj){
+	var startTime = trim(strValue);
+	var endTime = trim(paramsObj.datasObj.txtend1);
+	//alert(startTime + "----" + endTime);
+	var strd1 = startTime.replace(/-/g,"/");
+	var strd2 = endTime.replace(/-/g,"/");
+	//alert(strd1 + "----" + strd2);
+	var d1 = new Date(Date.parse(strd1));
+	var d2 = new Date(Date.parse(strd2));
+	//alert(d1 + "-----" + d2);
+	if(d1 > d2){
+		//alert("false");
+		startTime = endTime = strd1 = strd2 = d1 = d2 = null;
+		return false;
+	}else{
+		//alert("true");
+		startTime = endTime = strd1 = strd2 = d1 = d2 = null;
+		return true;
+	}
+}
+
+
+/**
+ * 针对发送的文件列表的时间查询条件的校验
+ * @param strValue 开始时间
+ * @param boxObj
+ * @param paramsObj结束时间的输入框对象
+ * @return 开始时间晚于结束时间则返回false，否则返回true
+ */
+function isStartTimeLargerEnd2(strValue,boxObj,paramsObj){
+	var startTime = trim(strValue);
+	var endTime = trim(paramsObj.datasObj.txtend3);
+	//alert(startTime + "----" + endTime);
+	var strd1 = startTime.replace(/-/g,"/");
+	var strd2 = endTime.replace(/-/g,"/");
+	//alert(strd1 + "----" + strd2);
+	var d1 = new Date(Date.parse(strd1));
+	var d2 = new Date(Date.parse(strd2));
+	//alert(d1 + "-----" + d2);
+	if(d1 > d2){
+		//alert("false");
+		startTime = endTime = strd1 = strd2 = d1 = d2 = null;
+		return false;
+	}else{
+		//alert("true");
+		startTime = endTime = strd1 = strd2 = d1 = d2 = null;
+		return true;
+	}
+}
+
+/**
+ * 针对发送的文件的图表时间查询条件的校验
+ * @param strValue 开始时间
+ * @param boxObj
+ * @param paramsObj结束时间的输入框对象
+ * @return 开始时间晚于结束时间则返回false，否则返回true
+ */
+function isStartTimeLargerEnd2TB(strValue,boxObj,paramsObj){
+	var startTime = trim(strValue);
+	var endTime = trim(paramsObj.datasObj.txtend2);
+	//alert(startTime + "----" + endTime);
+	var strd1 = startTime.replace(/-/g,"/");
+	var strd2 = endTime.replace(/-/g,"/");
+	//alert(strd1 + "----" + strd2);
+	var d1 = new Date(Date.parse(strd1));
+	var d2 = new Date(Date.parse(strd2));
+	//alert(d1 + "-----" + d2);
+	if(d1 > d2){
+		//alert("false");
+		return false;
+	}else{
+		//alert("true");
+		return true;
+	}
+}
+
+
+/**
+ * 针对生成的文件列表的时间查询条件的校验
+ * @param strValue 开始时间
+ * @param boxObj
+ * @param paramsObj结束时间的输入框对象
+ * @return 开始时间晚于结束时间则返回false，否则返回true
+ */
+function isStartTimeLargerEnd3(strValue,boxObj,paramsObj){
+	var startTime = trim(strValue);
+	var endTime = trim(paramsObj.datasObj.txtend2);
+	//alert(startTime + "----" + endTime);
+	var strd1 = startTime.replace(/-/g,"/");
+	var strd2 = endTime.replace(/-/g,"/");
+	//alert(strd1 + "----" + strd2);
+	var d1 = new Date(Date.parse(strd1));
+	var d2 = new Date(Date.parse(strd2));
+	//alert(d1 + "-----" + d2);
+	if(d1 > d2){
+		//alert("false");
+		return false;
+	}else{
+		//alert("true");
+		return true;
+	}
+}
+
+/**
+ * 针对生成的文件的图表时间查询条件的校验
+ * @param strValue 开始时间
+ * @param boxObj
+ * @param paramsObj结束时间的输入框对象
+ * @return 开始时间晚于结束时间则返回false，否则返回true
+ */
+function isStartTimeLargerEnd3TB(strValue,boxObj,paramsObj){
+	var startTime = trim(strValue);
+	var endTime = trim(paramsObj.datasObj.txtend3);
+	//alert(startTime + "----" + endTime);
+	var strd1 = startTime.replace(/-/g,"/");
+	var strd2 = endTime.replace(/-/g,"/");
+	//alert(strd1 + "----" + strd2);
+	var d1 = new Date(Date.parse(strd1));
+	var d2 = new Date(Date.parse(strd2));
+	//alert(d1 + "-----" + d2);
+	if(d1 > d2){
+		//alert("false");
+		return false;
+	}else{
+		//alert("true");
+		return true;
+	}
+}
+
+/**
+ * 针对管理的文件的时间查询条件的校验
+ * @param strValue 开始时间
+ * @param boxObj
+ * @param paramsObj结束时间的输入框对象
+ * @return 开始时间晚于结束时间则返回false，否则返回true
+ */
+function isStartTimeLargerEnd4(strValue,boxObj,paramsObj){
+	var startTime = trim(strValue);
+	var endTime = trim(paramsObj.datasObj.txtend4);
+	//alert(startTime + "----" + endTime);
+	var strd1 = startTime.replace(/-/g,"/");
+	var strd2 = endTime.replace(/-/g,"/");
+	//alert(strd1 + "----" + strd2);
+	var d1 = new Date(Date.parse(strd1));
+	var d2 = new Date(Date.parse(strd2));
+	//alert(d1 + "-----" + d2);
+	if(d1 > d2){
+		//alert("false");
+		return false;
+	}else{
+		//alert("true");
+		return true;
+	}
+}
+
+/**
+ * 针对内部业务流转的时间查询条件的校验
+ * @param strValue 开始时间
+ * @param boxObj
+ * @param paramsObj结束时间的输入框对象
+ * @return 开始时间晚于结束时间则返回false，否则返回true
+ */
+function isStartTimeLargerEnd5(strValue,boxObj,paramsObj){
+	var startTime = trim(strValue);
+	var endTime = trim(paramsObj.datasObj.txtend5);
+	//alert(startTime + "----" + endTime);
+	var strd1 = startTime.replace(/-/g,"/");
+	var strd2 = endTime.replace(/-/g,"/");
+	//alert(strd1 + "----" + strd2);
+	var d1 = new Date(Date.parse(strd1));
+	var d2 = new Date(Date.parse(strd2));
+	//alert(d1 + "-----" + d2);
+	if(d1 > d2){
+		//alert("false");
+		return false;
+	}else{
+		//alert("true");
+		return true;
+	}
+}
+
+/**
+ * 针对查询条件中的日期和时间的校验函数，空可以通过，但是空格不行   by gq 2014-6-11 
+ * @param strValue 被校验的时间字符串
+ * @return 不合法的时间则返回失败，否则返回成功
+ */
+function isdatetime(strValue)
+{
+	//空字符串可以通过，但是空格不行
+	if(strValue.length==0) return true;
+	
+    var result=strValue.match(/^(\d{4})(-|\/)(\d{1,2})\2(\d{1,2}) (\d{1,2}):(\d{1,2}):(\d{1,2})$/);
+    
+    if(result==null) return false;
+    var d= new Date(result[1], result[3]-1, result[4], result[5], result[6], result[7]);
+    //alert(d);
+    return (d.getFullYear()==result[1]&&(d.getMonth()+1)==result[3]&&d.getDate()==result[4]&&d.getHours()==result[5]&&d.getMinutes()==result[6]&&d.getSeconds()==result[7]);
+
+}
+
+/**
+ * 针对输入框中的日期和时间的校验函数，空格和空都不通过   by gq 2014-6-11 
+ * @param strValue 被校验的时间字符串
+ * @return 不合法的时间则返回失败，否则返回成功
+ */
+function isdatetimeInput(strValue)
+{
+    var result=strValue.match(/^(\d{4})(-|\/)(\d{1,2})\2(\d{1,2}) (\d{1,2}):(\d{1,2}):(\d{1,2})$/);
+    
+    if(result==null)  return false;
+    //result[2]实际是-)
+    var d= new Date(result[1], result[3]-1, result[4], result[5], result[6], result[7]);
+    
+    return (d.getFullYear()==result[1]&&(d.getMonth()+1)==result[3]&&d.getDate()==result[4]&&d.getHours()==result[5]&&d.getMinutes()==result[6]&&d.getSeconds()==result[7]);
+
+}
+
+/**
+ * 校验用户名和密码中是否有(~!@#$%^&*()_+{}|:\"<>\/])的特殊字符，
+ * 其中\是转义用，\"和\/实际是对后一个字符的校验 by gq 2014-06-11
+ * @param strValue 被校验的字符串
+ * @return 含有特殊字符返回失败，否则返回成功
+ */
+function stripscript(strValue) 
+{ 
+	//所检常用的测试
+	var pattern = new RegExp("[`~!@#$%^&*()_+{}|:\"<>\/]");
+	//更加严格的校验含全角半角
+	//var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？\"]") 
+		
+	if(pattern.test(strValue))
+	{
+		return false;
+	}
+
+	return true;
+	
+} 
+

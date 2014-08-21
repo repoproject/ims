@@ -14,6 +14,7 @@ import com.wabacus.config.component.application.report.ReportBean;
 import com.wabacus.system.ReportRequest;
 import com.wabacus.system.assistant.WabacusAssistant;
 import com.wabacus.system.buttons.EditableReportSQLButtonDataBean;
+import com.wabacus.system.component.application.report.configbean.editablereport.*;
 import com.wabacus.system.component.application.report.configbean.editablereport.AbsEditableReportEditDataBean;
 import com.wabacus.system.component.application.report.configbean.editablereport.EditableReportDeleteDataBean;
 import com.wabacus.system.component.application.report.configbean.editablereport.EditableReportInsertDataBean;

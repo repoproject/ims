@@ -23,41 +23,53 @@
 			</interceptor-->
 				<display mouseoverbgcolor="CCCCCC" >
 				<col column="{col-rowselect}" width="20"></col>
-					<col column="{sequence:1}" label="序号" width="3%"/>
+					<col column="{sequence:1}" label="序号" width="5%"/>
 					<col column="id" label="编号"  displaytype="hidden"/>
-					<col column="userid" label="工号"  clickorderby="true" width="5%"/>
-					<col column="name" label="用户名称" clickorderby="true" width="20%"></col>
-					<col column="nickname" label="昵称" clickorderby="true" width="20%"></col>
-					<col column="role" label="角色" clickorderby="true" width="10%"></col>
+					<col column="nickname" label="昵称" clickorderby="true" width="15%"></col>
+					<col column="name" label="姓名" clickorderby="true" width="15%"></col>
+					<col column="role" label="角色" clickorderby="true" width="15%"></col>
 					<col column="sex" label="性别" clickorderby="true" width="10%"></col>
-					<col column="remark" label="备注" clickorderby="true" width="20%"></col>
+					<col column="remark" label="备注" clickorderby="true" width="20%"></col>					
 				</display>
 				<sql>
 				
 					<select>
 						<value>
-							<![CDATA[SELECT id,userid,name,nickname,(select codename from d_code where codetype='role' and code = a.role ) role,(select codename from d_code where codetype='sex' and  code = a.sex ) sex,remark FROM d_user a  order by a.name]]>
-						</value>
+							<![CDATA[SELECT id,name,nickname,(select codename from d_code where codetype='role' and code = a.role ) role,(select codename from d_code where codetype='sex' and  code = a.sex ) sex,remark FROM d_user a where {#condition#} order by a.name]]>
+						</value>						
+						<condition name="txtname" label="昵称" labelposition="left">
+							<value>
+								<![CDATA[(nickname like '%#data#%' )]]>								
+							</value>
+							<inputbox type="textbox" jsvalidate="isNotLongerThan20(#label#列长度应小于等于20);stripscript(#label#不能含有特殊字符)">
+							</inputbox>
+						</condition>
+						<condition name="txtrole" label="角色" labelposition="left">
+							<value>
+								<![CDATA[(role = '#data#' )]]>
+							</value>
+							<inputbox type="selectbox">
+								<option value="" label="全部"></option>
+								<option value="0" label="普通用户"></option>
+								<option value="1" label="高级用户"></option>
+							</inputbox>
+						</condition>
 					</select>	
 					<insert pageurl="report{user_edit.report1}" popupparams="{title:'新增用户',width:400,height:300}"></insert>
 					<update pageurl="report{user_edit.report1}" urlparams="txtid=@{id}"
 						popupparams="{title:'编辑用户',width:400,height:300}"></update>  
-					<delete confirmessage="是否删除[@{name}]对应的记录？">
-						delete from t_user where id=@{id__old};
+					<delete confirmessage="是否删除[@{role}]对应的记录？">
+						delete from d_user where id=@{id__old};
 					  </delete>							
 				</sql>
 				<buttons>
-					<button name="button1" position="title" label="重置密码" extends="${wabacus.button2.default}">
-						<!-- invokeServerActionForComponent('yhglpage','yhgl','com.wabacusdemo.TestServerCallBack1',{name:'SELECTEDROW',value:true},true,testInvokeCallbackMethod1) -->
-						
-					</button>
-			        <!--  <button extends="${wabacus.button2.default}" name="button1" class="com.wabacus.system.buttons.ServerSQLActionButton" position="title" label="重置密码" successprompt="重置成功" failedprompt="重置失败"  confirmessage="是否重置该用户的密码？" positionorder="3"> 
+			        <button extends="${wabacus.button2.default}" name="button1" class="com.wabacus.system.buttons.ServerSQLActionButton" position="title" label="重置密码" successprompt="重置成功" failedprompt="重置失败"  confirmessage="是否重置该用户的密码？" positionorder="3"> 
 					<value>
 					<![CDATA[
-						update yxgluser(password = 'ecf6e9a713c8533bbad5393ec4a9dab4') where id=@{id__old};
+						update d_user set password = '8888' where id=@{id};
 					]]>
 					</value>
-					</button-->
+					</button>
 			    </buttons>
 
 			</report>
