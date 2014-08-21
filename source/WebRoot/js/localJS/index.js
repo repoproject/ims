@@ -224,7 +224,7 @@ function minSystemMonitorPic(){
 	$("#sanpic").css("top","380px");
 }
 //检测是否有报警数据
-function getWarningData(){
+/*function getWarningData(){
 	$.ajax({
 		   type: "GET",
 		   url: "servlet/GetWarningInfo?t="+Math.random(),
@@ -248,7 +248,7 @@ function getWarningData(){
 		   		//alert("请求告警数据出错，错误原因如下： \n\nstatus="+xhr.status);	
 		   	}
 	});
-}
+}*/
 //检测当前浏览器是否安装了flash插件，若没有安装提示下载安装
 function checkFlash(){
 	var isIE = (navigator.appVersion.indexOf("MSIE", 0)>=0);
@@ -300,8 +300,8 @@ function checkFlash(){
 	//maxSystemMonitorPic();
 	
 	//设置报警灯的显示状态
-	getWarningData();
-	var temp1 = setInterval("getWarningData()",5222);
+	//getWarningData();
+	//var temp1 = setInterval("getWarningData()",5222);
 	var aw = $(window).width();
 	$("#realTimeWarning").attr("width",aw-8);
 	//模块分权限显示
