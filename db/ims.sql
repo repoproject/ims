@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-08-20 23:03:47
+Date: 2014-08-21 23:36:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -43,6 +43,7 @@ DROP TABLE IF EXISTS `b_in`;
 CREATE TABLE `b_in` (
   `id` int(11) NOT NULL COMMENT '货号，试剂号耗材号',
   `catId` varchar(50) NOT NULL,
+  `catName` varchar(100) DEFAULT NULL COMMENT '试剂名称，冗余，b_cat.name',
   `batchNo` varchar(255) DEFAULT NULL COMMENT '批号',
   `producer` varchar(200) DEFAULT NULL COMMENT '生产商',
   `dealer` varchar(200) DEFAULT NULL COMMENT '经销商',
@@ -55,17 +56,19 @@ CREATE TABLE `b_in` (
   `priceUnit` varchar(255) DEFAULT NULL COMMENT '货币单位 codetype=''money'',存储codename',
   `localPrice` decimal(10,2) DEFAULT NULL COMMENT '本地货币单价，通过汇率转化',
   `taxRate` decimal(5,4) DEFAULT NULL COMMENT '税率',
-  `orderDate` datetime DEFAULT NULL COMMENT '入库日期',
+  `inDate` datetime DEFAULT NULL COMMENT '入库日期',
   `machineNo` varchar(50) DEFAULT NULL COMMENT '设备编号',
   `rType` varchar(50) DEFAULT NULL COMMENT 'R分类',
-  `from` varchar(100) DEFAULT NULL COMMENT '来源，oversea，local',
+  `catFrom` varchar(100) DEFAULT NULL COMMENT '来源，oversea，local',
+  `inperson` varchar(50) DEFAULT NULL COMMENT '入库人',
+  `remark` varchar(500) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='试剂表';
 
 -- ----------------------------
 -- Records of b_in
 -- ----------------------------
-INSERT INTO `b_in` VALUES ('1', '1', '1', 'www', 'dddd', '2014-08-20 22:56:45', 'fe', '2014-10-23 22:56:51', '10', '个', '10.00', 'USD', '60.00', '0.0000', '2014-08-20 22:57:41', '111', 'R1', 'vendor');
+INSERT INTO `b_in` VALUES ('1', '1', null, '1', 'www', 'dddd', '2014-08-20 22:56:45', 'fe', '2014-10-23 22:56:51', '10', '个', '10.00', 'USD', '60.00', '0.0000', '2014-08-20 22:57:41', '111', 'R1', 'vendor', null, null);
 
 -- ----------------------------
 -- Table structure for b_machine
@@ -75,9 +78,10 @@ CREATE TABLE `b_machine` (
   `id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL COMMENT '设备名称',
   `shortname` varchar(255) DEFAULT NULL COMMENT '设备简称',
-  `seqno` int(11) DEFAULT NULL COMMENT '设备编号',
+  `seqno` varchar(50) DEFAULT NULL COMMENT '设备编号',
   `alias` varchar(255) DEFAULT NULL COMMENT '别名',
   `class` varchar(255) DEFAULT NULL COMMENT '分类',
+  `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='设备机器表';
 
@@ -155,6 +159,8 @@ CREATE TABLE `d_code` (
 -- ----------------------------
 -- Records of d_code
 -- ----------------------------
+INSERT INTO `d_code` VALUES ('bool', '0', '否', null);
+INSERT INTO `d_code` VALUES ('bool', '1', '是', null);
 INSERT INTO `d_code` VALUES ('money', '0', 'CNY', '人民币');
 INSERT INTO `d_code` VALUES ('money', '1', 'USD', '美元');
 INSERT INTO `d_code` VALUES ('money', '2', 'SGD', '新元');
@@ -194,6 +200,7 @@ INSERT INTO `d_codetype` VALUES ('role', '角色', null);
 INSERT INTO `d_codetype` VALUES ('sex', '性别', null);
 INSERT INTO `d_codetype` VALUES ('orderreason', '入库原因', null);
 INSERT INTO `d_codetype` VALUES ('usereason', '出库原因', null);
+INSERT INTO `d_codetype` VALUES ('bool', '是否', null);
 
 -- ----------------------------
 -- Table structure for d_dept
