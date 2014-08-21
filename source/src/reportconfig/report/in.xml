@@ -2,42 +2,73 @@
 <applications xmlns="http://www.wabacus.com"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
-	<page id="in" js="/webresources/script/validate.js">
-		<report id="report1" title="request{txtname}详细信息" type="editabledetail" >
+	<page id="in" js="/webresources/script/validate.js"  css="/webresources/component/tiny_mce/themes/advanced/skins/o2k7/ui.css">
+		<report id="report1" title="request{txtname}入库信息" type="form" >
 			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
 				<col column="ID" displaytype="hidden">
 				</col>
-				<col column="userID" label="工号*" br="true">
+				<col column="machineno" label="设备名称*" >
 					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
 				</col>
-				<col column="name" label="姓名" br="true">
-					<inputbox jsvalidate="isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
-				</col>
-				<col column="nickName" label="昵称*" br="true">
+				<col column="catid" label="试剂/耗材名称*" >
 					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
 				</col>
-				<col column="password" label="密码" br="true" displaytype="hidden" >
+				<col column="batchno" label="批号"  br="true">
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
 				</col>
-				<col column="role" label="角色" br="true">
+				<col column="expire" label="有效期" >
 					<inputbox type="selectbox">
 						<option value="0" label="普通用户"></option>
 						<option value="1" label="高级用户"></option>
 					</inputbox>
 				</col>
-				<col column="sex" label="性别" br="true">
+				<col column="indate" label="入库时间" datatype="date{MM/dd/yyyy}"  >
+					<inputbox type="datepicker" dateformat="MM/dd/yyyy"></inputbox>
+				</col>
+				<col column="num" label="数量" br="true">
+					<inputbox   />
+				</col>
+				<col column="producer" label="生产商" >
+					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+				<col column="inperson" label="入库人" >
+					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+				<col column="dealer" label="供应商" br="true">
+					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+				<col column="price" label="单价" >
+					<inputbox  jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+				<col column="priceUnit" label="货币" >
 					<inputbox type="selectbox">
 						<option value="0" label="女"></option>
 						<option value="1" label="男"></option>
 					</inputbox>
 				</col>
-				<col column="remark" label="备注">
-					<inputbox type="textareabox" styleproperty="rows='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				<col column="taxRate" label="含税否" br="true">
+					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+				<col column="reason" label="入库原因" >
+					<inputbox jsvalidate="isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				</col>
+				<col column="rType" label="所属R" >
+					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+				<col column="catFrom" label="来源"  br="true">
+					<inputbox type="selectbox">
+						<option value="0" label="女"></option>
+						<option value="1" label="男"></option>
+					</inputbox>
+				</col>
+				<col column="remark" label="备注" br="true">
+					<inputbox type="textareabox" styleproperty="colspan='3'" valuestyleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
 				</col>
 			</display>
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT ID,name,userID,nickName,password,role,sex,remark FROM d_user where  {#condition#}]]>
+						<![CDATA[SELECT ID,machineno,catid,batchno,expire,indate,num,producer,dealer,reason,inperson,price,priceUnit,taxRate,rType,catFrom,remark FROM b_in where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -46,13 +77,49 @@
 					</condition>
 				</select>
 				<insert>
-					insert into d_user(userID,name,nickName,password,role,sex,remark)
-					values(trim(@{userID}),trim(@{name}),trim(@{nickName}),'ecf6e9a713c8533bbad5393ec4a9dab4',@{role},@{sex},trim(@{remark}));
+					insert into b_in(machineno,catid,batchno,expire,indate,num,producer,dealer,reason,inperson,price,priceUnit,taxRate,rType,catFrom,remark)
+					values(@{machineno},@{catid},@{batchno},@{expire},@{indate},@{num},@{producer},@{dealer},@{reason},@{inperson},@{price},@{priceUnit},@{taxRate},@{rType},@{catFrom},@{remark});
 				</insert>
 				<update>
-					update d_user set name=trim(@{name}),nickName=trim(@{nickName}),password=@{password},role=@{role},sex=@{sex},remark=trim(@{remark}) 
+					update b_in set machineno=trim(@{machineno}),batchno=trim(@{batchno}),expire=@{expire},indate=@{indate},num=@{num},producer=trim(@{producer}),dealer=trim(@{dealer}),reason=@{reason},inperson=trim(@{inperson}),price=@{price},priceUnit=@{priceUnit},taxRate=@{taxRate},rType=@{rType},catFrom=@{catFrom},remark=trim(@{remark}) 
 					where ID=@{ID__old};
 				</update>
+			</sql>
+			<format><!--
+				<value>
+					rrequest.getRequest().setAttribute("txtname",name);//存放request，以便显示标题时能取到
+				</value>
+			--></format>
+		</report>
+		<report id="report2" title="request{txtname}入库列表" rowselect="multiple-checkbox" type="editablelist" >
+				<display mouseoverbgcolor="CCCCCC" >
+				<col column="{col-rowselect}" width="20"></col>
+					<col column="id" label="编号"  displaytype="hidden"/>
+					<col column="{sequence:1}" label="序号" width="3%"/>
+					<col column="machineno" label="机器"  clickorderby="true" width="5%"/>
+					<col column="catid" label="机器编号"  clickorderby="true" width="5%"/>
+					<col column="batchno" label="批次" clickorderby="true" width="20%"></col>
+					<col column="expire" label="出库人" clickorderby="true" width="20%"></col>
+					<col column="indate" label="出库日期" clickorderby="true" width="10%"></col>
+					<col column="num" label="数量" clickorderby="true" width="10%"></col>
+					<col column="producer" label="原因" clickorderby="true" width="20%"></col>
+				</display>
+			<sql>
+				<select>
+					<value>
+						<![CDATA[SELECT id,machineno,catid,batchno,expire,indate,num,producer,dealer,reason,inperson,price,priceUnit,taxRate,rType,catFrom,remark FROM b_in where  {#condition#}]]>
+					</value>
+					<condition name="txtid" hidden="true">
+						<value>
+						<![CDATA[(ID = '#data#' )]]>
+						</value>
+					</condition>
+				</select>
+				<update pageurl="report{in.report1}" urlparams="txtid=@{id}"
+						popupparams="{title:'编辑用户',width:400,height:300}"></update>  
+				<delete confirmessage="是否删除[@{batchno}]对应的记录？">
+						delete from b_in where id=@{id__old};
+					  </delete>		
 			</sql>
 			<format><!--
 				<value>
