@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications xmlns="http://www.wabacus.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
+	<page id="equip" js="/webresources/script/validate.js,/webresources/script/demo.js">
+		<header>
+			<![CDATA[<p align="center"><font size="6"><b>设备信息管理</b></font></p>]]>
+		</header>
+		<report id="equiplist" parenttitle="设备信息管理" type="editablelist" cellresize="1" rowselect="multiple-checkbox" pagesize="13" interceptor="com.ims.interceptor.DeleteUser">
+				<display mouseoverbgcolor="CCCCCC" >
+				<col column="{col-rowselect}" width="20"></col>
+					<col column="{sequence:1}" label="序号" width="5%"/>
+					<col column="id" label="编号"  displaytype="hidden"/>
+					<col column="name" label="设备名称" clickorderby="true" width="25%"></col>
+					<col column="seqno" label="设备序列号" clickorderby="true" width="25%"></col>				
+					<col column="remark" label="备注" clickorderby="true" width="30%"></col>					
+				</display>
+				<sql>
+				
+					<select>
+						<value>
+							<![CDATA[SELECT id,name,seqno,remark FROM b_machine  where {#condition#} order by name]]>
+						</value>						
+						<condition name="txtname" label="设备名称" labelposition="left">
+							<value>
+								<![CDATA[(name like '%#data#%' )]]>								
+							</value>
+							<inputbox type="textbox" jsvalidate="isNotLongerThan50(#label#列长度应小于等于50);stripscript(#label#不能含有特殊字符)">
+							</inputbox>
+						</condition>
+						<condition name="txtseqno" label="设备序列号" labelposition="left">
+							<value>
+								<![CDATA[(seqno like '%#data#%' )]]>								
+							</value>
+							<inputbox type="textbox" jsvalidate="isNotLongerThan50(#label#列长度应小于等于50);stripscript(#label#不能含有特殊字符)">
+							</inputbox>
+						</condition>
+					</select>	
+					<insert pageurl="report{equip_edit.report1}" popupparams="{title:'新增设备',width:400,height:300}"></insert>
+					<update pageurl="report{equip_edit.report1}" urlparams="txtid=@{id}"
+						popupparams="{title:'编辑设备',width:400,height:300}"></update>  
+					<delete confirmessage="是否删除[@{seqno}]对应的记录？">
+						delete from b_machine where id=@{id__old};
+					  </delete>							
+				</sql>
+				
+			</report>
+	</page>
+</applications>

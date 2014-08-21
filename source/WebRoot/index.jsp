@@ -158,13 +158,14 @@ $(function(){
 									<li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo" external="true" fresh="false">出库查询</a></li>
 									<li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo" external="true" fresh="false">入库查询</a></li>
 									<li><a href="ShowReport.wx?PAGEID=navTab" target="navTab" rel="userbaseinfo" external="true" fresh="false">查询过期</a></li>
+									<li><a href="ShowReport.wx?PAGEID=navTab" target="navTab" rel="userbaseinfo" external="true" fresh="false">导出出库</a></li>
 									<li><a href="excel.jsp" target="navTab" rel="ftpserverstat" external="true" fresh="false">库存统计</a></li>									
 								</ul>
 							</li>
 							<li><a>基础信息维护</a>
 								<ul>
-									<li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo" external="true" fresh="false">用户信息</a></li>
-									<li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo" external="true" fresh="false">设备信息</a></li>
+									<li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo1" external="true" fresh="false" >用户信息</a></li>
+									<li><a href="ShowReport.wx?PAGEID=equip" target="navTab" rel="userbaseinfo2" external="true" fresh="false">设备信息</a></li>
 									<li><a href="ChangePWD.jsp" target="dialog" rel="changepassword" width="600" mask="true">修改密码</a></li>
 												
 								</ul>
