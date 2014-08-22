@@ -7,20 +7,19 @@
 				<display mouseoverbgcolor="CCCCCC" >
 				<col column="{col-rowselect}" width="20"></col>
 					<col column="id" label="编号"  displaytype="hidden"/>
-					<col column="inDate" label="入库日期"  clickorderby="true" width="5%"/>
-					<col column="catname" label="试剂/耗材名称"  clickorderby="true" width="5%"/>
-					<col column="batchno" label="批号"  clickorderby="true" width="5%"/>
+					<col column="inDate" label="入库日期"  clickorderby="true" datatype="date{MM/dd/yyyy}" width="20%"/>
+					<col column="catname" label="试剂/耗材名称"  clickorderby="true" width="20%"/>
+					<col column="batchno" label="批号"  clickorderby="true" width="10%"/>
 					<col column="num" label="数量"  clickorderby="true" width="5%"/>
-					<col column="price" label="单价RMB"  clickorderby="true" width="5%"/>
-					<col column="dealer" label="供应商"  clickorderby="true" width="5%"/>
-					<col column="producer" label="生产商"  clickorderby="true" width="5%"/>
-					<col column="machinename" label="机器"  clickorderby="true" width="5%"/>
-					<col column="catfrom" label="入库原因"  clickorderby="true" width="5%"/>
+					<col column="localPrice" label="单价RMB"  clickorderby="true" width="5%"/>
+					<col column="dealer" label="供应商"  clickorderby="true" width="10%"/>
+					<col column="producer" label="生产商"  clickorderby="true" width="10%"/>
+					<col column="catfrom" label="入库原因"  clickorderby="true" width="20%"/>
 				</display>
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id,inDate,catname,batchno,num,localPrice,num,producer,dealer,catfrom,inperson FROM b_in where  {#condition#}]]>
+						<![CDATA[SELECT id,inDate,catname,batchno,num,localPrice,producer,dealer,catfrom,inperson FROM b_in where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>

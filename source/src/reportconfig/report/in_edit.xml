@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications xmlns="http://www.wabacus.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
+	<page id="in_edit" js="/webresources/script/validate.js"  css="/webresources/component/tiny_mce/themes/advanced/skins/o2k7/ui.css">
+		<report id="report1" title="request{txtname}入库信息" type="form" >
+			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
+				<col column="ID" displaytype="hidden">
+				</col>
+				<col column="machineno" label="设备名称*" >
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				</col>
+				<col column="catid" label="试剂/耗材名称*" br="true">
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				</col>
+				<col column="batchno" label="批号"  >
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				</col>
+				<col column="expire" label="有效期"  datatype="date{MM/dd/yyyy}"  br="true">
+					<inputbox type="datepicker" dateformat="MM/dd/yyyy"></inputbox>
+				</col>
+				<col column="indate" label="入库时间" datatype="date{MM/dd/yyyy}"  >
+					<inputbox type="datepicker" dateformat="MM/dd/yyyy"></inputbox>
+				</col>
+				<col column="num" label="数量" br="true">
+					<inputbox   />
+				</col>
+				<col column="producer" label="生产商" >
+					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+				<col column="inperson" label="入库人"  br="true">
+					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+				<col column="dealer" label="供应商" >
+					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+				<col column="price" label="单价" br="true">
+					<inputbox  jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+				<col column="priceUnit" label="货币" >
+					<inputbox type="selectbox">
+						<option value="0" label="女"></option>
+						<option value="1" label="男"></option>
+					</inputbox>
+				</col>
+				<col column="taxRate" label="含税否" br="true">
+					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+				<col column="reason" label="入库原因" >
+					<inputbox jsvalidate="isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				</col>
+				<col column="rType" label="所属R" br="true">
+					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+				<col column="catFrom" label="来源"  br="true">
+					<inputbox type="selectbox">
+						<option value="0" label="女"></option>
+						<option value="1" label="男"></option>
+					</inputbox>
+				</col>
+				<col column="remark" label="备注" br="true">
+					<inputbox type="textareabox" styleproperty="colspan='3'" valuestyleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+			</display>
+			<sql>
+				<select>
+					<value>
+						<![CDATA[SELECT ID,machineno,catid,batchno,expire,indate,num,producer,dealer,reason,inperson,price,priceUnit,taxRate,rType,catFrom,remark FROM b_in where  {#condition#}]]>
+					</value>
+					<condition name="txtid" hidden="true">
+						<value>
+						<![CDATA[(ID = '#data#' )]]>
+						</value>
+					</condition>
+				</select>
+				<insert>
+					insert into b_in(machineno,catid,batchno,expire,indate,num,producer,dealer,reason,inperson,price,priceUnit,taxRate,rType,catFrom,remark)
+					values(@{machineno},@{catid},@{batchno},@{expire},@{indate},@{num},@{producer},@{dealer},@{reason},@{inperson},@{price},@{priceUnit},@{taxRate},@{rType},@{catFrom},@{remark});
+				</insert>
+				<update>
+					update b_in set machineno=trim(@{machineno}),batchno=trim(@{batchno}),expire=@{expire},indate=@{indate},num=@{num},producer=trim(@{producer}),dealer=trim(@{dealer}),reason=@{reason},inperson=trim(@{inperson}),price=@{price},priceUnit=@{priceUnit},taxRate=@{taxRate},rType=@{rType},catFrom=@{catFrom},remark=trim(@{remark}) 
+					where ID=@{ID__old};
+				</update>
+			</sql>
+			<format><!--
+				<value>
+					rrequest.getRequest().setAttribute("txtname",name);//存放request，以便显示标题时能取到
+				</value>
+			--></format>
+		</report>
+	</page>
+	
+</applications>
