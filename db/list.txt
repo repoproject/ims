@@ -1,0 +1,15 @@
+b_machine表有较大变化。（昨天）
+
+1、b_catuse中machineNo改为varchar 50
+
+2、b_catuse中batchno改为varchar 255
+
+3、b_catuse中增加catname为varchar 100
+
+4、b_catorder中增加catname为varchar 100
+
+5、b_cat中的type改为int
+
+7、b_cat表中的group字段是存R8还是R8 - Cent& Immu&Liai&Mini ？
+
+8、新增加d_catcode，用于试剂耗材库数据字典的提前维护
