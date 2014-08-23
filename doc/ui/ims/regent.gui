@@ -45,9 +45,9 @@
 			CID = "1276135175"
 			Type = "Table"
 			X = "-374"
-			Y = "255"
+			Y = "312"
 			Width = "573"
-			Height = "203"
+			Height = "146"
 			Flags = "0"
 			HeaderBackgroundColour = "236,233,216,0,16"
 			HeaderBorderColour = "172,168,153,0,17"
@@ -62,7 +62,7 @@
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			NextColumnID = "11"
+			NextColumnID = "14"
 			IsFlat = "0"
 			IsHeaderBold = "0"
 			IsTransparent = "0"
@@ -96,6 +96,20 @@
 					OddBackgroundColour = "255,255,255,0,6"
 					EvenBackgroundColour = "255,255,255,0,6"
 					TextColour = "0,0,0,0,9"
+					ColumnID = "12"
+					Heading = "类型"
+					Width = "80"
+					HeaderMargin = "0"
+					CellMargin = "0"
+					HasCustomOddBgColour = "0"
+					HasCustomEvenBgColour = "0"
+					HasCustomTextColour = "0"
+					HeadingAlignment = "Left"
+					CellAlignment = "Left"/>
+				<ColumnItem
+					OddBackgroundColour = "255,255,255,0,6"
+					EvenBackgroundColour = "255,255,255,0,6"
+					TextColour = "0,0,0,0,9"
 					ColumnID = "2"
 					Heading = "试剂/耗材名"
 					Width = "200"
@@ -125,7 +139,7 @@
 					EvenBackgroundColour = "255,255,255,0,6"
 					TextColour = "0,0,0,0,9"
 					ColumnID = "6"
-					Heading = "所属组别"
+					Heading = "所属设备"
 					Width = "120"
 					HeaderMargin = "0"
 					CellMargin = "0"
@@ -138,8 +152,8 @@
 					OddBackgroundColour = "255,255,255,0,6"
 					EvenBackgroundColour = "255,255,255,0,6"
 					TextColour = "0,0,0,0,9"
-					ColumnID = "7"
-					Heading = "设备类型"
+					ColumnID = "8"
+					Heading = "排序号"
 					Width = "100"
 					HeaderMargin = "0"
 					CellMargin = "0"
@@ -152,7 +166,7 @@
 					OddBackgroundColour = "255,255,255,0,6"
 					EvenBackgroundColour = "255,255,255,0,6"
 					TextColour = "0,0,0,0,9"
-					ColumnID = "8"
+					ColumnID = "13"
 					Heading = "备注"
 					Width = "100"
 					HeaderMargin = "0"
@@ -167,6 +181,9 @@
 				<Row
 					IsSelected = "0">
 					<Cell>
+						耗材
+					</Cell>
+					<Cell>
 						GN Test Kit革兰氏阴性杆菌鉴定卡
 					</Cell>
 					<Cell>
@@ -176,25 +193,7 @@
 						R2 - LCMS &amp; Micro&#32;
 					</Cell>
 					<Cell>
-						Micro Lab
-					</Cell>
-					<Cell>
-						BD
-					</Cell>
-				</Row>
-				<Row
-					IsSelected = "0">
-					<Cell>
-						
-					</Cell>
-					<Cell>
-						
-					</Cell>
-					<Cell>
-						
-					</Cell>
-					<Cell>
-						
+						12
 					</Cell>
 					<Cell>
 						
@@ -217,6 +216,30 @@
 					<Cell>
 						
 					</Cell>
+					<Cell>
+						
+					</Cell>
+				</Row>
+				<Row
+					IsSelected = "0">
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
+					<Cell>
+						
+					</Cell>
 				</Row>
 				<Row
 					IsSelected = "0">
@@ -235,9 +258,15 @@
 					<Cell>
 						
 					</Cell>
+					<Cell>
+						
+					</Cell>
 				</Row>
 				<Row
 					IsSelected = "0">
+					<Cell>
+						
+					</Cell>
 					<Cell>
 						
 					</Cell>
@@ -295,8 +324,8 @@
 		<Element
 			CID = "1276128973"
 			Type = "StaticText"
-			X = "-69"
-			Y = "79"
+			X = "-341"
+			Y = "81"
 			Width = "100"
 			Height = "21"
 			Flags = "4096"
@@ -314,7 +343,7 @@
 			CID = "1276123750"
 			Type = "StaticText"
 			X = "-346"
-			Y = "146"
+			Y = "122"
 			Width = "100"
 			Height = "21"
 			Flags = "0"
@@ -331,8 +360,8 @@
 		<Element
 			CID = "1276121209"
 			Type = "StaticText"
-			X = "-349"
-			Y = "80"
+			X = "-80"
+			Y = "42"
 			Width = "100"
 			Height = "21"
 			Flags = "0"
@@ -379,8 +408,8 @@
 		<Element
 			CID = "1276123465"
 			Type = "EditBox"
-			X = "33"
-			Y = "79"
+			X = "-239"
+			Y = "81"
 			Width = "120"
 			Height = "21"
 			Flags = "4098"
@@ -409,16 +438,16 @@
 		<Element
 			CID = "1276121813"
 			Type = "TextButton"
-			X = "-5"
-			Y = "225"
-			Width = "75"
+			X = "-63"
+			Y = "256"
+			Width = "42"
 			Height = "23"
-			Flags = "0"
+			Flags = "4096"
 			TextColour = "0,0,0,0,19"
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "确定"
+			Text = "查询"
 			Depth = "2"
 			IsDefault = "0"
 			IsDisabled = "0"
@@ -430,16 +459,16 @@
 		<Element
 			CID = "1253537804"
 			Type = "TextButton"
-			X = "91"
-			Y = "229"
-			Width = "75"
+			X = "85"
+			Y = "215"
+			Width = "32"
 			Height = "23"
-			Flags = "0"
+			Flags = "4096"
 			TextColour = "0,0,0,0,19"
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "取消"
+			Text = "增加"
 			Depth = "2"
 			IsDefault = "0"
 			IsDisabled = "0"
@@ -476,7 +505,7 @@
 			CID = "1888096843"
 			Type = "EditBox"
 			X = "-241"
-			Y = "149"
+			Y = "124"
 			Width = "386"
 			Height = "21"
 			Flags = "2"
@@ -551,8 +580,8 @@
 		<Element
 			CID = "77529134"
 			Type = "StaticText"
-			X = "-69"
-			Y = "46"
+			X = "-87"
+			Y = "75"
 			Width = "100"
 			Height = "21"
 			Flags = "4096"
@@ -569,8 +598,8 @@
 		<Element
 			CID = "77561080"
 			Type = "EditBox"
-			X = "35"
-			Y = "46"
+			X = "7"
+			Y = "81"
 			Width = "120"
 			Height = "21"
 			Flags = "4098"
@@ -599,8 +628,8 @@
 		<Element
 			CID = "1302750133"
 			Type = "ComboBox"
-			X = "-240"
-			Y = "80"
+			X = "29"
+			Y = "42"
 			Width = "127"
 			Height = "21"
 			Flags = "2"
@@ -651,8 +680,8 @@
 		<Element
 			CID = "1718228986"
 			Type = "StaticText"
-			X = "-73"
-			Y = "113"
+			X = "-339"
+			Y = "153"
 			Width = "100"
 			Height = "21"
 			Flags = "4096"
@@ -661,7 +690,7 @@
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "耗材序号："
+			Text = "排序号："
 			IsDisabled = "0"
 			Fill = "None"
 			HorzAlign = "Centre"
@@ -669,8 +698,8 @@
 		<Element
 			CID = "1718248177"
 			Type = "EditBox"
-			X = "31"
-			Y = "113"
+			X = "-235"
+			Y = "153"
 			Width = "120"
 			Height = "21"
 			Flags = "4098"
@@ -699,10 +728,10 @@
 		<Element
 			CID = "77536552"
 			Type = "EllipseShape"
-			X = "-15"
-			Y = "126"
+			X = "-66"
+			Y = "110"
 			Width = "214"
-			Height = "70"
+			Height = "105"
 			Flags = "0"
 			TextColour = "0,0,0,0,0"
 			FillColour = "255,255,224,0,0"
@@ -710,7 +739,7 @@
 			Typeface = ""
 			FontAttributes = "0"
 			TextSize = "Normal"
-			Text = "耗材序号：统计表中耗材不用货号，而用序号。是因为序号是约定成俗的，试剂无该字段。但是耗材也先保留货号字段"
+			Text = "排序号：统计表中耗材不用货号，而用序号。是因为序号是约定成俗的，试剂暂时无该字段，但是考虑到未来排序方便也要填写该字段。耗材也先保留货号字段"
 			BorderWidth = "2"
 			Fill = "Solid"
 			Border = "Single"
@@ -744,6 +773,167 @@
 			MarginRight = "0"
 			MarginTop = "0"
 			MarginBottom = "0"/>
+		<Element
+			CID = "1159138761"
+			Type = "StaticText"
+			X = "-377"
+			Y = "225"
+			Width = "100"
+			Height = "21"
+			Flags = "0"
+			FillColour = "236,233,216,0,16"
+			TextColour = "0,0,0,0,19"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "所属设备："
+			IsDisabled = "0"
+			Fill = "None"
+			HorzAlign = "Centre"
+			VertAlign = "Centre"/>
+		<Element
+			CID = "1159142072"
+			Type = "ComboBox"
+			X = "-291"
+			Y = "225"
+			Width = "127"
+			Height = "21"
+			Flags = "2"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "LH"
+			IsDisabled = "0"
+			IsEditable = "1"
+			IsFlat = "0"
+			Mirror = "0"
+			CustomStyle = "0"
+			HorzAlign = "Left"
+			OverrideTextColour = "0"
+			OverrideDisabledTextColour = "0"
+			OverrideFillColour = "0"
+			OverrideDisabledFillColour = "0"
+			OverrideBorderColour = "1"
+			TextColour = "0,0,0,0,9"
+			DisabledTextColour = "161,161,146,0,18"
+			FillColour = "240,240,255,0,0"
+			DisabledFillColour = "236,233,216,0,16"
+			BorderColour = "0,0,255,0,0"/>
+		<Element
+			CID = "1159141544"
+			Type = "StaticText"
+			X = "-196"
+			Y = "225"
+			Width = "100"
+			Height = "21"
+			Flags = "0"
+			FillColour = "236,233,216,0,16"
+			TextColour = "0,0,0,0,19"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "名称："
+			IsDisabled = "0"
+			Fill = "None"
+			HorzAlign = "Centre"
+			VertAlign = "Centre"/>
+		<Element
+			CID = "1159152332"
+			Type = "TextButton"
+			X = "127"
+			Y = "215"
+			Width = "33"
+			Height = "23"
+			Flags = "0"
+			TextColour = "0,0,0,0,19"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "删除"
+			Depth = "2"
+			IsDefault = "0"
+			IsDisabled = "0"
+			MarginLeft = "0"
+			MarginRight = "0"
+			MarginTop = "0"
+			MarginBottom = "0"
+			AutoNavType = ""/>
+		<Element
+			CID = "1159160309"
+			Type = "EditBox"
+			X = "-126"
+			Y = "225"
+			Width = "120"
+			Height = "21"
+			Flags = "4098"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "Siemens Centaur"
+			IsDisabled = "0"
+			IsReadOnly = "0"
+			HorzAlign = "Left"
+			EditType = "Text"
+			OverrideTextColour = "0"
+			OverrideDisabledTextColour = "0"
+			OverrideFillColour = "0"
+			OverrideDisabledFillColour = "0"
+			OverrideBorderColour = "1"
+			MarginLeft = "0"
+			MarginRight = "0"
+			MarginTop = "0"
+			MarginBottom = "0"
+			TextColour = "0,0,0,0,9"
+			DisabledTextColour = "161,161,146,0,18"
+			FillColour = "255,255,153,0,0"
+			DisabledFillColour = "236,233,216,0,16"
+			BorderColour = "153,84,10,0,34"/>
+		<Element
+			CID = "866872206"
+			Type = "StaticText"
+			X = "-376"
+			Y = "260"
+			Width = "100"
+			Height = "21"
+			Flags = "0"
+			FillColour = "236,233,216,0,16"
+			TextColour = "0,0,0,0,19"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "类别："
+			IsDisabled = "0"
+			Fill = "None"
+			HorzAlign = "Centre"
+			VertAlign = "Centre"/>
+		<Element
+			CID = "866875336"
+			Type = "ComboBox"
+			X = "-290"
+			Y = "260"
+			Width = "127"
+			Height = "21"
+			Flags = "2"
+			Typeface = ""
+			FontAttributes = "0"
+			TextSize = "Normal"
+			Text = "全部"
+			IsDisabled = "0"
+			IsEditable = "1"
+			IsFlat = "0"
+			Mirror = "0"
+			CustomStyle = "0"
+			HorzAlign = "Left"
+			OverrideTextColour = "0"
+			OverrideDisabledTextColour = "0"
+			OverrideFillColour = "0"
+			OverrideDisabledFillColour = "0"
+			OverrideBorderColour = "1"
+			TextColour = "0,0,0,0,9"
+			DisabledTextColour = "161,161,146,0,18"
+			FillColour = "240,240,255,0,0"
+			DisabledFillColour = "236,233,216,0,16"
+			BorderColour = "0,0,255,0,0"/>
 	</Elements>
 	<Connections
 		CID = "2"/>

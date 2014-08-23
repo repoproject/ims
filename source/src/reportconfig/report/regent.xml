@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications xmlns="http://www.wabacus.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
+	<page id="regent" js="/webresources/script/validate.js,/webresources/script/demo.js">
+		<header>
+			<![CDATA[<p align="center"><font size="6"><b>试剂/耗材库维护</b></font></p>]]>
+		</header>
+		<report id="regentlist" parenttitle="试剂/耗材库维护" type="editablelist" cellresize="1" rowselect="multiple-checkbox" pagesize="13" interceptor="com.ims.interceptor.DeleteUser">
+				
+
+				<display mouseoverbgcolor="CCCCCC" >
+				<col column="{col-rowselect}" width="20"></col>
+					<col column="{sequence:1}" label="序号" width="3%"/>
+					<col column="id" label="编号"  displaytype="hidden"/>					
+					<col column="typename" label="类型" clickorderby="true" width="5%"></col>
+					<col column="name" label="名称" clickorderby="true" width="25%"></col>
+					<col column="catno" label="货号" clickorderby="true" width="20%"></col>
+					<col column="seq" label="编号"  displaytype="hidden" width="10%"/>
+					<col column="machinename" label="所属设备" clickorderby="true" width="15%"></col>
+	
+					<col column="orde" label="排序号" clickorderby="true" width="8%"></col>
+					<col column="remark" label="备注" clickorderby="true" width="12%"></col>					
+				</display>
+				<sql>
+				
+					<select>
+						<value>
+							<![CDATA[SELECT id,type,(select codename from d_code where codetype='cattype' and  code = d_catcode.type )typename,name,catno,seq,machinename,machineid,orde,remark FROM d_catcode where {#condition#}  order by type ,orde]]>
+						</value>						
+						<condition name="txtname" label="名称" labelposition="left">
+							<value>
+								<![CDATA[(name like '%#data#%' )]]>								
+							</value>
+							<inputbox type="textbox" jsvalidate="isNotLongerThan20(#label#列长度应小于等于50);stripscript(#label#不能含有特殊字符)">
+							</inputbox>
+						</condition>
+						<condition name="machinename" label="所属设备" labelposition="left">
+						
+							<value> <![CDATA[(trim(machinename) = '#data#')]]>
+							</value>
+							<inputbox type="selectbox" >	
+							<option value="" label="全部"></option>						
+							<option dataset="@{select distinct name from b_machine}" label="name" value="name"></option>
+							</inputbox>
+						</condition>
+						<condition name="typename" label="类型" labelposition="left">						
+							<value> <![CDATA[(trim(type) = '#data#')]]>
+							</value>
+							<inputbox type="selectbox" >	
+							<option value="" label="全部"></option>						
+							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
+							</inputbox>
+						</condition>
+					</select>	
+					<insert pageurl="report{regent_edit.report1}" popupparams="{title:'新增试剂/耗材',width:500,height:350}"></insert>
+					<update pageurl="report{regent_edit.report1}" urlparams="txtid=@{id}"
+						popupparams="{title:'编辑试剂/耗材',width:500,height:350}"></update>  
+					<delete confirmessage="是否删除[@{name}]对应的记录？">
+						delete from d_catcode where id=@{id__old};
+					  </delete>							
+				</sql>
+			</report>
+	</page>
+</applications>

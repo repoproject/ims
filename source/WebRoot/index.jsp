@@ -149,7 +149,7 @@ $(function(){
 							    <ul>
 								  <li><a href="ShowReport.wx?PAGEID=out" target="navTab" rel="userbaseinfo" external="true" fresh="false">出库操作</a></li>
 							      <li><a href="ShowReport.wx?PAGEID=in" target="navTab" rel="userbaseinfo" external="true" fresh="false">入库操作</a></li>
-								  <li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo" external="true" fresh="false">试剂/耗材库</a></li>
+								  <li><a href="ShowReport.wx?PAGEID=regent" target="navTab" rel="userbaseinfo" external="true" fresh="false">试剂/耗材库</a></li>
 								    
 								</ul>
 							</li>									
