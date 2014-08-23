@@ -17,3 +17,5 @@ b_machine表有较大变化。（昨天）
 
 
 9、d_catcode中的machineID是否需要？？？
+
+10、调试方法

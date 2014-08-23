@@ -3,16 +3,17 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
 	<page id="user_edit" js="/webresources/script/validate.js">
-		<report id="report1" title="request{txtname}详细信息" type="editabledetail"  >
+		<report id="report1" title="request{txtname}详细信息" type="editabledetail" interceptor="com.ims.interceptor.AddUser"  >
 			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
 				<col column="ID" displaytype="hidden">
 				</col>
+				<col column="name" label="姓名*" br="true">
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				</col>	
 				<col column="nickName" label="昵称*" br="true">
 					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
 				</col>
-				<col column="name" label="姓名*" br="true">
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
-				</col>				
+			
 				<col column="password" label="密码" br="true" displaytype="hidden" >
 				</col>
 				<col column="role" label="角色" br="true">
@@ -47,7 +48,7 @@
 					values(trim(@{name}),trim(@{nickName}),'8888',@{role},@{sex},trim(@{remark}));
 				</insert>
 				<update>
-					update d_user set name=trim(@{name}),nickName=trim(@{nickName}),password=@{password},role=@{role},sex=@{sex},remark=trim(@{remark}) 
+					update d_user set nickName=trim(@{nickName}),password=@{password},role=@{role},sex=@{sex},remark=trim(@{remark}) 
 					where ID=@{ID__old};
 				</update>
 			</sql>

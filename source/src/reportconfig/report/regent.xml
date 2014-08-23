@@ -29,21 +29,33 @@
 							<![CDATA[SELECT id,type,(select codename from d_code where codetype='cattype' and  code = d_catcode.type )typename,name,catno,seq,machinename,machineid,orde,remark FROM d_catcode where {#condition#}  order by type ,orde]]>
 						</value>						
 						<condition name="txtname" label="名称" labelposition="left">
-							<value>
-								<![CDATA[(name like '%#data#%' )]]>								
-							</value>
-							<inputbox type="textbox" jsvalidate="isNotLongerThan20(#label#列长度应小于等于50);stripscript(#label#不能含有特殊字符)">
-							</inputbox>
-						</condition>
-						<condition name="machinename" label="所属设备" labelposition="left">
+						     <value>
+							<![CDATA[(trim(name) like  '%#data#%' )]]>
+						</value>
+						     <inputbox>
+						        <typeprompt width="-1" count="20">
+							       <promptcol label="name" matchmode="anywhere"></promptcol>
+							       <datasource>    
+							          <option dataset="@{select distinct name from d_catcode where {#matchcondition#}}"></option> 
+                                   </datasource>
+						        </typeprompt>
+						     </inputbox>
+					    </condition>
 						
-							<value> <![CDATA[(trim(machinename) = '#data#')]]>
-							</value>
-							<inputbox type="selectbox" >	
-							<option value="" label="全部"></option>						
-							<option dataset="@{select distinct name from b_machine}" label="name" value="name"></option>
-							</inputbox>
-						</condition>
+						 <condition name="machinename" label="所属设备" labelposition="left">
+						     <value>
+							<![CDATA[(trim(machinename) like  '%#data#%' )]]>
+						</value>
+						     <inputbox>
+						        <typeprompt width="-1" count="20">
+							       <promptcol label="name" matchmode="anywhere"></promptcol>
+							       <datasource>    
+							          <option dataset="@{select distinct name from b_machine where {#matchcondition#}}"></option> 
+                                   </datasource>
+						        </typeprompt>
+						     </inputbox>
+					    </condition>
+						
 						<condition name="typename" label="类型" labelposition="left">						
 							<value> <![CDATA[(trim(type) = '#data#')]]>
 							</value>

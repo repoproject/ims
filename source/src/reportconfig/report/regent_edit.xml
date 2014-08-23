@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications xmlns="http://www.wabacus.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
+	<page id="regent_edit" js="/webresources/script/validate.js">
+		<report id="report1" title="request{txtname}详细信息" type="editabledetail"  interceptor="com.ims.interceptor.RegentEdit" >
+			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
+				<col column="ID" displaytype="hidden">
+				</col>
+				<col column="type" label="类别" br="true">
+                    <inputbox type="selectbox" inlinecount="5" >							
+							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
+					</inputbox>
+				</col>
+				
+				<col column="machinename" label="所属设备" br="true">
+					<inputbox type="selectbox" inlinecount="5" >							
+							<option dataset="@{select distinct name  from b_machine}" label="name" value="name"></option>
+					</inputbox>
+				</col>
+				 <!-- 
+				<col column="machinename" label="所属设备"  br="true">
+					<inputbox type="combox"  inlinecount="5"  servervalidate="isNotEmpty(${invalid.isnotempty})" >
+						<option dataset="@{select distinct name  from b_machine}" label="name" value="name"></option>
+					</inputbox>
+			    </col>-->
+				<col column="catno" label="货号*" br="true">
+					<inputbox   jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				</col>		
+				<col column="name" label="试剂/耗材名称*" br="true">
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于100);stripscript(#label#不能含有特殊字符);" />
+				</col>					
+				<col column="seq" label="编号" br="true" >
+				 <inputbox type="textbox" styleproperty="rows='3'" jsvalidate="isNotLongerThan50(#label#列长度应小于等于50);" />	
+				</col>
+				<col column="orde" label="排序号" br="true" >		
+				    <inputbox type="textbox" defaultvalue='0'  styleproperty="rows='3'" jsvalidate="isNumber(#label#必须是整数);" />			
+				</col>
+				<col column="remark" label="备注">
+					<inputbox type="textareabox" styleproperty="rows='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+			</display>
+			<sql>
+				<select>
+					<value>
+						<![CDATA[SELECT id,type,(select codename from d_code where codetype='cattype' and  code = d_catcode.type )typename,name,catno,seq,machinename,machineid,orde,remark FROM d_catcode where {#condition#}]]>
+					</value>
+					<condition name="txtid" hidden="true">
+						<value>
+						<![CDATA[(ID = '#data#' )]]>
+						</value>
+					</condition>
+				</select>
+				<insert>
+					insert into d_catcode(type,name,catno,seq,machinename,orde,remark)
+					values(trim(@{type}),trim(@{name}),trim(@{catno}),trim(@{seq}),trim(@{machinename}),trim(@{orde}),trim(@{remark}));
+				</insert>
+				<update>
+					update d_catcode set type=trim(@{type}),machinename=trim(@{machinename}),name=trim(@{name}),seq=trim(@{seq}),orde=@{orde},remark=trim(@{remark}) 
+					where ID=@{ID__old};
+				</update>
+			</sql>
+			<format><!--
+				<value>
+					rrequest.getRequest().setAttribute("txtname",name);//存放request，以便显示标题时能取到
+				</value>
+			--></format>
+		</report>
+	</page>
+	
+</applications>

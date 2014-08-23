@@ -41,70 +41,12 @@ public class DeleteUser extends AbsInterceptorDefaultAdapter{
 			rowDataBean.setRowstyleproperty(style);
 		}
 	}
-	@Override
-	public int doSave(ReportRequest rrequest, ReportBean rbean,
-			AbsEditableReportEditDataBean editbean) {
-		// TODO Auto-generated method stub
-		return super.doSave(rrequest, rbean, editbean);
-	}
 
-	@Override
-	public int doSavePerAction(ReportRequest rrequest, ReportBean rbean,
-			Map<String, String> mRowData, Map<String, String> mParamValues,
-			AbsUpdateAction actionbean, AbsEditableReportEditDataBean editbean) {
-		// TODO Auto-generated method stub
-		return super.doSavePerAction(rrequest, rbean, mRowData, mParamValues,
-				actionbean, editbean);
-	}
-	/**
-	 * 装载数据之前执行的函数
-	 * @创建者： zhouhl
-	 * @创建时间：2014-06-18
-	 * @修改人：zhouhl
-	 * @修改时间：2013-12-30
-	 * @返回值：查询语句字符串对象
-	 */
-	public Object beforeLoadData(ReportRequest rrequest, ReportBean rbean,
-			Object typeObj, String sql) {
-		
-		//设置响应头信息，设定页面无缓存
-		rrequest.getWResponse().getResponse().setHeader("Cache-Control","no-cache");
-		rrequest.getWResponse().getResponse().setHeader("Cache-Control","no-store");
-		rrequest.getWResponse().getResponse().setDateHeader("Expires", 0);
-		rrequest.getWResponse().getResponse().setHeader("Pragma", "No-cache");
-		
-		
-		//设置序列号查询条件的sql语句
-		if (rrequest.getAttribute("txtname") != null) {
-			String filename = rrequest.getAttribute("txtname").toString();
-			if (sql.contains("textName")) {
-				if (filename.indexOf("%") > -1) {
-					filename = filename.replaceAll("%", "/%");
-				}
-				if (filename.indexOf("_") > -1) {
-					filename = filename.replaceAll("_", "/_");
-				}
-				sql = sql.replaceAll("textName", "name like '%" + filename +  "%' escape '/'");
-			}
-			
-		}
-		//返回数据库查询语句字符串
-		return sql;
-	}
+
 	public int doSavePerRow( ReportRequest rrequest, ReportBean rbean, Map<String,String> mRowData, Map<String,String> mParamValues, AbsEditableReportEditDataBean editbean){
-		if(editbean instanceof EditableReportInsertDataBean) {
-			//添加操作
-			String usernameString = mRowData.get("name");
-			super.doSavePerRow(rrequest, rbean, mRowData, mParamValues,editbean);
-		}else if(editbean instanceof EditableReportUpdateDataBean) {
-				//修改操作
-			super.doSavePerRow(rrequest, rbean, mRowData, mParamValues,editbean);
-		}else if(editbean instanceof EditableReportSQLButtonDataBean) {
-			//调用配置在<button/>中配置的调用后台服务操作
-			super.doSavePerRow(rrequest, rbean, mRowData, mParamValues,editbean);
-		}else if(editbean instanceof EditableReportDeleteDataBean) {
+		if(editbean instanceof EditableReportDeleteDataBean) {
 			//删除操作
-			String usernameString = mRowData.get("name");
+			String usernameString = mRowData.get("nickname");
 			if (usernameString.equalsIgnoreCase("admin")) {
 				rrequest.getWResponse().getMessageCollector().alert("admin用户禁止删除",null,false);
 				return WX_RETURNVAL_SKIP;
