@@ -16,11 +16,11 @@
 				<col column="batchno" label="批号"  >
 					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
 				</col>
-				<col column="expire" label="有效期"  datatype="date{MM/dd/yyyy}"  br="true">
-					<inputbox type="datepicker" dateformat="MM/dd/yyyy"></inputbox>
+				<col column="expire" label="有效期"  datatype="date{yyyy-MM-dd}"  br="true">
+					<inputbox type="datepicker" dateformat="yyyy-MM-dd"></inputbox>
 				</col>
-				<col column="indate" label="入库时间" datatype="date{MM/dd/yyyy}"  >
-					<inputbox type="datepicker" dateformat="MM/dd/yyyy"></inputbox>
+				<col column="indate" label="入库时间" datatype="date{yyyy-MM-dd}"  >
+					<inputbox type="datepicker" dateformat="yyyy-MM-dd"></inputbox>
 				</col>
 				<col column="num" label="数量" br="true">
 					<inputbox   />
@@ -39,8 +39,8 @@
 				</col>
 				<col column="priceUnit" label="货币" >
 					<inputbox type="selectbox">
-						<option value="0" label="女"></option>
-						<option value="1" label="男"></option>
+						<option value="0" label="USD"></option>
+						<option value="1" label="CNY"></option>
 					</inputbox>
 				</col>
 				<col column="taxRate" label="含税否" br="true">
@@ -50,7 +50,10 @@
 					<inputbox jsvalidate="isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
 				</col>
 				<col column="rType" label="所属R" br="true">
-					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+					<inputbox type="selectbox">
+						<option value="0" label="USD"></option>
+						<option value="1" label="CNY"></option>
+					</inputbox>
 				</col>
 				<col column="catFrom" label="来源"  br="true">
 					<inputbox type="selectbox">
