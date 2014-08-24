@@ -6,7 +6,7 @@
 		<header>
 			<![CDATA[<p align="center"><font size="6"><b>用户基础信息管理</b></font></p>]]>
 		</header>
-		<report id="userlist" parenttitle="用户基础信息管理" type="editablelist" cellresize="1" rowselect="multiple-checkbox" pagesize="13" interceptor="com.ims.interceptor.DeleteUser">
+		<report id="userlist" parenttitle="用户基础信息管理" type="editablelist" cellresize="1" rowselect="multiple-checkbox" pagesize="13" interceptor="com.ims.interceptor.DeleteUser"  >
 				
 			  <!--interceptor>
 				<beforedisplay-perrow>
@@ -58,7 +58,7 @@
 					<insert pageurl="report{user_edit.report1}" popupparams="{title:'新增用户',width:400,height:300}"></insert>
 					<update pageurl="report{user_edit.report1}" urlparams="txtid=@{id}"
 						popupparams="{title:'编辑用户',width:400,height:300}"></update>  
-					<delete confirmessage="是否删除[@{role}]对应的记录？">
+					<delete confirmessage="是否删除[@{nickname}]对应的记录？">
 						delete from d_user where id=@{id__old};
 					  </delete>							
 				</sql>

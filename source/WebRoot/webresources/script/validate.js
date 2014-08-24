@@ -1,4 +1,4 @@
-Array.prototype.max = function()
+﻿Array.prototype.max = function()
 {
 	var i, max = this[0];
 	
@@ -738,7 +738,7 @@ function isdatetimeInput(strValue)
 function stripscript(strValue) 
 { 
 	//所检常用的测试
-	var pattern = new RegExp("[`~!@#$%^&*()_+{}|:\"<>\/]");
+	var pattern = new RegExp("[`~!@#$%^&*()+{}|:\"<>\/]");
 	//更加严格的校验含全角半角
 	//var pattern = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？\"]") 
 		
@@ -751,3 +751,19 @@ function stripscript(strValue)
 	
 } 
 
+/**
+ *校验输入的必须是整数，包括正整数、0和负整数  by gq
+ *@param strValue 被校验的字符串
+ * @return 含有特殊字符返回失败，否则返回成功
+ */  
+function isNumber(strValue) 
+{  
+	//验证数字测试
+	
+	if( !checkExp("^-?\\d+$", strValue ))
+	{
+		return false;
+	}
+
+	return true;	
+} 

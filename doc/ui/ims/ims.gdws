@@ -90,10 +90,13 @@
 			RootPath = "$Container"
 			RelativePathname = "index.gui"
 			ViewSettings = ""/>
+<<<<<<< HEAD
 		<File
 			FileID = "7AA88628-5C34-4717-B87CBFF0D5FF5898"
 			RootPath = "$Container"
 			RelativePathname = "in.gui"
 			ViewSettings = ""/>
+=======
+>>>>>>> f76866632204a7e0eaf5b633d3e5fd89a1e5772b
 	</OpenFiles>
 </Workspace>
