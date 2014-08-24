@@ -18,4 +18,12 @@ b_machine表有较大变化。（昨天）
 
 9、d_catcode中的machineID是否需要？？？
 
-10、调试方法
+10、调试方法??
+
+11、b_cat和b_catorder中的批号是字符串还是数字？？
+
+
+12、d_codetype表中增加expiretime 过期时间的说明
+
+
+13、统一界面和数据库中的varchar长度。数据库分两种50,255，界面是20、200？？？

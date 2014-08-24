@@ -13,7 +13,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
-<title>管理软件</title>
+<title>出入库管理系统（IMS）</title>
 
 <link href="themes/default/style.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="css/core.css" rel="stylesheet" type="text/css" media="screen"/>
@@ -100,8 +100,7 @@ $(function(){
 <body scroll="no">
 	<div id="flashArea" style="display:none;">
 		<!--div id="closeFlash"></div-->
-		<h4 style="">您的系统没有安装flash播放软件，服务器下的图表数据需要flash才能显示，请先下载安装Adobe flash player</h4>
-		<p><a href="download/flash/flashplayer12.0win_ax.exe">下载Flash_player12 flash播放(支持64位系统)</a></p>
+		
 	</div>
 	<div id="layout" >
 		<div id="header">
@@ -180,7 +179,7 @@ $(function(){
 				<div class="tabsPageHeader">
 					<div class="tabsPageHeaderContent"><!-- 显示左右控制时添加 class="tabsPageHeaderMargin" -->
 						<ul class="navTab-tab">
-							<li tabid="main" class="main"><a href="javascript:;"><span><span class="home_icon">系统</span></span></a></li>
+							<li tabid="main" class="main"><a href="javascript:;"><span><span class="home_icon">首页</span></span></a></li>
 						</ul>
 					</div>
 					<div class="tabsLeft">left</div><!-- 禁用只需要添加一个样式 class="tabsLeft tabsLeftDisabled" -->
@@ -192,8 +191,8 @@ $(function(){
 				</ul>
 				<div class="navTab-panel tabsPageContent layoutBox">
 					<div class="page unitBox" id="mainBox" style="height:100%;">
-						<!-- <iframe src="SystemMonitor.jsp" style="width:100%;height:616px;" frameborder="no" border="0" marginwidth="0" marginheight="0"></iframe> -->
-						 
+						
+						<a href="ShowReport.wx?PAGEID=mainpage" target="navTab" rel="userbaseinfo2" external="true" fresh="false">试剂/耗材过期预警</a> 
 						 
 					</div>
 					

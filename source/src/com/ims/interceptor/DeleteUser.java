@@ -4,18 +4,14 @@ import java.util.Map;
 
 import com.wabacus.config.component.application.report.ReportBean;
 import com.wabacus.system.ReportRequest;
-import com.wabacus.system.buttons.EditableReportSQLButtonDataBean;
 import com.wabacus.system.component.application.report.configbean.editablereport.AbsEditableReportEditDataBean;
 import com.wabacus.system.component.application.report.configbean.editablereport.EditableReportDeleteDataBean;
-import com.wabacus.system.component.application.report.configbean.editablereport.EditableReportInsertDataBean;
-import com.wabacus.system.component.application.report.configbean.editablereport.EditableReportUpdateDataBean;
-import com.wabacus.system.dataset.update.action.AbsUpdateAction;
 import com.wabacus.system.intercept.AbsInterceptorDefaultAdapter;
 import com.wabacus.system.intercept.RowDataBean;
 /**
  * 测试用
  * @author jyp
- * @修改人：zhouhl
+ * @修改人：guanq
  * @修改时间：2013-12-30
  *
  */
@@ -25,8 +21,8 @@ public class DeleteUser extends AbsInterceptorDefaultAdapter{
 	/**
 	 * 每行数据显示到页面之前执行的函数
 	 * @创建者：zhouhl
-	 * @修改人：zhouhl
-	 * @修改时间：2014-06-16
+	 * @修改人：guanq
+	 * @修改时间：
 	 * @返回值：无
 	 * 
 	 */

@@ -4,20 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Map;
 
 import com.wabacus.config.Config;
 import com.wabacus.config.component.application.report.ReportBean;
 import com.wabacus.system.ReportRequest;
-import com.wabacus.system.assistant.WabacusAssistant;
 import com.wabacus.system.buttons.EditableReportSQLButtonDataBean;
 import com.wabacus.system.component.application.report.configbean.editablereport.*;
 import com.wabacus.system.intercept.AbsInterceptorDefaultAdapter;
-import com.wabacus.system.intercept.AbsPageInterceptor;
-import com.wabacus.util.UUIDGenerator;
 /**
  * 测试用
  * @author jyp
