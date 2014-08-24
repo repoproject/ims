@@ -1,29 +1,3 @@
 
-b_machine表有较大变化。（昨天）
-
-1、b_catuse中machineNo改为varchar 50
-
-2、b_catuse中batchno改为varchar 255
-
-3、b_catuse中增加catname为varchar 100
-
-4、b_catorder中增加catname为varchar 100
-
-5、b_cat中的type改为int
-
-7、b_cat表中的group字段是存R8还是R8 - Cent& Immu&Liai&Mini ？
-
-8、新增加d_catcode，用于试剂耗材库数据字典的提前维护
-
-
-9、d_catcode中的machineID是否需要？？？
-
-10、调试方法??
-
-11、b_cat和b_catorder中的批号是字符串还是数字？？
-
-
-12、d_codetype表中增加expiretime 过期时间的说明
-
-
-13、统一界面和数据库中的varchar长度。数据库分两种50,255，界面是20、200？？？
+13、统一界面和数据库中的varchar长度。数据库分两种50,255，界面是20、200。库中int 为11
+     

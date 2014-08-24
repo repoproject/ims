@@ -14,7 +14,7 @@
 				</col>
 				
 				<col column="machinename" label="所属设备" br="true">
-					<inputbox type="selectbox" inlinecount="5" >							
+					<inputbox type="combox" inlinecount="5" >							
 							<option dataset="@{select distinct name  from b_machine}" label="name" value="name"></option>
 					</inputbox>
 				</col>

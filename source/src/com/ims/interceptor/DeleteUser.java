@@ -43,8 +43,11 @@ public class DeleteUser extends AbsInterceptorDefaultAdapter{
 		if(editbean instanceof EditableReportDeleteDataBean) {
 			//删除操作
 			String usernameString = mRowData.get("nickname");
+			
 			if (usernameString.equalsIgnoreCase("admin")) {
+				
 				rrequest.getWResponse().getMessageCollector().alert("admin用户禁止删除",null,false);
+				
 				return WX_RETURNVAL_SKIP;
 			}else {
 				super.doSavePerRow(rrequest, rbean, mRowData, mParamValues,editbean);
