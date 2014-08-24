@@ -19,7 +19,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id,inDate,catname,batchno,num,localPrice,producer,dealer,catfrom,inperson FROM b_in where  {#condition#}]]>
+						<![CDATA[SELECT id,inDate,catname,batchno,num,localPrice,producer,dealer,catfrom,person FROM b_in where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -27,7 +27,7 @@
 						</value>
 					</condition>
 				</select>
-				<insert pageurl="report{in_edit.report1}" popupparams="{title:'入库',width:800,height:600}"></insert>
+				<insert pageurl="report{in_edit.report1}" popupparams="{title:'入库',width:800,height:400}"></insert>
 				<update pageurl="report{in_edit.report1}" urlparams="txtid=@{id}"
 						popupparams="{title:'修改入库',width:400,height:300}"></update>  
 				<delete confirmessage="是否删除[@{batchno}]对应的记录？">

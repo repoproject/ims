@@ -7,37 +7,42 @@
 			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
 				<col column="ID" displaytype="hidden">
 				</col>
-				<col column="machinename" label="工号*" br="true">
+				<col column="machinename" label="设备名称" >
 					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
 				</col>
-				<col column="machineno" label="姓名" br="true">
+				<col column="machineno" label="设备序号" br="true">
 					<inputbox jsvalidate="isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
 				</col>
-				<col column="batchno" label="昵称*" br="true">
+				<col column="catname" label="试剂/耗材" >
 					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
 				</col>
-				<col column="username" label="密码" br="true" displaytype="hidden" >
+				<col column="batchno" label="批号" br="true">
+					<inputbox ></inputbox>
 				</col>
-				<col column="useDate" label="角色" br="true">
-					<inputbox type="selectbox">
-						<option value="0" label="普通用户"></option>
-						<option value="1" label="高级用户"></option>
-					</inputbox>
+				<col column="person" label="出库人" >
+					<inputbox ></inputbox>
 				</col>
-				<col column="reason" label="性别" br="true">
-					<inputbox type="selectbox">
+				<col column="outdate" label="出库日期" datatype="date{yyyy-MM-dd}" br="true">
+					<inputbox type="datepicker" dateformat="yyyy-MM-dd"></inputbox>
+				</col>
+				<col column="num" label="数量" >
+					<inputbox />
+				</col>
+				<col column="reason" label="出库原因"  br="true">
+					<inputbox type="selectbox" inlinecount="5">
 						<option value="0" label="女"></option>
 						<option value="1" label="男"></option>
+					    <!--option dataset="@{select codename,code from d_code where codetype='outreason'}" label="codename" value="code"></option-->
 					</inputbox>
 				</col>
-				<col column="num" label="备注">
-					<inputbox type="textareabox" styleproperty="rows='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				<col column="remark" label="备注" br="true">
+					<inputbox type="textareabox" styleproperty="colspan='3'" valuestyleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
 				</col>
 			</display>
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT machinename,machineno,batchno,username,useDate,num,reason FROM b_catuse where  {#condition#}]]>
+						<![CDATA[SELECT ID,machinename,machineno,catname,batchno,person,outdate,num,reason,remark FROM b_out where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -46,13 +51,14 @@
 					</condition>
 				</select>
 				<insert>
-					insert into b_catuse(machinename,machineno,batchno,username,useDate,num,reason,remark,operator)
-					values(trim(@{machinename}),trim(@{machineno}),trim(@{batchno}),trim(@{username}),@{useDate},,trim(@{reason}),'001'));
+				insert into b_out(machinename)
+					values(@{machinename});
+				
 				</insert>
 				<update>
-					update b_catuse set machinename=trim(@{machinename}),machineno=trim(@{machineno}),batchno=@{batchno},username=@{username},useDate=@{useDate},num=trim(@{num}) 
-					where ID=@{ID__old};
+				      update b_out set machinename=@{machinename} where ID=@{ID__old};
 				</update>
+				
 			</sql>
 			<format><!--
 				<value>
