@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications xmlns="http://www.wabacus.com"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+					xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
+	<!-- 新闻形式展示 -->
+	<page id="mainpage">
+			<report id="report2" title="试剂/耗材过期预警"  border="horizontal2"  template="${articlelist.report.template}">
+				<display dataheader="" pagecolselect="false">
+					<col column="id" label="编号" displaytype="hidden"/>
+					<col column="expire" label="过期时间" displaytype="hidden" />
+					<col property="prexdot" column="{non-fromdb}" valuestyleproperty="align='right' width='5px'"/>
+					<col column="description" label="标题" datatype="clob" valuestyleproperty="align='left'"/>
+				</display>
+				<sql>
+					<value>
+						<![CDATA[SELECT * FROM (select a.catname,CONCAT(a.batchNo,a.catname,'还剩余',cast(DATEDIFF(a.expire,current_date()) as char(12)),'天过期！') description,DATEDIFF(a.expire,current_date()) from b_catorder a,b_cat b where DATEDIFF(a.expire,current_date())>0 and b.batchname=a.batchNo and b.total>0 and {#condition#}  ORDER BY a.expire ASC  ) c ]]>
+					</value>
+				
+					<condition name="catname" label="试剂/耗材名称" labelposition="left">
+						<value>
+							<![CDATA[(trim(catname) like  '%#data#%' )]]>
+						</value>
+						  <inputbox>
+						        <typeprompt width="-1" count="20">
+							       <promptcol label="name" matchmode="anywhere"></promptcol>
+							       <datasource>    
+							          <option dataset="@{
+							                   SELECT distinct name FROM
+												d_catcode where {#matchcondition#}
+												
+												}"/>
+							      </datasource>
+						        </typeprompt>
+						     </inputbox>						
+					
+					</condition>
+				</sql>
+				<format>
+					<value>
+					<![CDATA[
+						prexdot="<img src='/ims/source/WebRoot/Images/dot_prex.gif'>";//显示在标题前面的点
+						expire=expire==null?"":expire.trim();
+						if(expire.indexOf(" ")>0) expire=expire.substring(0,expire.indexOf(" "));//去除掉时间部分
+						description=description==null?"":description.trim();
+						if(!description.equals(""))
+						{
+							String fulldesc=description;
+							if(description.length()>40) description=description.substring(0,40)+"...";
+							description=description.replaceAll("<p>","");
+							description=description.replaceAll("</p>","");
+							if(rrequest.getShowtype()== Consts.DISPLAY_ON_PLAINEXCEL)
+							{
+								description=description+"  ["+expire+"]";
+							}else
+							{
+								description="&nbsp;&nbsp;<span onmouseover=\"this.style.cursor='pointer'\"  onclick=\"wx_win('"+fulldesc+"',{width:400,height:200})\">"+description+"</span>";
+								description=description+"&nbsp;&nbsp;<font color='#505050'>["+expire+"]</font>";
+							}
+						}
+					]]>
+					</value>
+				</format>
+			</report>
+			</page>
+</applications>
