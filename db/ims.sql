@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-08-21 23:36:27
+Date: 2014-08-24 20:07:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,14 +20,21 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `b_cat`;
 CREATE TABLE `b_cat` (
-  `id` int(10) NOT NULL AUTO_INCREMENT,
-  `catno` varchar(20) NOT NULL COMMENT '货号',
-  `name` varchar(100) NOT NULL COMMENT '物品名称',
-  `type` varchar(255) DEFAULT NULL COMMENT '0-试剂,1-耗材',
-  `batchid` int(11) NOT NULL COMMENT '批号',
-  `batchname` varchar(255) DEFAULT NULL COMMENT '批次名称',
-  `total` int(10) unsigned zerofill DEFAULT NULL COMMENT '总数',
-  `group` varchar(10) DEFAULT NULL COMMENT '分组，按照R特性分组',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `catno` varchar(50) NOT NULL COMMENT '货号',
+  `catname` varchar(255) NOT NULL COMMENT '物品名称',
+  `type` int(11) NOT NULL COMMENT '0-试剂,1-耗材',
+  `batchno` varchar(50) NOT NULL COMMENT '批号',
+  `total` int(11) unsigned zerofill NOT NULL COMMENT '总数',
+  `group` varchar(50) NOT NULL COMMENT '分组，按照R特性分组',
+  `produceDate` datetime DEFAULT NULL COMMENT '生产日期',
+  `producer` varchar(255) DEFAULT NULL COMMENT '生产商',
+  `expiredate` datetime DEFAULT NULL COMMENT '有效期，过期日',
+  `price` double NOT NULL,
+  `priceUnit` varchar(50) NOT NULL,
+  `dealer` varchar(255) DEFAULT NULL,
+  `makedate` datetime NOT NULL,
+  `modifydate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `I_CAT_NO` (`catno`) USING BTREE COMMENT '不用作为主键，但是作为唯一索引标识不能重复'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -42,33 +49,36 @@ CREATE TABLE `b_cat` (
 DROP TABLE IF EXISTS `b_in`;
 CREATE TABLE `b_in` (
   `id` int(11) NOT NULL COMMENT '货号，试剂号耗材号',
-  `catId` varchar(50) NOT NULL,
-  `catName` varchar(100) DEFAULT NULL COMMENT '试剂名称，冗余，b_cat.name',
-  `batchNo` varchar(255) DEFAULT NULL COMMENT '批号',
-  `producer` varchar(200) DEFAULT NULL COMMENT '生产商',
-  `dealer` varchar(200) DEFAULT NULL COMMENT '经销商',
+  `catno` varchar(50) NOT NULL,
+  `catName` varchar(255) DEFAULT NULL COMMENT '试剂名称，冗余，b_cat.name',
+  `batchNo` varchar(50) DEFAULT NULL COMMENT '批号',
+  `producer` varchar(255) DEFAULT NULL COMMENT '生产商',
+  `dealer` varchar(255) DEFAULT NULL COMMENT '经销商',
   `producerDate` datetime DEFAULT NULL COMMENT '生产日期',
-  `reason` varchar(200) DEFAULT NULL COMMENT '入库原因 codetype=''orderreason''',
-  `expire` datetime DEFAULT NULL COMMENT '失效日',
+  `reason` varchar(255) DEFAULT NULL COMMENT '入库原因 codetype=''orderreason''',
+  `expiredate` datetime DEFAULT NULL COMMENT '失效日',
   `num` int(11) DEFAULT NULL COMMENT '数量',
-  `numUnit` varchar(255) DEFAULT NULL COMMENT '数量单位',
+  `numUnit` varchar(50) DEFAULT NULL COMMENT '数量单位',
   `price` decimal(10,2) DEFAULT NULL COMMENT '单价，原始单价',
-  `priceUnit` varchar(255) DEFAULT NULL COMMENT '货币单位 codetype=''money'',存储codename',
+  `priceUnit` varchar(50) DEFAULT NULL COMMENT '货币单位 codetype=''money'',存储codename',
   `localPrice` decimal(10,2) DEFAULT NULL COMMENT '本地货币单价，通过汇率转化',
-  `taxRate` decimal(5,4) DEFAULT NULL COMMENT '税率',
+  `taxRate` decimal(10,2) DEFAULT NULL COMMENT '税率',
   `inDate` datetime DEFAULT NULL COMMENT '入库日期',
-  `machineNo` varchar(50) DEFAULT NULL COMMENT '设备编号',
-  `rType` varchar(50) DEFAULT NULL COMMENT 'R分类',
+  `machineName` varchar(50) DEFAULT NULL COMMENT '设备编号',
+  `group` varchar(50) DEFAULT NULL COMMENT 'R分类',
   `catFrom` varchar(100) DEFAULT NULL COMMENT '来源，oversea，local',
-  `inperson` varchar(50) DEFAULT NULL COMMENT '入库人',
+  `person` varchar(50) DEFAULT NULL COMMENT '入库人',
   `remark` varchar(500) DEFAULT NULL COMMENT '备注',
+  `operator` varchar(255) DEFAULT NULL COMMENT '当前用户',
+  `makedate` datetime DEFAULT NULL COMMENT '产生日期',
+  `modifydate` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='试剂表';
 
 -- ----------------------------
 -- Records of b_in
 -- ----------------------------
-INSERT INTO `b_in` VALUES ('1', '1', null, '1', 'www', 'dddd', '2014-08-20 22:56:45', 'fe', '2014-10-23 22:56:51', '10', '个', '10.00', 'USD', '60.00', '0.0000', '2014-08-20 22:57:41', '111', 'R1', 'vendor', null, null);
+INSERT INTO `b_in` VALUES ('1', '1', null, '1', 'www', 'dddd', '2014-08-20 22:56:45', 'fe', '2014-10-23 22:56:51', '10', '个', '10.00', 'USD', '60.00', '0.00', '2014-08-20 22:57:41', '111', 'R1', 'vendor', null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for b_machine
@@ -80,7 +90,6 @@ CREATE TABLE `b_machine` (
   `shortname` varchar(255) DEFAULT NULL COMMENT '设备简称',
   `seqno` varchar(50) DEFAULT NULL COMMENT '设备编号',
   `alias` varchar(255) DEFAULT NULL COMMENT '别名',
-  `class` varchar(255) DEFAULT NULL COMMENT '分类',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='设备机器表';
@@ -145,6 +154,26 @@ CREATE TABLE `b_var` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for d_catcode
+-- ----------------------------
+DROP TABLE IF EXISTS `d_catcode`;
+CREATE TABLE `d_catcode` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '����',
+  `catno` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '����',
+  `seq` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '��ţ�δ��ȫ��ͳһ��ŵ�Ԥ��',
+  `name` varchar(100) CHARACTER SET utf8 DEFAULT NULL COMMENT '�Լ�/�Ĳĵ�����',
+  `type` int(11) DEFAULT NULL COMMENT '0-�Լ�,1-�Ĳ�',
+  `orde` int(11) DEFAULT NULL COMMENT '����ţ�Ϊͳ�ƻ���ҵ��Լ��Ԥ���',
+  `remark` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '��ע',
+  `group` varchar(10) CHARACTER SET utf8 DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+-- ----------------------------
+-- Records of d_catcode
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for d_code
 -- ----------------------------
 DROP TABLE IF EXISTS `d_code`;
@@ -161,25 +190,29 @@ CREATE TABLE `d_code` (
 -- ----------------------------
 INSERT INTO `d_code` VALUES ('bool', '0', '否', null);
 INSERT INTO `d_code` VALUES ('bool', '1', '是', null);
+INSERT INTO `d_code` VALUES ('catfrom', '0', 'local', null);
+INSERT INTO `d_code` VALUES ('catfrom', '1', 'oversea', null);
+INSERT INTO `d_code` VALUES ('cattype', '0', '试剂', null);
+INSERT INTO `d_code` VALUES ('cattype', '1', '耗材', null);
+INSERT INTO `d_code` VALUES ('inreason', '0', 'From Vendor', null);
+INSERT INTO `d_code` VALUES ('inreason', '1', 'From InterLab', null);
+INSERT INTO `d_code` VALUES ('inreason', '2', 'From Sponsor', null);
+INSERT INTO `d_code` VALUES ('inreason', '3', 'Other Charges', null);
 INSERT INTO `d_code` VALUES ('money', '0', 'CNY', '人民币');
 INSERT INTO `d_code` VALUES ('money', '1', 'USD', '美元');
 INSERT INTO `d_code` VALUES ('money', '2', 'SGD', '新元');
 INSERT INTO `d_code` VALUES ('money', '3', 'EUR', '欧元');
 INSERT INTO `d_code` VALUES ('money', '4', 'GBP', '英镑');
-INSERT INTO `d_code` VALUES ('orderreason', '0', 'From Vendor', null);
-INSERT INTO `d_code` VALUES ('orderreason', '1', 'From InterLab', null);
-INSERT INTO `d_code` VALUES ('orderreason', '2', 'From Sponsor', null);
-INSERT INTO `d_code` VALUES ('orderreason', '3', 'Other Charges', null);
+INSERT INTO `d_code` VALUES ('outreason', '0', 'Trial Test', null);
+INSERT INTO `d_code` VALUES ('outreason', '1', 'Validation', null);
+INSERT INTO `d_code` VALUES ('outreason', '2', 'Discard', null);
+INSERT INTO `d_code` VALUES ('outreason', '3', 'To IntelLab', null);
+INSERT INTO `d_code` VALUES ('outreason', '4', 'To Site/Sponsor', null);
+INSERT INTO `d_code` VALUES ('outreason', '5', 'Othre Cost', null);
 INSERT INTO `d_code` VALUES ('role', '0', '普通用户', null);
 INSERT INTO `d_code` VALUES ('role', '1', '高级用户', null);
 INSERT INTO `d_code` VALUES ('sex', '0', '女', null);
 INSERT INTO `d_code` VALUES ('sex', '1', '男', null);
-INSERT INTO `d_code` VALUES ('usereason', '0', 'Trial Test', null);
-INSERT INTO `d_code` VALUES ('usereason', '1', 'Validation', null);
-INSERT INTO `d_code` VALUES ('usereason', '2', 'Discard', null);
-INSERT INTO `d_code` VALUES ('usereason', '3', 'To IntelLab', null);
-INSERT INTO `d_code` VALUES ('usereason', '4', 'To Site/Sponsor', null);
-INSERT INTO `d_code` VALUES ('usereason', '5', 'Othre Cost', null);
 
 -- ----------------------------
 -- Table structure for d_codetype
@@ -198,9 +231,11 @@ CREATE TABLE `d_codetype` (
 INSERT INTO `d_codetype` VALUES ('money', '货币', null);
 INSERT INTO `d_codetype` VALUES ('role', '角色', null);
 INSERT INTO `d_codetype` VALUES ('sex', '性别', null);
-INSERT INTO `d_codetype` VALUES ('orderreason', '入库原因', null);
-INSERT INTO `d_codetype` VALUES ('usereason', '出库原因', null);
+INSERT INTO `d_codetype` VALUES ('inreason', '入库原因', null);
+INSERT INTO `d_codetype` VALUES ('outreason', '出库原因', null);
 INSERT INTO `d_codetype` VALUES ('bool', '是否', null);
+INSERT INTO `d_codetype` VALUES ('catfrom', '来源', '国内或者国外');
+INSERT INTO `d_codetype` VALUES ('cattype', '物品类型', '试剂或耗材');
 
 -- ----------------------------
 -- Table structure for d_dept

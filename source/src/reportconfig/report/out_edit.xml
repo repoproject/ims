@@ -20,7 +20,7 @@
 					<inputbox ></inputbox>
 				</col>
 				<col column="person" label="出库人" >
-					<inputbox type="selectbox"></inputbox>
+					<inputbox ></inputbox>
 				</col>
 				<col column="outdate" label="出库日期" datatype="date{yyyy-MM-dd}" br="true">
 					<inputbox type="datepicker" dateformat="yyyy-MM-dd"></inputbox>
@@ -29,9 +29,10 @@
 					<inputbox />
 				</col>
 				<col column="reason" label="出库原因"  br="true">
-					<inputbox type="selectbox">
-						<option value="0" label="daiding"></option>
-						<option value="1" label="daiding"></option>
+					<inputbox type="selectbox" inlinecount="5">
+						<option value="0" label="女"></option>
+						<option value="1" label="男"></option>
+					    <!--option dataset="@{select codename,code from d_code where codetype='outreason'}" label="codename" value="code"></option-->
 					</inputbox>
 				</col>
 				<col column="remark" label="备注" br="true">
@@ -41,7 +42,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT machinename,machineno,catname,batchno,person,outdate,num,reason,remark FROM b_out where  {#condition#}]]>
+						<![CDATA[SELECT ID,machinename,machineno,catname,batchno,person,outdate,num,reason,remark FROM b_out where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -50,13 +51,14 @@
 					</condition>
 				</select>
 				<insert>
-					insert into b_out(machinename,machineno,catname,batchno,person,outdate,num,reason,remark)
-					values(trim(@{machinename}),trim(@{machineno}),trim(@{catname}),trim(@{batchno}),@{person},trim(@{outdate}),trim(@{num}),trim(@{reason}),trim(@{remark})));
+				insert into b_out(machinename)
+					values(@{machinename});
+				
 				</insert>
 				<update>
-					update b_catuse set machinename=trim(@{machinename}),machineno=trim(@{machineno}),batchno=@{batchno},username=@{username},useDate=@{useDate},num=trim(@{num}) 
-					where ID=@{ID__old};
+				      update b_out set machinename=@{machinename} where ID=@{ID__old};
 				</update>
+				
 			</sql>
 			<format><!--
 				<value>
