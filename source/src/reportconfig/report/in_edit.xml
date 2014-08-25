@@ -7,59 +7,66 @@
 			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
 				<col column="ID" displaytype="hidden">
 				</col>
-				<col column="machineno" label="设备名称*" >
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
-				</col>
-				<col column="catid" label="试剂/耗材名称*" br="true">
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
-				</col>
-				<col column="batchno" label="批号"  >
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
-				</col>
-				<col column="expire" label="有效期"  datatype="date{yyyy-MM-dd}"  br="true">
-					<inputbox type="datepicker" dateformat="yyyy-MM-dd"></inputbox>
-				</col>
-				<col column="indate" label="入库时间" datatype="date{yyyy-MM-dd}"  >
-					<inputbox type="datepicker" dateformat="yyyy-MM-dd"></inputbox>
-				</col>
-				<col column="num" label="数量" br="true">
-					<inputbox   />
-				</col>
-				<col column="producer" label="生产商" >
-					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
-				</col>
-				<col column="inperson" label="入库人"  br="true">
-					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
-				</col>
-				<col column="dealer" label="供应商" >
-					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
-				</col>
-				<col column="price" label="单价" br="true">
-					<inputbox  jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
-				</col>
-				<col column="priceUnit" label="货币" >
-					<inputbox type="selectbox">
-						<option value="0" label="USD"></option>
-						<option value="1" label="CNY"></option>
+				<col column="cattype" label="试剂/耗材" >
+					<inputbox type="selectbox" >
+					    <option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
 					</inputbox>
 				</col>
-				<col column="taxRate" label="含税否" br="true">
+				<col column="catno" label="试剂/耗材编号*" br="true">
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				</col>
+				<col column="catname" label="试剂/耗材名称*" >
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				</col>
+				<col column="batchno" label="批号"  br="true">
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				</col>
+				<col column="productdate" label="生产日期"  datatype="date{yyyy-MM-dd}"  >
+					<inputbox type="datepicker" dateformat="yyyy-MM-dd"></inputbox>
+				</col>
+				<col column="expiredate" label="有效期"  datatype="date{yyyy-MM-dd}"  br="true">
+					<inputbox type="datepicker" dateformat="yyyy-MM-dd"></inputbox>
+				</col>
+				<col column="num" label="数量" >
+					<inputbox   />
+				</col>
+				<col column="producer" label="生产商"  br="true">
+					<inputbox jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+				<col column="person" label="入库人"  >
+					<inputbox jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+				<col column="dealer" label="供应商" br="true">
 					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
 				</col>
-				<col column="reason" label="入库原因" >
-					<inputbox jsvalidate="isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				<col column="price" label="单价" >
+					<inputbox  jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
 				</col>
-				<col column="rType" label="所属R" br="true">
-					<inputbox type="selectbox">
-						<option value="0" label="USD"></option>
-						<option value="1" label="CNY"></option>
+				<col column="priceUnit" label="货币" br="true">
+					<inputbox type="selectbox" >
+					    <option dataset="@{select codename,code from d_code where codetype='money'}" label="codename" value="code"></option>
+					</inputbox>
+				</col>
+				<col column="taxRate" label="含税否" >
+					<inputbox type="selectbox" >
+					    <option dataset="@{select codename,code from d_code where codetype='bool'}" label="codename" value="code"></option>
+					</inputbox>
+				</col>
+				<col column="reason" label="入库原因" br="true">
+					<inputbox type="selectbox" >
+					    <option dataset="@{select codename,code from d_code where codetype='inreason'}" label="codename" value="code"></option>
+					</inputbox>
+				</col>
+				<col column="rtype" label="所属R" >
+					<inputbox type="selectbox"><option dataset="@{select codename,code from d_code where codetype='rtype'}" label="codename" value="code"></option>
 					</inputbox>
 				</col>
 				<col column="catFrom" label="来源"  br="true">
-					<inputbox type="selectbox">
-						<option value="0" label="女"></option>
-						<option value="1" label="男"></option>
+					<inputbox type="selectbox"><option dataset="@{select codename,code from d_code where codetype='catfrom'}" label="codename" value="code"></option>
 					</inputbox>
+				</col>
+				<col column="indate" label="入库时间" datatype="date{yyyy-MM-dd}"   >
+					<inputbox type="datepicker" dateformat="yyyy-MM-dd"></inputbox>
 				</col>
 				<col column="remark" label="备注" br="true">
 					<inputbox type="textareabox" styleproperty="colspan='3'" valuestyleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
@@ -68,7 +75,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT ID,machineno,catid,batchno,expire,indate,num,producer,dealer,reason,inperson,price,priceUnit,taxRate,rType,catFrom,remark FROM b_in where  {#condition#}]]>
+						<![CDATA[SELECT ID,cattype,catno,catname,batchno,productdate,productdate,expiredate,indate,num,producer,dealer,reason,person,price,priceUnit,taxRate,rtype,catFrom,remark FROM b_in where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -77,11 +84,11 @@
 					</condition>
 				</select>
 				<insert>
-					insert into b_in(machineno,catid,batchno,expire,indate,num,producer,dealer,reason,inperson,price,priceUnit,taxRate,rType,catFrom,remark)
-					values(@{machineno},@{catid},@{batchno},@{expire},@{indate},@{num},@{producer},@{dealer},@{reason},@{inperson},@{price},@{priceUnit},@{taxRate},@{rType},@{catFrom},@{remark});
+					insert into b_in(cattype,catno,catname,batchno,productdate,expiredate,indate,num,producer,dealer,reason,person,price,priceUnit,taxRate,rtype,catFrom,remark)
+					values(@{cattype},@{catno},@{catname},@{batchno},@{productdate},@{expiredate},@{indate},@{num},@{producer},@{dealer},@{reason},@{person},@{price},@{priceUnit},@{taxRate},@{rtype},@{catFrom},@{remark});
 				</insert>
 				<update>
-					update b_in set machineno=trim(@{machineno}),batchno=trim(@{batchno}),expire=@{expire},indate=@{indate},num=@{num},producer=trim(@{producer}),dealer=trim(@{dealer}),reason=@{reason},inperson=trim(@{inperson}),price=@{price},priceUnit=@{priceUnit},taxRate=@{taxRate},rType=@{rType},catFrom=@{catFrom},remark=trim(@{remark}) 
+					update b_in set catno=trim(@{catno}),catname=trim(@{catname}),batchno=trim(@{batchno}),productdate=@{productdate},expiredate=@{expiredate},indate=@{indate},num=@{num},producer=trim(@{producer}),dealer=trim(@{dealer}),reason=@{reason},person=trim(@{person}),price=@{price},priceUnit=@{priceUnit},taxRate=@{taxRate},rtype=@{rtype},catFrom=@{catFrom},remark=trim(@{remark}) 
 					where ID=@{ID__old};
 				</update>
 			</sql>

@@ -86,4 +86,5 @@ public class AddUser extends AbsInterceptorDefaultAdapter{
 		return WX_RETURNVAL_SUCCESS;
 	}
 	
+	
 }

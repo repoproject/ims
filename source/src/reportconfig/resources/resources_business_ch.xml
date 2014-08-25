@@ -2,8 +2,16 @@
 <resources xmlns="http://www.wabacus.com"
 			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			  xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.resources.xsd">
-			  
+  <resource key="invalid.isnotempty">
+		<![CDATA[#label#不能为空]]>
+  </resource>
+  <resource key="invalid.number">
+		<![CDATA[#data#不是合法数字]]>
+  </resource>
+  <resource key="invalid.age">
+		<![CDATA[#data#不是有效年龄]]>
+  </resource>
   <resource key="filedownloadpage1.downloadfilepath">
-  		relative{/zxyx/uploadfile}
+  		relative{/ims/uploadfile}
   </resource>
 </resources>

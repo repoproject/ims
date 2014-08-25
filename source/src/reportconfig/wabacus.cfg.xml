@@ -64,7 +64,7 @@
 	<i18n-resources file="resources/i18n/ApplicationResources.xml"/>
 	<!-- 注册所有全局资源文件 -->
 	<global-resources>
-		<resource-file>resources/resources_business_ch.xml</resource-file>
+		<resource-file>resources/resources_business_en.xml</resource-file>
 	</global-resources>
 	<!-- 注册所有报表配置文件 -->
 	<report-files>
@@ -74,6 +74,7 @@
 		<report-file>report/in.xml</report-file>
 		<report-file>report/in_edit.xml</report-file>
 		<report-file>report/out.xml</report-file>
+		<report-file>report/out_add.xml</report-file>
 		<report-file>report/out_edit.xml</report-file>
 		<report-file>report/regent.xml</report-file>
 		<report-file>report/regent_edit.xml</report-file>

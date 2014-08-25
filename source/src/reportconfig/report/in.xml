@@ -7,7 +7,8 @@
 				<display mouseoverbgcolor="CCCCCC" >
 				<col column="{col-rowselect}" width="20"></col>
 					<col column="id" label="编号"  displaytype="hidden"/>
-					<col column="inDate" label="入库日期"  clickorderby="true" datatype="date{yyyy-MM-dd}" width="20%"/>
+					<col column="inDate" label="入库日期"  clickorderby="true" datatype="date{yyyy-MM-dd}" width="8%"/>
+					<col column="catno" label="试剂/耗材名称"  clickorderby="true" width="8%"/>
 					<col column="catname" label="试剂/耗材名称"  clickorderby="true" width="20%"/>
 					<col column="batchno" label="批号"  clickorderby="true" width="10%"/>
 					<col column="num" label="数量"  clickorderby="true" width="5%"/>
@@ -19,7 +20,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id,inDate,catname,batchno,num,localPrice,producer,dealer,catfrom,person FROM b_in where  {#condition#}]]>
+						<![CDATA[SELECT id,inDate,catno,catname,batchno,num,localPrice,producer,dealer,catfrom,person FROM b_in where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -29,7 +30,7 @@
 				</select>
 				<insert pageurl="report{in_edit.report1}" popupparams="{title:'入库',width:800,height:400}"></insert>
 				<update pageurl="report{in_edit.report1}" urlparams="txtid=@{id}"
-						popupparams="{title:'修改入库',width:400,height:300}"></update>  
+						popupparams="{title:'修改入库',width:800,height:400}"></update>  
 				<delete confirmessage="是否删除[@{batchno}]对应的记录？">
 						delete from b_in where id=@{id__old};
 					  </delete>		

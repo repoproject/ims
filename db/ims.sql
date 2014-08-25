@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-08-24 20:07:50
+Date: 2014-08-25 22:24:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -22,39 +22,42 @@ DROP TABLE IF EXISTS `b_cat`;
 CREATE TABLE `b_cat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `catno` varchar(50) NOT NULL COMMENT '货号',
-  `catname` varchar(255) NOT NULL COMMENT '物品名称',
-  `type` int(11) NOT NULL COMMENT '0-试剂,1-耗材',
+  `catname` varchar(255) DEFAULT NULL COMMENT '物品名称',
+  `cattype` varchar(50) DEFAULT NULL COMMENT '0-试剂,1-耗材',
   `batchno` varchar(50) NOT NULL COMMENT '批号',
-  `total` int(11) unsigned zerofill NOT NULL COMMENT '总数',
-  `group` varchar(50) NOT NULL COMMENT '分组，按照R特性分组',
-  `produceDate` datetime DEFAULT NULL COMMENT '生产日期',
+  `total` int(11) unsigned zerofill DEFAULT NULL COMMENT '总数',
+  `rType` varchar(50) DEFAULT NULL COMMENT '分组，按照R特性分组',
+  `productDate` datetime DEFAULT NULL COMMENT '生产日期',
   `producer` varchar(255) DEFAULT NULL COMMENT '生产商',
   `expiredate` datetime DEFAULT NULL COMMENT '有效期，过期日',
   `price` double NOT NULL,
-  `priceUnit` varchar(50) NOT NULL,
+  `priceUnit` varchar(50) DEFAULT NULL,
   `dealer` varchar(255) DEFAULT NULL,
-  `makedate` datetime NOT NULL,
+  `makedate` datetime DEFAULT NULL,
   `modifydate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `I_CAT_NO` (`catno`) USING BTREE COMMENT '不用作为主键，但是作为唯一索引标识不能重复'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_cat
 -- ----------------------------
+INSERT INTO `b_cat` VALUES ('5', 'a', 'a', '0', 'a', '00000000005', '1', '2014-08-01 00:00:00', 'a', '2014-08-31 00:00:00', '10', '0', 'aa', '2014-08-25 21:29:00', '2014-08-25 21:29:00');
+INSERT INTO `b_cat` VALUES ('6', 'bb', 'bb', '0', 'bb', '00000000000', '1', '2014-08-01 00:00:00', 'bbbb', '2014-08-31 00:00:00', '111', '0', 'bbb', '2014-08-25 21:29:30', '2014-08-25 21:29:30');
 
 -- ----------------------------
 -- Table structure for b_in
 -- ----------------------------
 DROP TABLE IF EXISTS `b_in`;
 CREATE TABLE `b_in` (
-  `id` int(11) NOT NULL COMMENT '货号，试剂号耗材号',
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '货号，试剂号耗材号',
   `catno` varchar(50) NOT NULL,
   `catName` varchar(255) DEFAULT NULL COMMENT '试剂名称，冗余，b_cat.name',
   `batchNo` varchar(50) DEFAULT NULL COMMENT '批号',
+  `cattype` varchar(50) DEFAULT NULL,
   `producer` varchar(255) DEFAULT NULL COMMENT '生产商',
   `dealer` varchar(255) DEFAULT NULL COMMENT '经销商',
-  `producerDate` datetime DEFAULT NULL COMMENT '生产日期',
+  `productDate` datetime DEFAULT NULL COMMENT '生产日期',
   `reason` varchar(255) DEFAULT NULL COMMENT '入库原因 codetype=''orderreason''',
   `expiredate` datetime DEFAULT NULL COMMENT '失效日',
   `num` int(11) DEFAULT NULL COMMENT '数量',
@@ -65,7 +68,7 @@ CREATE TABLE `b_in` (
   `taxRate` decimal(10,2) DEFAULT NULL COMMENT '税率',
   `inDate` datetime DEFAULT NULL COMMENT '入库日期',
   `machineName` varchar(50) DEFAULT NULL COMMENT '设备编号',
-  `group` varchar(50) DEFAULT NULL COMMENT 'R分类',
+  `rtype` varchar(50) DEFAULT NULL COMMENT 'R分类',
   `catFrom` varchar(100) DEFAULT NULL COMMENT '来源，oversea，local',
   `person` varchar(50) DEFAULT NULL COMMENT '入库人',
   `remark` varchar(500) DEFAULT NULL COMMENT '备注',
@@ -73,19 +76,19 @@ CREATE TABLE `b_in` (
   `makedate` datetime DEFAULT NULL COMMENT '产生日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='试剂表';
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='试剂表';
 
 -- ----------------------------
 -- Records of b_in
 -- ----------------------------
-INSERT INTO `b_in` VALUES ('1', '1', null, '1', 'www', 'dddd', '2014-08-20 22:56:45', 'fe', '2014-10-23 22:56:51', '10', '个', '10.00', 'USD', '60.00', '0.00', '2014-08-20 22:57:41', '111', 'R1', 'vendor', null, null, null, null, null);
+INSERT INTO `b_in` VALUES ('15', 'a', 'a', 'a', '0', 'a', 'aa', '2014-08-01 00:00:00', '0', '2014-08-31 00:00:00', '10', null, '10.00', '0', null, '0.00', '2014-08-25 00:00:00', null, '1', '0', 'a', 'aaa', null, null, null);
 
 -- ----------------------------
 -- Table structure for b_machine
 -- ----------------------------
 DROP TABLE IF EXISTS `b_machine`;
 CREATE TABLE `b_machine` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL COMMENT '设备名称',
   `shortname` varchar(255) DEFAULT NULL COMMENT '设备简称',
   `seqno` varchar(50) DEFAULT NULL COMMENT '设备编号',
@@ -105,11 +108,14 @@ DROP TABLE IF EXISTS `b_out`;
 CREATE TABLE `b_out` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `machineName` varchar(255) DEFAULT NULL COMMENT '设备名称',
-  `machineNo` int(11) DEFAULT NULL COMMENT '设备编号',
-  `catname` varchar(100) DEFAULT NULL,
-  `batchno` int(11) NOT NULL COMMENT '批号',
-  `person` varchar(255) NOT NULL COMMENT '出库人',
+  `machineNo` varchar(50) DEFAULT NULL COMMENT '设备编号',
+  `catno` varchar(50) NOT NULL,
+  `catname` varchar(255) DEFAULT NULL,
+  `batchno` varchar(50) NOT NULL COMMENT '批号',
+  `person` varchar(255) DEFAULT NULL COMMENT '出库人',
   `outDate` datetime DEFAULT NULL COMMENT '出库日期',
+  `price` decimal(10,2) NOT NULL,
+  `priceUnit` varchar(50) DEFAULT NULL,
   `num` int(11) DEFAULT NULL COMMENT '数量',
   `reason` varchar(255) DEFAULT NULL COMMENT '出库原因，codetype=''userreason''',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
@@ -117,18 +123,19 @@ CREATE TABLE `b_out` (
   `makedate` datetime DEFAULT NULL COMMENT '创建日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='出库记录';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='出库记录';
 
 -- ----------------------------
 -- Records of b_out
 -- ----------------------------
+INSERT INTO `b_out` VALUES ('3', 'aa', 'aa', 'a', 'a', 'a', 'aa', '2014-08-25 00:00:00', '10.00', '0', '5', '0', 'aa', '001', '2014-08-25 22:20:54', '2014-08-25 22:20:54');
 
 -- ----------------------------
 -- Table structure for b_person
 -- ----------------------------
 DROP TABLE IF EXISTS `b_person`;
 CREATE TABLE `b_person` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `alias` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -211,6 +218,16 @@ INSERT INTO `d_code` VALUES ('outreason', '4', 'To Site/Sponsor', null);
 INSERT INTO `d_code` VALUES ('outreason', '5', 'Othre Cost', null);
 INSERT INTO `d_code` VALUES ('role', '0', '普通用户', null);
 INSERT INTO `d_code` VALUES ('role', '1', '高级用户', null);
+INSERT INTO `d_code` VALUES ('rtype', '1', 'R1', null);
+INSERT INTO `d_code` VALUES ('rtype', '10', 'R10', null);
+INSERT INTO `d_code` VALUES ('rtype', '2', 'R2', null);
+INSERT INTO `d_code` VALUES ('rtype', '3', 'R3', null);
+INSERT INTO `d_code` VALUES ('rtype', '4', 'R4', null);
+INSERT INTO `d_code` VALUES ('rtype', '5', 'R5', null);
+INSERT INTO `d_code` VALUES ('rtype', '6', 'R6', null);
+INSERT INTO `d_code` VALUES ('rtype', '7', 'R7', null);
+INSERT INTO `d_code` VALUES ('rtype', '8', 'R8', null);
+INSERT INTO `d_code` VALUES ('rtype', '9', 'R9', null);
 INSERT INTO `d_code` VALUES ('sex', '0', '女', null);
 INSERT INTO `d_code` VALUES ('sex', '1', '男', null);
 
@@ -236,6 +253,7 @@ INSERT INTO `d_codetype` VALUES ('outreason', '出库原因', null);
 INSERT INTO `d_codetype` VALUES ('bool', '是否', null);
 INSERT INTO `d_codetype` VALUES ('catfrom', '来源', '国内或者国外');
 INSERT INTO `d_codetype` VALUES ('cattype', '物品类型', '试剂或耗材');
+INSERT INTO `d_codetype` VALUES ('rtype', 'R分组', null);
 
 -- ----------------------------
 -- Table structure for d_dept
@@ -299,3 +317,76 @@ CREATE TABLE `d_var` (
 -- ----------------------------
 -- Records of d_var
 -- ----------------------------
+DROP TRIGGER IF EXISTS `tg_In_Insert`;
+DELIMITER ;;
+CREATE TRIGGER `tg_In_Insert` AFTER INSERT ON `b_in` FOR EACH ROW begin
+     declare cnt int;
+     set cnt=(select count(id) from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
+     if cnt > 0 then
+         update b_cat set total = (total+new.num) where catno=catno and batchno=batchno and price=price;
+     else
+         insert into b_cat(catno,catname,cattype,batchno,total,rtype,productdate,producer,expiredate,price,priceunit,dealer,makedate,modifydate)
+          values(new.catno,new.catname,new.cattype,new.batchno,new.num,new.rtype,new.productdate,new.producer,new.expiredate,new.price,new.priceunit,new.dealer,sysdate(),sysdate());
+     end if;
+end
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tg_In_Update`;
+DELIMITER ;;
+CREATE TRIGGER `tg_In_Update` AFTER UPDATE ON `b_in` FOR EACH ROW begin
+   declare cnt int;
+   set cnt=(select count(id) from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
+
+   if old.catno = new.catno and old.batchno=new.batchno and old.price=new.price then
+       update b_cat a set a.total = (a.total-old.num+new.num) where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
+   else
+       update b_cat a set a.total = a.total-old.num where a.catno=old.catno and a.batchno=old.batchno and a.price=old.price;
+       if cnt > 0 then
+           update b_cat a set a.total=a.total+new.num where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
+       else
+           insert into b_cat(catno,catname,cattype,batchno,total,rtype,prodectdate,producer,expiredate,price,priceunit,dealer,makedate,modifydate)
+          values(new.catno,new.catname,new.cattype,new.batchno,new.num,new.rtype,new.productdate,new.producer,new.expiredate,new.price,new.priceunit,sysdate(),sysdate());
+       end if;
+   end if;
+end
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tg_In_Delete`;
+DELIMITER ;;
+CREATE TRIGGER `tg_In_Delete` AFTER DELETE ON `b_in` FOR EACH ROW begin
+     declare v_total int;
+     set v_total=(select total-old.num from b_cat a where a.catno=old.catno and a.batchno=old.batchno and a.price=old.price);
+     if v_total < 0 then
+          set v_total = 0;
+     end if;
+     update b_cat set total = v_total where catno=old.catno and batchno=old.batchno and price=old.price;
+     
+end
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tg_Out_Insert`;
+DELIMITER ;;
+CREATE TRIGGER `tg_Out_Insert` AFTER INSERT ON `b_out` FOR EACH ROW begin
+     declare v_total int;
+     set v_total=(select total-new.num from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
+     if v_total < 0 then
+          set v_total = 0;
+     end if;
+     update b_cat set total = v_total where catno=new.catno and batchno=new.batchno and price=new.price;
+     
+end
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tg_Out_Update`;
+DELIMITER ;;
+CREATE TRIGGER `tg_Out_Update` AFTER UPDATE ON `b_out` FOR EACH ROW begin
+end
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tg_Out_Delete`;
+DELIMITER ;;
+CREATE TRIGGER `tg_Out_Delete` AFTER DELETE ON `b_out` FOR EACH ROW begin
+     update b_cat set total = total+old.num where catno=old.catno and batchno=old.batchno and price=old.price;   
+end
+;;
+DELIMITER ;
