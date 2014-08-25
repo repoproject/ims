@@ -307,12 +307,9 @@ function checkFlash(){
 	//模块分权限显示
 	var role = $("#roleFlag").val();
 	if(role == 0){
-		$("#userManage").html('<a href="ShowReport.wx?PAGEID=yhglpage" target="navTab" rel="userbaseinfo" external="true" fresh="false">用户基础信息维护</a>');
-		$("#settingManage").html('<a href="ShowReport.wx?PAGEID=sbglpage" target="navTab" rel="pagination3" external="true" fresh="false">设备信息管理</a>');
-		$("#msgParamNumberConfig").html('<a href="ShowReport.wx?PAGEID=dxglpage" target="navTab" rel="textmsgparamsetting" external="true" fresh="false">短信用户号码参数配置</a>');
-		$("#msgWarningConfig").html('<a href="MSGWarningConfig.jsp" target="navTab" rel="msgwarningruleconfig" external="true" fresh="false">短信告警配置</a>');
-		$("#GWSaveDirectory").html('<a href="ShowReport.wx?PAGEID=mlglpage" target="navTab" rel="savedirectoryconfig" external="true" fresh="false">公文存放目录配置</a>');
-	}else{
+		$("#userManage").html('<a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo31" external="true" fresh="false" >用户信息管理</a> ');
+		$("#inventoryStatics").html('<a href="excel.jsp" target="navTab" rel="ftpserverstat" external="true" fresh="false">库存统计</a>');
+		}else{
 		/*$("#userManage").html('<a href="javascript:void();" id="userInfo">用户基础信息维护</a>');
 		$("#userInfo").click(function(){
 			alert("当前用户不是高级用户，没有权限操作！");
@@ -321,18 +318,10 @@ function checkFlash(){
 		var temp0 = document.getElementById("userManage");
 		if(temp0) temp0.parentNode.removeChild(temp0);
 		//$("#userManage").parentNode.removeChild(this);
-		var temp1 = document.getElementById("settingManage");
+		var temp1 = document.getElementById("inventoryStatics");
 		if(temp1) temp1.parentNode.removeChild(temp1);
 		
-		var temp2 = document.getElementById("msgParamNumberConfig");
-		if(temp2) temp2.parentNode.removeChild(temp2);
-		
-		var temp3 = document.getElementById("msgWarningConfig");
-		if(temp3) temp3.parentNode.removeChild(temp3);
-		
-		var temp4 = document.getElementById("GWSaveDirectory");
-		if(temp4) temp4.parentNode.removeChild(temp4);
-	}
+		}
 	
 	//若浏览器端没装flash。提示安装
 	if(checkFlash() == 0){

@@ -1,9 +1,10 @@
 function loginSubmit(form, callback){
 		var $form = $(form);
 		var pwd = form.elements[1].value;
-		pwd = hex_md5(pwd);
+		//pwd = hex_md5(pwd);
 		var formData = $form.serializeArray();
 		formData[1].value = pwd;
+		
 		$.ajax({
 			type: form.method || 'POST',
 			url:$form.attr("action"),
@@ -15,6 +16,7 @@ function loginSubmit(form, callback){
 				alert("服务器返回值出错！");
 			}
 		});
+		
 	return false;
 }
 function loginCallBack(json){

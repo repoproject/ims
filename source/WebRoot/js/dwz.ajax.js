@@ -26,10 +26,10 @@ function validateCallback(form, callback, confirmMsg) {
 		return false;
 	}
 	var oldPWD = form.elements[1].value;
-	oldPWD = hex_md5(oldPWD);
+	//oldPWD = hex_md5(oldPWD); 
 	
 	var newPWD = form.elements[2].value;
-	newPWD = hex_md5(newPWD);
+	//newPWD = hex_md5(newPWD);
 	
 	var formData = $form.serializeArray();
 	formData[1].value = oldPWD;

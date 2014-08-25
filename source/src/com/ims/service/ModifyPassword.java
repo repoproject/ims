@@ -35,7 +35,7 @@ import com.wabacus.system.intercept.AbsInterceptorDefaultAdapter;
  * 修改密码
  * @创建者 yyy
  * @创建时间 2013-11-18
- * @修改人 yyy
+ * @修改人 gq
  * @修改时间 2014-01-16
  */
 public class ModifyPassword extends HttpServlet {
@@ -55,7 +55,6 @@ public class ModifyPassword extends HttpServlet {
 		String name = request.getParameter("username");
 		String oldPassword = request.getParameter("oldPassword");	
 		String newPassword = request.getParameter("newPassword");	
-//		String confirmPassword = request.getParameter("confirmPassword");	
 
 		// 修改密码结果  1 成功  0 失败  -1 旧密码输入有误
 		int result = 0;
@@ -63,15 +62,24 @@ public class ModifyPassword extends HttpServlet {
         PreparedStatement pstmt = null;
 		ResultSet rs = null;
 	
-		// 查询旧密码是否存在
+		// 查询旧密码是否正确
 		try {
 	    	//从数据库中获取数据
-	    	pstmt = conn.prepareStatement("select nickName from d_user");
+	    	pstmt = conn.prepareStatement("SELECT nickname,password FROM d_user WHERE nickname = ? AND PASSWORD = ?");
+	    	pstmt.setString(1, name);
+	    	pstmt.setString(2,oldPassword);
 	    	rs = pstmt.executeQuery();
-	    	while (rs.next()) {	
-	        	 
+	    	//无结果，说明旧密码错误
+	    	if (!rs.next()) {	
+	        	 result=-1;
 				}
-	        
+	    	else
+	    	{
+	    		pstmt = conn.prepareStatement( "UPDATE d_user SET PASSWORD = ? WHERE nickname = ? ");
+	    		pstmt.setString(1,newPassword);
+		    	pstmt.setString(2,name);
+				result = pstmt.executeUpdate();
+	    	}
 	  }catch (SQLException e) {
 			e.printStackTrace();
 	  }finally{
@@ -101,11 +109,7 @@ public class ModifyPassword extends HttpServlet {
 			}
 		}
 	  }
-	  
-		
-		
-		
-		
+	  		
 		// 以JSON格式返回修改密码结果
         PrintWriter out = response.getWriter();		
 		JSONObject jsonObject = new JSONObject();

@@ -2,6 +2,10 @@ package com.ims.service;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wabacus.config.Config;
+
+
 
 /**
  * 用户登录
@@ -22,12 +29,12 @@ public class Login extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	@SuppressWarnings("unchecked")
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// URL基本路径
+		
+	/*	// URL基本路径
 		String basePath = request.getScheme() + "://"+request.getServerName() + ":"
-		+ request.getServerPort() + request.getContextPath() + "/";
+		+ request.getServerPort() + request.getContextPath() + "/";*/
 		// 设置request编码
 		request.setCharacterEncoding("UTF-8");		
 		// 设置响应内容类型
@@ -40,8 +47,76 @@ public class Login extends HttpServlet {
 		String password = request.getParameter("password");		
 		
 		// 登录验证结果  1 成功  2用户名不存在  3 密码输入有误
-		int result = 1;
+		int result = 3;
 		
+		
+		Connection conn=Config.getInstance().getDataSource("ds_mysql").getConnection();//取配置的默认数据源的连接
+        PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		// 查询用户名和密码是否匹配，1：正常匹配，2：用户名不存在，3：密码不正确
+		try {
+	    	//从数据库中获取数据
+	    	pstmt = conn.prepareStatement("SELECT nickname FROM d_user WHERE nickname = ? ");
+	    	pstmt.setString(1, name);
+	    	
+	    	rs = pstmt.executeQuery();
+	    	//无结果，说明用户名不存在
+	    	if (!rs.next()) {	
+	        	 result=2;
+				}
+	    	// 用户名存在，验证密码是否正确
+	    	else
+	    	{
+	    		pstmt = conn.prepareStatement( "SELECT nickname,role FROM d_user WHERE nickname = ? and password = ?");
+	    		pstmt.setString(1,name);
+		    	pstmt.setString(2,password);
+				result = pstmt.executeUpdate();
+				
+				//无结果，说明用户名密码不匹配
+		    	if (!rs.next()) {	
+		        	 result=3;
+					}
+		    	//登录成功
+		    	else{
+		    		// 获取用户角色    0 系统管理员  1普通用户
+					int role =  Integer.parseInt((rs.getArray("role").toString()));
+					
+					// 保存用户名和用户角色
+					HttpSession session = request.getSession();
+					session.setAttribute("username", name);
+					session.setAttribute("role", role);					
+		    	}
+		    		
+	    	}
+	  }catch (SQLException e) {
+			e.printStackTrace();
+	  }finally{
+	  	// 关闭结果集
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		// 关闭Statement
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		// 关闭数据库连接
+		if (conn != null) {
+			try {
+				conn.close();
+				conn=null;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	  }
 /*		List<Object> list = new ArrayList<Object>();
 		
 		// 查询用户名是否存在
@@ -85,20 +160,7 @@ public class Login extends HttpServlet {
 				
 			}
 		}
-
-		// 以JSON格式返回登录验证结果
-        PrintWriter out = response.getWriter();		
-		JSONObject jsonObject = new JSONObject();
-		jsonObject.put("result", result);		
-		out.write(jsonObject.toJSONString());
-     	out.flush();
-		out.close();
 */
-		// 保存用户名和用户角色
-		HttpSession session = request.getSession();
-		session.setAttribute("username", name);
-		session.setAttribute("role", 0);				
-		
 		// 以JSON格式返回登录验证结果
         PrintWriter out = response.getWriter();		
 		JSONObject jsonObject = new JSONObject();
@@ -106,6 +168,8 @@ public class Login extends HttpServlet {
 		out.write(jsonObject.toJSONString());
      	out.flush();
 		out.close();
+	
+
 	}
 
 }

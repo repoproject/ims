@@ -102,6 +102,7 @@ $(function(){
 		<!--div id="closeFlash"></div-->
 		
 	</div>
+	
 	<div id="layout" >
 		<div id="header">
 			<div class="headerNav">
@@ -157,12 +158,13 @@ $(function(){
 									<li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo22" external="true" fresh="false">入库查询</a></li>
 									<li><a href="ShowReport.wx?PAGEID=navTab" target="navTab" rel="userbaseinfo23" external="true" fresh="false">查询过期</a></li>
 									<li><a href="ShowReport.wx?PAGEID=navTab" target="navTab" rel="userbaseinfo24" external="true" fresh="false">导出出库</a></li>
-									<li><a href="excel.jsp" target="navTab" rel="ftpserverstat" external="true" fresh="false">库存统计</a></li>									
+									 <li id="inventoryStatics"></li>
+									<!-- <a href="excel.jsp" target="navTab" rel="ftpserverstat" external="true" fresh="false">库存统计</a>  -->									
 								</ul>
 							</li>
 							<li><a>基础信息维护</a>
 								<ul>
-									<li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo31" external="true" fresh="false" >用户信息</a></li>
+								    <li id="userManage"></li>
 									<li><a href="ShowReport.wx?PAGEID=equip" target="navTab" rel="userbaseinfo32" external="true" fresh="false">设备信息</a></li>
 									<li><a href="ChangePWD.jsp" target="dialog" rel="changepassword" width="600" mask="true">修改密码</a></li>
 								</ul>
@@ -185,12 +187,12 @@ $(function(){
 					<div class="tabsMore">more</div>
 				</div>
 				<ul class="tabsMoreList">
-					<li><a href="javascript:;">系统监视</a></li>
+					<li><a href="javascript:;">首页</a></li>
 				</ul>
 				<div class="navTab-panel tabsPageContent layoutBox">
 					<div class="page unitBox" id="mainBox" style="height:100%;">
-						
-						<a href="ShowReport.wx?PAGEID=mainpage" target="navTab" rel="userbaseinfo2" external="true" fresh="false">试剂/耗材过期预警</a> 
+					
+						 <iframe src="ShowReport.wx?PAGEID=equip" style="width:100%;height:616px;" frameborder="no" border="0" marginwidth="0" marginheight="0"></iframe> 
 						 
 					</div>
 					
