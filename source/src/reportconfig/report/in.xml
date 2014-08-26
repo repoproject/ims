@@ -8,19 +8,19 @@
 				<col column="{col-rowselect}" width="20"></col>
 					<col column="id" label="编号"  displaytype="hidden"/>
 					<col column="inDate" label="入库日期"  clickorderby="true" datatype="date{yyyy-MM-dd}" width="8%"/>
-					<col column="catno" label="试剂/耗材名称"  clickorderby="true" width="8%"/>
+					<col column="catno" label="试剂/耗材编号"  clickorderby="true" width="8%"/>
 					<col column="catname" label="试剂/耗材名称"  clickorderby="true" width="20%"/>
 					<col column="batchno" label="批号"  clickorderby="true" width="10%"/>
-					<col column="num" label="数量"  clickorderby="true" width="5%"/>
+					<col column="num" label="数量"  datatype="int" clickorderby="true" width="5%"/>
 					<col column="localPrice" label="单价RMB"  clickorderby="true" width="5%"/>
 					<col column="dealer" label="供应商"  clickorderby="true" width="10%"/>
 					<col column="producer" label="生产商"  clickorderby="true" width="10%"/>
-					<col column="catfrom" label="入库原因"  clickorderby="true" width="20%"/>
+					<col column="reason" label="入库原因"  clickorderby="true" width="15%"/>
 				</display>
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id,inDate,catno,catname,batchno,num,localPrice,producer,dealer,catfrom,person FROM b_in where  {#condition#}]]>
+						<![CDATA[SELECT id,inDate,catno,catname,batchno,num,localPrice,producer,dealer,(select codename from d_code where code=reason and codetype='inreason') reason,person FROM b_in where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>

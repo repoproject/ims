@@ -7,17 +7,17 @@
 				<display mouseoverbgcolor="CCCCCC" >
 				<col column="{col-rowselect}" width="20"></col>
 					<col column="id" label="序号"  displaytype="hidden"/>
-					<col column="catno" label="编号"  clickorderby="true" width="10%"/>
-					<col column="catname" label="名称"  clickorderby="true" width="20%"/>
-					<col column="batchno" label="批次" clickorderby="true" width="15%"></col>
-					<col column="num" label="数量" clickorderby="true" width="5%"></col>
+					<col column="catno" label="试剂/耗材编号"  clickorderby="true" width="10%"/>
+					<col column="catname" label="试剂/耗材名称"  clickorderby="true" width="20%"/>
+					<col column="batchno" label="批号" clickorderby="true" width="15%"></col>
+					<col column="total" label="数量" clickorderby="true" datatype="int" width="5%"></col>
 					<col column="expiredate" label="有效期" clickorderby="true" width="15%"></col>
 					<col column="producer" label="生产商" clickorderby="true" width="20%"></col>
 				</display>
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id,catno,catname,batchno,total num, expiredate,producer FROM b_cat  where  total>0 and {#condition#}]]>
+						<![CDATA[SELECT id,catno,catname,batchno,total,expiredate,producer FROM b_cat  where  total>0 and {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -43,7 +43,7 @@
 					<col column="catno" label="试剂/耗材编号"  clickorderby="true" width="10%"/>
 					<col column="catname" label="试剂/耗材名称"  clickorderby="true" width="20%"/>
 					<col column="batchno" label="批次" clickorderby="true" width="10%"></col>
-					<col column="num" label="数量" clickorderby="true" width="5%"></col>
+					<col column="num" label="数量" datatype="int" clickorderby="true" width="5%"></col>
 					<col column="machinename" label="设备"  clickorderby="true" width="10%"/>
 					<col column="machineno" label="设备序号"  clickorderby="true" width="10%"/>
 					<col column="reason" label="原因" clickorderby="true" width="15%"></col>

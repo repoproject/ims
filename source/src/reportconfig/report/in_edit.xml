@@ -54,7 +54,7 @@
 				</col>
 				<col column="reason" label="入库原因" br="true">
 					<inputbox type="selectbox" >
-					    <option dataset="@{select codename,code from d_code where codetype='inreason'}" label="codename" value="code"></option>
+					    <option dataset="@{select codename,code from d_code where codetype='inreason'}" label="codename" value="codename"></option>
 					</inputbox>
 				</col>
 				<col column="rtype" label="所属R" >
@@ -66,7 +66,7 @@
 					</inputbox>
 				</col>
 				<col column="indate" label="入库时间" datatype="date{yyyy-MM-dd}"   >
-					<inputbox type="datepicker" dateformat="yyyy-MM-dd"></inputbox>
+					<inputbox type="datepicker" defaultvalue="2014-01-01" dateformat="yyyy-MM-dd"></inputbox>
 				</col>
 				<col column="remark" label="备注" br="true">
 					<inputbox type="textareabox" styleproperty="colspan='3'" valuestyleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
