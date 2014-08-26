@@ -50,7 +50,7 @@
 	</servlet>
 	<servlet>
 		<servlet-name>ModifyPassword</servlet-name>
-		<servlet-class>com.zxyx.service.ModifyPassword</servlet-class>
+		<servlet-class>com.ims.service.ModifyPassword</servlet-class>
 	</servlet>
 	
 	<servlet>
