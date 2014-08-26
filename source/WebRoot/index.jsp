@@ -192,7 +192,7 @@ $(function(){
 				<div class="navTab-panel tabsPageContent layoutBox">
 					<div class="page unitBox" id="mainBox" style="height:100%;">
 					
-						 <iframe src="ShowReport.wx?PAGEID=equip" style="width:100%;height:616px;" frameborder="no" border="0" marginwidth="0" marginheight="0"></iframe> 
+						 <iframe src="ShowReport.wx?PAGEID=mainpage" style="width:100%;height:616px;" frameborder="no" border="0" marginwidth="0" marginheight="0"></iframe> 
 						 
 					</div>
 					

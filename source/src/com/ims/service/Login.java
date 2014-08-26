@@ -63,15 +63,17 @@ public class Login extends HttpServlet {
 	    	//无结果，说明用户名不存在
 	    	if (!rs.next()) {	
 	        	 result=2;
+	        	 
 				}
 	    	// 用户名存在，验证密码是否正确
 	    	else
 	    	{
+	    		//pstmt=null;//释放一次
 	    		pstmt = conn.prepareStatement( "SELECT nickname,role FROM d_user WHERE nickname = ? and password = ?");
 	    		pstmt.setString(1,name);
 		    	pstmt.setString(2,password);
-				result = pstmt.executeUpdate();
-				
+		    	rs = pstmt.executeQuery();
+		    	
 				//无结果，说明用户名密码不匹配
 		    	if (!rs.next()) {	
 		        	 result=3;
@@ -79,8 +81,8 @@ public class Login extends HttpServlet {
 		    	//登录成功
 		    	else{
 		    		// 获取用户角色    0 系统管理员  1普通用户
-					int role =  Integer.parseInt((rs.getArray("role").toString()));
-					
+					int role =  rs.getInt("role");
+					result=1;//匹配且成功
 					// 保存用户名和用户角色
 					HttpSession session = request.getSession();
 					session.setAttribute("username", name);
