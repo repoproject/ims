@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-08-25 22:24:53
+Date: 2014-08-26 19:50:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -42,7 +42,7 @@ CREATE TABLE `b_cat` (
 -- ----------------------------
 -- Records of b_cat
 -- ----------------------------
-INSERT INTO `b_cat` VALUES ('5', 'a', 'a', '0', 'a', '00000000005', '1', '2014-08-01 00:00:00', 'a', '2014-08-31 00:00:00', '10', '0', 'aa', '2014-08-25 21:29:00', '2014-08-25 21:29:00');
+INSERT INTO `b_cat` VALUES ('5', 'a', 'a', '0', 'a', '00000000004', '1', '2014-08-01 00:00:00', 'a', '2014-08-31 00:00:00', '10', '0', 'aa', '2014-08-25 21:29:00', '2014-08-25 21:29:00');
 INSERT INTO `b_cat` VALUES ('6', 'bb', 'bb', '0', 'bb', '00000000000', '1', '2014-08-01 00:00:00', 'bbbb', '2014-08-31 00:00:00', '111', '0', 'bbb', '2014-08-25 21:29:30', '2014-08-25 21:29:30');
 
 -- ----------------------------
@@ -123,12 +123,13 @@ CREATE TABLE `b_out` (
   `makedate` datetime DEFAULT NULL COMMENT '创建日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='出库记录';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='出库记录';
 
 -- ----------------------------
 -- Records of b_out
 -- ----------------------------
 INSERT INTO `b_out` VALUES ('3', 'aa', 'aa', 'a', 'a', 'a', 'aa', '2014-08-25 00:00:00', '10.00', '0', '5', '0', 'aa', '001', '2014-08-25 22:20:54', '2014-08-25 22:20:54');
+INSERT INTO `b_out` VALUES ('4', 'bbb', 'bbb', 'a', 'a', 'a', 'aaa', '2014-08-26 00:00:00', '10.00', '0', '1', '0', 'aaa', '001', '2014-08-26 16:21:28', '2014-08-26 16:21:28');
 
 -- ----------------------------
 -- Table structure for b_person
@@ -165,20 +166,40 @@ CREATE TABLE `b_var` (
 -- ----------------------------
 DROP TABLE IF EXISTS `d_catcode`;
 CREATE TABLE `d_catcode` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '����',
-  `catno` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '����',
-  `seq` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '��ţ�δ��ȫ��ͳһ��ŵ�Ԥ��',
-  `name` varchar(100) CHARACTER SET utf8 DEFAULT NULL COMMENT '�Լ�/�Ĳĵ�����',
-  `type` int(11) DEFAULT NULL COMMENT '0-�Լ�,1-�Ĳ�',
-  `orde` int(11) DEFAULT NULL COMMENT '����ţ�Ϊͳ�ƻ���ҵ��Լ��Ԥ���',
-  `remark` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '��ע',
-  `group` varchar(10) CHARACTER SET utf8 DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `catno` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '货号',
+  `seq` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '编号，未来全球统一编号的预留',
+  `name` varchar(100) CHARACTER SET utf8 DEFAULT NULL COMMENT '试剂/耗材的名称',
+  `type` int(11) DEFAULT NULL COMMENT '0-试剂,1-耗材',
+  `orde` int(11) DEFAULT NULL COMMENT '排序号（耗材维约定成俗的，试剂为统计表排序预留）',
+  `remark` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '备注',
+  `machineid` int(11) DEFAULT NULL COMMENT '所属设备ID',
+  `machinename` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '所属设备名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of d_catcode
 -- ----------------------------
+INSERT INTO `d_catcode` VALUES ('1', '123', '1', '1', '1', '888', '1', null, '1');
+INSERT INTO `d_catcode` VALUES ('3', '789', '33', '耗材1', '1', '33', '33', null, null);
+INSERT INTO `d_catcode` VALUES ('4', '888', '88', '试剂3', '0', '44', '44', null, '二哥');
+INSERT INTO `d_catcode` VALUES ('6', '飞', '飞', '飞 方法', '0', '444444', '', null, '123二恶');
+INSERT INTO `d_catcode` VALUES ('7', '61', '651', '651', '0', '77777', '65161616', null, '问问');
+INSERT INTO `d_catcode` VALUES ('8', '00', '00', '00', '0', '1000', '00', null, '123二恶');
+INSERT INTO `d_catcode` VALUES ('9', '444', '666', '555', '1', '0', '777', null, '123二恶');
+INSERT INTO `d_catcode` VALUES ('10', '999', '999', '999', '1', '0', '999', null, '123二恶');
+INSERT INTO `d_catcode` VALUES ('11', '88', '88-', '88-', '0', '6', '88-', null, '深V深V');
+INSERT INTO `d_catcode` VALUES ('12', '22', '222', '222', '0', '2222', '', null, '123二恶');
+INSERT INTO `d_catcode` VALUES ('14', 'd', 'd', 'd', '0', '0', '', null, '123二恶');
+INSERT INTO `d_catcode` VALUES ('15', '4', '4', '4', '0', '5', '', null, '123二恶');
+INSERT INTO `d_catcode` VALUES ('16', '55', '55ff', '55', '0', '0', '55', null, 'wewev');
+INSERT INTO `d_catcode` VALUES ('17', '3434', '', '343434', '0', '0', '', null, '123二恶');
+INSERT INTO `d_catcode` VALUES ('18', '222', '', '222', '0', '-22', '', null, '123二恶');
+INSERT INTO `d_catcode` VALUES ('19', '2323', '', '2323', '0', '11', '', null, '123二恶');
+INSERT INTO `d_catcode` VALUES ('20', '3434', '', '3434', '0', '0', '', null, '123二恶');
+INSERT INTO `d_catcode` VALUES ('21', '太挑剔', '他', '他', '0', '77', '他', null, '问问');
+INSERT INTO `d_catcode` VALUES ('22', '222', '222', '222', '0', '222', '222', null, '123二恶');
 
 -- ----------------------------
 -- Table structure for d_code
