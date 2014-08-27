@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-08-26 19:50:28
+Date: 2014-08-27 22:06:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,7 +25,7 @@ CREATE TABLE `b_cat` (
   `catname` varchar(255) DEFAULT NULL COMMENT '物品名称',
   `cattype` varchar(50) DEFAULT NULL COMMENT '0-试剂,1-耗材',
   `batchno` varchar(50) NOT NULL COMMENT '批号',
-  `total` int(11) unsigned zerofill DEFAULT NULL COMMENT '总数',
+  `total` int(11) DEFAULT NULL COMMENT '总数',
   `rType` varchar(50) DEFAULT NULL COMMENT '分组，按照R特性分组',
   `productDate` datetime DEFAULT NULL COMMENT '生产日期',
   `producer` varchar(255) DEFAULT NULL COMMENT '生产商',
@@ -42,8 +42,8 @@ CREATE TABLE `b_cat` (
 -- ----------------------------
 -- Records of b_cat
 -- ----------------------------
-INSERT INTO `b_cat` VALUES ('5', 'a', 'a', '0', 'a', '00000000004', '1', '2014-08-01 00:00:00', 'a', '2014-08-31 00:00:00', '10', '0', 'aa', '2014-08-25 21:29:00', '2014-08-25 21:29:00');
-INSERT INTO `b_cat` VALUES ('6', 'bb', 'bb', '0', 'bb', '00000000000', '1', '2014-08-01 00:00:00', 'bbbb', '2014-08-31 00:00:00', '111', '0', 'bbb', '2014-08-25 21:29:30', '2014-08-25 21:29:30');
+INSERT INTO `b_cat` VALUES ('5', 'a', 'a', '0', 'a', '4', '1', '2014-08-01 00:00:00', 'a', '2014-08-31 00:00:00', '10', '0', 'aa', '2014-08-25 21:29:00', '2014-08-25 21:29:00');
+INSERT INTO `b_cat` VALUES ('6', 'bb', 'bb', '0', 'bb', '0', '1', '2014-08-01 00:00:00', 'bbbb', '2014-08-31 00:00:00', '111', '0', 'bbb', '2014-08-25 21:29:30', '2014-08-25 21:29:30');
 
 -- ----------------------------
 -- Table structure for b_in
@@ -76,7 +76,7 @@ CREATE TABLE `b_in` (
   `makedate` datetime DEFAULT NULL COMMENT '产生日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='试剂表';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='试剂表';
 
 -- ----------------------------
 -- Records of b_in
@@ -89,9 +89,9 @@ INSERT INTO `b_in` VALUES ('15', 'a', 'a', 'a', '0', 'a', 'aa', '2014-08-01 00:0
 DROP TABLE IF EXISTS `b_machine`;
 CREATE TABLE `b_machine` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL COMMENT '设备名称',
+  `machineName` varchar(255) DEFAULT NULL COMMENT '设备名称',
   `shortname` varchar(255) DEFAULT NULL COMMENT '设备简称',
-  `seqno` varchar(50) DEFAULT NULL COMMENT '设备编号',
+  `machineNo` varchar(50) DEFAULT NULL COMMENT '设备编号',
   `alias` varchar(255) DEFAULT NULL COMMENT '别名',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
@@ -160,6 +160,10 @@ CREATE TABLE `b_var` (
 -- ----------------------------
 -- Records of b_var
 -- ----------------------------
+INSERT INTO `b_var` VALUES ('banchTime', '3', '新批次提醒的阈值，距离当前时间X天之内的新批号');
+INSERT INTO `b_var` VALUES ('expireTime', '7', '过期提醒的阈值，距离当前时间少于X天物品');
+INSERT INTO `b_var` VALUES ('newinout', '3', '最近X天的出入库记录');
+INSERT INTO `b_var` VALUES ('stockthreshold', '10', '库存少于X件进行提醒的阈值');
 
 -- ----------------------------
 -- Table structure for d_catcode
@@ -169,11 +173,11 @@ CREATE TABLE `d_catcode` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `catno` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '货号',
   `seq` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '编号，未来全球统一编号的预留',
-  `name` varchar(100) CHARACTER SET utf8 DEFAULT NULL COMMENT '试剂/耗材的名称',
-  `type` int(11) DEFAULT NULL COMMENT '0-试剂,1-耗材',
+  `catname` varchar(100) CHARACTER SET utf8 DEFAULT NULL COMMENT '试剂/耗材的名称',
+  `cattype` int(11) DEFAULT NULL COMMENT '0-试剂,1-耗材',
   `orde` int(11) DEFAULT NULL COMMENT '排序号（耗材维约定成俗的，试剂为统计表排序预留）',
   `remark` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '备注',
-  `machineid` int(11) DEFAULT NULL COMMENT '所属设备ID',
+  `machineNo` int(11) DEFAULT NULL COMMENT '所属设备ID',
   `machinename` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '所属设备名称',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
@@ -318,7 +322,7 @@ CREATE TABLE `d_user` (
 -- ----------------------------
 -- Records of d_user
 -- ----------------------------
-INSERT INTO `d_user` VALUES ('1', 'a11111', 'name', null, 'nick', '111', '1', '1', null, 'dddd', null);
+INSERT INTO `d_user` VALUES ('1', 'a11111', 'name', '1', '1', '1', '1', '1', null, 'dddd', null);
 INSERT INTO `d_user` VALUES ('2', '11', '111', null, '1111', 'ecf6e9a713c8533bbad5393ec4a9dab4', '1', '1', null, '111111', null);
 INSERT INTO `d_user` VALUES ('4', '2222', '张三', null, '三', 'ecf6e9a713c8533bbad5393ec4a9dab4', '0', '0', null, '发的', null);
 INSERT INTO `d_user` VALUES ('5', '444', '李四', null, '四儿', 'ecf6e9a713c8533bbad5393ec4a9dab4', '0', '0', null, '所属省', null);

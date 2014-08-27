@@ -7,49 +7,52 @@
 			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
 				<col column="ID" displaytype="hidden">
 				</col>
-				<col column="machinename" label="设备名称" >
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
-				</col>
-				<col column="machineno" label="设备序号" br="true">
-					<inputbox jsvalidate="isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
-				</col>
 				<col column="catno" label="试剂/耗材编号" >
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
 				<col column="catname" label="试剂/耗材名称" br="true">
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
 				<col column="batchno" label="批号" >
-					<inputbox ></inputbox>
+				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
-				<col column="num" label="数量" br="true">
-					<inputbox />
+				<col column="total" label="库存" br="true">
+				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
 				<col column="price" label="价格" >
-					<inputbox ></inputbox>
+				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
 				<col column="priceunit" label="货币" br="true">
-					<inputbox />
+				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
-				<col column="person" label="出库人" >
-					<inputbox ></inputbox>
+				<col column="num" label="数量" >
+				    <inputbox type="textbox"  />
 				</col>
 				<col column="reason" label="出库原因"  br="true">
 					<inputbox type="selectbox" inlinecount="5">
 					    <option dataset="@{select codename,code from d_code where codetype='outreason'}" label="codename" value="code"></option>
 					</inputbox>
 				</col>
-				<col column="outdate" label="出库日期" datatype="date{yyyy-MM-dd}" >
+				<col column="machinename" label="设备名称" >
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				</col>
+				<col column="machineno" label="设备序号" br="true">
+					<inputbox jsvalidate="isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				</col>
+				<col column="person" label="出库人" >
+					<inputbox type="textbox" defaultvalue="session{nickname}"></inputbox>
+				</col>
+				<col column="outdate" label="出库日期" datatype="date{yyyy-MM-dd}" br="true">
 					<inputbox type="datepicker" dateformat="yyyy-MM-dd"></inputbox>
 				</col>
 				<col column="remark" label="备注" br="true">
-					<inputbox type="textareabox" styleproperty="colspan='3'" valuestyleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+					<inputbox type="textareabox" styleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
 				</col>
 			</display>
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT ID,null machinename,null machineno,catno,catname,batchno,null num,price,priceunit,null person,null reason,sysdate() outdate, null remark FROM b_cat where  {#condition#}]]>
+						<![CDATA[SELECT ID,null machinename,null machineno,catno,catname,batchno,null num,total,price,priceunit,null person,null reason,sysdate() outdate, null remark FROM b_cat where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>

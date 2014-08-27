@@ -14,7 +14,7 @@
 					<col column="{sequence:1}" label="序号" width="3%"/>
 					<col column="id" label="编号"  displaytype="hidden"/>					
 					<col column="typename" label="类型" clickorderby="true" width="5%"></col>
-					<col column="name" label="名称" clickorderby="true" width="25%"></col>
+					<col column="catname" label="名称" clickorderby="true" width="25%"></col>
 					<col column="catno" label="货号" clickorderby="true" width="20%"></col>
 					<col column="seq" label="编号"  displaytype="hidden" width="10%"/>
 					<col column="machinename" label="所属设备" clickorderby="true" width="15%"></col>
@@ -26,7 +26,7 @@
 				
 					<select>
 						<value>
-							<![CDATA[SELECT id,type,(select codename from d_code where codetype='cattype' and  code = d_catcode.type )typename,name,catno,seq,machinename,machineid,orde,remark FROM d_catcode where {#condition#}  order by type ,orde]]>
+							<![CDATA[SELECT id,cattype,(select codename from d_code where codetype='cattype' and  code = d_catcode.cattype )typename,catname,catno,seq,machinename,machineno,orde,remark FROM d_catcode where {#condition#}  order by cattype ,orde]]>
 						</value>						
 						<condition name="txtname" label="名称" labelposition="left">
 						     <value>
@@ -48,9 +48,9 @@
 						</value>
 						     <inputbox>
 						        <typeprompt width="-1" count="20">
-							       <promptcol label="name" matchmode="anywhere"></promptcol>
+							       <promptcol label="machinename" matchmode="anywhere"></promptcol>
 							       <datasource>    
-							          <option dataset="@{select distinct name from b_machine where {#matchcondition#}}"></option> 
+							          <option dataset="@{select distinct machinename from b_machine where {#matchcondition#}}"></option> 
                                    </datasource>
 						        </typeprompt>
 						     </inputbox>
