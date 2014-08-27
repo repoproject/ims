@@ -20,6 +20,8 @@
 		<!-- 皮肤样式 -->
 		<item name="default-checkpermission" value="true"/>
 		<!-- 本应用是否要检查权限，如果在不需要检查权限的应用中关闭它，可以改善性能 -->
+		<!-- 自己开发的服务器端校验类 -->
+		<item name="skin" value="vista"/>
 		<item name="prompt-dialog-type" value="artdialog"/>
 		<!-- 提示组件类型 ymprompt;artdialog-->
 	</system>
@@ -84,6 +86,8 @@
 		<report-file>report/equip_edit.xml</report-file>
 		
 		<report-file>report/mainpage.xml</report-file>
+		
+		
 		<!--<report-file pattern="true">report/(report_)(\S*?)(\.xml)</report-file>
 		<report-file>report/in.xml</report-file>
 		<report-file>report/out.xml</report-file>-->

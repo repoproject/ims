@@ -48,7 +48,7 @@ public class DeleteUser extends AbsInterceptorDefaultAdapter{
 				
 				rrequest.getWResponse().getMessageCollector().alert("admin用户禁止删除",null,false);
 				
-				return WX_RETURNVAL_SKIP;
+				return WX_RETURNVAL_TERMINATE;
 			}else {
 				super.doSavePerRow(rrequest, rbean, mRowData, mParamValues,editbean);
 			}

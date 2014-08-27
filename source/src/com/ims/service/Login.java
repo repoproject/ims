@@ -86,6 +86,7 @@ public class Login extends HttpServlet {
 					// 保存用户名和用户角色
 					HttpSession session = request.getSession();
 					session.setAttribute("username", name);
+					session.setAttribute("nickname", name);
 					session.setAttribute("role", role);					
 		    	}
 		    		

@@ -1,51 +1,179 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <applications xmlns="http://www.wabacus.com"
 					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 					xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
-	<!-- 新闻形式展示 -->
+	<!-- 数据展示篇报表类型 -->
+	
+	
 	<page id="mainpage">
-			<report id="report2" title="过期预警" parenttitle="过期预警1" border="horizontal2" dataexport="word" template="${articlelist.report.template}">
+		<header>
+			<![CDATA[<p align="center"><font size="6"><b>首页提醒</b></font></p>]]>
+		</header>
+		<hpanel id="hp1" margin="1px" >
+			 <panel id="panel" title="新批号提醒" margin="10px" border="1" bordercolor="#ff0000">
+			<report id="report1"  width="450" border="horizontal2"  template="${articlelist.report.template}">
 				<display dataheader="" pagecolselect="false">
-					<col column="id" label="编号" displaytype="hidden"/>
-					<col column="catno" label="货号" displaytype="hidden"/>
-					<col column="catname" label="物品名称" displaytype="hidden"/>
-					<col column="batchno" label="批号" displaytype="hidden"/>
-					<col column="total" label="数量" displaytype="hidden"/>
-					<col column="expiredate" label="过期时间" displaytype="hidden" />
-					<col property="prexdot" column="{non-fromdb}" valuestyleproperty="align='right' width='5px'"/>
-					<col column="expiredate" label="标题" datatype="clob" valuestyleproperty="align='left'"/>
+					<col column="deptno" label="部门编号" displaytype="hidden"/>
+					<col column="builtdate" label="创建日期" displaytype="hidden"/>
+					 <col property="prexdot" column="{non-fromdb}" valuestyleproperty="align='right' width='5px'"/> 
+					<col column="description" label="标题" datatype="clob" valuestyleproperty="align='left'"/>
 				</display>
 				<sql>
 					<value>
-<![CDATA[SELECT id,b.catno,b.catname,b.batchno,b.total,b.expiredate,CONCAT(0+b.total,'个',b.batchno,'还剩',cast(DATEDIFF(b.expiredate,current_date()) as char(12)),'天过期！(',b.catname,')') description FROM b_cat b,b_var v where v.bizkey='expireTime' ]]> 
-					
-					</value>
+						<![CDATA[SELECT * FROM tbl_department  order by deptno]]>
+					</value>					
 				</sql>
 				<format>
 					<value>
 					<![CDATA[
-						prexdot="<img src='/ims/source/WebRoot/Images/dot_prex.gif'>";//显示在标题前面的点
-						expiredate=expiredate==null?"":expiredate();
-						if(expiredate.indexOf(" ")>0) expiredate=expiredate.substring(0,expiredate.indexOf(" "));//去除掉时间部分
+						prexdot="<img src='/ims/Images/dot_prex.gif'>";//显示在标题前面的点
+						builtdate=builtdate==null?"":builtdate.trim();
+						if(builtdate.indexOf(" ")>0) builtdate=builtdate.substring(0,builtdate.indexOf(" "));//去除掉时间部分
 						description=description==null?"":description.trim();
 						if(!description.equals(""))
 						{
 							String fulldesc=description;
-							if(description.length()>40) description=description.substring(0,40)+"...";
+							if(description.length()>40) description=description.substring(0,30)+"...";
 							description=description.replaceAll("<p>","");
 							description=description.replaceAll("</p>","");
 							if(rrequest.getShowtype()== Consts.DISPLAY_ON_PLAINEXCEL)
 							{
-								description=description+"  ["+expiredate+"]";
+								description=description+"  ["+builtdate+"]";
 							}else
 							{
 								description="&nbsp;&nbsp;<span onmouseover=\"this.style.cursor='pointer'\"  onclick=\"wx_win('"+fulldesc+"',{width:400,height:200})\">"+description+"</span>";
-								description=description+"&nbsp;&nbsp;<font color='#505050'>["+expiredate+"]</font>";
+								description=description+"&nbsp;&nbsp;<font color='#505050'>["+builtdate+"]</font>";
 							}
 						}
 					]]>
 					</value>
 				</format>
 			</report>
-			</page>
+			</panel>
+			<panel id="pane2" title="过期预警" margin="10px" border="1" bordercolor="#ff0000">
+			<report id="report2"  width="450px" border="horizontal2"  template="${articlelist.report.template}">
+				<display dataheader="" pagecolselect="false">
+					<col column="deptno" label="部门编号" displaytype="hidden"/>
+					<col column="builtdate" label="创建日期" displaytype="hidden"/>
+					 <col property="prexdot" column="{non-fromdb}" valuestyleproperty="align='right' width='5px'"/> 
+					<col column="description" label="标题" datatype="clob" valuestyleproperty="align='left'"/>
+				</display>
+				<sql>
+					<value>
+						<![CDATA[SELECT * FROM tbl_department order by deptno]]>
+					</value>					
+				</sql>
+				<format>
+					<value>
+					<![CDATA[
+						prexdot="<img src='/ims/Images/dot_prex.gif'>";//显示在标题前面的点
+						builtdate=builtdate==null?"":builtdate.trim();
+						if(builtdate.indexOf(" ")>0) builtdate=builtdate.substring(0,builtdate.indexOf(" "));//去除掉时间部分
+						description=description==null?"":description.trim();
+						if(!description.equals(""))
+						{
+							String fulldesc=description;
+							if(description.length()>40) description=description.substring(0,30)+"...";
+							description=description.replaceAll("<p>","");
+							description=description.replaceAll("</p>","");
+							if(rrequest.getShowtype()== Consts.DISPLAY_ON_PLAINEXCEL)
+							{
+								description=description+"  ["+builtdate+"]";
+							}else
+							{
+								description="&nbsp;&nbsp;<span onmouseover=\"this.style.cursor='pointer'\"  onclick=\"wx_win('"+fulldesc+"',{width:400,height:200})\">"+description+"</span>";
+								description=description+"&nbsp;&nbsp;<font color='#505050'>["+builtdate+"]</font>";
+							}
+						}
+					]]>
+					</value>
+				</format>
+			</report>
+			</panel>
+		</hpanel>
+		<hpanel id="hp2" margin="10px" >
+			<panel id="pane3" title="库存预警"  margin="10px" border="1" bordercolor="#ff0000">
+			<report id="report3"  width="450" border="horizontal2"  template="${articlelist.report.template}">
+				<display dataheader="" pagecolselect="false">
+					<col column="deptno" label="部门编号" displaytype="hidden"/>
+					<col column="builtdate" label="创建日期" displaytype="hidden"/>
+					 <col property="prexdot" column="{non-fromdb}" valuestyleproperty="align='right' width='5px'"/> 
+					<col column="description" label="标题" datatype="clob" valuestyleproperty="align='left'"/>
+				</display>
+				<sql>
+					<value>
+						<![CDATA[SELECT * FROM tbl_department  order by deptno]]>
+					</value>
+				</sql>
+				<format>
+					<value>
+					<![CDATA[
+						prexdot="<img src='/ims/Images/dot_prex.gif'>";//显示在标题前面的点
+						builtdate=builtdate==null?"":builtdate.trim();
+						if(builtdate.indexOf(" ")>0) builtdate=builtdate.substring(0,builtdate.indexOf(" "));//去除掉时间部分
+						description=description==null?"":description.trim();
+						if(!description.equals(""))
+						{
+							String fulldesc=description;
+							if(description.length()>40) description=description.substring(0,30)+"...";
+							description=description.replaceAll("<p>","");
+							description=description.replaceAll("</p>","");
+							if(rrequest.getShowtype()== Consts.DISPLAY_ON_PLAINEXCEL)
+							{
+								description=description+"  ["+builtdate+"]";
+							}else
+							{
+								description="&nbsp;&nbsp;<span onmouseover=\"this.style.cursor='pointer'\"  onclick=\"wx_win('"+fulldesc+"',{width:400,height:200})\">"+description+"</span>";
+								description=description+"&nbsp;&nbsp;<font color='#505050'>["+builtdate+"]</font>";
+							}
+						}
+					]]>
+					</value>
+				</format>
+			</report>
+			</panel>
+			<panel id="pane4" title="最新出入库"  margin="10px" border="1" bordercolor="#ff0000">
+			<report id="report4"  width="450px" border="horizontal2"  template="${articlelist.report.template}">
+				<display dataheader="" pagecolselect="false">
+					<col column="deptno" label="部门编号" displaytype="hidden"/>
+					<col column="builtdate" label="创建日期" displaytype="hidden"/>
+					 <col property="prexdot" column="{non-fromdb}" valuestyleproperty="align='right' width='5px'"/> 
+					<col column="description" label="标题" datatype="clob" valuestyleproperty="align='left'"/>
+				</display>
+				<sql>
+					<value>
+						<![CDATA[SELECT * FROM tbl_department order by deptno]]>
+					</value>					
+				</sql>
+				<format>
+					<value>
+					<![CDATA[
+						prexdot="<img src='/ims/Images/dot_prex.gif'>";//显示在标题前面的点
+						builtdate=builtdate==null?"":builtdate.trim();
+						if(builtdate.indexOf(" ")>0) builtdate=builtdate.substring(0,builtdate.indexOf(" "));//去除掉时间部分
+						description=description==null?"":description.trim();
+						if(!description.equals(""))
+						{
+							String fulldesc=description;
+							if(description.length()>40) description=description.substring(0,30)+"...";
+							description=description.replaceAll("<p>","");
+							description=description.replaceAll("</p>","");
+							if(rrequest.getShowtype()== Consts.DISPLAY_ON_PLAINEXCEL)
+							{
+								description=description+"  ["+builtdate+"]";
+							}else
+							{
+								description="&nbsp;&nbsp;<span onmouseover=\"this.style.cursor='pointer'\"  onclick=\"wx_win('"+fulldesc+"',{width:400,height:200})\">"+description+"</span>";
+								description=description+"&nbsp;&nbsp;<font color='#505050'>["+builtdate+"]</font>";
+							}
+						}
+					]]>
+					</value>
+				</format>
+			</report>
+			</panel>
+		</hpanel>
+	</page>
+	
+	
 </applications>
