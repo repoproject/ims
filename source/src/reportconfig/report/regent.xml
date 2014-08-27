@@ -26,7 +26,7 @@
 				
 					<select>
 						<value>
-							<![CDATA[SELECT id,type,(select codename from d_code where codetype='cattype' and  code = d_catcode.cattype )typename,catname,catno,seq,machinename,machineid,orde,remark FROM d_catcode where {#condition#}  order by type ,orde]]>
+							<![CDATA[SELECT id,cattype,(select codename from d_code where codetype='cattype' and  code = d_catcode.cattype )typename,catname,catno,seq,machinename,machineno,orde,remark FROM d_catcode where {#condition#}  order by cattype ,orde]]>
 						</value>						
 						<condition name="txtname" label="名称" labelposition="left">
 						     <value>

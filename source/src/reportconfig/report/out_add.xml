@@ -25,7 +25,7 @@
 				<col column="priceunit" label="货币" br="true">
 				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
-				<col column="num" label="数量" datatype="int">
+				<col column="num" label="数量" >
 				    <inputbox type="textbox"  />
 				</col>
 				<col column="reason" label="出库原因"  br="true">
@@ -40,7 +40,7 @@
 					<inputbox jsvalidate="isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
 				</col>
 				<col column="person" label="出库人" >
-					<inputbox type="textbox" defaultvalue="session{username}"></inputbox>
+					<inputbox type="textbox" defaultvalue="session{nickname}"></inputbox>
 				</col>
 				<col column="outdate" label="出库日期" datatype="date{yyyy-MM-dd}" br="true">
 					<inputbox type="datepicker" dateformat="yyyy-MM-dd"></inputbox>

@@ -46,7 +46,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT ID,machinename,machineno,catno,catname,batchno,num,total,person,reason, outdate, remark FROM b_out where  {#condition#}]]>
+						<![CDATA[SELECT ID,machinename,machineno,catno,catname,batchno,num,price,priceunit,null total,person,reason, outdate, remark FROM b_out where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
