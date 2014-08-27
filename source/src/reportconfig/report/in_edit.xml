@@ -2,7 +2,7 @@
 <applications xmlns="http://www.wabacus.com"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
-	<page id="in_edit" js="/webresources/script/validate.js"  css="/webresources/component/tiny_mce/themes/advanced/skins/o2k7/ui.css">
+	<page id="in_edit" js="/webresources/script/validate.js,/webresources/script/wabacus_api.js,webresources/script/wabacus_editsystem.js,/js/localJS/in.js"  css="/webresources/component/tiny_mce/themes/advanced/skins/o2k7/ui.css">
 		<report id="report1" title="request{txtname}入库信息" type="form" >
 			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
 				<col column="ID" displaytype="hidden">
@@ -13,10 +13,26 @@
 					</inputbox>
 				</col>
 				<col column="catno" label="试剂/耗材编号*" br="true">
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" >
+					    <typeprompt count="20">
+							 <promptcol label="catno" title="编号" matchmode="anywhere"></promptcol>
+							 <promptcol label="catname" value="catno" title="名称" matchmode="anywhere"></promptcol>
+							      <datasource>
+							          <option dataset="@{select catno,catname from d_catcode where {#matchcondition#}}"></option>       
+							      </datasource>
+					    </typeprompt>
+					</inputbox>
 				</col>
 				<col column="catname" label="试剂/耗材名称*" >
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" >
+					  <typeprompt count="20">
+							 <promptcol label="catname" title="名称" matchmode="anywhere"></promptcol>
+							 <promptcol label="catno" value="catname" title="编号" matchmode="anywhere"></promptcol>
+							      <datasource>
+							          <option dataset="@{select catno,catname from d_catcode where {#matchcondition#}}"></option>       
+							      </datasource>
+					    </typeprompt>
+					</inputbox>
 				</col>
 				<col column="batchno" label="批号"  br="true">
 					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
@@ -47,7 +63,7 @@
 					    <option dataset="@{select codename,code from d_code where codetype='money'}" label="codename" value="code"></option>
 					</inputbox>
 				</col>
-				<col column="taxRate" label="含税否" >
+				<col column="taxRate" label="含税" >
 					<inputbox type="selectbox" >
 					    <option dataset="@{select codename,code from d_code where codetype='bool'}" label="codename" value="code"></option>
 					</inputbox>
@@ -58,7 +74,7 @@
 					</inputbox>
 				</col>
 				<col column="rtype" label="所属R" >
-					<inputbox type="selectbox"><option dataset="@{select codename,code from d_code where codetype='rtype'}" label="codename" value="code"></option>
+					<inputbox type="selectbox"><option dataset="@{select codename,code from d_code where codetype='rtype' order by code*1}" label="codename" value="code"></option>
 					</inputbox>
 				</col>
 				<col column="catFrom" label="来源"  br="true">
@@ -66,7 +82,7 @@
 					</inputbox>
 				</col>
 				<col column="indate" label="入库时间" datatype="date{yyyy-MM-dd}"   >
-					<inputbox type="datepicker" defaultvalue="2014-01-01" dateformat="yyyy-MM-dd"></inputbox>
+					<inputbox type="datepicker"  dateformat="yyyy-MM-dd"></inputbox>
 				</col>
 				<col column="remark" label="备注" br="true">
 					<inputbox type="textareabox" styleproperty="colspan='3'" valuestyleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
@@ -75,7 +91,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT ID,cattype,catno,catname,batchno,productdate,productdate,expiredate,indate,num,producer,dealer,reason,person,price,priceUnit,taxRate,rtype,catFrom,remark FROM b_in where  {#condition#}]]>
+						<![CDATA[SELECT ID,cattype,catno,catname,batchno,productdate,productdate,expiredate,indate,num,producer,dealer,reason,person,price,priceUnit,case when taxRate=0 then 0 else 1 end taxRate,rtype,catFrom,remark FROM b_in where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>

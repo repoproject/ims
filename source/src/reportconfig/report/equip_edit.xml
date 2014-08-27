@@ -7,10 +7,10 @@
 			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
 				<col column="ID" displaytype="hidden">
 				</col>				
-				<col column="name" label="设备名称*" br="true">
+				<col column="machinenamename" label="设备名称*" br="true">
 					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan50(#label#长度应小于等于50);stripscript(#label#不能含有特殊字符);" />
 				</col>				
-				<col column="seqno" label="序号S/N*" br="true">
+				<col column="machinenameno" label="序号S/N*" br="true">
 					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan50(#label#长度应小于等于50);stripscript(#label#不能含有特殊字符);" />
 				</col>			
 				<col column="remark" label="备注">
@@ -20,7 +20,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT  id,name,seqno,remark FROM b_machine where  {#condition#}]]>
+						<![CDATA[SELECT  id,machinenamename,machinenameno,remark FROM b_machine where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -29,11 +29,11 @@
 					</condition>
 				</select>
 				<insert>
-					insert into b_machine(name,seqno,remark)
-					values(trim(@{name}),@{seqno},trim(@{remark}));
+					insert into b_machine(machinenamename,machinenameno,remark)
+					values(trim(@{machinenamename}),@{machinenameno},trim(@{remark}));
 				</insert>
 				<update>
-					update b_machine set name=trim(@{name}),seqno=@{seqno},remark=trim(@{remark}) 
+					update b_machine set machinenamename=trim(@{machinenamename}),machinenameno=@{machinenameno},remark=trim(@{remark}) 
 					where ID=@{ID__old};
 				</update>
 			</sql>

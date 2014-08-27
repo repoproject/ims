@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-08-26 19:50:28
+Date: 2014-08-27 17:28:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -89,9 +89,9 @@ INSERT INTO `b_in` VALUES ('15', 'a', 'a', 'a', '0', 'a', 'aa', '2014-08-01 00:0
 DROP TABLE IF EXISTS `b_machine`;
 CREATE TABLE `b_machine` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL COMMENT '设备名称',
+  `machineName` varchar(255) DEFAULT NULL COMMENT '设备名称',
   `shortname` varchar(255) DEFAULT NULL COMMENT '设备简称',
-  `seqno` varchar(50) DEFAULT NULL COMMENT '设备编号',
+  `machineNo` varchar(50) DEFAULT NULL COMMENT '设备编号',
   `alias` varchar(255) DEFAULT NULL COMMENT '别名',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
@@ -169,11 +169,11 @@ CREATE TABLE `d_catcode` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `catno` varchar(20) CHARACTER SET utf8 DEFAULT NULL COMMENT '货号',
   `seq` varchar(50) CHARACTER SET utf8 DEFAULT NULL COMMENT '编号，未来全球统一编号的预留',
-  `name` varchar(100) CHARACTER SET utf8 DEFAULT NULL COMMENT '试剂/耗材的名称',
-  `type` int(11) DEFAULT NULL COMMENT '0-试剂,1-耗材',
+  `catname` varchar(100) CHARACTER SET utf8 DEFAULT NULL COMMENT '试剂/耗材的名称',
+  `cattype` int(11) DEFAULT NULL COMMENT '0-试剂,1-耗材',
   `orde` int(11) DEFAULT NULL COMMENT '排序号（耗材维约定成俗的，试剂为统计表排序预留）',
   `remark` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '备注',
-  `machineid` int(11) DEFAULT NULL COMMENT '所属设备ID',
+  `machineNo` int(11) DEFAULT NULL COMMENT '所属设备ID',
   `machinename` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '所属设备名称',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;

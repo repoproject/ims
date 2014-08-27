@@ -76,6 +76,11 @@
 <script src="js/dwz.combox.js" type="text/javascript"></script>
 <script src="js/dwz.print.js" type="text/javascript"></script>
 <script src="js/dwz.regional.zh.js" type="text/javascript"></script>
+<script src="js/dwz.util.date.js" type="text/javascript"></script>
+<script src="webresources/script/validate.js" type="text/javascript"></script>
+<script src="webresources/script/wabacus_api.js" type="text/javascript"></script>
+<script src="webresources/script/wabacus_editsystem.js" type="text/javascript"></script>
+<script src="webresources/script/wabacus_system.js" type="text/javascript"></script>
 
 
 

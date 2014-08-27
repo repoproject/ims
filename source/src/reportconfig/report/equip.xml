@@ -11,15 +11,15 @@
 				<col column="{col-rowselect}" width="20"></col>
 					<col column="{sequence:1}" label="序号" width="5%"/>
 					<col column="id" label="编号"  displaytype="hidden"/>
-					<col column="name" label="设备名称" clickorderby="true" width="25%"></col>
-					<col column="seqno" label="设备序列号" clickorderby="true" width="25%"></col>				
+					<col column="machinename" label="设备名称" clickorderby="true" width="25%"></col>
+					<col column="machineno" label="设备序列号" clickorderby="true" width="25%"></col>				
 					<col column="remark" label="备注" clickorderby="true" width="30%"></col>					
 				</display>
 				<sql>
 				
 					<select>
 						<value>
-							<![CDATA[SELECT id,name,seqno,remark FROM b_machine  where {#condition#} order by name]]>
+							<![CDATA[SELECT id,machinename,machineno,remark FROM b_machine  where {#condition#} order by name]]>
 						</value>						
 						<condition name="txtname" label="设备名称" labelposition="left">
 							<value>
