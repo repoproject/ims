@@ -6,12 +6,12 @@
 	
 	
 	<page id="mainpage">
-		<header>
-			<![CDATA[<p align="center"><font size="6"><b>首页提醒</b></font></p>]]>
+	 <header  >
+			<![CDATA[<p align="center"><font size="5"><b>首页提醒</b></font></p>]]>
 		</header>
-		<hpanel id="hp1" margin="1px" >
-			 <panel id="panel" title="新批号提醒" margin="10px" border="1" bordercolor="#ff0000">
-			<report id="report1"  width="450" border="horizontal2"  template="${articlelist.report.template}">
+		<hpanel id="hp1" margin="10px" >
+			 <panel id="panel"   width="550" height="220"   margin="6px" border="3" bordercolor="#6633FF">
+			<report id="report1" title="新批号提醒" pagesize="5"  bordercolor="#6633FF"  titlealign="center" width="100%" border="horizontal2"  template="${articlelist.report.template}">
 				<display dataheader="" pagecolselect="false">
 					<col column="deptno" label="部门编号" displaytype="hidden"/>
 					<col column="builtdate" label="创建日期" displaytype="hidden"/>
@@ -50,17 +50,18 @@
 				</format>
 			</report>
 			</panel>
-			<panel id="pane2" title="过期预警" margin="10px" border="1" bordercolor="#ff0000">
-			<report id="report2"  width="450px" border="horizontal2"  template="${articlelist.report.template}">
+			
+			<panel id="pane2" width="550" height="220"  margin="6px" border="3" bordercolor="#6633FF">
+			<report id="report2"  title="过期预警"   pagesize="5"  bordercolor="#6633FF"  titlealign="center" width="100%" border="horizontal2"  template="${articlelist.report.template}">
 				<display dataheader="" pagecolselect="false">
-					<col column="deptno" label="部门编号" displaytype="hidden"/>
-					<col column="builtdate" label="创建日期" displaytype="hidden"/>
+					<col column="id" label="编号" displaytype="hidden"/>
+					<col column="builtdate" label="过期时间" displaytype="hidden"/>
 					 <col property="prexdot" column="{non-fromdb}" valuestyleproperty="align='right' width='5px'"/> 
 					<col column="description" label="标题" datatype="clob" valuestyleproperty="align='left'"/>
 				</display>
 				<sql>
 					<value>
-						<![CDATA[SELECT * FROM tbl_department order by deptno]]>
+						<![CDATA[SELECT id,b.catno,b.catname,b.batchno,b.total,b.expiredate as builtdate,CONCAT(b.total,'个',b.batchno,'还剩',cast(DATEDIFF(b.expiredate,current_date()) as char(12)),'天过期！(',b.catname,')') description FROM b_cat b,b_var v where v.bizkey='expireTime' and DATEDIFF(b.expiredate,current_date())<v.bizValue and DATEDIFF(b.expiredate,current_date())>0 and  b.total>0 ]]>
 					</value>					
 				</sql>
 				<format>
@@ -92,8 +93,8 @@
 			</panel>
 		</hpanel>
 		<hpanel id="hp2" margin="10px" >
-			<panel id="pane3" title="库存预警"  margin="10px" border="1" bordercolor="#ff0000">
-			<report id="report3"  width="450" border="horizontal2"  template="${articlelist.report.template}">
+			<panel id="pane3"   width="550" height="220"   margin="4px" border="3" bordercolor="#6633FF">
+			<report id="report3" title="库存预警"  pagesize="5"  bordercolor="#6633FF"  titlealign="center" width="100%" border="horizontal2"  template="${articlelist.report.template}">
 				<display dataheader="" pagecolselect="false">
 					<col column="deptno" label="部门编号" displaytype="hidden"/>
 					<col column="builtdate" label="创建日期" displaytype="hidden"/>
@@ -132,8 +133,8 @@
 				</format>
 			</report>
 			</panel>
-			<panel id="pane4" title="最新出入库"  margin="10px" border="1" bordercolor="#ff0000">
-			<report id="report4"  width="450px" border="horizontal2"  template="${articlelist.report.template}">
+			<panel id="pane4"  width="550" height="220"   margin="4px" border="3" bordercolor="#6633FF">
+			<report id="report4" title="最新出入库"   pagesize="5"  bordercolor="#6633FF"  titlealign="center" width="100%" border="horizontal2"  template="${articlelist.report.template}">
 				<display dataheader="" pagecolselect="false">
 					<col column="deptno" label="部门编号" displaytype="hidden"/>
 					<col column="builtdate" label="创建日期" displaytype="hidden"/>
