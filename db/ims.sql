@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-08-27 17:28:03
+Date: 2014-08-27 22:00:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -76,7 +76,7 @@ CREATE TABLE `b_in` (
   `makedate` datetime DEFAULT NULL COMMENT '产生日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='试剂表';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='试剂表';
 
 -- ----------------------------
 -- Records of b_in
@@ -160,6 +160,10 @@ CREATE TABLE `b_var` (
 -- ----------------------------
 -- Records of b_var
 -- ----------------------------
+INSERT INTO `b_var` VALUES ('banchTime', '3', '新批次提醒的阈值，距离当前时间X天之内的新批号');
+INSERT INTO `b_var` VALUES ('expireTime', '7', '过期提醒的阈值，距离当前时间少于X天物品');
+INSERT INTO `b_var` VALUES ('newinout', '3', '最近X天的出入库记录');
+INSERT INTO `b_var` VALUES ('stockthreshold', '10', '库存少于X件进行提醒的阈值');
 
 -- ----------------------------
 -- Table structure for d_catcode
@@ -318,7 +322,7 @@ CREATE TABLE `d_user` (
 -- ----------------------------
 -- Records of d_user
 -- ----------------------------
-INSERT INTO `d_user` VALUES ('1', 'a11111', 'name', null, 'nick', '111', '1', '1', null, 'dddd', null);
+INSERT INTO `d_user` VALUES ('1', 'a11111', 'name', '1', '1', '1', '1', '1', null, 'dddd', null);
 INSERT INTO `d_user` VALUES ('2', '11', '111', null, '1111', 'ecf6e9a713c8533bbad5393ec4a9dab4', '1', '1', null, '111111', null);
 INSERT INTO `d_user` VALUES ('4', '2222', '张三', null, '三', 'ecf6e9a713c8533bbad5393ec4a9dab4', '0', '0', null, '发的', null);
 INSERT INTO `d_user` VALUES ('5', '444', '李四', null, '四儿', 'ecf6e9a713c8533bbad5393ec4a9dab4', '0', '0', null, '所属省', null);

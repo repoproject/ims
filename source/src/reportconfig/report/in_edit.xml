@@ -14,7 +14,7 @@
 				</col>
 				<col column="catno" label="试剂/耗材编号*" br="true">
 					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" >
-					    <typeprompt count="20">
+					    <typeprompt count="20"  callbackmethod="testTypePromptCallBack1">
 							 <promptcol label="catno" title="编号" matchmode="anywhere"></promptcol>
 							 <promptcol label="catname" value="catno" title="名称" matchmode="anywhere"></promptcol>
 							      <datasource>

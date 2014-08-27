@@ -20,7 +20,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id,catno,catname,batchno,total,expiredate,producer FROM b_cat  where  total>0 and expiredate >= sysdate() and {#condition#} order by expiredate]]>
+						<![CDATA[SELECT id,catno,catname,batchno,total,expiredate,producer FROM b_cat  where  total>0 and {#condition#} order by expiredate]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>

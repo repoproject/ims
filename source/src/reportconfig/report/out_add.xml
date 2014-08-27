@@ -8,19 +8,25 @@
 				<col column="ID" displaytype="hidden">
 				</col>
 				<col column="catno" label="试剂/耗材编号" >
+				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
 				<col column="catname" label="试剂/耗材名称" br="true">
+				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
 				<col column="batchno" label="批号" >
+				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
 				<col column="total" label="库存" datatype="int" br="true">
+				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
 				<col column="price" label="价格" >
+				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
 				<col column="priceunit" label="货币" br="true">
+				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
 				<col column="num" label="数量" >
-					<inputbox />
+				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
 				<col column="reason" label="出库原因"  br="true">
 					<inputbox type="selectbox" inlinecount="5">
@@ -40,7 +46,7 @@
 					<inputbox type="datepicker" dateformat="yyyy-MM-dd"></inputbox>
 				</col>
 				<col column="remark" label="备注" br="true">
-					<inputbox type="textareabox" styleproperty="colspan='3'" valuestyleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+					<inputbox type="textareabox" styleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
 				</col>
 			</display>
 			<sql>
