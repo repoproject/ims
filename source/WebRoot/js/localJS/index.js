@@ -306,7 +306,8 @@ function checkFlash(){
 	$("#realTimeWarning").attr("width",aw-8);
 	//模块分权限显示
 	var role = $("#roleFlag").val();
-	if(role == 0){
+	//高级用户分配用户管理权限
+	if(role == 1){
 		$("#userManage").html('<a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo31" external="true" fresh="false" >用户信息管理</a> ');
 		$("#inventoryStatics").html('<a href="excel.jsp" target="navTab" rel="ftpserverstat" external="true" fresh="false">库存统计</a>');
 		}else{
