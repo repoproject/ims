@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-08-27 22:00:33
+Date: 2014-08-27 22:06:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -25,7 +25,7 @@ CREATE TABLE `b_cat` (
   `catname` varchar(255) DEFAULT NULL COMMENT '物品名称',
   `cattype` varchar(50) DEFAULT NULL COMMENT '0-试剂,1-耗材',
   `batchno` varchar(50) NOT NULL COMMENT '批号',
-  `total` int(11) unsigned zerofill DEFAULT NULL COMMENT '总数',
+  `total` int(11) DEFAULT NULL COMMENT '总数',
   `rType` varchar(50) DEFAULT NULL COMMENT '分组，按照R特性分组',
   `productDate` datetime DEFAULT NULL COMMENT '生产日期',
   `producer` varchar(255) DEFAULT NULL COMMENT '生产商',
@@ -42,8 +42,8 @@ CREATE TABLE `b_cat` (
 -- ----------------------------
 -- Records of b_cat
 -- ----------------------------
-INSERT INTO `b_cat` VALUES ('5', 'a', 'a', '0', 'a', '00000000004', '1', '2014-08-01 00:00:00', 'a', '2014-08-31 00:00:00', '10', '0', 'aa', '2014-08-25 21:29:00', '2014-08-25 21:29:00');
-INSERT INTO `b_cat` VALUES ('6', 'bb', 'bb', '0', 'bb', '00000000000', '1', '2014-08-01 00:00:00', 'bbbb', '2014-08-31 00:00:00', '111', '0', 'bbb', '2014-08-25 21:29:30', '2014-08-25 21:29:30');
+INSERT INTO `b_cat` VALUES ('5', 'a', 'a', '0', 'a', '4', '1', '2014-08-01 00:00:00', 'a', '2014-08-31 00:00:00', '10', '0', 'aa', '2014-08-25 21:29:00', '2014-08-25 21:29:00');
+INSERT INTO `b_cat` VALUES ('6', 'bb', 'bb', '0', 'bb', '0', '1', '2014-08-01 00:00:00', 'bbbb', '2014-08-31 00:00:00', '111', '0', 'bbb', '2014-08-25 21:29:30', '2014-08-25 21:29:30');
 
 -- ----------------------------
 -- Table structure for b_in

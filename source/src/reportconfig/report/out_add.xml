@@ -16,7 +16,7 @@
 				<col column="batchno" label="批号" >
 				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
-				<col column="total" label="库存" datatype="int" br="true">
+				<col column="total" label="库存" br="true">
 				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
 				<col column="price" label="价格" >
@@ -25,8 +25,8 @@
 				<col column="priceunit" label="货币" br="true">
 				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
-				<col column="num" label="数量" >
-				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
+				<col column="num" label="数量" datatype="int">
+				    <inputbox type="textbox"  />
 				</col>
 				<col column="reason" label="出库原因"  br="true">
 					<inputbox type="selectbox" inlinecount="5">
