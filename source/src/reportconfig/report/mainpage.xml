@@ -5,7 +5,7 @@
 	<!-- 数据展示篇报表类型 -->
 	
 	
-	<page id="mainpage">
+	<page id="mainpage"   scrollY="true" height="3000">
 	 <header  >
 			<![CDATA[<p align="center"><font size="5"><b>首页提醒</b></font></p>]]>
 		</header>
@@ -13,14 +13,14 @@
 			 <panel id="panel"   width="550" height="220"   margin="6px" border="3" bordercolor="#6633FF">
 			<report id="report1" title="新批号提醒" pagesize="5"  bordercolor="#6633FF"  titlealign="center" width="100%" border="horizontal2"  template="${articlelist.report.template}">
 				<display dataheader="" pagecolselect="false">
-					<col column="deptno" label="部门编号" displaytype="hidden"/>
-					<col column="builtdate" label="创建日期" displaytype="hidden"/>
+					<col column="catno" label="货号" displaytype="hidden"/>
+					<col column="builtdate" label="入库日期" displaytype="hidden"/>
 					 <col property="prexdot" column="{non-fromdb}" valuestyleproperty="align='right' width='5px'"/> 
 					<col column="description" label="标题" datatype="clob" valuestyleproperty="align='left'"/>
 				</display>
 				<sql>
 					<value>
-						<![CDATA[SELECT * FROM tbl_department  order by deptno]]>
+						<![CDATA[SELECT b_in.id,b_in.catno,b_in.catName,b_in.batchNo,b_in.inDate,b_in.inDate as builtdate,CONCAT(date_format(b_in.inDate,'%Y-%c-%d') ,'新入库',b_in.num,'个',b_in.batchno,'的',b_in.catname) description FROM b_in ,b_var WHERE DATEDIFF(current_date(),b_in.inDate) <= b_var.bizValue and  DATEDIFF(current_date(),b_in.inDate)>=0 and b_var.bizkey='banchTime' ORDER BY b_in.inDate DESC]]>
 					</value>					
 				</sql>
 				<format>
@@ -38,11 +38,11 @@
 							description=description.replaceAll("</p>","");
 							if(rrequest.getShowtype()== Consts.DISPLAY_ON_PLAINEXCEL)
 							{
-								description=description+"  ["+builtdate+"]";
+								description=description;
 							}else
 							{
 								description="&nbsp;&nbsp;<span onmouseover=\"this.style.cursor='pointer'\"  onclick=\"wx_win('"+fulldesc+"',{width:400,height:200})\">"+description+"</span>";
-								description=description+"&nbsp;&nbsp;<font color='#505050'>["+builtdate+"]</font>";
+								description=description+"&nbsp;&nbsp;<font color='#505050'></font>";
 							}
 						}
 					]]>
@@ -61,7 +61,7 @@
 				</display>
 				<sql>
 					<value>
-						<![CDATA[SELECT id,b.catno,b.catname,b.batchno,b.total,b.expiredate as builtdate,CONCAT(b.total,'个',b.batchno,'还剩',cast(DATEDIFF(b.expiredate,current_date()) as char(12)),'天过期！(',b.catname,')') description FROM b_cat b,b_var v where v.bizkey='expireTime' and DATEDIFF(b.expiredate,current_date())<v.bizValue and DATEDIFF(b.expiredate,current_date())>0 and  b.total>0 ]]>
+						<![CDATA[SELECT id,b.catno,b.catname,b.batchno,b.total,b.expiredate as builtdate,CONCAT(b.total,'个',b.batchno,'还剩',cast(DATEDIFF(b.expiredate,current_date()) as char(12)),'天过期！(',b.catname,')') description FROM b_cat b,b_var v where v.bizkey='expireTime' and DATEDIFF(b.expiredate,current_date())<=v.bizValue and DATEDIFF(b.expiredate,current_date())>=0 and  b.total>0 ]]>
 					</value>					
 				</sql>
 				<format>
@@ -96,14 +96,15 @@
 			<panel id="pane3"   width="550" height="220"   margin="4px" border="3" bordercolor="#6633FF">
 			<report id="report3" title="库存预警"  pagesize="5"  bordercolor="#6633FF"  titlealign="center" width="100%" border="horizontal2"  template="${articlelist.report.template}">
 				<display dataheader="" pagecolselect="false">
-					<col column="deptno" label="部门编号" displaytype="hidden"/>
-					<col column="builtdate" label="创建日期" displaytype="hidden"/>
+				<col column="id" label="编号" displaytype="hidden"/>
+					<col column="catno" label="货号" displaytype="hidden"/>
+					<col column="builtdate" label="时间" displaytype="hidden"/>
 					 <col property="prexdot" column="{non-fromdb}" valuestyleproperty="align='right' width='5px'"/> 
 					<col column="description" label="标题" datatype="clob" valuestyleproperty="align='left'"/>
 				</display>
 				<sql>
 					<value>
-						<![CDATA[SELECT * FROM tbl_department  order by deptno]]>
+						<![CDATA[SELECT * FROM ( SELECT  b1.id, b1.catno, b1.catname,sum(DISTINCT b1.total) alltotal,b1.expiredate as builtdate,b_var.bizValue,CONCAT(b1.catname,'的库存还剩',b1.total,'个！') description FROM b_cat b1 , b_cat b2,b_var where b1.catname=b2.catname and b_var.bizkey='stockthreshold' GROUP BY b1.catname ) K WHERE alltotal>=0 and alltotal<=bizValue ORDER BY alltotal asc ]]>
 					</value>
 				</sql>
 				<format>
@@ -121,11 +122,11 @@
 							description=description.replaceAll("</p>","");
 							if(rrequest.getShowtype()== Consts.DISPLAY_ON_PLAINEXCEL)
 							{
-								description=description+"  ["+builtdate+"]";
+								description=description;
 							}else
 							{
 								description="&nbsp;&nbsp;<span onmouseover=\"this.style.cursor='pointer'\"  onclick=\"wx_win('"+fulldesc+"',{width:400,height:200})\">"+description+"</span>";
-								description=description+"&nbsp;&nbsp;<font color='#505050'>["+builtdate+"]</font>";
+								description=description+"&nbsp;&nbsp;<font color='#505050'></font>";
 							}
 						}
 					]]>
@@ -136,14 +137,15 @@
 			<panel id="pane4"  width="550" height="220"   margin="4px" border="3" bordercolor="#6633FF">
 			<report id="report4" title="最新出入库"   pagesize="5"  bordercolor="#6633FF"  titlealign="center" width="100%" border="horizontal2"  template="${articlelist.report.template}">
 				<display dataheader="" pagecolselect="false">
-					<col column="deptno" label="部门编号" displaytype="hidden"/>
-					<col column="builtdate" label="创建日期" displaytype="hidden"/>
+					<col column="id" label="编号" displaytype="hidden"/>
+					<col column="catno" label="货号" displaytype="hidden"/>
+					<col column="builtdate" label="出入库日期" displaytype="hidden"/>
 					 <col property="prexdot" column="{non-fromdb}" valuestyleproperty="align='right' width='5px'"/> 
 					<col column="description" label="标题" datatype="clob" valuestyleproperty="align='left'"/>
 				</display>
 				<sql>
 					<value>
-						<![CDATA[SELECT * FROM tbl_department order by deptno]]>
+						<![CDATA[SELECT b_in.id id,b_in.catName as catName,b_in.catno as catno,b_in.inDate as builtdate,b_in.person as person,b_in.num AS num,CONCAT(b_in.person,'入库',b_in.num,'个',b_in.catName,'(',b_in.batchNo,')') description FROM b_in ,b_var where b_var.bizkey='newinout' and DATEDIFF(CURDATE(),b_in.inDate) <=b_var.bizValue and DATEDIFF(CURDATE(),b_in.inDate)>=0 UNION ALL  SELECT b_out.id as id,b_out.catname as catName,b_out.catno as catno,b_out.outDate as builtdate,b_out.person as person,b_out.num as num,CONCAT(b_out.person,'出库',b_out.num,'个',b_out.catName,'(',b_out.batchNo,')') description FROM b_out ,b_var where b_var.bizkey='newinout' and DATEDIFF(CURDATE(),b_out.outDate) <=b_var.bizValue and DATEDIFF(CURDATE(),b_out.outDate)>=0 ORDER BY builtdate DESC ]]>
 					</value>					
 				</sql>
 				<format>
