@@ -30,7 +30,7 @@
 						</value>						
 						<condition name="txtname" label="名称" labelposition="left">
 						     <value>
-							<![CDATA[(trim(name) like  '%#data#%' )]]>
+							<![CDATA[(trim(catname) like  '%#data#%' )]]>
 						</value>
 						     <inputbox>
 						        <typeprompt width="-1" count="20">
@@ -68,7 +68,7 @@
 					<insert pageurl="report{regent_edit.report1}" popupparams="{title:'新增试剂/耗材',width:500,height:350}"></insert>
 					<update pageurl="report{regent_edit.report1}" urlparams="txtid=@{id}"
 						popupparams="{title:'编辑试剂/耗材',width:500,height:350}"></update>  
-					<delete confirmessage="是否删除[@{name}]对应的记录？">
+					<delete confirmessage="是否删除选中的记录？">
 						delete from d_catcode where id=@{id__old};
 					  </delete>							
 				</sql>

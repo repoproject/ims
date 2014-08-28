@@ -7,8 +7,8 @@
 			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
 				<col column="ID" displaytype="hidden">
 				</col>
-				<col column="type" label="类别" br="true">
-                    <inputbox type="selectbox" inlinecount="5" >							
+				<col column="cattype" label="类别" br="true">
+                    <inputbox cattype="selectbox" inlinecount="5" >							
 							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
 					</inputbox>
 				</col>
@@ -27,7 +27,7 @@
 				<col column="catno" label="货号*" br="true">
 					<inputbox   jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
 				</col>		
-				<col column="name" label="试剂/耗材名称*" br="true">
+				<col column="catname" label="称*" br="true">
 					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于100);stripscript(#label#不能含有特殊字符);" />
 				</col>					
 				<col column="seq" label="编号" br="true" >
@@ -43,7 +43,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id,type,(select codename from d_code where codetype='cattype' and  code = d_catcode.type )typename,name,catno,seq,machinename,machineid,orde,remark FROM d_catcode where {#condition#}]]>
+						<![CDATA[SELECT id,cattype,(select codename from d_code where codetype='cattype' and  code = d_catcode.cattype )typename,catname,catno,seq,machinename,machineno,orde,remark FROM d_catcode where {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -52,11 +52,11 @@
 					</condition>
 				</select>
 				<insert>
-					insert into d_catcode(type,name,catno,seq,machinename,orde,remark)
-					values(trim(@{type}),trim(@{name}),trim(@{catno}),trim(@{seq}),trim(@{machinename}),trim(@{orde}),trim(@{remark}));
+					insert into d_catcode(cattype,catname,catno,seq,machinename,orde,remark)
+					values(trim(@{cattype}),trim(@{catname}),trim(@{catno}),trim(@{seq}),trim(@{machinename}),trim(@{orde}),trim(@{remark}));
 				</insert>
 				<update>
-					update d_catcode set type=trim(@{type}),machinename=trim(@{machinename}),name=trim(@{name}),seq=trim(@{seq}),orde=@{orde},remark=trim(@{remark}) 
+					update d_catcode set cattype=trim(@{cattype}),machinename=trim(@{machinename}),catname=trim(@{catname}),seq=trim(@{seq}),orde=@{orde},remark=trim(@{remark}) 
 					where ID=@{ID__old};
 				</update>
 			</sql>
