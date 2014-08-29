@@ -16,6 +16,7 @@
 					<col column="total" label="数量" clickorderby="true" datatype="int" width="5%"></col>
 					<col column="expiredate" label="有效期" clickorderby="true" width="15%"></col>
 					<col column="producer" label="生产商" clickorderby="true" width="20%"></col>
+					<col column="{editablelist-edit}" label="出库操作"></col>
 				</display>
 			<sql>
 				<select>
@@ -77,6 +78,7 @@
 					<col column="machinename" label="设备"  clickorderby="true" width="10%"/>
 					<col column="machineno" label="设备序号"  clickorderby="true" width="10%"/>
 					<col column="reason" label="原因" clickorderby="true" width="15%"></col>
+					<col column="{editablelist-edit}" label="修改出库"></col>
 				</display>
 			<sql>
 				<select>

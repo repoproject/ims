@@ -19,6 +19,7 @@
 					<col column="dealer" label="供应商"  clickorderby="true" width="10%"/>
 					<col column="producer" label="生产商"  clickorderby="true" width="10%"/>
 					<col column="reason" label="入库原因"  clickorderby="true" width="15%"/>
+					<col column="{editablelist-edit}" label="入库操作"></col>
 				</display>
 			<sql>
 				<select>

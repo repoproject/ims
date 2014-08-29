@@ -2,7 +2,7 @@
 <applications xmlns="http://www.wabacus.com"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
-	<page id="regent_edit" js="/webresources/script/validate.js">
+	<page id="regent_edit" js="/webresources/script/validate.js" >
 		<report id="report1" title="request{txtname}详细信息" type="editabledetail"  interceptor="com.ims.interceptor.RegentEdit" >
 			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
 				<col column="ID" displaytype="hidden">
@@ -14,8 +14,15 @@
 				</col>
 				
 				<col column="machinename" label="所属设备" br="true">
-					<inputbox type="combox" inlinecount="5" >							
-							<option dataset="@{select distinct name  from b_machine}" label="name" value="name"></option>
+										
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" >
+					    <typeprompt count="20"  callbackmethod="testTypePromptCallBack1">
+							 <promptcol label="设备名称" value="machinename" title="名称" matchmode="anywhere"></promptcol>
+							 <promptcol label="设备编号" value="id" title="编号" matchmode="anywhere"></promptcol>
+							      <datasource>
+							          <option dataset="@{select  machinename,id  from b_machine where {#matchcondition#}}"></option>       
+							      </datasource>
+					    </typeprompt>
 					</inputbox>
 				</col>
 				 <!-- 
