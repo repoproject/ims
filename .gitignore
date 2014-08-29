@@ -11,6 +11,7 @@
 # Eclipse project files
 .mymetadata
 .settings/
+.classpath
 
 # svn files
 .svn/
