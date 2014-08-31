@@ -1,1 +1,2 @@
-SELECT id,b.catno,b.catname,b.batchno,b.total,b.expiredate as builtdate,CONCAT(b.total,'个',b.batchno,'还剩',cast(DATEDIFF(b.expiredate,current_date()) as char(12)),'天过期！(',b.catname,')') description FROM b_cat b,b_var v where v.bizkey='expireTime' and DATEDIFF(b.expiredate,current_date())<=v.bizValue and DATEDIFF(b.expiredate,current_date())>=0 and  b.total>0 ORDER BY b.expiredate ASC
+INSERT INTO `过期查询新` VALUES (5, 'a', 'a', 'a', 4, '2014-8-31 00:00:00', '4个a还剩0天过期！(a)');
+INSERT INTO `过期查询新` VALUES (7, '123', '1', '1-2-3', 10, '2014-9-2 00:00:00', '10个1-2-3还剩2天过期！(1)');

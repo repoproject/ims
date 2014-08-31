@@ -29,7 +29,8 @@ public class DeleteIn extends AbsInterceptorDefaultAdapter{
 			//如果库存小于当前入库的数量，说明当前入库的已经存在出库，则不允许删除入库
 			try {
 				int delNum = Integer.parseInt(row.get("num"));
-				int total = 0;//TODO:从数据库中取值
+				int total = 0;
+				//TODO:从数据库中取值
 				if(total < delNum){
 					rrequest.getWResponse().getMessageCollector().alert("当前入库已经存在被出库的情况，不允许删除",null,false);
 					return WX_RETURNVAL_TERMINATE;

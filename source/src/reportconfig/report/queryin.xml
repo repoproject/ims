@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications xmlns="http://www.wabacus.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
+	<page id="queryin" js="/webresources/script/validate.js"  css="/webresources/component/tiny_mce/themes/advanced/skins/o2k7/ui.css">
+	    <header>
+			<![CDATA[<p align="center"><font size="6"><b>入库查询</b></font></p>]]>
+		</header>
+		<report id="report1" title="request{txtname}入库列表" rowselect="multiple-checkbox" type="editablelist" interceptor="com.ims.interceptor.QueryIn" >
+				<display mouseoverbgcolor="CCCCCC" >
+				<col column="{col-rowselect}" width="20"></col>
+					<col column="id" label="编号"  displaytype="hidden"/>
+					<col column="inDate" label="入库日期"  clickorderby="true" datatype="date{yyyy-MM-dd}" width="10%"/>
+					<col column="cattype" label="类型"  clickorderby="true" width="4%"/>
+					<col column="catno" label="货号"  clickorderby="true" width="8%"/>
+					<col column="catname" label="名称"  clickorderby="true" width="15%"/>
+					<col column="seq" label="编号"  clickorderby="true" width="8%" />
+					<col column="batchno" label="批号"  clickorderby="true" width="8%"/>
+					<col column="num" label="数量"  datatype="int" clickorderby="true" width="8%"/>
+					<col column="localPrice" label="单价(RMB)"  clickorderby="true" width="8%"/>
+					<col column="person" label="入库人"  clickorderby="true" width="5%"/>
+					<col column="reason" label="入库原因"  clickorderby="true" width="10%"/>
+					<col column="dealer" label="供应商"  clickorderby="true" width="10%"/>
+					<col column="producer" label="生产商"  clickorderby="true" width="10%"/>					
+					<col column="remark" label="备注"  clickorderby="true" width="10%"/>
+				</display>
+			<sql>
+				<select>
+					<value>
+						<![CDATA[SELECT DISTINCT id,inDate,catno,catname,batchno,seq,num,localPrice,producer,dealer,(select codename from d_code where code=cattype and codetype='cattype') cattype,(select codename from d_code where code=reason and codetype='inreason') reason,person,b_in.remark FROM b_in,b_var where 1=1 and {#condition#}  ]]>
+					</value>
+					<condition name="txtbegin1" label="开始时间" labelposition="left">
+							<value>
+								<![CDATA[(b_in.indate>=DATE('#data#'))]]>
+							</value>
+							<inputbox type="datepicker" dateformat="yyyy-MM-dd" styleproperty="title='针对入库时间'" jsvalidatetype="onsubmit" jsvalidate="isStartTimeLargerEnd1(#label#不能晚于结束时间);isDate(#label#格式不符合要求)"></inputbox>
+						</condition>
+						<condition name="txtend1" label="结束时间" labelposition="left">
+							<value>
+								<![CDATA[(b_in.indate<=DATE('#data#'))]]>
+							</value>
+							<inputbox type="datepicker" dateformat="yyyy-MM-dd" styleproperty="title='针对入库时间'" jsvalidatetype="onsubmit" jsvalidate="isDate(#label#格式不符合要求)"></inputbox>
+						</condition>
+						
+						
+						<condition name="txtcatname" label="名称" labelposition="left">
+						     <value>
+							<![CDATA[(trim(catname) like  '%#data#%' )]]>
+						</value>
+						     <inputbox>
+						        <typeprompt width="-1" count="20"> 
+							       <promptcol label="catname" matchmode="anywhere"></promptcol>
+							       <datasource>    
+							          <option dataset="@{select distinct catname from d_catcode where {#matchcondition#}}"></option> 
+                                   </datasource>
+						        </typeprompt>
+						     </inputbox>
+					    </condition>
+					    <condition name="txtperson" label="入库人" labelposition="left">
+						     <value>
+							<![CDATA[(trim(person) like  '%#data#%' )]]>
+						</value>						     
+					    </condition>
+					    <condition name="typename" label="类型" labelposition="left">						
+							<value> <![CDATA[(trim(type) = '#data#')]]>
+							</value>
+							<inputbox type="selectbox" >	
+							<option value="" label="全部"></option>						
+							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
+							</inputbox>
+						</condition>
+					    <condition name="txtinreason"   label="入库原因" labelposition="left"  br="true">						
+							<value> <![CDATA[(trim(reason) = '#data#')]]>
+							</value>
+							<inputbox type="selectbox" >	
+							<option value="" label="全部"></option>						
+							<option dataset="@{select codename ,code from d_code where codetype='inreason'}" label="codename" value="code"></option>
+							</inputbox>
+						</condition>
+
+					    
+					    <condition name="txtproducer" label="生 产 商" labelposition="left">
+						     <value>
+							<![CDATA[(trim(producer) like  '%#data#%' )]]>
+						</value>						     
+					    </condition>	 
+					    <condition name="txtdealer" label="供 应 商" labelposition="left">
+						     <value>
+							<![CDATA[(trim(dealer) like  '%#data#%' )]]>
+						</value>						     
+					    </condition>							
+						<condition name="txtcatno" label="货号" labelposition="left">
+						     <value>
+							<![CDATA[(trim(catno) like  '%#data#%' )]]>
+						</value>						     
+					    </condition>
+					    <condition name="txtbatchno" label="批     号" labelposition="left"  >
+						     <value>
+							<![CDATA[(trim(batchno) like  '%#data#%' )]]>
+						</value>						     
+					    </condition>		
+						
+				</select>			
+			</sql>
+			<format><!--
+				<value>
+					rrequest.getRequest().setAttribute("txtname",name);//存放request，以便显示标题时能取到
+				</value>
+			--></format>
+		</report>
+	</page>
+	
+</applications>
