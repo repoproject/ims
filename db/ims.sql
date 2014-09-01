@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-08-27 22:06:12
+Date: 2014-08-29 22:53:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,15 +35,21 @@ CREATE TABLE `b_cat` (
   `dealer` varchar(255) DEFAULT NULL,
   `makedate` datetime DEFAULT NULL,
   `modifydate` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `I_CAT_NO` (`catno`) USING BTREE COMMENT '不用作为主键，但是作为唯一索引标识不能重复'
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_cat
 -- ----------------------------
-INSERT INTO `b_cat` VALUES ('5', 'a', 'a', '0', 'a', '4', '1', '2014-08-01 00:00:00', 'a', '2014-08-31 00:00:00', '10', '0', 'aa', '2014-08-25 21:29:00', '2014-08-25 21:29:00');
+INSERT INTO `b_cat` VALUES ('5', 'a', 'a', '0', 'a', '5', '1', '2014-08-01 00:00:00', 'a', '2014-08-31 00:00:00', '10', '0', 'aa', '2014-08-25 21:29:00', '2014-08-25 21:29:00');
 INSERT INTO `b_cat` VALUES ('6', 'bb', 'bb', '0', 'bb', '0', '1', '2014-08-01 00:00:00', 'bbbb', '2014-08-31 00:00:00', '111', '0', 'bbb', '2014-08-25 21:29:30', '2014-08-25 21:29:30');
+INSERT INTO `b_cat` VALUES ('7', 'bbb', 'bb', '0', 'bbbb', '10', '1', '2014-08-18 00:00:00', 'bbb', '2014-09-06 00:00:00', '12', '1', 'bbb', '2014-08-27 22:14:35', '2014-08-27 22:14:35');
+INSERT INTO `b_cat` VALUES ('8', 'cccc', 'ccc', '0', 'ccc', '10', '1', '2014-08-27 00:00:00', 'cc', '2014-12-31 00:00:00', '13', '0', 'cccc', '2014-08-27 22:15:08', '2014-08-27 22:15:08');
+INSERT INTO `b_cat` VALUES ('9', 'd', 'd', '0', 'dd', '0', '1', '2014-08-10 00:00:00', 'dddd', '2014-08-31 00:00:00', '12', '0', 'ddd', '2014-08-29 22:06:21', '2014-08-29 22:06:21');
+INSERT INTO `b_cat` VALUES ('10', 'd', 'd', '0', 'd', '10', '1', '2014-08-03 00:00:00', 'ddd', '2014-08-31 00:00:00', '12', '0', 'dd', '2014-08-29 22:09:50', '2014-08-29 22:09:50');
+INSERT INTO `b_cat` VALUES ('11', 'e', 'e', '0', 'e', '0', '1', '2014-08-01 00:00:00', 'ee', '2014-09-01 00:00:00', '10', '0', 'e', '2014-08-29 22:11:22', '2014-08-29 22:11:22');
+INSERT INTO `b_cat` VALUES ('12', 'e', 'e', '0', 'e', '0', '1', '2014-08-01 00:00:00', 'ee', '2014-08-29 00:00:00', '12', '0', 'ee', '2014-08-29 22:14:04', '2014-08-29 22:14:04');
+INSERT INTO `b_cat` VALUES ('13', 'e', 'e', '0', 'e', '0', '1', '2014-08-01 00:00:00', 'ee', '2014-09-01 00:00:00', '13', '0', 'ee', '2014-08-29 22:23:26', '2014-08-29 22:23:26');
 
 -- ----------------------------
 -- Table structure for b_in
@@ -76,12 +82,15 @@ CREATE TABLE `b_in` (
   `makedate` datetime DEFAULT NULL COMMENT '产生日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='试剂表';
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COMMENT='试剂表';
 
 -- ----------------------------
 -- Records of b_in
 -- ----------------------------
 INSERT INTO `b_in` VALUES ('15', 'a', 'a', 'a', '0', 'a', 'aa', '2014-08-01 00:00:00', '0', '2014-08-31 00:00:00', '10', null, '10.00', '0', null, '0.00', '2014-08-25 00:00:00', null, '1', '0', 'a', 'aaa', null, null, null);
+INSERT INTO `b_in` VALUES ('16', 'bbb', 'bb', 'bbbb', '0', 'bbb', 'bbb', '2014-08-18 00:00:00', '0', '2014-09-06 00:00:00', '10', null, '12.00', '1', null, '0.00', '2014-01-01 00:00:00', null, '1', '0', 'bb', '', null, null, null);
+INSERT INTO `b_in` VALUES ('17', 'cccc', 'ccc', 'ccc', '0', 'cc', 'cccc', '2014-08-27 00:00:00', '0', '2014-12-31 00:00:00', '10', null, '13.00', '0', null, '0.00', '2014-01-01 00:00:00', null, '1', '0', 'cc', '', null, null, null);
+INSERT INTO `b_in` VALUES ('19', 'd', 'd', 'd', '0', 'ddd', 'dd', '2014-08-03 00:00:00', '0', '2014-08-31 00:00:00', '10', null, '12.00', '0', null, '0.00', '2014-01-01 00:00:00', null, '1', '0', 'dd', 'dddddd', null, null, null);
 
 -- ----------------------------
 -- Table structure for b_machine
@@ -129,7 +138,7 @@ CREATE TABLE `b_out` (
 -- Records of b_out
 -- ----------------------------
 INSERT INTO `b_out` VALUES ('3', 'aa', 'aa', 'a', 'a', 'a', 'aa', '2014-08-25 00:00:00', '10.00', '0', '5', '0', 'aa', '001', '2014-08-25 22:20:54', '2014-08-25 22:20:54');
-INSERT INTO `b_out` VALUES ('4', 'bbb', 'bbb', 'a', 'a', 'a', 'aaa', '2014-08-26 00:00:00', '10.00', '0', '1', '0', 'aaa', '001', '2014-08-26 16:21:28', '2014-08-26 16:21:28');
+INSERT INTO `b_out` VALUES ('4', 'e', 'e', 'e', 'e', 'e', 'e', '2014-08-29 00:00:00', '13.00', '0', '4', '0', 'e', '001', '2014-08-29 22:24:28', '2014-08-29 22:24:28');
 
 -- ----------------------------
 -- Table structure for b_person
@@ -379,32 +388,56 @@ DELIMITER ;
 DROP TRIGGER IF EXISTS `tg_In_Delete`;
 DELIMITER ;;
 CREATE TRIGGER `tg_In_Delete` AFTER DELETE ON `b_in` FOR EACH ROW begin
-     declare v_total int;
-     set v_total=(select total-old.num from b_cat a where a.catno=old.catno and a.batchno=old.batchno and a.price=old.price);
-     if v_total < 0 then
-          set v_total = 0;
-     end if;
-     update b_cat set total = v_total where catno=old.catno and batchno=old.batchno and price=old.price;
+     declare v_total,v_delnum int;
+     set v_total=(select total from b_cat a where a.catno=old.catno and a.batchno=old.batchno and a.price=old.price);
+     set v_delnum = old.num;
+     if v_total < old.num  then
+          set v_delnum = v_total;  --  只能删掉未出库的入库物品，已经出库的不能删除
+          -- 已经出库的重新入库,这里无法实现，需要在程序中处理
+          end if;
+     update b_cat set total = v_total-v_delnum where catno=old.catno and batchno=old.batchno and price=old.price;
      
 end
 ;;
 DELIMITER ;
 DROP TRIGGER IF EXISTS `tg_Out_Insert`;
 DELIMITER ;;
-CREATE TRIGGER `tg_Out_Insert` AFTER INSERT ON `b_out` FOR EACH ROW begin
-     declare v_total int;
-     set v_total=(select total-new.num from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
-     if v_total < 0 then
-          set v_total = 0;
+CREATE TRIGGER `tg_Out_Insert` BEFORE INSERT ON `b_out` FOR EACH ROW begin
+     declare v_total,v_num int;
+     set v_total=(select total from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
+     if v_total < new.num then
+          set new.num = v_total;
      end if;
-     update b_cat set total = v_total where catno=new.catno and batchno=new.batchno and price=new.price;
+     update b_cat set total = (v_total-new.num) where catno=new.catno and batchno=new.batchno and price=new.price;
      
 end
 ;;
 DELIMITER ;
 DROP TRIGGER IF EXISTS `tg_Out_Update`;
 DELIMITER ;;
-CREATE TRIGGER `tg_Out_Update` AFTER UPDATE ON `b_out` FOR EACH ROW begin
+CREATE TRIGGER `tg_Out_Update` BEFORE UPDATE ON `b_out` FOR EACH ROW begin
+   declare cnt,v_total int;
+   set cnt=(select count(id) from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
+   set v_total=(select total from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
+   --  修改的时候可能会修改业务主键，这里判断
+   if old.catno = new.catno and old.batchno=new.batchno and old.price=new.price then
+       if  v_total + old.num < new.num then 
+           set new.num = v_total + old.num; -- 超额出库，设置最大出库数据为库存
+       end if;
+        update b_cat a set a.total = (a.total+old.num-new.num) where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
+   else
+       --  修改前的出库数据归库
+       update b_cat a set a.total = a.total+old.num where a.catno=old.catno and a.batchno=old.batchno and a.price=old.price;
+      --  修改后的业务主键存在于库存中，则更新库存，不存在则出库数量为0
+       if cnt > 0 then
+           if v_total < new.num then
+               set new.num = v_total; -- 超出库存，设定为库存
+           end if;
+           update b_cat a set a.total=a.total-new.num where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
+       else
+           set new.num = 0; --  通过修改，出库了一种没有库存的物品，则出库记录修改为0
+        end if;
+   end if;
 end
 ;;
 DELIMITER ;

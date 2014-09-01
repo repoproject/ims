@@ -2,34 +2,37 @@
 <applications xmlns="http://www.wabacus.com"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
-	<page id="regent_edit" js="/webresources/script/validate.js">
+	<page id="regent_edit" js="/webresources/script/validate.js" >
 		<report id="report1" title="request{txtname}详细信息" type="editabledetail"  interceptor="com.ims.interceptor.RegentEdit" >
 			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
 				<col column="ID" displaytype="hidden">
 				</col>
-				<col column="type" label="类别" br="true">
-                    <inputbox type="selectbox" inlinecount="5" >							
+				<col column="cattype" label="类别" br="true">
+					<inputbox type="selectbox" >													
 							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
 					</inputbox>
+					
 				</col>
 				
 				<col column="machinename" label="所属设备" br="true">
-					<inputbox type="combox" inlinecount="5" >							
-							<option dataset="@{select distinct name  from b_machine}" label="name" value="name"></option>
-					</inputbox>
+
+						     <inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" >
+						        <typeprompt width="-1" count="20">
+							       <promptcol label="machinename" matchmode="anywhere"></promptcol>
+							       <datasource>    
+							          <option dataset="@{select  machinename  from b_machine where {#matchcondition#}}"></option> 
+                                   </datasource>
+						        </typeprompt>
+						     </inputbox>	
 				</col>
-				 <!-- 
-				<col column="machinename" label="所属设备"  br="true">
-					<inputbox type="combox"  inlinecount="5"  servervalidate="isNotEmpty(${invalid.isnotempty})" >
-						<option dataset="@{select distinct name  from b_machine}" label="name" value="name"></option>
-					</inputbox>
-			    </col>-->
+				<col column="catname" label="名称*" br="true">
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于100);stripscript(#label#不能含有特殊字符);" />
+				</col>
+				
 				<col column="catno" label="货号*" br="true">
 					<inputbox   jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
 				</col>		
-				<col column="name" label="试剂/耗材名称*" br="true">
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于100);stripscript(#label#不能含有特殊字符);" />
-				</col>					
+					
 				<col column="seq" label="编号" br="true" >
 				 <inputbox type="textbox" styleproperty="rows='3'" jsvalidate="isNotLongerThan50(#label#列长度应小于等于50);" />	
 				</col>
@@ -43,7 +46,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id,type,(select codename from d_code where codetype='cattype' and  code = d_catcode.type )typename,name,catno,seq,machinename,machineid,orde,remark FROM d_catcode where {#condition#}]]>
+						<![CDATA[SELECT id,cattype,(select codename from d_code where codetype='cattype' and  code = d_catcode.cattype )typename,catname,catno,seq,machinename,machineno,orde,remark FROM d_catcode where {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -52,11 +55,11 @@
 					</condition>
 				</select>
 				<insert>
-					insert into d_catcode(type,name,catno,seq,machinename,orde,remark)
-					values(trim(@{type}),trim(@{name}),trim(@{catno}),trim(@{seq}),trim(@{machinename}),trim(@{orde}),trim(@{remark}));
+					insert into d_catcode(cattype,catname,catno,seq,machinename,orde,remark)
+					values(trim(@{cattype}),trim(@{catname}),trim(@{catno}),trim(@{seq}),trim(@{machinename}),trim(@{orde}),trim(@{remark}));
 				</insert>
 				<update>
-					update d_catcode set type=trim(@{type}),machinename=trim(@{machinename}),name=trim(@{name}),seq=trim(@{seq}),orde=@{orde},remark=trim(@{remark}) 
+					update d_catcode set cattype=trim(@{cattype}),machinename=trim(@{machinename}),catname=trim(@{catname}),seq=trim(@{seq}),orde=@{orde},remark=trim(@{remark}) 
 					where ID=@{ID__old};
 				</update>
 			</sql>

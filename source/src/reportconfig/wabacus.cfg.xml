@@ -82,6 +82,8 @@
 		<report-file>report/regent_edit.xml</report-file>
 		
 		
+		<report-file>report/queryin.xml</report-file>
+		
 		<report-file>report/equip.xml</report-file>
 		<report-file>report/equip_edit.xml</report-file>
 		

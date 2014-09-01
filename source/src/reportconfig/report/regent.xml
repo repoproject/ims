@@ -6,8 +6,19 @@
 		<header>
 			<![CDATA[<p align="center"><font size="6"><b>试剂/耗材库维护</b></font></p>]]>
 		</header>
-		<report id="regentlist" parenttitle="试剂/耗材库维护" type="editablelist" cellresize="1" rowselect="multiple-checkbox" pagesize="13" interceptor="com.ims.interceptor.DeleteUser">
-				
+		<report id="regentlist" parenttitle="试剂/耗材库维护" type="editablelist" cellresize="1" rowselect="multiple-checkbox" pagesize="13" >
+			<interceptor>
+				    <beforedisplay-perrow>
+					if(rowDataBean.getRowindex()==-1) return ;//标题行
+					if(rowDataBean.getRowindex()%2==1)
+					{
+						String style=rowDataBean.getRowstyleproperty();
+						if(style==null) style="";
+						style+=" style='background:#CFDFF8'";
+						rowDataBean.setRowstyleproperty(style);
+					}
+				</beforedisplay-perrow>
+			  </interceptor>	
 
 				<display mouseoverbgcolor="CCCCCC" >
 				<col column="{col-rowselect}" width="20"></col>
@@ -30,13 +41,13 @@
 						</value>						
 						<condition name="txtname" label="名称" labelposition="left">
 						     <value>
-							<![CDATA[(trim(name) like  '%#data#%' )]]>
+							<![CDATA[(trim(catname) like  '%#data#%' )]]>
 						</value>
 						     <inputbox>
 						        <typeprompt width="-1" count="20">
-							       <promptcol label="name" matchmode="anywhere"></promptcol>
+							       <promptcol label="catname" matchmode="anywhere"></promptcol>
 							       <datasource>    
-							          <option dataset="@{select distinct name from d_catcode where {#matchcondition#}}"></option> 
+							          <option dataset="@{select distinct catname from d_catcode where {#matchcondition#}}"></option> 
                                    </datasource>
 						        </typeprompt>
 						     </inputbox>
@@ -68,7 +79,7 @@
 					<insert pageurl="report{regent_edit.report1}" popupparams="{title:'新增试剂/耗材',width:500,height:350}"></insert>
 					<update pageurl="report{regent_edit.report1}" urlparams="txtid=@{id}"
 						popupparams="{title:'编辑试剂/耗材',width:500,height:350}"></update>  
-					<delete confirmessage="是否删除[@{name}]对应的记录？">
+					<delete confirmessage="是否删除所选中的记录？">
 						delete from d_catcode where id=@{id__old};
 					  </delete>							
 				</sql>

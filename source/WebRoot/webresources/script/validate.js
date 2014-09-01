@@ -767,3 +767,19 @@ function isNumber(strValue)
 
 	return true;	
 } 
+
+/**
+ *校验输入的必须是正整数和0  by gq
+ *@param strValue 被校验的字符串
+ * @return 含有特殊字符返回失败，否则返回成功
+ */  
+function isPosNumber(strValue) 
+{  
+	//验证正整数和0测试
+	if( !checkExp("^/d+$", strValue ))
+	{
+		return false;
+	}
+
+	return true;	
+} 
