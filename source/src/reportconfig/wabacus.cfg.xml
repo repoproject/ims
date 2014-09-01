@@ -15,8 +15,6 @@
 		<item name="default-labelstyle" value="1"/>
 		<!-- 查询条件提示标签的显示位置 -->
 		<item name="server-validate-class" value=""/>
-		<!-- 自己开发的服务器端校验类 -->
-		<item name="skin" value="vista"/>
 		<!-- 皮肤样式 -->
 		<item name="default-checkpermission" value="true"/>
 		<!-- 本应用是否要检查权限，如果在不需要检查权限的应用中关闭它，可以改善性能 -->
@@ -83,6 +81,7 @@
 		
 		
 		<report-file>report/queryin.xml</report-file>
+		<report-file>report/queryout.xml</report-file>
 		
 		<report-file>report/equip.xml</report-file>
 		<report-file>report/equip_edit.xml</report-file>

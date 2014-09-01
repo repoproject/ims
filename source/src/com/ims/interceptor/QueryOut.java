@@ -9,7 +9,7 @@ import com.wabacus.system.ReportRequest;
 import com.wabacus.system.intercept.AbsInterceptorDefaultAdapter;
 import com.wabacus.system.intercept.RowDataBean;
 
-public class QueryIn extends AbsInterceptorDefaultAdapter {
+public class QueryOut extends AbsInterceptorDefaultAdapter {
 
 	public void beforeDisplayReportDataPerRow(ReportRequest rrequest,
 			ReportBean rbean, RowDataBean rowDataBean) {
@@ -28,7 +28,7 @@ public class QueryIn extends AbsInterceptorDefaultAdapter {
 	 * 装载数据之前执行的函数
 	 * 
 	 * @创建者：guanq
-	 * @创建时间：2014-08-06
+	 * @创建时间：2014-08-30
 	 * @返回值：查询语句字符串对象
 	 */
 	public Object beforeLoadData(ReportRequest rrequest, ReportBean rbean,
@@ -44,8 +44,9 @@ public class QueryIn extends AbsInterceptorDefaultAdapter {
 
 		// 判断查询字符串中是否含有占位符（1=1）和开始时间查询条件
 		if (sql.contains("1=1")&& 
-				!sql.contains("b_in.indate>=DATE")
-			&&	!sql.contains("b_in.indate<=DATE")) {
+				!sql.contains("outdate>=DATE")
+			&&	!sql.contains("outdate<=DATE")) {
+
 
 			SimpleDateFormat sf1 = new SimpleDateFormat("yyyy-MM-dd");
 			SimpleDateFormat sf2 = new SimpleDateFormat("yyyy-MM-dd");
@@ -65,13 +66,13 @@ public class QueryIn extends AbsInterceptorDefaultAdapter {
 			rrequest.setAttribute("txtend1", time1);
 		
 			sql = sql
-					.replaceAll(
-							"1=1",
-							"(b_in.indate>=DATE('"
-									+ time2
-									+ "')) and (b_in.indate<=DATE('"
-									+ time1
-									+ "'))");
+			.replaceAll(
+					"1=1",
+					"(outdate>=DATE('"
+							+ time2
+							+ "')) and (outdate<=DATE('"
+							+ time1
+							+ "'))");
 		}
 
 		

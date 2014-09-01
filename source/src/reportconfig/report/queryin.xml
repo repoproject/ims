@@ -22,12 +22,13 @@
 					<col column="reason" label="入库原因"  clickorderby="true" width="10%"/>
 					<col column="dealer" label="供应商"  clickorderby="true" width="10%"/>
 					<col column="producer" label="生产商"  clickorderby="true" width="10%"/>					
+					<col column="rtype" label="所属R"  clickorderby="true" width="5%"/>
 					<col column="remark" label="备注"  clickorderby="true" width="10%"/>
 				</display>
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT DISTINCT id,inDate,catno,catname,batchno,seq,num,localPrice,producer,dealer,(select codename from d_code where code=cattype and codetype='cattype') cattype,(select codename from d_code where code=reason and codetype='inreason') reason,person,b_in.remark FROM b_in,b_var where 1=1 and {#condition#}  ]]>
+						<![CDATA[SELECT DISTINCT id,inDate,catno,catname,batchno,seq,num,localPrice,producer,dealer,(select codename from d_code where code=cattype and codetype='cattype') cattype,(select codename from d_code where code=reason and codetype='inreason') reason,person,b_in.remark,(select codename from d_code where code=rtype and codetype='rtype') rtype FROM b_in where 1=1 and {#condition#}  ]]>
 					</value>
 					<condition name="txtbegin1" label="开始时间" labelposition="left">
 							<value>
@@ -43,30 +44,32 @@
 						</condition>
 						
 						
-						<condition name="txtcatname" label="名称" labelposition="left">
+						<condition name="txtcatname" label="名             称" labelposition="left">
 						     <value>
 							<![CDATA[(trim(catname) like  '%#data#%' )]]>
 						</value>
-						     <inputbox>
-						        <typeprompt width="-1" count="20"> 
-							       <promptcol label="catname" matchmode="anywhere"></promptcol>
-							       <datasource>    
-							          <option dataset="@{select distinct catname from d_catcode where {#matchcondition#}}"></option> 
-                                   </datasource>
-						        </typeprompt>
+						 <inputbox>
+					    <typeprompt count="20" >
+							 <promptcol label="catname" value="catname" title="名称" matchmode="anywhere"></promptcol>
+							 <promptcol label="catno" value="catno" title="货号" matchmode="anywhere"></promptcol>				
+							      <datasource>
+							          <option dataset="@{select catno,catname from d_catcode where {#matchcondition#}}"></option>       
+							      </datasource>
+					    </typeprompt>
 						     </inputbox>
 					    </condition>
-					    <condition name="txtperson" label="入库人" labelposition="left">
+                        <condition name="txtcatno" label="货号" labelposition="left">
 						     <value>
-							<![CDATA[(trim(person) like  '%#data#%' )]]>
+							<![CDATA[(trim(catno) like  '%#data#%' )]]>
 						</value>						     
 					    </condition>
+                        
 					    <condition name="typename" label="类型" labelposition="left">						
-							<value> <![CDATA[(trim(type) = '#data#')]]>
+							<value> <![CDATA[(trim(cattype) = '#data#')]]>
 							</value>
 							<inputbox type="selectbox" >	
 							<option value="" label="全部"></option>						
-							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
+							<option dataset="@{select codename,code from d_code where codetype='cattype' order by code}" label="codename" value="code"></option>
 							</inputbox>
 						</condition>
 					    <condition name="txtinreason"   label="入库原因" labelposition="left"  br="true">						
@@ -88,18 +91,35 @@
 						     <value>
 							<![CDATA[(trim(dealer) like  '%#data#%' )]]>
 						</value>						     
-					    </condition>							
-						<condition name="txtcatno" label="货号" labelposition="left">
-						     <value>
-							<![CDATA[(trim(catno) like  '%#data#%' )]]>
-						</value>						     
 					    </condition>
+					    <condition name="txtperson" label="入库人" labelposition="left">
+						     <value>
+							<![CDATA[(trim(person) like  '%#data#%' )]]>
+						</value>	
+						     <inputbox>
+						        <typeprompt width="-1" count="20">
+							       <promptcol label="nickname" matchmode="anywhere"></promptcol>
+							       <datasource>    
+							          <option dataset="@{SELECT Distinct nickname from d_user where {#matchcondition#}}"></option> 
+                                   </datasource>
+						        </typeprompt>
+						     </inputbox>	     
+					    </condition>
+					    							
+					
 					    <condition name="txtbatchno" label="批     号" labelposition="left"  >
 						     <value>
 							<![CDATA[(trim(batchno) like  '%#data#%' )]]>
 						</value>						     
 					    </condition>		
-						
+						<condition name="txtrtype" label="所属R" labelposition="left">						
+							<value> <![CDATA[(trim(rtype) = '#data#')]]>
+							</value>
+							<inputbox type="selectbox" >	
+							<option value="" label="全部"></option>						
+							<option dataset="@{select codename,code from d_code where codetype='rtype'}" label="codename" value="code"></option>
+							</inputbox>
+						</condition>
 				</select>			
 			</sql>
 			<format><!--

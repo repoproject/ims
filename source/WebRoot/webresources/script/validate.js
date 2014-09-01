@@ -1,4 +1,5 @@
-﻿Array.prototype.max = function()
+﻿
+Array.prototype.max = function()
 {
 	var i, max = this[0];
 	
