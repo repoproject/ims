@@ -23,18 +23,19 @@ import com.ims.task.DayTask;
  */
 public class TaskListener implements ServletContextListener {
 
-    protected Logger cLogger = Logger.getLogger(getClass());
+    protected Logger log = Logger.getLogger(getClass());
 	
 	private static final long PERIOD_DAY = 24*60*60*1000; //run
 	private Timer timer = null;
 
 
 	public void contextInitialized(ServletContextEvent arg0) {
-		cLogger.info("定时任务监听器启动..........");
+		log.info("定时任务监听器启动..........");
 		timer = new Timer(true);
 		//指定时间开始固定的延迟时间执行
 		Date startDate = DayTask.getExeDate();
-		cLogger.info("注册日终任务====执行时间" + DateFormatUtils.format(startDate,"HH:mm:ss")  + "..........");
+		log.info("注册日终任务====执行时间" + DateFormatUtils.format(startDate,"HH:mm:ss")  + "..........");
+		
 		timer.schedule(new DayTask(),startDate,PERIOD_DAY);
 	}
 

@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimerTask;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.log4j.Logger;
 
 /**
@@ -16,18 +17,16 @@ import org.apache.log4j.Logger;
 public class DayTask extends TimerTask{
 
 	
-	private static final String DEFAULT_TIME = "23:00:00";
-    protected Logger cLogger = Logger.getLogger(getClass());
+	private static final String DEFAULT_TIME = "00:00:00";
+    protected Logger log = Logger.getLogger(getClass());
     
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		
+		log.info("DayTask run....");
 	}
 	
 	public static Date getExeDate(){
-
-
 		String[] startTime = DEFAULT_TIME.split(":");
 
 		int startHour = Integer.parseInt(startTime[0]);
@@ -43,7 +42,7 @@ public class DayTask extends TimerTask{
 		Date date = calendar.getTime();
 		//如果今天已经过了指定时间，则明天执行，不加一天会导致启动即执行。
 		if(date.before(new Date())){
-			//date = LisTask.addDay(date,1);
+			date = DateUtils.addDays(date,1);
 		}
 		return date;
 	}
