@@ -11,6 +11,9 @@
 	<session-config>
 		<session-timeout>-1</session-timeout>
 	</session-config>
+	<listener>
+		<listener-class>com.ims.listener.TaskListener</listener-class>
+	</listener>
 	<filter>
 		<filter-name>Encoding</filter-name>
 		<filter-class>com.ims.filter.SetCharacterEncodingFilter</filter-class>
