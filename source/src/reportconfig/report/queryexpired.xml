@@ -2,11 +2,11 @@
 <applications xmlns="http://www.wabacus.com"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
-	<page id="queryout" js="/webresources/script/validate.js">
+	<page id="queryexpired" js="/webresources/script/validate.js">
 		<header>
-			<![CDATA[<p align="center"><font size="6"><b>出库查询</b></font></p>]]>
+			<![CDATA[<p align="center"><font size="6"><b>查询过期(Discard)</b></font></p>]]>
 		</header>		
-		<report id="report2" title="request{txtname}出库记录信息" rowselect="multiple-checkbox" type="editablelist" interceptor="com.ims.interceptor.QueryOut" >
+		<report id="report2" title="过期出库记录信息" rowselect="multiple-checkbox" type="editablelist" interceptor="com.ims.interceptor.QueryOut" >
 				<display mouseoverbgcolor="CCCCCC" >
 				<col column="{col-rowselect}" width="20"></col>
 					<col column="id" label="编号"  displaytype="hidden"/>
@@ -17,16 +17,40 @@
 					<col column="catno" label="货号"  clickorderby="true" width="8%"/>
 					<col column="catname" label="名称"  clickorderby="true" width="15%"/>
 					<col column="batchno" label="批号" clickorderby="true" width="8%"></col>
+					<col column="localprice" label="单价(RMB)" datatype="int" clickorderby="true" width="5%"></col>	
 					<col column="num" label="数量" datatype="int" clickorderby="true" width="5%"></col>
-					<col column="machinename" label="所属设备"  clickorderby="true" width="8%"/>
-					<col column="machineno" label="设备序号"  clickorderby="true" width="8%"/>
-					<col column="reason" label="出库原因" clickorderby="true" width="10%"></col>
+					<col column="subtotal" label="小计(RMB)" datatype="int" clickorderby="true" width="5%"></col>					
 					<col column="remark" label="备注" clickorderby="true" width="10%"></col>
 				</display>
+				   <subdisplay>
+					    <statitems><!-- 定义要用到的统计项 -->
+						     <statitem property="item1" value="count(*)" datatype="int"></statitem>
+						     <statitem property="item2" value="max(localprice)" datatype="int"></statitem>
+						     <statitem property="item3" value="min(localprice)" datatype="int"></statitem>
+						     <statitem property="item4" value="sum(subtotal)" datatype="float"></statitem>
+					    </statitems>
+					    <subrow displaytype="page|report">
+						     <subcol property="sprop1" colspan="3" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
+						     <subcol property="sprop2" colspan="4" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
+						     <subcol property="sprop3" colspan="5" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
+					    </subrow>
+					    <format>
+						     <imports>
+							      <import>com.wabacus.util.*</import>
+						     </imports>
+						     <value>
+						<![CDATA[
+							sprop1="记录数合计 "+item1+"条";
+							sprop2="最高单价(RMB)："+item2+"  最低单价(RMB)："+item3;
+							sprop3="Discard总价值(RMB)："+Tools.formatDouble(String.valueOf(item4),"#,###0.00");
+						]]>
+						</value>
+					    </format>
+				   </subdisplay> 
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id,catno,catname,machinename,machineno,batchno,person,outdate,num,(select codename from d_code where code=reason and codetype='outreason') reason,remark,price,(select codename from d_code where code=cattype and codetype='cattype') cattype FROM b_out where 1=1 and {#condition#}  ]]>
+						<![CDATA[SELECT id,catno,catname,machinename,machineno,batchno,person,outdate,num,(select codename from d_code where code=reason and codetype='outreason') reason,remark,localprice,(localprice*num) subtotal, (select codename from d_code where code=cattype and codetype='cattype') cattype FROM b_out where b_out.reason ='2'/*DISCARD是2*/ and 1=1 and {#condition#}  ]]>
 					</value>
 					<condition name="txtbegin1" label="开始时间" labelposition="left">
 							<value>
@@ -54,42 +78,20 @@
 							          <option dataset="@{select catno,catname from d_catcode where {#matchcondition#}}"></option>       
 							      </datasource>
 					    </typeprompt>
-					</inputbox>
-						     
-						     
+				    	</inputbox>						     
 					    </condition>
 
-						<condition name="txtcatno" label="货号" labelposition="left">
+						<condition name="txtcatno" label="货号" labelposition="left" >
 						     <value>
 							<![CDATA[(trim(catno) like  '%#data#%' )]]>
 						</value>						     
 					    </condition>
-					    <condition name="txtbatchno" label="批号" labelposition="left"  br="true" >
+					    <condition name="txtbatchno" label="批号" labelposition="left" br="true" >
 						     <value>
 							<![CDATA[(trim(batchno) like  '%#data#%' )]]>
 						</value>						     
-					    </condition>					    
-					    
-					     <condition name="txtmachinename" label="所属设备" labelposition="left"  >
-						     <value>
-							<![CDATA[(trim(machinename) like  '%#data#%' )]]>
-						</value>		
-						     <inputbox>
-						        <typeprompt width="-1" count="20">
-							       <promptcol label="machinename" matchmode="anywhere"></promptcol>
-							       <datasource>    
-							          <option dataset="@{SELECT machinename from b_machine where {#matchcondition#}}"></option> 
-                                   </datasource>
-						        </typeprompt>
-						     </inputbox>						
-										     
-					    </condition>
-					     <condition name="txtmachineno" label="设备序号" labelposition="left"  >
-						     <value>
-							<![CDATA[(trim(machineno) like  '%#data#%' )]]>
-						</value>						     
-					    </condition>		
-					      <condition name="txtperson" label="出库人" labelposition="left"  >
+					    </condition> 
+					      <condition name="txtperson" label="出  库  人" labelposition="left"  >
 						     <value>
 							<![CDATA[(trim(person) like  '%#data#%' )]]>
 						</value>	
@@ -103,7 +105,7 @@
 						     </inputbox>	     
 					    </condition>
 					    
-					    <condition name="typename" label="类型" labelposition="left">						
+					    <condition name="typename" label="  类        型  " labelposition="left">						
 							<value> <![CDATA[(trim(cattype) = '#data#')]]>
 							</value>
 							<inputbox type="selectbox" >	
@@ -111,16 +113,7 @@
 							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
 							</inputbox>
 						</condition>
-					    <condition name="txtinreason"   label="出库原因" labelposition="left" >						
-							<value> <![CDATA[(trim(reason) = '#data#')]]>
-							</value>
-							<inputbox type="selectbox" >	
-							<option value="" label="全部"></option>						
-							<option dataset="@{select codename ,code from d_code where codetype='outreason'}" label="codename" value="code"></option>
-							</inputbox>
-						</condition>
-
-						
+					    						
 				</select>			
 			</sql>
 			<format><!--
