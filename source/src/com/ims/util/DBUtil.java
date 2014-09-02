@@ -12,239 +12,66 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
+import com.wabacus.config.Config;
+
 /**
  * 数据库工具， 提供常用的数据库操作
- * @创建者 yyy
- * @创建时间 2013-11-18
- * @修改人 yyy
- * @修改时间 2014-01-16
+ * @author ChengNing
+ * @version 1.0
  */
 public class DBUtil {
-	// 数据库驱动
-	public static String driver = "";
-	// 数据库url
-	public static String url = "";
-	// 用户名
-	public static String user = "";
-	// 密码
-	public static String password = "";
+	
+	private static Logger logger = Logger.getLogger(DBUtil.class);
 
+	private Connection conn = null;
+	private PreparedStatement stmt=null;
+	private ResultSet rs = null;
+	
 	/**
 	 * 获取数据库连接
 	 */
-	private static Connection getConnection() {
-/*
-		// 数据库驱动
-		String driver = "oracle.jdbc.driver.OracleDriver";
-		// 数据库url
-		String url = "jdbc:oracle:thin:@192.168.14.151:1521:WJQW";
-//		String url = "jdbc:oracle:thin:@localhost:1521:WJQW";
-		// 用户名
-		String user = "cpzh";
-//		String user = "cpzhe";
-		// 密码
-		String password = "cpzh";
-//		String password = "cpzhe";
-	*/	
+	private Connection getConnection() {
+		DBAdapter adapter = new DBAdapter();
 		// 数据库连接
-		Connection conn = null;
-		try {
-			// 注册数据库驱动
-			Class.forName(driver);
-			// 获取数据库连接
-		    conn = DriverManager.getConnection(url, user, password);			
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		Connection conn = adapter.getConnection();
 		return conn;
 	}
 	
 	/**
-	 * 数据库查询
-	 * @param sql 不带参数的SQL语句
-	 * @return List 查询结果
+	 * 查询执行方法
+	 * @param sql
+	 * @param params
+	 * @return
 	 */
-	public static List<Object> executeQuery(String sql) {
-		// 查询结果列表
-		List<Object> list = new ArrayList<Object>();		
-		// 数据库连接
-		Connection conn = null;
-		// Statement
-		Statement stmt = null;
-		// 结果集
-		ResultSet rs = null;	
-		// 元数据
-		ResultSetMetaData rsmd = null;
-		
+	private List<Object> executeQuery(String sql,Object...params){
+		List<Object> list = new ArrayList<Object>();
+		if(Config.show_sql) logger.info(sql);
 		try {
-			// 获取连接
 			conn = getConnection();
-			// 获取Statement
-			stmt = conn.createStatement();
-			// 执行sql语句
-			rs = stmt.executeQuery(sql);	
-			// 获取元数据
-			rsmd = rs.getMetaData();
-			
-			// 遍历结果集，将其中每行数据数据放入list
-			while (rs.next()) {		
+			stmt = conn.prepareStatement(sql);
+			if(params !=null){
+				for(int i=0;i< params.length;i++){
+					stmt.setObject(i+1, params[i]);
+				}
+			}
+			rs = stmt.executeQuery();
+			ResultSetMetaData rsmData = rs.getMetaData();
+			while(rs.next()){
 				Map<Object, Object> map = new HashMap<Object, Object>();
-				// 每行数据中的每一列以键-值对的形式放入HashMap中
-				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-					map.put(rsmd.getColumnName(i), rs.getObject(i));
+				for (int i = 1; i <= rsmData.getColumnCount(); i++) {
+					map.put(rsmData.getColumnName(i), rs.getObject(i));
 				}
 				list.add(map);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			// 关闭结果集
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			// 关闭Statement
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			// 关闭数据库连接
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+		} catch (Exception e) {
+			logger.error(e.getClass().getName() + ":" + e.getMessage());
 		}
-		
-        return list;
-	}
-	/**
-	 * 数据库查询
-	 * @param sql 带参数的SQL语句
-	 * @param params SQL语句参数
-	 * @return List 查询结果
-	 */
-	public static List<Object> executeQuery(String sql, Object...params) throws SQLException {
-		
-		// 查询结果列表
-		List<Object> list = new ArrayList<Object>();		
-		// 数据库连接
-		Connection conn = null;
-		// PreparedStatement
-		PreparedStatement pstmt = null;
-		// 结果集
-		ResultSet rs = null;	
-		// 元数据
-		ResultSetMetaData rsmd = null;
-		
-		try {
-			conn = getConnection();
-			// 预编译带参数的sql语句
-			pstmt = conn.prepareStatement(sql);
-			// 设置sql语句参数
-			for (int i = 0; i < params.length; i++) {
-				pstmt.setObject(i + 1, params[i]);
-			}
-			// 执行sql语句
-			rs = pstmt.executeQuery();	
-			// 获取元数据
-			rsmd = rs.getMetaData();
-			
-			// 遍历结果集，将其中的每行数据数据放入list
-			while (rs.next()) {		
-				Map<Object, Object> map = new HashMap<Object, Object>();
-				// 每行数据中的每一列以键-值对的形式放入HashMap中
-				for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-					map.put(rsmd.getColumnName(i), rs.getObject(i));
-				}
-				list.add(map);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			// 关闭结果集
-			if (rs != null) {
-				try {
-					rs.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			// 关闭PreparedStatement
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			// 关闭数据库连接
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+		finally{
+			close();
 		}
-		
-        return list;
-		
-	}
-	
-	/**
-	 * 数据库更新（增删改）
-	 * @param sql 不带参数的SQL语句
-	 * @return int 更新操作影响行数
-	 */
-	public static int executeUpdate(String sql) {
-		// 更新操作影响行数
-		int count = 0;		
-		// 数据库连接
-		Connection conn = null;
-		// Statement
-		Statement stmt = null;
-		
-		try {
-			// 获取连接
-			conn = getConnection();
-			// 获取Statement
-			stmt = conn.createStatement();
-			// 执行sql语句
-			count = stmt.executeUpdate(sql);			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			
-			// 关闭Statement
-			if (stmt != null) {
-				try {
-					stmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			// 关闭数据库连接
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		return count;
+		return list;
 	}
 	
 	/**
@@ -253,47 +80,129 @@ public class DBUtil {
 	 * @param params SQL语句参数
 	 * @return int 更新操作影响行数
 	 */
-	public static int executeUpdate(String sql, Object...params) {
+	private int executeUpdate(String sql, Object...params) {
 		// 更新操作影响行数
 		int count = 0;
-		// 数据库连接
-		Connection conn = null;
-		// PreparedStatement
-		PreparedStatement pstmt = null;
-
+		if(Config.show_sql) logger.info(sql);
 		try {
 			// 获取连接
 			conn = getConnection();
 			// 预编译带参数的sql语句
-			pstmt = conn.prepareStatement(sql);
+			stmt = conn.prepareStatement(sql);
 			// 设置sql语句参数
 			for (int i = 0; i < params.length; i++) {
-				pstmt.setObject(i + 1, params[i]);
+				stmt.setObject(i + 1, params[i]);
 			}
 			// 执行sql语句
-			count = pstmt.executeUpdate();		
+			count = stmt.executeUpdate();		
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {			
-			// 关闭 PreparedStatement
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-			// 关闭数据库连接
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
+		} finally {
+			close();
 		}
 		return count;
 	}
+	
+	/**
+	 * 销毁所有数据库连接资源
+	 */
+	private void close(){
+		// 关闭结果集
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		// 关闭PreparedStatement
+		if (stmt != null) {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		// 关闭数据库连接
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @param sql
+	 * @return
+	 */
+	public static String getOneValue(String sql){
+		return getOneValue(sql, null);
+	}
+	/**
+	 * 得到一个值的查询
+	 * @param sql
+	 * @return
+	 */
+	public static String getOneValue(String sql,Object...params){
+		String re = "";
+		List<Object> list = query(sql,params);
+		if(list != null && list.size() > 0){
+
+			Map<Object, Object> map = (HashMap<Object, Object>)list.get(0);
+			Object key = map.keySet().toArray()[0];
+			re = map.get(key).toString();
+			return re;
+		}
+		return "";
+	}
+	
+	/**
+	 * 数据库查询
+	 * @param sql 不带参数的SQL语句
+	 * @return List 查询结果
+	 */
+	public static List<Object> query(String sql) {
+        return query(sql,null);
+	}
+	
+	/**
+	 * 
+	 * @param sql
+	 * @param params
+	 * @return
+	 */
+	public static List<Object> query(String sql,Object...params) {
+		DBUtil db = new DBUtil();
+        return db.executeQuery(sql,params);
+	}
+	
+	/**
+	 * 
+	 * @param sql
+	 * @return
+	 */
+	public static int execute(String sql){
+		return execute(sql, null);
+	}
+	
+	/**
+	 * 
+	 * @param sql
+	 * @param params
+	 * @return
+	 */
+	public static int execute(String sql,Object...params){
+		DBUtil db = new DBUtil();
+		return db.executeUpdate(sql, params);
+	}
+	
+	
+	
+	
+
 
 }

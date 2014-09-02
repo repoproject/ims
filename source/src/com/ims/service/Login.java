@@ -6,6 +6,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.alibaba.fastjson.JSONObject;
+import com.ims.util.DBUtil;
 import com.wabacus.config.Config;
 
 
@@ -48,6 +52,27 @@ public class Login extends HttpServlet {
 		
 		// 登录验证结果  1 成功  2用户名不存在  3 密码输入有误
 		int result = 3;
+
+//		String sql = "SELECT nickname FROM d_user WHERE id = ?";
+//		String re = DBUtil.getOneValue(sql,1);
+//		String sql = "SELECT nickname,role FROM d_user WHERE nickname = ? and password = ?";
+//		List<Object> list = DBUtil.query(sql,name,password);
+//		if(list.size() > 0){
+//    		// 获取用户角色    0 系统管理员  1普通用户
+//			Map<String, Object> userMap = (HashMap<String, Object>)list.get(0);
+//			int role =  (Integer)userMap.get("role");
+//			
+//			// 保存用户名和用户角色
+//			HttpSession session = request.getSession();
+//			session.setAttribute("username", name);
+//			session.setAttribute("nickname", name);
+//			session.setAttribute("role", role);	
+//			
+//			result=1;//匹配且成功	
+//		}
+//		else{
+//			result = 2;
+//		}
 		
 		
 		Connection conn=Config.getInstance().getDataSource("ds_mysql").getConnection();//取配置的默认数据源的连接
