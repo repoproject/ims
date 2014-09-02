@@ -26,6 +26,10 @@ public class DayTask extends TimerTask{
 		log.info("DayTask run....");
 	}
 	
+	/**
+	 * 任务执行时间
+	 * @return
+	 */
 	public static Date getExeDate(){
 		String[] startTime = DEFAULT_TIME.split(":");
 

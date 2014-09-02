@@ -35,7 +35,7 @@
 				
 					<select>
 						<value>
-							<![CDATA[SELECT id,name,nickname,(select codename from d_code where codetype='role' and code = a.role ) role,(select codename from d_code where codetype='sex' and  code = a.sex ) sex,remark FROM d_user a where {#condition#} order by a.name]]>
+							<![CDATA[SELECT id,names,nickname,(select codename from d_code where codetype='role' and code = a.role ) role,(select codename from d_code where codetype='sex' and  code = a.sex ) sex,remark FROM d_user a where {#condition#} order by a.name]]>
 						</value>						
 						<condition name="txtname" label="昵称" labelposition="left">
 							<value>
