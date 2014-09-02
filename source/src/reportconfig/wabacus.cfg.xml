@@ -82,6 +82,7 @@
 		
 
 		<report-file>report/queryout.xml</report-file>
+		<report-file>report/queryin.xml</report-file>
 		
 		<report-file>report/equip.xml</report-file>
 		<report-file>report/equip_edit.xml</report-file>
