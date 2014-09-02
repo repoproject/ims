@@ -161,9 +161,9 @@ $(function(){
 								<ul>
 									<li><a href="ShowReport.wx?PAGEID=queryout" target="navTab" rel="userbaseinfo21" external="true" fresh="false">出库查询</a></li>
 									<li><a href="ShowReport.wx?PAGEID=queryin" target="navTab" rel="userbaseinfo22" external="true" fresh="false">入库查询</a></li>
-									<li><a href="ShowReport.wx?PAGEID=navTab" target="navTab" rel="userbaseinfo23" external="true" fresh="false">查询过期</a></li>
-									<li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo21" external="true" fresh="false">库存查询</a></li>
-									<li><a href="ShowReport.wx?PAGEID=navTab" target="navTab" rel="userbaseinfo24" external="true" fresh="false">导出出库</a></li>
+									<li><a href="ShowReport.wx?PAGEID=queryexpired" target="navTab" rel="userbaseinfo23" external="true" fresh="false">查询过期</a></li>
+									<li><a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo24" external="true" fresh="false">库存查询</a></li>
+									<li><a href="ShowReport.wx?PAGEID=navTab" target="navTab" rel="userbaseinfo25" external="true" fresh="false">导出出库</a></li>
 									 <li id="inventoryStatics"></li>
 									<!-- <a href="excel.jsp" target="navTab" rel="ftpserverstat" external="true" fresh="false">库存统计</a>  -->									
 								</ul>
