@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-09-03 17:34:50
+Date: 2014-09-04 00:14:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,21 +40,16 @@ CREATE TABLE `b_cat` (
   `makedate` datetime DEFAULT NULL,
   `modifydate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_cat
 -- ----------------------------
-INSERT INTO `b_cat` VALUES ('5', 'a', 'a', '0', 'a', '30', '1', '2014-08-01 00:00:00', 'a', '2014-08-31 00:00:00', '10.0000', '0', null, 'aa', null, null, null, '2014-08-25 21:29:00', '2014-08-25 21:29:00');
-INSERT INTO `b_cat` VALUES ('6', 'bb', 'bb', '0', 'bb', '25', '1', '2014-08-01 00:00:00', 'bbbb', '2014-08-31 00:00:00', '111.0000', '0', null, 'bbb', null, null, null, '2014-08-25 21:29:30', '2014-08-25 21:29:30');
-INSERT INTO `b_cat` VALUES ('7', 'bbb', 'bb', '0', 'bbbb', '35', '1', '2014-08-18 00:00:00', 'bbb', '2014-09-06 00:00:00', '12.0000', '1', null, 'bbb', null, null, null, '2014-08-27 22:14:35', '2014-08-27 22:14:35');
-INSERT INTO `b_cat` VALUES ('8', 'cccc', 'ccc', '0', 'ccc', '35', '1', '2014-08-27 00:00:00', 'cc', '2014-12-31 00:00:00', '13.0000', '0', null, 'cccc', null, null, null, '2014-08-27 22:15:08', '2014-08-27 22:15:08');
-INSERT INTO `b_cat` VALUES ('9', 'd', 'd', '0', 'dd', '25', '1', '2014-08-10 00:00:00', 'dddd', '2014-08-31 00:00:00', '12.0000', '0', null, 'ddd', null, null, null, '2014-08-29 22:06:21', '2014-08-29 22:06:21');
-INSERT INTO `b_cat` VALUES ('10', 'd', 'd', '0', 'd', '35', '1', '2014-08-03 00:00:00', 'ddd', '2014-08-31 00:00:00', '12.0000', '0', null, 'dd', null, null, null, '2014-08-29 22:09:50', '2014-08-29 22:09:50');
-INSERT INTO `b_cat` VALUES ('11', 'e', 'e', '0', 'e', '10', '1', '2014-08-01 00:00:00', 'ee', '2014-09-01 00:00:00', '10.0000', '0', null, 'e', null, null, null, '2014-08-29 22:11:22', '2014-08-29 22:11:22');
-INSERT INTO `b_cat` VALUES ('12', 'e', 'e', '0', 'e', '25', '1', '2014-08-01 00:00:00', 'ee', '2014-08-29 00:00:00', '12.0000', '0', null, 'ee', null, null, null, '2014-08-29 22:14:04', '2014-08-29 22:14:04');
-INSERT INTO `b_cat` VALUES ('13', 'e', 'e', '0', 'e', '25', '1', '2014-08-01 00:00:00', 'ee', '2014-09-01 00:00:00', '13.0000', '0', null, 'ee', null, null, null, '2014-08-29 22:23:26', '2014-08-29 22:23:26');
-INSERT INTO `b_cat` VALUES ('14', 'e', 'e', '0', 'e', '23', '1', '2014-09-01 00:00:00', '', '2014-09-17 00:00:00', '100.0000', '1', '10000.0000', '', null, null, null, '2014-09-03 15:40:58', '2014-09-03 15:40:58');
+INSERT INTO `b_cat` VALUES ('15', 'a', 'a', '0', 'a', '10', '1', '2014-09-01 00:00:00', 'a', '2014-09-30 00:00:00', '21.0000', '0', '21.0000', 'a', null, null, null, '2014-09-03 22:00:13', '2014-09-03 22:00:13');
+INSERT INTO `b_cat` VALUES ('16', 'b', 'b', '0', 'b', '10', '1', '2014-09-01 00:00:00', 'b', '2014-09-30 00:00:00', '10.0000', '1', '62.6445', 'b', null, null, null, '2014-09-03 22:01:46', '2014-09-03 22:01:46');
+INSERT INTO `b_cat` VALUES ('17', 'c', 'c', '0', 'c', '10', '2', '2014-09-03 00:00:00', 'c', '2014-09-30 00:00:00', '100.0000', '0', '100.0000', 'c', null, null, null, '2014-09-03 22:02:54', '2014-09-03 22:02:54');
+INSERT INTO `b_cat` VALUES ('18', 'a', 'a', '0', 'a', '5', '1', '2014-09-01 00:00:00', 'a', '2014-09-01 00:00:00', '20.0000', '0', '20.0000', 'a', null, null, null, '2014-09-03 22:07:52', '2014-09-03 22:07:52');
+INSERT INTO `b_cat` VALUES ('19', 'a', 'a', '0', 'b', '10', '1', '2014-08-01 00:00:00', 'a', '2014-11-30 00:00:00', '10.0000', '0', '10.0000', 'a', null, null, null, '2014-09-03 22:08:20', '2014-09-03 22:08:20');
 
 -- ----------------------------
 -- Table structure for b_in
@@ -88,11 +83,16 @@ CREATE TABLE `b_in` (
   `makedate` datetime DEFAULT NULL COMMENT '产生日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='试剂表';
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COMMENT='试剂表';
 
 -- ----------------------------
 -- Records of b_in
 -- ----------------------------
+INSERT INTO `b_in` VALUES ('22', 'a', 'a', null, 'a', '0', 'a', 'a', '2014-09-01 00:00:00', '0', '2014-09-30 00:00:00', '10', null, '21.0000', '0', '21.0000', '0.0000', '2014-09-03 00:00:00', null, '1', '0', '1', 'a', null, null, null);
+INSERT INTO `b_in` VALUES ('23', 'b', 'b', null, 'b', '0', 'b', 'b', '2014-09-01 00:00:00', '1', '2014-09-30 00:00:00', '10', null, '10.0000', '1', '62.6445', '0.0000', '2014-09-03 00:00:00', null, '1', '0', '1', 'bb', null, null, null);
+INSERT INTO `b_in` VALUES ('24', 'c', 'c', null, 'c', '0', 'c', 'c', '2014-09-03 00:00:00', '2', '2014-09-30 00:00:00', '10', null, '100.0000', '0', '100.0000', '0.0000', '2014-09-03 00:00:00', null, '2', '0', '1', 'c', null, null, null);
+INSERT INTO `b_in` VALUES ('25', 'a', 'a', null, 'a', '0', 'a', 'a', '2014-09-01 00:00:00', '0', '2014-09-01 00:00:00', '10', null, '20.0000', '0', '20.0000', '0.0000', '2014-09-03 00:00:00', null, '1', '0', '1', 'a', null, null, null);
+INSERT INTO `b_in` VALUES ('26', 'a', 'a', null, 'b', '0', 'a', 'a', '2014-08-01 00:00:00', '0', '2014-11-30 00:00:00', '10', null, '10.0000', '0', '10.0000', '0.0000', '2014-09-03 00:00:00', null, '1', '0', '1', 'a', null, null, null);
 
 -- ----------------------------
 -- Table structure for b_machine
@@ -136,14 +136,12 @@ CREATE TABLE `b_out` (
   `makedate` datetime DEFAULT NULL COMMENT '创建日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='出库记录';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='出库记录';
 
 -- ----------------------------
 -- Records of b_out
 -- ----------------------------
-INSERT INTO `b_out` VALUES ('3', 'aa', 'aa', 'a', 'a', 'a', null, 'aa', '2014-08-25 00:00:00', '10.0000', '0', null, '5', '0', 'aa', '001', '2014-08-25 22:20:54', '2014-08-25 22:20:54');
-INSERT INTO `b_out` VALUES ('4', 'e', 'e', 'e', 'e', 'e', null, 'e', '2014-08-29 00:00:00', '13.0000', '0', null, '4', '0', 'e', '001', '2014-08-29 22:24:28', '2014-08-29 22:24:28');
-INSERT INTO `b_out` VALUES ('5', 'sss', 'sss', 'e', 'e', 'e', null, '1', '2014-09-03 00:00:00', '100.0000', '1', '10000.0000', '2', '0', 'sss', '001', '2014-09-03 16:02:37', '2014-09-03 16:02:37');
+INSERT INTO `b_out` VALUES ('7', 'aa', 'aa', 'a', 'a', 'a', null, '1', '2014-09-03 00:00:00', '20.0000', '0', '20.0000', '5', '0', 'a', '001', '2014-09-03 22:11:11', '2014-09-03 22:11:11');
 
 -- ----------------------------
 -- Table structure for b_person
@@ -424,6 +422,8 @@ CREATE TABLE `d_var` (
 -- Records of d_var
 -- ----------------------------
 INSERT INTO `d_var` VALUES ('localmoney', '0', '本币为CNY人民币');
+INSERT INTO `d_var` VALUES ('reportpath', '/reports/', '报表保存路径');
+INSERT INTO `d_var` VALUES ('taskserverip', '127.0.0.1', '任务服务器，多台服务器集群使用');
 
 -- ----------------------------
 -- View structure for r_in_view
@@ -440,7 +440,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
 	a.indate
 FROM
 	b_in a,b_cat b
-WHERE a.catno = b.catno and a.batchno = b.batchno and a.price = b.price ;
+WHERE a.catno = b.catno and a.batchno = b.batchno and a.price = b.price ; ;
 
 -- ----------------------------
 -- View structure for r_out_view
@@ -460,7 +460,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
 	a.outdate
 FROM
 	b_out a,b_cat b
-WHERE a.catno = b.catno and a.batchno = b.batchno and a.price = b.price ;
+WHERE a.catno = b.catno and a.batchno = b.batchno and a.price = b.price ; ;
 
 -- ----------------------------
 -- View structure for r_view
@@ -500,7 +500,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
   o.outdate
 FROM
 	b_cat a LEFT JOIN r_in_view i ON a.id = i.id
-LEFT JOIN r_out_view o ON a.id=o.id ;
+LEFT JOIN r_out_view o ON a.id=o.id ; ;
 DROP TRIGGER IF EXISTS `tg_In_Insert_Before`;
 DELIMITER ;;
 CREATE TRIGGER `tg_In_Insert_Before` BEFORE INSERT ON `b_in` FOR EACH ROW begin
