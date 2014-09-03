@@ -65,9 +65,15 @@ public class ExcelExport  extends HttpServlet{
 	
 	private void createExcel(){
 		wb = new HSSFWorkbook();
-
-		
 		createSheet("R1 - CHEM");
+	}
+	
+	private void createSheet1(){
+		
+	}
+	
+	private void createSheet2(){
+		
 	}
 	/**
 	 * ref http://www.cnblogs.com/marsmile/p/3669513.html

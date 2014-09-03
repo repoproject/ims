@@ -32,11 +32,6 @@ public class ExcelHeader {
 		setStyle();
 	}
 	
-//	private List<List> getData()
-//	{
-//		List<List> list = new List<List>();
-//		return list;
-//	}
 	
 	/**
 	 * 

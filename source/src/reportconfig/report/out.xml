@@ -12,16 +12,17 @@
 					<col column="id" label="序号"  displaytype="hidden"/>
 					<col column="catname" label="名称"  clickorderby="true" width="25%"/>
 					<col column="catno" label="货号"  clickorderby="true" width="10%"/>					
-					<col column="batchno" label="批号" clickorderby="true" width="10%"></col>
+					<col column="batchno" label="批号" clickorderby="true" width="10%"></col>		
+					<col column="localprice" label="单价CNY" datatype="float" clickorderby="true" width="10%"></col>
 					<col column="total" label="数量" clickorderby="true" datatype="int" width="10%"></col>
-					<col column="expiredate" label="有效期" clickorderby="true" width="10%"></col>
+					<col column="expiredate" label="有效期" datatype="date{yyyy-MM-dd}" clickorderby="true" width="10%"></col>
 					<col column="producer" label="生产商" clickorderby="true" width="15%"></col>
 					<col column="{editablelist-edit}" label="出库操作"></col>
 				</display>
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id,catno,catname,batchno,total, DATE_FORMAT(expiredate,'%Y-%m-%d') expiredate,producer FROM b_cat  where  total>0 and {#condition#} order by expiredate]]>
+						<![CDATA[SELECT id,catno,catname,batchno,round(localprice,2) localprice,total, expiredate ,producer FROM b_cat  where  total>0 and {#condition#} order by expiredate]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -67,6 +68,7 @@
 					<col column="catno" label="货号"  clickorderby="true" width="10%"/>
 					<col column="catname" label="名称"  clickorderby="true" width="20%"/>
 					<col column="batchno" label="批号" clickorderby="true" width="10%"></col>
+					<col column="localprice" label="单价CNY" datatype="float" clickorderby="true" width="10%"></col>
 					<col column="num" label="数量" datatype="int" clickorderby="true" width="5%"></col>
 					<col column="machinename" label="设备"  clickorderby="true" width="10%"/>
 					<col column="machineno" label="设备序号"  clickorderby="true" width="10%"/>
@@ -76,7 +78,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id,catno,catname,machinename,machineno,batchno,person,outdate,num,(select codename from d_code where code=reason and codetype='outreason') reason FROM b_out  where  {#condition#}]]>
+						<![CDATA[SELECT id,catno,catname,machinename,machineno,batchno,person,outdate,round(localprice,2) localprice,num,(select codename from d_code where code=reason and codetype='outreason') reason FROM b_out  where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>

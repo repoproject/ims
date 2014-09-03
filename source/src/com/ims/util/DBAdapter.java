@@ -37,7 +37,8 @@ public class DBAdapter {
 	}
     
     public Connection getConnection() {
-		Connection conn=Config.getInstance().getDataSource("ds_mysql").getConnection();//取配置的默认数据源的连接
+		//Connection conn=Config.getInstance().getDataSource("ds_mysql").getConnection();//取配置的默认数据源的连接
+		Connection conn=Config.getInstance().getDataSource(this.datasource).getConnection();//取配置的默认数据源的连接
 		return conn;
 	}
 
