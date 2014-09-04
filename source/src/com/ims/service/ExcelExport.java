@@ -30,6 +30,7 @@ import com.itextpdf.text.List;
 import com.wabacus.config.ConfigLoadManager;
 
 /**
+ * 行从1开始，列从0开始
  * @author ChengNing
  * @date   2014年8月13日
  */
@@ -63,12 +64,64 @@ public class ExcelExport  extends HttpServlet{
 		out.close();
 	}
 	
-	private void createExcel(){
-		wb = new HSSFWorkbook();
-		createSheet("R1 - CHEM");
+	private void createExcel(InputStream is,String test){
+		try {
+			wb = new HSSFWorkbook(is);
+			createSheet1("R1 - CHEM");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
-	private void createSheet1(){
+	private void createSheet1(String sheetName){
+//		for(int i=0;i<20;i++){
+			HSSFSheet sheet = wb.getSheetAt(5);
+//			System.out.println(sheet.getSheetName());
+//		}
+////		HSSFRow row0 = sheet.getRow(0);
+////		HSSFCell cell1 = row0.getCell(0);
+////		cell1.setCellValue("testtest");
+		int startRow = 7; //第8行开始
+		//第10行是模板尾行，poi无插入，所以复制此行，最后添加到最后
+		HSSFRow rowFooter = sheet.getRow(9);
+		//如下用于标号
+		for(int i=startRow;i<8;i++){
+			HSSFRow row = sheet.getRow(i);
+			if(row == null)
+				row = sheet.createRow(i);
+			for(int j=0;j<50;j++){
+				HSSFCell cell = row.getCell(j);//row.createCell(j);
+				if(cell == null)
+					cell = row.createCell(j);
+//				System.out.println(cell.getStringCellValue());
+				cell.setCellValue(String.valueOf(i) + "," + String.valueOf(j));
+				System.out.println(cell.getStringCellValue());
+				
+			}
+		}
+		
+		HSSFRow row = sheet.createRow(20);
+		copyRow(rowFooter, row, 50);
+		//row = rowFooter;
+		//rowFooter.setRowNum(20);
+	}
+	
+	private void copyRow(HSSFRow source,HSSFRow target,int cellCount){
+		if(target == null)
+			return;
+		for(int i=0;i<cellCount;i++){
+			HSSFCell sourceCell = source.getCell(i);
+			if(sourceCell != null){
+				HSSFCell targetCell = target.createCell(i);
+				targetCell.setCellStyle(sourceCell.getCellStyle());
+				targetCell.setCellType(sourceCell.getCellType());
+				targetCell.setCellValue(sourceCell.getStringCellValue());
+			}
+		}
+	}
+	
+	private void insertRow(){
 		
 	}
 	
@@ -161,7 +214,7 @@ public class ExcelExport  extends HttpServlet{
 			FileInputStream fileInputStream = new FileInputStream(ExcelExport.class.getResource("").getPath() + "template.xls");
 			
 			ExcelExport testExcelExport = new ExcelExport();
-			testExcelExport.createExcel(fileInputStream);
+			testExcelExport.createExcel(fileInputStream,"test");
 		    FileOutputStream fStream = new FileOutputStream("D://test1.xls");
 		    testExcelExport.wb.write(fStream);
 		    fStream.flush();
