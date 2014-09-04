@@ -15,7 +15,6 @@ import org.apache.log4j.Logger;
  * @date   2014年9月1日
  */
 public class DayTask extends TimerTask{
-
 	
 	private static final String DEFAULT_TIME = "00:00:00";
     protected Logger log = Logger.getLogger(getClass());
@@ -24,6 +23,12 @@ public class DayTask extends TimerTask{
 	public void run() {
 		// TODO Auto-generated method stub
 		log.info("DayTask run....");
+		//如果是月结日进行月结操作
+		if(MonthTask.isMonthTaskDay()){
+			MonthTask monthTask = new MonthTask();
+			Thread taskThread = new Thread(monthTask,"MonthTaskThread");
+			taskThread.start();
+		}
 	}
 	
 	/**

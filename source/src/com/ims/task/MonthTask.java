@@ -8,6 +8,7 @@ import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.apache.log4j.Logger;
 
 import com.ims.util.DBUtil;
 
@@ -18,9 +19,11 @@ import com.ims.util.DBUtil;
  */
 public class MonthTask implements Runnable{
 
+	private static Logger logger = Logger.getLogger(MonthTask.class);
+	
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		logger.info("开始执行MonthTask.......");
 		
 	}
 	
@@ -32,7 +35,7 @@ public class MonthTask implements Runnable{
 		Calendar calendar = Calendar.getInstance();
 		int dayOfMonth = calendar.get(calendar.DAY_OF_MONTH);
 		int monthOfYear = calendar.get(calendar.MONTH);
-		monthOfYear++;
+		monthOfYear++;//得到的月份是从0开始，需要加1
 		String sql = "select runPoint from d_task where code='monthtask' and flag = ?";
 		String runPoint = DBUtil.getOneValue(sql,String.valueOf(monthOfYear));
 		if(StringUtils.equals(String.valueOf(dayOfMonth), runPoint))
