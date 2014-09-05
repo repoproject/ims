@@ -1,2 +1,1 @@
-INSERT INTO `过预警期查询` VALUES (14, 'a', 'a', 'bbb', 10, '2014-9-5 00:00:00', '10个bbb还剩3天过期！(a)');
-INSERT INTO `过预警期查询` VALUES (7, 'bbb', 'bb', 'bbbb', 8, '2014-9-6 00:00:00', '8个bbbb还剩4天过期！(bb)');
+﻿SELECT id, b.catno, b.catname, b.batchno, b.total, b.expiredate AS builtdate, CONCAT( b.total, '个', b.batchno, '还剩', cast( DATEDIFF( b.expiredate, CURRENT_DATE ()) AS CHAR (12)), '天过期！(', b.catname, ')' ) description FROM b_cat b, b_var v WHERE v.bizkey = 'expireTime' AND DATEDIFF( b.expiredate, CURRENT_DATE ()) <= v.bizValue AND DATEDIFF( b.expiredate, CURRENT_DATE ()) >= 0 AND b.total > 0 ORDER BY b.expiredate ASC

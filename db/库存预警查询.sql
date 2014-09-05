@@ -1,6 +1,1 @@
-INSERT INTO `库存预警查询` VALUES (15, 'eee', 'eee', 0, '2014-9-4 00:00:00', '10', 'eee的库存还剩0个！');
-INSERT INTO `库存预警查询` VALUES (11, 'e', 'e', 0, '2014-9-1 00:00:00', '10', 'e的库存还剩0个！');
-INSERT INTO `库存预警查询` VALUES (10, 'd', 'd', 1, '2014-8-31 00:00:00', '10', 'd的库存还剩1个！');
-INSERT INTO `库存预警查询` VALUES (7, 'bbb', 'bb', 8, '2014-9-6 00:00:00', '10', 'bb的库存还剩8个！');
-INSERT INTO `库存预警查询` VALUES (8, 'cccc', 'ccc', 10, '2014-12-31 00:00:00', '10', 'ccc的库存还剩10个！');
-INSERT INTO `库存预警查询` VALUES (14, 'a', 'a', 10, '2014-9-5 00:00:00', '10', 'a的库存还剩10个！');
+﻿SELECT * FROM ( SELECT  b1.id, b1.catno, b1.catname,sum(DISTINCT b1.total) alltotal,b1.expiredate as builtdate,b_var.bizValue,CONCAT(b1.catname,'的库存还剩',b1.total,'个！') description FROM b_cat b1 , b_cat b2,b_var where b1.catname=b2.catname and b_var.bizkey='stockthreshold' GROUP BY b1.catname ) K WHERE alltotal>=0 and alltotal<=bizValue ORDER BY alltotal asc
