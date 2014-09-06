@@ -62,7 +62,7 @@
 		</report>
 		<report id="report2" title="request{txtname}出库信息" rowselect="multiple-checkbox" type="editablelist" >
 				<display mouseoverbgcolor="CCCCCC" >
-				<col column="{col-rowselect}" width="20"></col>
+				<col column="{col-rowselect}" width="20"></col> 
 					<col column="id" label="编号"  displaytype="hidden"/>
 					<col column="outdate" label="出库日期" clickorderby="true" datatype="date{yyyy-MM-dd}" width="10%"></col>
 					<col column="catno" label="货号"  clickorderby="true" width="8%"/>
