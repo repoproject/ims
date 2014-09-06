@@ -5,6 +5,7 @@ package com.test;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -48,6 +49,21 @@ public class DBUtilTest {
 	@Test
 	public void testExecuteStringObjectArray() {
 		fail("Not yet implemented");
+	}
+	
+	@Test
+	public void testUtil(){
+		List<String> list = new ArrayList<String>();
+		list.add("a");
+		list.add("b");
+		list.add("c");
+		
+		for(int i=0;i<list.size();i++){
+			if(list.get(i).equals("b")){
+				list.add(i, "1");//进入死循环，必须加1
+				i++;
+			}
+		}
 	}
 
 }

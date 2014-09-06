@@ -7,7 +7,57 @@
         footerRowNum:模板中尾行的行号，Excel的行标号，从1开始
         class：处理此Sheet的类
      -->
-    <Sheet name="" dataRowNum="10" dataStartNum="8" footerRowNum="11" class="">
+    <Sheet name="R1 - CHEM" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.R1Sheet">
+        <sql>
+	        SELECT
+				a.catno,
+				a.catname,
+				a.batchno,
+				a.machineno,
+				a.machineName,
+				a.price,
+			  0 opening,/*计算*/
+			  sum(a.inVendor),
+			  sum(a.inInterlab),
+			  sum(a.inSponsor),
+			  sum(a.inCharges),
+			  sum(a.intotal),
+			  sum(outTrialTest),
+			sum(outValidation),
+			sum(outDiscard),
+			sum(outIntelLab),
+			sum(outSponsor),
+			sum(outOthre),
+			sum(outTotal),
+			a.closing,
+			a.localprice,
+			a.totalAmount
+			FROM
+				r_view a
+			WHERE
+				(
+					a.indate IS NULL
+					OR a.indate BETWEEN DATE('2014-07-26')
+					AND DATE('2014-10-25')
+				)
+			AND (
+				a.outdate IS NULL
+				OR a.outdate BETWEEN DATE('2014-10-26')
+				AND DATE('2014-08-25')
+			)
+			GROUP BY
+				a.catno,
+				a.catname,
+				a.batchno,
+				a.price,a.machineno,a.machineName
+        </sql>
+        <col index="1" type="String">catno</col>
+        <col index="2" type="Int">catname</col>
+        <col index="3" type="">batchno</col>
+        <col index="9" type="">opening</col>
+        <col index="10" type="">closing</col>
+    </Sheet>
+    <Sheet name="1" dataRowNum="10" dataStartNum="8" footerRowNum="11" class="com.ims.report.R2Sheet">
         <sql></sql>
         <col index="1" type="String"></col>
         <col index="2" type="Int"></col>
@@ -15,9 +65,109 @@
         <col index="9" type=""></col>
         <col index="10" type=""></col>
     </Sheet>
-    <Sheet name="" dataRowNum="9" footerRowNum="10">
+    <Sheet name="2" dataRowNum="10" dataStartNum="8" footerRowNum="11" class="com.ims.report.R3Sheet">
         <sql></sql>
-        <col num="1" type=""></col>
+        <col index="1" type="String"></col>
+        <col index="2" type="Int"></col>
+        <col index="3" type=""></col>
+        <col index="9" type=""></col>
+        <col index="10" type=""></col>
+    </Sheet>
+    <Sheet name="3" dataRowNum="10" dataStartNum="8" footerRowNum="11" class="com.ims.report.R4Sheet">
+        <sql></sql>
+        <col index="1" type="String"></col>
+        <col index="2" type="Int"></col>
+        <col index="3" type=""></col>
+        <col index="4" type=""></col>
+        <col index="10" type=""></col>
+    </Sheet>
+    <Sheet name="4" dataRowNum="10" dataStartNum="8" footerRowNum="11" class="com.ims.report.R5Sheet">
+        <sql></sql>
+        <col index="1" type="String"></col>
+        <col index="2" type="Int"></col>
+        <col index="3" type=""></col>
+        <col index="9" type=""></col>
+        <col index="10" type=""></col>
+    </Sheet>
+    <Sheet name="5" dataRowNum="10" dataStartNum="8" footerRowNum="11" class="com.ims.report.R6Sheet">
+        <sql></sql>
+        <col index="1" type="String"></col>
+        <col index="2" type="Int"></col>
+        <col index="3" type=""></col>
+        <col index="9" type=""></col>
+        <col index="10" type=""></col>
+    </Sheet>
+    <Sheet name="6" dataRowNum="10" dataStartNum="8" footerRowNum="11" class="com.ims.report.R7Sheet">
+        <sql></sql>
+        <col index="1" type="String"></col>
+        <col index="2" type="Int"></col>
+        <col index="3" type=""></col>
+        <col index="9" type=""></col>
+        <col index="10" type=""></col>
+    </Sheet>
+    <Sheet name="7" dataRowNum="10" dataStartNum="8" footerRowNum="11" class="com.ims.report.R8Sheet">
+        <sql></sql>
+        <col index="1" type="String"></col>
+        <col index="2" type="Int"></col>
+        <col index="3" type=""></col>
+        <col index="9" type=""></col>
+        <col index="10" type=""></col>
+    </Sheet>
+    <Sheet name="8" dataRowNum="10" dataStartNum="8" footerRowNum="11" class="com.ims.report.R9Sheet">
+        <sql></sql>
+        <col index="1" type="String"></col>
+        <col index="2" type="Int"></col>
+        <col index="3" type=""></col>
+        <col index="9" type=""></col>
+        <col index="10" type=""></col>
+    </Sheet>
+    <Sheet name="9" dataRowNum="10" dataStartNum="8" footerRowNum="11" class="com.ims.report.LabSupplierSheet">
+        <sql></sql>
+        <col index="1" type="String"></col>
+        <col index="2" type="Int"></col>
+        <col index="3" type=""></col>
+        <col index="9" type=""></col>
+        <col index="10" type=""></col>
+    </Sheet>
+    <Sheet name="10" dataRowNum="10" dataStartNum="8" footerRowNum="11" class="com.ims.report.DiscardCLabSheet">
+        <sql></sql>
+        <col index="1" type="String"></col>
+        <col index="2" type="Int"></col>
+        <col index="3" type=""></col>
+        <col index="9" type=""></col>
+        <col index="10" type=""></col>
+    </Sheet>
+    <Sheet name="11" dataRowNum="10" dataStartNum="8" footerRowNum="11" class="com.ims.report.ValidationCLabSheet">
+        <sql></sql>
+        <col index="1" type="String"></col>
+        <col index="2" type="Int"></col>
+        <col index="3" type=""></col>
+        <col index="9" type=""></col>
+        <col index="10" type=""></col>
+    </Sheet>
+    <Sheet name="12" dataRowNum="10" dataStartNum="8" footerRowNum="11" class="com.ims.report.R10Sheet">
+        <sql></sql>
+        <col index="1" type="String"></col>
+        <col index="2" type="Int"></col>
+        <col index="3" type=""></col>
+        <col index="9" type=""></col>
+        <col index="10" type=""></col>
+    </Sheet>
+    <Sheet name="13" dataRowNum="10" dataStartNum="8" footerRowNum="11" class="com.ims.report.DiscardAPLabSheet">
+        <sql></sql>
+        <col index="1" type="String"></col>
+        <col index="2" type="Int"></col>
+        <col index="3" type=""></col>
+        <col index="9" type=""></col>
+        <col index="10" type=""></col>
+    </Sheet>
+    <Sheet name="14" dataRowNum="10" dataStartNum="8" footerRowNum="11" class="com.ims.report.ValidationAPLabSheet">
+        <sql></sql>
+        <col index="1" type="String"></col>
+        <col index="2" type="Int"></col>
+        <col index="3" type=""></col>
+        <col index="9" type=""></col>
+        <col index="10" type=""></col>
     </Sheet>
    
 </Excel>

@@ -30,8 +30,8 @@ public class ExcelUtil {
 		int cellCount = source.getLastCellNum();
 		for(int i=0;i<cellCount;i++){
 			HSSFCell sourceCell = source.getCell(i);
-			if(sourceCell != null){
-				HSSFCell targetCell = target.createCell(i);
+			HSSFCell targetCell = target.createCell(i);
+			if(sourceCell != null && targetCell != null){
 				copyCell(sourceCell, targetCell);
 			}
 		}

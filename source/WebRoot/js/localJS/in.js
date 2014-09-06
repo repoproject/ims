@@ -19,6 +19,7 @@ function init()
 function initInput()
 {
 	//alert(22);
+	indate.displaytype = "";
 	
 	setEditableReportColValue('in_edit','report1',{indate:"2014-01-01",num:"10"});
 	//setReportInputBoxValue('in_edit','report1',false,{indate:'2013-01-01',num:'10'});

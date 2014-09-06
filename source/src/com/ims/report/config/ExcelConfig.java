@@ -12,6 +12,8 @@ package com.ims.report.config;
  */
 public class ExcelConfig {
 	
+	public static String PATH = "reportconfig/excel.xml";
+	
 	/**
 	 * 
 	 * @param sheetName
@@ -25,5 +27,14 @@ public class ExcelConfig {
 	 */
 	public static Sheet getSheet(String sheetName){
 		return SheetConfigParser.getInstance().getSheet(sheetName);
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public static String getPath(){
+		return Thread.currentThread().getContextClassLoader().getResource("").getPath()
+		+ PATH;
 	}
 }

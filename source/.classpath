@@ -26,7 +26,7 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/proxool-0.9.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/proxool-cglib.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/wabacus-4.3.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/wabacus-4.3.jar" sourcepath="E:/Project/InventoryManager/wabacus4.3-src.zip"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

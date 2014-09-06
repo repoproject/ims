@@ -50,7 +50,7 @@ public class SheetConfigParser {
 	 * @return
 	 */
 	private void loadConfig(){
-		String configPath = "";
+		String configPath = ExcelConfig.getPath();
 		File configFile = new File(configPath);
 		if(!configFile.exists()){
 			logger.error("没有找到配置文件，路径:" + configPath);
@@ -94,7 +94,7 @@ public class SheetConfigParser {
 		Element sheetEle = null;
 		for(Iterator i=root.elementIterator();i.hasNext();){
 			Element ele = (Element)i.next();
-			if(ele.attributeValue("sheetName").equals(sheetName)){
+			if(ele.attributeValue("name").equals(sheetName)){
 				sheetEle = ele;
 				break;
 			}
