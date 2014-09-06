@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Excel>
+    <!-- 
+        name:sheet页名称，与模板中相同
+        dataRowNum：模板中数据行等于Excel的行号，从1开始
+        dataStartNum:开始填充数据的行
+        footerRowNum:模板中尾行的行号，Excel的行标号，从1开始
+        class：处理此Sheet的类
+     -->
+    <Sheet name="" dataRowNum="10" dataStartNum="8" footerRowNum="11" class="">
+        <sql></sql>
+        <col index="1" type="String"></col>
+        <col index="2" type="Int"></col>
+        <col index="3" type=""></col>
+        <col index="9" type=""></col>
+        <col index="10" type=""></col>
+    </Sheet>
+    <Sheet name="" dataRowNum="9" footerRowNum="10">
+        <sql></sql>
+        <col num="1" type=""></col>
+    </Sheet>
+   
+</Excel>
