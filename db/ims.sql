@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-09-06 16:17:30
+Date: 2014-09-06 23:33:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -105,6 +105,7 @@ CREATE TABLE `b_machine` (
   `machineNo` varchar(50) DEFAULT NULL COMMENT '设备编号',
   `alias` varchar(255) DEFAULT NULL COMMENT '别名',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `orderNo` int(11) DEFAULT NULL COMMENT '排序号',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='设备机器表';
 
@@ -132,6 +133,10 @@ CREATE TABLE `b_out` (
   `num` int(11) DEFAULT NULL COMMENT '数量',
   `reason` varchar(255) DEFAULT NULL COMMENT '出库原因，codetype=''outreason''',
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
+  `projectCode` varchar(255) DEFAULT NULL COMMENT '项目编号',
+  `description` varchar(255) DEFAULT NULL COMMENT 'validation description',
+  `cause` varchar(255) DEFAULT NULL,
+  `section` varchar(255) DEFAULT NULL COMMENT 'section/instruments',
   `operator` varchar(255) DEFAULT NULL COMMENT '操作者',
   `makedate` datetime DEFAULT NULL COMMENT '创建日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改日期',
@@ -141,7 +146,7 @@ CREATE TABLE `b_out` (
 -- ----------------------------
 -- Records of b_out
 -- ----------------------------
-INSERT INTO `b_out` VALUES ('7', 'aa', 'aa', 'a', 'a', 'a', null, '1', '2014-09-03 00:00:00', '20.0000', '0', '20.0000', '5', '0', 'a', '001', '2014-09-03 22:11:11', '2014-09-03 22:11:11');
+INSERT INTO `b_out` VALUES ('7', 'aa', 'aa', 'a', 'a', 'a', null, '1', '2014-09-03 00:00:00', '20.0000', '0', '20.0000', '5', '0', 'a', null, null, null, null, '001', '2014-09-03 22:11:11', '2014-09-03 22:11:11');
 
 -- ----------------------------
 -- Table structure for b_person
@@ -424,6 +429,83 @@ CREATE TABLE `d_var` (
 INSERT INTO `d_var` VALUES ('localmoney', '0', '本币为CNY人民币');
 INSERT INTO `d_var` VALUES ('reportpath', '/reports/', '报表保存路径');
 INSERT INTO `d_var` VALUES ('taskserverip', '127.0.0.1', '任务服务器，多台服务器集群使用');
+
+-- ----------------------------
+-- View structure for r_in_view
+-- ----------------------------
+DROP VIEW IF EXISTS `r_in_view`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `r_in_view` AS SELECT
+  b.id,
+	a.catno,
+	a.catname,
+  case when a.reason = '0' then a.num else 0 end inVendor,
+  case when a.reason = '1' then a.num else 0 end inInterlab,
+  case when a.reason = '2' then a.num else 0 end inSponsor,
+  case when a.reason = '3' then a.num else 0 end inCharges,
+	a.indate
+FROM
+	b_in a,b_cat b
+WHERE a.catno = b.catno and a.batchno = b.batchno and a.price = b.price ;
+
+-- ----------------------------
+-- View structure for r_out_view
+-- ----------------------------
+DROP VIEW IF EXISTS `r_out_view`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `r_out_view` AS SELECT
+  b.id,
+	a.catno,
+	a.catname,
+  a.price,
+  case when a.reason = '0' then a.num else 0 end outTrialTest,
+  case when a.reason = '1' then a.num else 0 end outValidation,
+  case when a.reason = '2' then a.num else 0 end outDiscard,
+  case when a.reason = '3' then a.num else 0 end outIntelLab,
+  case when a.reason = '4' then a.num else 0 end outSponsor,
+  case when a.reason = '5' then a.num else 0 end outOthre,
+	a.outdate
+FROM
+	b_out a,b_cat b
+WHERE a.catno = b.catno and a.batchno = b.batchno and a.price = b.price ;
+
+-- ----------------------------
+-- View structure for r_view
+-- ----------------------------
+DROP VIEW IF EXISTS `r_view`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `r_view` AS SELECT
+	a.id,
+	a.catno,
+	a.catname,
+	a.batchno,
+	a.price,
+	a.priceUnit,
+	a.cattype,
+	a.machineno,
+	a.machineName,
+  i.inVendor,
+  i.inInterlab,
+  i.inSponsor,
+  i.inCharges,
+  i.inVendor + i.inInterlab + i.inSponsor +i.inCharges inTotal,
+  o.outTrialTest,
+  o.outValidation,
+  o.outDiscard,
+  o.outIntelLab,
+  o.outSponsor,
+  o.outOthre,
+  o.outTrialTest+o.outValidation+o.outDiscard+o.outIntelLab+o.outSponsor+o.outOthre outTotal,
+  a.total closing,
+   case when a.priceUnit='0' then a.price end CNY, 
+   case when a.priceUnit='1' then a.price end USD, 
+   case when a.priceUnit='2' then a.price end SGD, 
+   case when a.priceUnit='3' then a.price end EUR, 
+   case when a.priceUnit='4' then a.price end GBP,
+  a.localprice,
+  a.total * a.localprice totalAmount,
+  i.indate,
+  o.outdate
+FROM
+	b_cat a LEFT JOIN r_in_view i ON a.id = i.id
+LEFT JOIN r_out_view o ON a.id=o.id ;
 DROP TRIGGER IF EXISTS `tg_In_Insert_Before`;
 DELIMITER ;;
 CREATE TRIGGER `tg_In_Insert_Before` BEFORE INSERT ON `b_in` FOR EACH ROW begin
@@ -477,9 +559,9 @@ CREATE TRIGGER `tg_In_Update` AFTER UPDATE ON `b_in` FOR EACH ROW begin
    set cnt=(select count(id) from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
 
    if old.catno = new.catno and old.batchno=new.batchno and old.price=new.price then
-       update b_cat a set a.total = (a.total-old.num+new.num) where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
+       update b_cat a set a.total = (a.total-old.num+new.num),a.modifydate=sysdate() where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
    else
-       update b_cat a set a.total = a.total-old.num where a.catno=old.catno and a.batchno=old.batchno and a.price=old.price;
+       update b_cat a set a.total = a.total-old.num,a.modifydate=sysdate() where a.catno=old.catno and a.batchno=old.batchno and a.price=old.price;
        if cnt > 0 then
            update b_cat a set a.total=a.total+new.num where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
        else
@@ -500,7 +582,7 @@ CREATE TRIGGER `tg_In_Delete` AFTER DELETE ON `b_in` FOR EACH ROW begin
           set v_delnum = v_total;  --  只能删掉未出库的入库物品，已经出库的不能删除
           -- 已经出库的重新入库,这里无法实现，需要在程序中处理
           end if;
-     update b_cat set total = v_total-v_delnum where catno=old.catno and batchno=old.batchno and price=old.price;
+     update b_cat set total = v_total-v_delnum,modifydate=sysdate() where catno=old.catno and batchno=old.batchno and price=old.price;
      
 end
 ;;
@@ -513,7 +595,7 @@ CREATE TRIGGER `tg_Out_Insert` BEFORE INSERT ON `b_out` FOR EACH ROW begin
      if v_total < new.num then
           set new.num = v_total;
      end if;
-     update b_cat set total = (v_total-new.num) where catno=new.catno and batchno=new.batchno and price=new.price;
+     update b_cat set total = (v_total-new.num),modifydate=sysdate() where catno=new.catno and batchno=new.batchno and price=new.price;
      
 end
 ;;
@@ -529,16 +611,16 @@ CREATE TRIGGER `tg_Out_Update` BEFORE UPDATE ON `b_out` FOR EACH ROW begin
        if  v_total + old.num < new.num then 
            set new.num = v_total + old.num; -- 超额出库，设置最大出库数据为库存
        end if;
-        update b_cat a set a.total = (a.total+old.num-new.num) where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
+        update b_cat a set a.total = (a.total+old.num-new.num),a.modifydate=sysdate() where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
    else
        --  修改前的出库数据归库
-       update b_cat a set a.total = a.total+old.num where a.catno=old.catno and a.batchno=old.batchno and a.price=old.price;
+       update b_cat a set a.total = a.total+old.num,a.modifydate=sysdate() where a.catno=old.catno and a.batchno=old.batchno and a.price=old.price;
       --  修改后的业务主键存在于库存中，则更新库存，不存在则出库数量为0
        if cnt > 0 then
            if v_total < new.num then
                set new.num = v_total; -- 超出库存，设定为库存
            end if;
-           update b_cat a set a.total=a.total-new.num where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
+           update b_cat a set a.total=a.total-new.num,a.modifydate=sysdate() where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
        else
            set new.num = 0; --  通过修改，出库了一种没有库存的物品，则出库记录修改为0
         end if;
@@ -549,7 +631,7 @@ DELIMITER ;
 DROP TRIGGER IF EXISTS `tg_Out_Delete`;
 DELIMITER ;;
 CREATE TRIGGER `tg_Out_Delete` AFTER DELETE ON `b_out` FOR EACH ROW begin
-     update b_cat set total = total+old.num where catno=old.catno and batchno=old.batchno and price=old.price;   
+     update b_cat set total = total+old.num,modifydate=sysdate() where catno=old.catno and batchno=old.batchno and price=old.price;   
 end
 ;;
 DELIMITER ;
