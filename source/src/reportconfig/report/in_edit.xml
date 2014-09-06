@@ -7,84 +7,94 @@
 			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
 				<col column="ID" displaytype="hidden">
 				</col>
-				<col column="cattype" label="试剂/耗材" >
+				<col column="cattype" label="类型" >
 					<inputbox type="selectbox" >
 					    <option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
 					</inputbox>
 				</col>
-				<col column="catno" label="试剂/耗材编号*" br="true">
+				<col column="reason" label="入库原因"  br="true" >
+					<inputbox type="selectbox" styleproperty="onfocus=test1()" >
+					    <option dataset="@{select codename,code from d_code where codetype='inreason'}" label="codename" value="code"></option>
+					</inputbox>
+				</col>
+				
+				<col column="catname" label="名称*" >
 					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" >
 					    <typeprompt count="20"  callbackmethod="testTypePromptCallBack1">
-							 <promptcol label="catno" value="catno" title="编号" matchmode="anywhere"></promptcol>
-							 <promptcol label="catname" value="catname" title="名称" matchmode="anywhere"></promptcol>
+							 <promptcol label="catname" value="catname" title="名称" matchmode="anywhere"></promptcol>					    
+							 <promptcol label="catno" value="catno" title="货号" matchmode="anywhere"></promptcol>
 							      <datasource>
 							          <option dataset="@{select catno,catname from d_catcode where {#matchcondition#}}"></option>       
 							      </datasource>
-					    </typeprompt>
+					    </typeprompt>					
 					</inputbox>
 				</col>
-				<col column="catname" label="试剂/耗材名称*" >
+				<col column="catno" label="货号*" br="true" >
 					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" >
+
 					</inputbox>
 				</col>
-				<col column="batchno" label="批号"  br="true">
+				
+				<col column="batchno" label="批号*"  >
 					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
 				</col>
-				<col column="productdate" label="生产日期"  datatype="date{yyyy-MM-dd}"  >
-					<inputbox type="datepicker" dateformat="yyyy-MM-dd"></inputbox>
+				<col column="expiredate" label="有效期*"  datatype="date{yyyy-MM-dd}"  br="true">
+					<inputbox type="datepicker" dateformat="yyyy-MM-dd" jsvalidate="isNotEmpty(#label#不允许为空);isDate(#label#格式不符合要求)"></inputbox>
 				</col>
-				<col column="expiredate" label="有效期"  datatype="date{yyyy-MM-dd}"  br="true">
-					<inputbox type="datepicker" dateformat="yyyy-MM-dd"></inputbox>
+				
+                <col column="num" label="数量*" >
+					<inputbox  jsvalidate="isNotEmpty(#label#不允许为空);"  />
 				</col>
-				<col column="num" label="数量" >
-					<inputbox   />
-				</col>
-				<col column="producer" label="生产商"  br="true">
-					<inputbox jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
-				</col>
-				<col column="person" label="入库人"  >
-					<inputbox type="textbox" defaultvalue="session{nickname}"></inputbox>
-				</col>
-				<col column="dealer" label="供应商" br="true">
-					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
-				</col>
-				<col column="price" label="单价" >
+				<col column="price" label="单价*"  br="true" >
 					<inputbox  jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
 				</col>
-				<col column="priceUnit" label="货币" br="true">
+				
+				<col column="priceUnit" label="货币" >
 					<inputbox type="selectbox" stypeproperty="size='300'">
 					    <option dataset="@{select codename,code from d_code where codetype='money'}" label="codename" value="code"></option>
 					</inputbox>
 				</col>
-				<col column="taxRate" label="含税" >
+				<col column="taxRate" label="含税"   br="true" > 
 					<inputbox type="selectbox" >
 					    <option dataset="@{select codename,code from d_code where codetype='bool'}" label="codename" value="code"></option>
 					</inputbox>
-				</col>
-				<col column="reason" label="入库原因" br="true">
-					<inputbox type="selectbox" >
-					    <option dataset="@{select codename,code from d_code where codetype='inreason'}" label="codename" value="code"></option>
-					</inputbox>
-				</col>
-				<col column="rtype" label="所属R" >
+				</col>		
+				
+									
+				<col column="rtype" label="所属R"  displaytype="hidden">
 					<inputbox type="selectbox"><option dataset="@{select codename,code from d_code where codetype='rtype' order by code*1}" label="codename" value="code"></option>
 					</inputbox>
 				</col>
+				
+				<col column="productdate" label="生产日期*"  datatype="date{yyyy-MM-dd}"  >
+					<inputbox type="datepicker" dateformat="yyyy-MM-dd" jsvalidate="isNotEmpty(#label#不允许为空);isDate(#label#格式不符合要求)"></inputbox>
+				</col>
+				<col column="producer" label="生产商*"  br="true">
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+				
+                <col column="dealer" label="供应商*" >
+					<inputbox   jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>	
 				<col column="catFrom" label="来源"  br="true">
 					<inputbox type="selectbox"><option dataset="@{select codename,code from d_code where codetype='catfrom'}" label="codename" value="code"></option>
 					</inputbox>
 				</col>
-				<col column="indate" label="入库时间" datatype="date{yyyy-MM-dd}"   >
-					<inputbox type="datepicker"  dateformat="yyyy-MM-dd"></inputbox>
+				
+				<col column="person" label="入库人*"  >
+					<inputbox type="textbox" jsvalidate="isNotEmpty(#label#不允许为空);" defaultvalue="session{nickname}"></inputbox>
 				</col>
-				<col column="remark" label="备注" br="true">
+				<col column="indate" label="入库时间*" datatype="date{yyyy-MM-dd}"  br="true"   >
+					<inputbox type="datepicker"  dateformat="yyyy-MM-dd" jsvalidate="isNotEmpty(#label#不允许为空);isDate(#label#格式不符合要求)"></inputbox>
+				</col>
+				<col column="remark" label="备注">
 					<inputbox type="textareabox" styleproperty="colspan='3'" valuestyleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
 				</col>
 			</display>
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT ID,cattype,catno,catname,batchno,productdate,productdate,expiredate,indate,num,producer,dealer,reason,person,price,priceUnit,case when taxRate=0 then 0 else 1 end taxRate,rtype,catFrom,remark FROM b_in where  {#condition#}]]>
+						<![CDATA[SELECT ID,(select codename from d_code where code=cattype and codetype='cattype') cattype,catno,catname,batchno,productdate,productdate,expiredate,indate,num,producer,dealer,reason,person,price,priceUnit,case when taxRate=0 then 0 else 1 end taxRate,rtype,catFrom,remark FROM b_in where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
