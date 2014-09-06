@@ -10,14 +10,14 @@
 				<display mouseoverbgcolor="CCCCCC" >
 				<col column="{col-rowselect}" width="20"></col>
 					<col column="id" label="序号"  displaytype="hidden"/>
-					<col column="catname" label="名称"  clickorderby="true" width="25%"/>
+					<col column="catname" label="名称"  clickorderby="true" width="15%"/>
 					<col column="catno" label="货号"  clickorderby="true" width="10%"/>					
 					<col column="batchno" label="批号" clickorderby="true" width="10%"></col>		
 					<col column="localprice" label="单价CNY" datatype="float" clickorderby="true" width="10%"></col>
 					<col column="total" label="数量" clickorderby="true" datatype="int" width="10%"></col>
 					<col column="expiredate" label="有效期" datatype="date{yyyy-MM-dd}" clickorderby="true" width="10%"></col>
-					<col column="producer" label="生产商" clickorderby="true" width="15%"></col>
-					<col column="{editablelist-edit}" label="出库操作"></col>
+					<col column="producer" label="生产商" clickorderby="true" width="10%"></col>
+					<col column="{editablelist-edit}" label="出库操作" width="5%"></col>
 				</display>
 			<sql>
 				<select>
@@ -62,18 +62,18 @@
 		</report>
 		<report id="report2" title="request{txtname}出库信息" rowselect="multiple-checkbox" type="editablelist" >
 				<display mouseoverbgcolor="CCCCCC" >
-				<col column="{col-rowselect}" width="20"></col>
+				<col column="{col-rowselect}" width="20"></col>    
 					<col column="id" label="编号"  displaytype="hidden"/>
 					<col column="outdate" label="出库日期" clickorderby="true" datatype="date{yyyy-MM-dd}" width="10%"></col>
-					<col column="catno" label="货号"  clickorderby="true" width="10%"/>
-					<col column="catname" label="名称"  clickorderby="true" width="20%"/>
-					<col column="batchno" label="批号" clickorderby="true" width="10%"></col>
-					<col column="localprice" label="单价CNY" datatype="float" clickorderby="true" width="10%"></col>
+					<col column="catno" label="货号"  clickorderby="true" width="8%"/>
+					<col column="catname" label="名称"  clickorderby="true" width="15%"/>
+					<col column="batchno" label="批号" clickorderby="true" width="8%"></col>
+					<col column="localprice" label="单价CNY" datatype="float" clickorderby="true" width="6%"></col>
 					<col column="num" label="数量" datatype="int" clickorderby="true" width="5%"></col>
-					<col column="machinename" label="设备"  clickorderby="true" width="10%"/>
-					<col column="machineno" label="设备序号"  clickorderby="true" width="10%"/>
-					<col column="reason" label="原因" clickorderby="true" width="15%"></col>
-					<col column="{editablelist-edit}" label="修改出库"></col>
+					<col column="machinename" label="设备"  clickorderby="true" width="8%"/>
+					<col column="machineno" label="设备序号"  clickorderby="true" width="8%"/>
+					<col column="reason" label="原因" clickorderby="true" width="10%"></col>
+					<col column="{editablelist-edit}" label="修改出库" width="4%"></col>
 				</display>
 			<sql>
 				<select>

@@ -11,16 +11,18 @@
 				<col column="{col-rowselect}" width="20"></col>
 					<col column="id" label="编号"  displaytype="hidden"/>
 					<col column="{sequence:1}" label="序号" width="3%"/>
-					<col column="cattype" label="类型"  clickorderby="true" width="4%"/>
-					<col column="person" label="出库人" clickorderby="true" width="5%"></col>
-					<col column="outdate" label="出库日期" clickorderby="true" datatype="date{yyyy-MM-dd}" width="8%"></col>
-					<col column="catno" label="货号"  clickorderby="true" width="8%"/>
-					<col column="catname" label="名称"  clickorderby="true" width="15%"/>
-					<col column="batchno" label="批号" clickorderby="true" width="8%"></col>
+					<col column="cattype" label="类型"  clickorderby="true" width="3%"/>
+					<col column="person" label="出库人" clickorderby="true" width="4%"></col>
+					<col column="outdate" label="出库日期" clickorderby="true" datatype="date{yyyy-MM-dd}" width="6%"></col>
+					<col column="catno" label="货号"  clickorderby="true" width="6%"/>
+					<col column="catname" label="名称"  clickorderby="true" width="12%"/>
+					<col column="batchno" label="批号" clickorderby="true" width="6%"></col>
+					<col column="machinename" label="所属设备"  clickorderby="true" width="6%"/>
+					<col column="machineno" label="设备序号"  clickorderby="true" width="6%"/>
 					<col column="localprice" label="单价(RMB)" datatype="int" clickorderby="true" width="5%"></col>	
-					<col column="num" label="数量" datatype="int" clickorderby="true" width="5%"></col>
+					<col column="num" label="数量" datatype="int" clickorderby="true" width="4%"></col>
 					<col column="subtotal" label="小计(RMB)" datatype="int" clickorderby="true" width="5%"></col>					
-					<col column="remark" label="备注" clickorderby="true" width="10%"></col>
+					<col column="remark" label="备注" clickorderby="true" width="8%"></col>
 				</display>
 				   <subdisplay>
 					    <statitems><!-- 定义要用到的统计项 -->
@@ -30,8 +32,8 @@
 						     <statitem property="item4" value="sum(subtotal)" datatype="float"></statitem>
 					    </statitems>
 					    <subrow displaytype="page|report">
-						     <subcol property="sprop1" colspan="3" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
-						     <subcol property="sprop2" colspan="4" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
+						     <subcol property="sprop1" colspan="4" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
+						     <subcol property="sprop2" colspan="5" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
 						     <subcol property="sprop3" colspan="5" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
 					    </subrow>
 					    <format>
@@ -66,7 +68,7 @@
 						</condition>
 						
 						
-						<condition name="txtcatname" label=" 名      称 " labelposition="left">
+						<condition name="txtcatname" label=" 名       称   " labelposition="left">
 						     <value>
 							<![CDATA[(trim(catname) like  '%#data#%' )]]>
 						</value>
@@ -91,7 +93,26 @@
 							<![CDATA[(trim(batchno) like  '%#data#%' )]]>
 						</value>						     
 					    </condition> 
-					      <condition name="txtperson" label="出  库  人" labelposition="left"  >
+					     <condition name="txtmachinename" label="所属设备" labelposition="left"  >
+						     <value>
+							<![CDATA[(trim(machinename) like  '%#data#%' )]]>
+						</value>		
+						     <inputbox>
+						        <typeprompt width="-1" count="20">
+							       <promptcol label="machinename" matchmode="anywhere"></promptcol>
+							       <datasource>    
+							          <option dataset="@{SELECT machinename from b_machine where {#matchcondition#}}"></option> 
+                                   </datasource>
+						        </typeprompt>
+						     </inputbox>						
+										     
+					    </condition>
+					     <condition name="txtmachineno" label="设备序号" labelposition="left"  >
+						     <value>
+							<![CDATA[(trim(machineno) like  '%#data#%' )]]>
+						</value>						     
+					    </condition>
+					      <condition name="txtperson" label="出库人" labelposition="left"  >
 						     <value>
 							<![CDATA[(trim(person) like  '%#data#%' )]]>
 						</value>	
@@ -105,7 +126,7 @@
 						     </inputbox>	     
 					    </condition>
 					    
-					    <condition name="typename" label="  类        型  " labelposition="left">						
+					    <condition name="typename" label="  类型  " labelposition="left">						
 							<value> <![CDATA[(trim(cattype) = '#data#')]]>
 							</value>
 							<inputbox type="selectbox" >	
