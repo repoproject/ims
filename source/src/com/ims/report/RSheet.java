@@ -11,6 +11,4 @@ public interface RSheet {
 	public void createSheet();
 	
 	public String getSheetName();
-	
-	public void setData();
 }
