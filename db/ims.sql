@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-09-04 00:14:26
+Date: 2014-09-06 16:17:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -424,83 +424,6 @@ CREATE TABLE `d_var` (
 INSERT INTO `d_var` VALUES ('localmoney', '0', '本币为CNY人民币');
 INSERT INTO `d_var` VALUES ('reportpath', '/reports/', '报表保存路径');
 INSERT INTO `d_var` VALUES ('taskserverip', '127.0.0.1', '任务服务器，多台服务器集群使用');
-
--- ----------------------------
--- View structure for r_in_view
--- ----------------------------
-DROP VIEW IF EXISTS `r_in_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `r_in_view` AS SELECT
-  b.id,
-	a.catno,
-	a.catname,
-  case when a.reason = '0' then a.num else 0 end inVendor,
-  case when a.reason = '1' then a.num else 0 end inInterlab,
-  case when a.reason = '2' then a.num else 0 end inSponsor,
-  case when a.reason = '3' then a.num else 0 end inCharges,
-	a.indate
-FROM
-	b_in a,b_cat b
-WHERE a.catno = b.catno and a.batchno = b.batchno and a.price = b.price ; ;
-
--- ----------------------------
--- View structure for r_out_view
--- ----------------------------
-DROP VIEW IF EXISTS `r_out_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `r_out_view` AS SELECT
-  b.id,
-	a.catno,
-	a.catname,
-  a.price,
-  case when a.reason = '0' then a.num else 0 end outTrialTest,
-  case when a.reason = '1' then a.num else 0 end outValidation,
-  case when a.reason = '2' then a.num else 0 end outDiscard,
-  case when a.reason = '3' then a.num else 0 end outIntelLab,
-  case when a.reason = '4' then a.num else 0 end outSponsor,
-  case when a.reason = '5' then a.num else 0 end outOthre,
-	a.outdate
-FROM
-	b_out a,b_cat b
-WHERE a.catno = b.catno and a.batchno = b.batchno and a.price = b.price ; ;
-
--- ----------------------------
--- View structure for r_view
--- ----------------------------
-DROP VIEW IF EXISTS `r_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `r_view` AS SELECT
-	a.id,
-	a.catno,
-	a.catname,
-	a.batchno,
-	a.price,
-	a.priceUnit,
-	a.cattype,
-	a.machineno,
-	a.machineName,
-  i.inVendor,
-  i.inInterlab,
-  i.inSponsor,
-  i.inCharges,
-  i.inVendor + i.inInterlab + i.inSponsor +i.inCharges inTotal,
-  o.outTrialTest,
-  o.outValidation,
-  o.outDiscard,
-  o.outIntelLab,
-  o.outSponsor,
-  o.outOthre,
-  o.outTrialTest+o.outValidation+o.outDiscard+o.outIntelLab+o.outSponsor+o.outOthre outTotal,
-  a.total closing,
-   case when a.priceUnit='0' then a.price end CNY, 
-   case when a.priceUnit='1' then a.price end USD, 
-   case when a.priceUnit='2' then a.price end SGD, 
-   case when a.priceUnit='3' then a.price end EUR, 
-   case when a.priceUnit='4' then a.price end GBP,
-  a.localprice,
-  a.total * a.localprice totalAmount,
-  i.indate,
-  o.outdate
-FROM
-	b_cat a LEFT JOIN r_in_view i ON a.id = i.id
-LEFT JOIN r_out_view o ON a.id=o.id ; ;
 DROP TRIGGER IF EXISTS `tg_In_Insert_Before`;
 DELIMITER ;;
 CREATE TRIGGER `tg_In_Insert_Before` BEFORE INSERT ON `b_in` FOR EACH ROW begin
@@ -512,7 +435,7 @@ CREATE TRIGGER `tg_In_Insert_Before` BEFORE INSERT ON `b_in` FOR EACH ROW begin
      if(new.priceunit <> v_localmoney) then
          set v_rate=(select rate from d_rate where localmoney = v_localmoney and foreignmoney=new.priceunit and sysdate() > startdatetime ORDER BY startDateTime desc limit 1); --  通过本币和单价换算汇率
      end if;
-     set new.localprice = (new.price / v_rate);
+     set new.localprice = (new.price/v_rate);
 
 end
 ;;
@@ -542,7 +465,7 @@ CREATE TRIGGER `tg_In_Update_Before` BEFORE UPDATE ON `b_in` FOR EACH ROW begin
      if(new.priceunit <> v_localmoney) then
          set v_rate=(select rate from d_rate where localmoney = v_localmoney and foreignmoney=new.priceunit and sysdate() > startdatetime ORDER BY startDateTime desc limit 1); --  通过本币和单价换算汇率
      end if;
-     set new.localprice = (new.price / v_rate);
+     set new.localprice = (new.price/v_rate);
 
 end
 ;;
