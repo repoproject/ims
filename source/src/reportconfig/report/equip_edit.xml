@@ -12,7 +12,10 @@
 				</col>				
 				<col column="machineNo" label="序号S/N*" br="true">
 					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan50(#label#长度应小于等于50);stripscript(#label#不能含有特殊字符);" />
-				</col>			
+				</col>
+				<col column="orderNo" label="排序号*" br="true">
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNumber(#label#必须是整数)" />
+				</col>							
 				<col column="remark" label="备注">
 					<inputbox type="textareabox" styleproperty="rows='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
 				</col>
@@ -20,7 +23,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT  id,machineName,machineNo,remark FROM b_machine where  {#condition#}]]>
+						<![CDATA[SELECT  id,machineName,machineNo,orderNo,remark FROM b_machine where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -29,11 +32,11 @@
 					</condition>
 				</select>
 				<insert>
-					insert into b_machine(machineName,machineNo,remark)
-					values(trim(@{machineName}),@{machineNo},trim(@{remark}));
+					insert into b_machine(machineName,machineNo,orderNo,remark)
+					values(trim(@{machineName}),@{machineNo},trim(@{orderNo}),trim(@{remark}));
 				</insert>
 				<update>
-					update b_machine set machineName=trim(@{machineName}),machineNo=@{machineNo},remark=trim(@{remark}) 
+					update b_machine set machineName=trim(@{machineName}),machineNo=@{machineNo},orderNo=trim(@{orderNo}),remark=trim(@{remark}) 
 					where ID=@{ID__old};
 				</update>
 			</sql>
