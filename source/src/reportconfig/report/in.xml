@@ -16,7 +16,7 @@
 					<col column="catname" label="名称"  clickorderby="true" width="20%"/>
 					<col column="batchno" label="批号"  clickorderby="true" width="10%"/>
 					<col column="num" label="数量"  datatype="int" clickorderby="true" width="5%"/>
-					<col column="localPrice" label="单价RMB"  datatype="float" clickorderby="true" width="5%"/>
+					<col column="price" label="单价RMB"  datatype="float" clickorderby="true" width="5%"/>
 					<col column="dealer" label="供应商"  clickorderby="true" width="10%"/>
 					<col column="producer" label="生产商"  clickorderby="true" width="10%"/>
 					<col column="reason" label="入库原因"  clickorderby="true" width="15%"/>
@@ -25,7 +25,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id,inDate,catno,catname,batchno,num,round(localPrice,2) localPrice,producer,dealer,(select codename from d_code where code=cattype and codetype='cattype') cattype,(select codename from d_code where code=reason and codetype='inreason') reason,person FROM b_in where  {#condition#}]]>
+						<![CDATA[SELECT id,inDate,catno,catname,batchno,num,round(localPrice,2) localPrice, round(price,2) price,producer,dealer,(select codename from d_code where code=cattype and codetype='cattype') cattype,(select codename from d_code where code=reason and codetype='inreason') reason,person FROM b_in where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
