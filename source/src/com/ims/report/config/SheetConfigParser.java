@@ -6,6 +6,7 @@ package com.ims.report.config;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -83,6 +84,21 @@ public class SheetConfigParser {
 	public Sheet getSheet(String sheetName){
 		Element sheetEle = getSheetElement(sheetName);
 		return marshal(sheetEle);
+	}
+	
+	/**
+	 * 得到所有配置的节点
+	 * @return
+	 */
+	public List<Sheet> getSheetList(){
+		List<Sheet> sheetList = new LinkedList<Sheet>();
+		for(Iterator i=root.elementIterator();i.hasNext();){
+			Element ele = (Element)i.next();
+			Sheet sheetObj = new Sheet();
+			sheetObj = marshal(ele);
+			sheetList.add(sheetObj);
+		}
+		return sheetList;
 	}
 	
 	/**

@@ -58,7 +58,7 @@
 	
 	<servlet>
 		<servlet-name>ExcelExport</servlet-name>
-		<servlet-class>com.ims.service.ExcelExport</servlet-class>
+		<servlet-class>com.ims.report.ExcelExport</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ExcelExport</servlet-name>

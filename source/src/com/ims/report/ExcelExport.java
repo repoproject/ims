@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.ims.service;
+package com.ims.report;
 
 
 import java.io.File;
@@ -27,7 +27,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.util.Region;
 
-import com.ims.report.R1Sheet;
+import com.ims.report.excel.R1Sheet;
 import com.ims.util.ExcelUtil;
 import com.itextpdf.text.List;
 import com.wabacus.config.ConfigLoadManager;
@@ -57,6 +57,11 @@ public class ExcelExport  extends HttpServlet{
         
 		FileInputStream fileInputStream = new FileInputStream(path);
 		createExcel(fileInputStream);
+		
+		String startDate = "";
+		
+		InventoryReport reportor = new InventoryReport(startDate);
+		Thread reportThread = new Thread(reportor);
 
 		logger.info("Excel创建完毕，开始下载输出");
 		response.setContentType("application/vnd.ms-excel");	

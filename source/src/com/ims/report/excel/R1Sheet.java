@@ -1,15 +1,17 @@
 /**
  * 
  */
-package com.ims.report;
+package com.ims.report.excel;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.time.DateUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -20,13 +22,15 @@ import com.ims.report.config.Column;
 import com.ims.report.config.ExcelConfig;
 import com.ims.report.config.Sheet;
 import com.ims.util.DBUtil;
+import com.ims.util.DateTimeUtil;
 import com.ims.util.ExcelUtil;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
  * @author ChengNing
  * @date   2014年9月3日
  */
-public class R1Sheet implements RSheet{
+public class R1Sheet implements ISheet{
 	private HSSFWorkbook wb;
 	private HSSFCellStyle dataCellStyle;
 	private HSSFSheet sheet;
@@ -67,7 +71,7 @@ public class R1Sheet implements RSheet{
 	/**
 	 * 创建sheet
 	 */
-	public  void createSheet(){
+	public void createSheet(){
 		loadConfig();
 		//第10行是模板尾行，poi无插入，所以复制此行，最后添加到最后
 		this.templateFooterRow = sheet.getRow(footerRowNum);
@@ -94,21 +98,24 @@ public class R1Sheet implements RSheet{
 		HSSFCell cell = row.getCell(3);
 		if(cell == null)
 			cell = row.createCell(3);
-		cell.setCellValue("26-Aug-14");
+		//ExcelUtil.setCellValue(cell, "26/Aug/14");
+		Date date = DateTimeUtil.getDate("2014-08-26",DateTimeUtil.DEFAULT_FORMAT_DATE);
+		ExcelUtil.setCellValue(cell, date);
 		
 
 		HSSFCell cell2 = row.getCell(16);
 		if(cell2 == null)
 			cell2 = row.createCell(16);
-		cell2.setCellValue("25-Sep-14");
+		Date date1 = DateTimeUtil.getDate("2014-09-25",DateTimeUtil.DEFAULT_FORMAT_DATE);
+		ExcelUtil.setCellValue(cell2, date1);
 	}
 	
 	/**
 	 * 设置尾行
 	 */
-	private void setFooter(int rowIndex){
-		HSSFRow row = sheet.createRow(rowIndex);
-		ExcelUtil.copyRow(this.templateFooterRow, row);
+	private void moveFooter(int rowCount){
+		int moveCount = rowCount-(this.footerRowNum-this.startRow);
+		this.sheet.shiftRows(this.footerRowNum, this.sheet.getLastRowNum(), moveCount);
 	}
 	
 	/**
@@ -119,7 +126,7 @@ public class R1Sheet implements RSheet{
 		int rowCount = data.size();
 		
 		//得到数据之后先设置尾行,否则模板行会被覆盖
-		setFooter(rowCount+this.startRow);
+		moveFooter(rowCount);
 		
 		//创建数据区域
 		createDataRegion(rowCount);
@@ -139,8 +146,13 @@ public class R1Sheet implements RSheet{
 	 * @param dataRowCount
 	 */
 	private void createDataRegion(int dataRowCount){
+		int rowIndex=0;
 		for(int i = 1;i< dataRowCount;i++){
 			//数据模板行的下一行开始创建数据区
+			rowIndex = this.startRow + i;
+			if(rowIndex == this.dataRowNum - 1){
+				continue;//模板行跳过
+			}
 			HSSFRow row = sheet.createRow(this.startRow + i);
 			ExcelUtil.copyRow(this.templateDataRow, row);
 		}
@@ -161,31 +173,13 @@ public class R1Sheet implements RSheet{
 			if(cell == null)
 				cell = row.createCell(index);
 			String valueName = col.getValue().toString();
-			cell.setCellValue(rowData.get(valueName).toString());
-			cell.setCellStyle(this.dataCellStyle);
+			Object value = rowData.get(valueName);
+			if(value == null || value.equals("0"))
+				value = StringUtils.EMPTY;
+			cell.setCellValue(value.toString());
 		}
 	}
 	
-//	/**
-//	 * 行级写数
-//	 * @param row
-//	 * @param rowData
-//	 */
-//	private void setRowData(HSSFRow row,Object[] rowData){
-//		int colCount = row.getLastCellNum();
-//		Object cellValue = null;
-//		for(int j=0;j<colCount;j++){
-//			if(j == rowData.length)
-//				break;
-//			HSSFCell cell = row.getCell(j);
-//			cellValue = rowData[j];
-//			if(cell == null)
-//				cell = row.createCell(j);
-//			
-//			cell.setCellValue(cellValue.toString());
-//			cell.setCellStyle(this.dataCellStyle);
-//		}
-//	}
 	
 
 	/**

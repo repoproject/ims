@@ -3,6 +3,10 @@
  */
 package com.ims.report.config;
 
+import java.util.List;
+
+import com.ims.util.Sys;
+
 
 
 /**
@@ -30,11 +34,18 @@ public class ExcelConfig {
 	}
 	
 	/**
+	 * 获得配置文件中所有的sheet配置
+	 * @return
+	 */
+	public static List<Sheet> getAllSheet(){
+		return SheetConfigParser.getInstance().getSheetList();
+	}
+	
+	/**
 	 * 
 	 * @return
 	 */
 	public static String getPath(){
-		return Thread.currentThread().getContextClassLoader().getResource("").getPath()
-		+ PATH;
+		return Sys.classRootPath() + PATH;
 	}
 }
