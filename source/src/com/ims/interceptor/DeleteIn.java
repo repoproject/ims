@@ -13,7 +13,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.ims.util.DBUtil;
-import com.ims.util.InOutRule;
+import com.ims.rule.InOutRule;
 import com.wabacus.config.component.application.report.ReportBean;
 import com.wabacus.system.ReportRequest;
 import com.wabacus.system.component.application.report.configbean.editablereport.AbsEditableReportEditDataBean;

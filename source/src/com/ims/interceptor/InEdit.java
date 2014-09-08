@@ -16,7 +16,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.ims.util.DBUtil;
-import com.ims.util.InOutRule;
+import com.ims.rule.InOutRule;
 import com.wabacus.config.component.application.report.ReportBean;
 import com.wabacus.system.ReportRequest;
 import com.wabacus.system.buttons.EditableReportSQLButtonDataBean;
@@ -69,7 +69,7 @@ public class InEdit extends AbsInterceptorDefaultAdapter {
 		if (editbean instanceof EditableReportInsertDataBean) {
 
 			// 判断入库时间是否晚于上次R统计，晚于才能增加，否则不能增加
-			if (!InOutRule.indateIsOK(strindate)) {
+			if (!com.ims.rule.InOutRule.indateIsOK(strindate)) {
 				rrequest.getWResponse().getMessageCollector().alert(
 						"新增入库记录的入库时间[" + strindate + "]必须晚于上月统计库存的时间["
 								+ strRDate + "]！", null, false);
@@ -77,27 +77,29 @@ public class InEdit extends AbsInterceptorDefaultAdapter {
 			}
 
 			// 判断该试剂/耗材是否在库中存在，不存在则提示并不能保存
-			if (!InOutRule.catIsExit(strcatno, strcatname)) {
+			if (!com.ims.rule.InOutRule.catIsExit(strcatno, strcatname)) {
 				rrequest.getWResponse().getMessageCollector().alert(
 						"不存在货号为[" + strcatno + "]名称为[" + strcatname
 								+ "]的试剂/耗材，请提前维护后再进行入库！", null, false);
 				return WX_RETURNVAL_TERMINATE;
 			}
 
+			//判断如果维护入库的数量小于出库量，则进行提示不能维护。即入库修改时修改的数量不能小于出库数量
+			
 			super.doSavePerRow(rrequest, rbean, mRowData, mParamValues,
 					editbean);
 
 		} else if (editbean instanceof EditableReportUpdateDataBean) {
 
 			// 判断入库时间是否晚于上次R统计，晚于才能修改，否则不能修改
-			if (!InOutRule.indateIsOK(strindate)) {
+			if (!com.ims.rule.InOutRule.indateIsOK(strindate)) {
 				rrequest.getWResponse().getMessageCollector().alert(
 						"修改入库记录的入库时间[" + strindate + "]必须晚于上月统计库存的时间["
 								+ strRDate + "]！", null, false);
 				return WX_RETURNVAL_TERMINATE;
 			}
 			// 判断该试剂/耗材是否在库中存在，不存在则提示并不能保存
-			if (!InOutRule.catIsExit(strcatno, strcatname)) {
+			if (!com.ims.rule.InOutRule.catIsExit(strcatno, strcatname)) {
 				rrequest.getWResponse().getMessageCollector().alert(
 						"不存在货号为[" + strcatno + "]名称为[" + strcatname
 								+ "]的试剂/耗材，请提前维护后再进行入库！", null, false);
@@ -114,7 +116,7 @@ public class InEdit extends AbsInterceptorDefaultAdapter {
 		} else if (editbean instanceof EditableReportDeleteDataBean) {
 			// 删除操作
 			// 判断入库时间是否晚于上次R统计，晚于才能删除，否则不能删除
-			if (!InOutRule.indateIsOK(strindate)) {
+			if (!com.ims.rule.InOutRule.indateIsOK(strindate)) {
 				rrequest.getWResponse().getMessageCollector().alert(
 						"删除入库记录的入库时间" + strindate + "必须晚于上月统计库存的时间[" + strRDate
 								+ "]！", null, false);
