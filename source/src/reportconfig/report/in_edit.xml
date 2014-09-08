@@ -19,7 +19,7 @@
 				</col>
 				
 				<col column="catname" label="名称*" >
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" >
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan200(#label#长度应小于等于200);stripscript(#label#不能含有特殊字符);" >
 					    <typeprompt count="20"  callbackmethod="testTypePromptCallBack1">
 							 <promptcol label="catname" value="catname" title="名称" matchmode="anywhere"></promptcol>					    
 							 <promptcol label="catno" value="catno" title="货号" matchmode="anywhere"></promptcol>
@@ -53,10 +53,10 @@
 				
 				
                 <col column="num" label="数量*" >
-					<inputbox  jsvalidate="isNotEmpty(#label#不允许为空);"  />
+					<inputbox  jsvalidate="isNotEmpty(#label#不允许为空);isPosNumber(#label#必须是大于0的整数)"  />
 				</col>
 				<col column="price" label="单价*"  br="true" >
-					<inputbox  jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+					<inputbox  jsvalidate="isNumeric(#label#必须是数字)" />
 				</col>
 				
 				<col column="priceUnit" label="货币" >
@@ -81,7 +81,7 @@
 					<inputbox   jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
 				</col>				
 				<col column="person" label="入库人*"   br="true" >
-					<inputbox type="textbox" jsvalidate="isNotEmpty(#label#不允许为空);" defaultvalue="session{nickname}"></inputbox>
+					<inputbox type="textbox" styleproperty="disabled='disabled'"  jsvalidate="isNotEmpty(#label#不允许为空);" defaultvalue="session{nickname}"></inputbox>
 				</col>
 				
 				<col column="indate" label="入库时间*" datatype="date{yyyy-MM-dd}"   >
@@ -103,11 +103,11 @@
 					</condition>
 				</select>
 				<insert>
-					insert into b_in(cattype,catno,catname,batchno,productdate,expiredate,indate,num,producer,dealer,reason,person,price,priceUnit,taxRate,rtype,catFrom,remark)
-					values(@{cattype},@{catno},@{catname},@{batchno},@{productdate},@{expiredate},@{indate},@{num},@{producer},@{dealer},@{reason},@{person},@{price},@{priceUnit},@{taxRate},@{rtype},@{catFrom},@{remark});
+					insert into b_in(cattype,catno,catname,batchno,productdate,expiredate,indate,num,producer,dealer,reason,person,price,priceUnit,taxRate,rtype,catFrom,remark,operator,makedate, modifydate)
+					values(@{cattype},@{catno},@{catname},@{batchno},@{productdate},@{expiredate},@{indate},@{num},@{producer},@{dealer},@{reason},@{person},@{price},@{priceUnit},@{taxRate},@{rtype},@{catFrom},@{remark},session{nickname}, sysdate(),sysdate());
 				</insert>
 				<update>
-					update b_in set cattype=trim(@{cattype}), catno=trim(@{catno}),catname=trim(@{catname}),batchno=trim(@{batchno}),productdate=@{productdate},expiredate=@{expiredate},indate=@{indate},num=@{num},producer=trim(@{producer}),dealer=trim(@{dealer}),reason=@{reason},person=trim(@{person}),price=@{price},priceUnit=@{priceUnit},taxRate=@{taxRate},rtype=@{rtype},catFrom=@{catFrom},remark=trim(@{remark}) 
+					update b_in set cattype=trim(@{cattype}), catno=trim(@{catno}),catname=trim(@{catname}),batchno=trim(@{batchno}),productdate=@{productdate},expiredate=@{expiredate},indate=@{indate},num=@{num},producer=trim(@{producer}),dealer=trim(@{dealer}),reason=@{reason},person=trim(@{person}),price=@{price},priceUnit=@{priceUnit},taxRate=@{taxRate},rtype=@{rtype},catFrom=@{catFrom},remark=trim(@{remark}),operator=session{nickname},modifydate=sysdate() 
 					where ID=@{ID__old};
 				</update>
 			</sql>
