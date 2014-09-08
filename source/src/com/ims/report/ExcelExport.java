@@ -57,34 +57,27 @@ public class ExcelExport  extends HttpServlet{
 		String path = ExcelExport.class.getResource("").getPath() + "template.xls";
 		logger.info("template:" + path);
         
-		FileInputStream fileInputStream = new FileInputStream(path);
-		createExcel(fileInputStream);
+		//FileInputStream fileInputStream = new FileInputStream(path);
+		createExcel();
 
-		logger.info("Excel创建完毕，开始下载输出");
-		response.setContentType("application/vnd.ms-excel");	
-		
-		ServletOutputStream out = response.getOutputStream();
-		this.wb.write(out);
-		out.flush();
-		out.close();
+//		logger.info("Excel创建完毕，开始下载输出");
+//		response.setContentType("application/vnd.ms-excel");	
+//		
+//		ServletOutputStream out = response.getOutputStream();
+//		this.wb.write(out);
+//		out.flush();
+//		out.close();
 	}
 	
-	private void createExcel(InputStream is){
-		try {
-			wb = new HSSFWorkbook(is);
-
-			Date startDate=DateTimeUtil.getDate("2014-08-26", DateTimeUtil.DEFAULT_FORMAT_DATE);
-			Date endDate = DateTimeUtil.getDate("2014-10-26", DateTimeUtil.DEFAULT_FORMAT_DATE);
+	private void createExcel(){
+	    Date startDate=DateTimeUtil.getDate("2014-08-26", DateTimeUtil.DEFAULT_FORMAT_DATE);
+		Date endDate = DateTimeUtil.getDate("2014-10-26", DateTimeUtil.DEFAULT_FORMAT_DATE);
 			
-			InventoryReport reportor = new InventoryReport(startDate,endDate);
-			reportor.run();
+		InventoryReport reportor = new InventoryReport(startDate,endDate);
+		reportor.run();
 //			Thread reportThread = new Thread(reportor);
 //			reportThread.start();
 			//r1.createSheet();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	
@@ -130,19 +123,20 @@ public class ExcelExport  extends HttpServlet{
 	
 	public static void main(String [] arc){
 		System.out.println("test");
-		try {
-			FileInputStream fileInputStream = new FileInputStream(ExcelExport.class.getResource("").getPath() + "template.xls");
-			
-			ExcelExport testExcelExport = new ExcelExport();
-			testExcelExport.createExcel(fileInputStream);
-		    FileOutputStream fStream = new FileOutputStream("D://test1.xls");
-		    testExcelExport.wb.write(fStream);
-		    fStream.flush();
-			fStream.close();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+//		try {
+//			FileInputStream fileInputStream = new FileInputStream(ExcelExport.class.getResource("").getPath() + "template.xls");
+//			
+//			ExcelExport testExcelExport = new ExcelExport();
+//			testExcelExport.createExcel(fileInputStream);
+//		    FileOutputStream fStream = new FileOutputStream("D://test1.xls");
+//		    testExcelExport.wb.write(fStream);
+//		    fStream.flush();
+//			fStream.close();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 }

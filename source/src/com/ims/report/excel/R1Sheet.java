@@ -12,6 +12,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -31,9 +32,11 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
  * @date   2014年9月3日
  */
 public class R1Sheet implements ISheet{
+	private static Logger logger = Logger.getLogger(R1Sheet.class);
 	private HSSFSheet sheet;
 	private HSSFRow templateDataRow;
 	private String sheetName;
+	private Sheet sheetConfig;
 
 	private int footerRowNum;
 	private int dataRowNum;
@@ -44,15 +47,15 @@ public class R1Sheet implements ISheet{
 	private Date startDate;
 	private Date endDate;
 	
-
 	/**
 	 * 指定开始时间到当期时间
 	 * @param sheet
 	 * @param startDate
 	 * @param endDate
 	 */
-	public R1Sheet(HSSFSheet sheet,Date startDate){
+	public R1Sheet(HSSFSheet sheet,Sheet config,Date startDate){
 		this.sheet = sheet;
+		this.sheetConfig = config;
 		this.sheetName=sheet.getSheetName();
 		this.startDate = startDate;
 		this.endDate = new Date();
@@ -62,8 +65,9 @@ public class R1Sheet implements ISheet{
 	 * 指定开始时间和结束时间
 	 * @param sheet
 	 */
-	public R1Sheet(HSSFSheet sheet,Date startDate,Date endDate){
+	public R1Sheet(HSSFSheet sheet,Sheet config,Date startDate,Date endDate){
 		this.sheet = sheet;
+		this.sheetConfig = config;
 		this.sheetName=sheet.getSheetName();
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -73,7 +77,7 @@ public class R1Sheet implements ISheet{
 	 * 加载配置属性
 	 */
 	private void loadConfig(){
-		Sheet sheetConfig = ExcelConfig.getSheet(sheetName);
+		logger.info("加载配置属性");
 		this.footerRowNum = sheetConfig.getFooterRowNum()-1;
 		this.dataRowNum = sheetConfig.getDataRowNum()-1;
 		this.startRow = sheetConfig.getDataStartNum()-1;
@@ -105,6 +109,7 @@ public class R1Sheet implements ISheet{
 	 * 设置日期汇率
 	 */
 	private void setHeader(){
+		logger.info("设置表头数据");
 		HSSFRow row = sheet.getRow(5);
 		HSSFCell cell = row.getCell(3);
 		if(cell == null)
@@ -133,6 +138,7 @@ public class R1Sheet implements ISheet{
 	 * sheet中填数
 	 */
 	private void setData(){
+		logger.info("设置数据");
 		List<Object> data = getData();
 		int rowCount = data.size();
 		
