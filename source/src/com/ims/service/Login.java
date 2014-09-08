@@ -50,6 +50,7 @@ public class Login extends HttpServlet {
 		String name = request.getParameter("username");
 		String password = request.getParameter("password");		
 		
+		
 		// 登录验证结果  1 成功  2用户名不存在  3 密码输入有误
 		int result = 3;
 

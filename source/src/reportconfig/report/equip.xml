@@ -12,14 +12,15 @@
 					<col column="{sequence:1}" label="序号" width="5%"/>
 					<col column="id" label="编号"  displaytype="hidden"/>
 					<col column="machinename" label="设备名称" clickorderby="true" width="25%"></col>
-					<col column="machineno" label="设备序列号" clickorderby="true" width="25%"></col>				
+					<col column="machineno" label="序号S/N" clickorderby="true" width="25%"></col>
+					<col column="orderno" label="排序号" clickorderby="true" width="15%"></col>				
 					<col column="remark" label="备注" clickorderby="true" width="30%"></col>					
 				</display>
 				<sql>
 				
 					<select>
 						<value>
-							<![CDATA[SELECT id,machinename,machineno,remark FROM b_machine  where {#condition#} order by machinename]]>
+							<![CDATA[SELECT id,machinename,machineno,orderno,remark FROM b_machine  where {#condition#} order by machinename]]>
 						</value>						
 						<condition name="txtname" label="设备名称" labelposition="left">
 							<value>
@@ -28,7 +29,7 @@
 							<inputbox type="textbox" jsvalidate="isNotLongerThan50(#label#列长度应小于等于50);stripscript(#label#不能含有特殊字符)">
 							</inputbox>
 						</condition>
-						<condition name="txtseqno" label="设备序列号" labelposition="left">
+						<condition name="txtseqno" label="序号S/N" labelposition="left">
 							<value>
 								<![CDATA[(machineno like '%#data#%' )]]>								
 							</value>
