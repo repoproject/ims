@@ -70,8 +70,8 @@ public class ExcelExport  extends HttpServlet{
 	}
 	
 	private void createExcel(){
-	    Date startDate=DateTimeUtil.getDate("2014-08-26", DateTimeUtil.DEFAULT_FORMAT_DATE);
-		Date endDate = DateTimeUtil.getDate("2014-10-26", DateTimeUtil.DEFAULT_FORMAT_DATE);
+	    Date startDate=DateTimeUtil.getDate("2014-08-26");
+		Date endDate = DateTimeUtil.getDate("2014-10-26");
 			
 		InventoryReport reportor = new InventoryReport(startDate,endDate);
 		reportor.run();

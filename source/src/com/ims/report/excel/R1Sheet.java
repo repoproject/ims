@@ -115,14 +115,14 @@ public class R1Sheet implements ISheet{
 		if(cell == null)
 			cell = row.createCell(3);
 		//ExcelUtil.setCellValue(cell, "26/Aug/14");
-		Date date = DateTimeUtil.getDate("2014-08-26",DateTimeUtil.DEFAULT_FORMAT_DATE);
+		Date date = DateTimeUtil.getDate("2014-08-26");
 		ExcelUtil.setCellValue(cell, date);
 		
 
 		HSSFCell cell2 = row.getCell(16);
 		if(cell2 == null)
 			cell2 = row.createCell(16);
-		Date date1 = DateTimeUtil.getDate("2014-09-25",DateTimeUtil.DEFAULT_FORMAT_DATE);
+		Date date1 = DateTimeUtil.getDate("2014-09-25");
 		ExcelUtil.setCellValue(cell2, date1);
 	}
 	

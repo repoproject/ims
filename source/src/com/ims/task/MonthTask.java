@@ -4,10 +4,8 @@
 package com.ims.task;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.time.DateUtils;
 import org.apache.log4j.Logger;
 
 import com.ims.util.DBUtil;
@@ -24,7 +22,8 @@ public class MonthTask implements Runnable{
 	@Override
 	public void run() {
 		logger.info("开始执行MonthTask.......");
-		
+		MonthReport monthTask = new MonthReport();
+		monthTask.report();
 	}
 	
 	/**
@@ -38,6 +37,7 @@ public class MonthTask implements Runnable{
 		monthOfYear++;//得到的月份是从0开始，需要加1
 		String sql = "select runPoint from d_task where code='monthtask' and flag = ?";
 		String runPoint = DBUtil.getOneValue(sql,String.valueOf(monthOfYear));
+		logger.info("本月运行日" + runPoint);
 		if(StringUtils.equals(String.valueOf(dayOfMonth), runPoint))
 			return true;
 		return false;
