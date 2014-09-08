@@ -6,46 +6,54 @@
 		<header>
 			<![CDATA[<p align="center"><font size="6"><b>出库管理</b></font></p>]]>
 		</header>
-		<report id="report1" title="request{txtname}库存信息" rowselect="multiple-checkbox" type="editablelist" >
+		<report id="report1" title="request{txtname}库存信息" rowselect="multiple-checkbox" type="editablelist" interceptor="com.ims.interceptor.Out" >
 				<display mouseoverbgcolor="CCCCCC" >
 				<col column="{col-rowselect}" width="20"></col>
 					<col column="id" label="序号"  displaytype="hidden"/>
 					<col column="catname" label="名称"  clickorderby="true" width="15%"/>
 					<col column="catno" label="货号"  clickorderby="true" width="10%"/>					
 					<col column="batchno" label="批号" clickorderby="true" width="10%"></col>		
-					<col column="localprice" label="单价CNY" datatype="float" clickorderby="true" width="10%"></col>
-					<col column="total" label="数量" clickorderby="true" datatype="int" width="10%"></col>
+					<col column="price" label="单价" datatype="float" clickorderby="true" width="10%"></col>
+					<col column="priceUnit" label="货币"  clickorderby="true" width="10%"></col>					
+					<col column="total" label="库存" clickorderby="true" datatype="int" width="10%"></col>
 					<col column="expiredate" label="有效期" datatype="date{yyyy-MM-dd}" clickorderby="true" width="10%"></col>
+					<col column="ISEXP" label="提醒"  width="3%"  displaytype="hidden"></col>
 					<col column="producer" label="生产商" clickorderby="true" width="10%"></col>
-					<col column="{editablelist-edit}" label="出库操作" width="5%"></col>
+					<col column="{editablelist-edit}" label="出库" width="5%"></col>
 				</display>
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id,catno,catname,batchno,round(localprice,2) localprice,total, expiredate ,producer FROM b_cat  where  total>0 and {#condition#} order by expiredate]]>
+						<![CDATA[SELECT id, catno, catname, batchno, round(localprice, 2) localprice, round(price, 2) price, ( SELECT codename FROM d_code WHERE CODE = priceUnit AND codetype = 'money' ) priceUnit, total, expiredate, producer, CASE WHEN DATEDIFF(expiredate, CURRENT_DATE()) <= b_var.bizValue THEN "1" ELSE "0" END ISEXP FROM b_cat, b_var WHERE total > 0 AND bizkey = 'expireTime' and {#condition#} order by expiredate]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
 						<![CDATA[(ID = '#data#' )]]>
 						</value>
 					</condition>						
-				    <condition name="catname" label="名称" labelposition="left">
+				   <condition name="txtcatname" label="名称" labelposition="left">
 						     <value>
 							<![CDATA[(trim(catname) like  '%#data#%' )]]>
 						</value>
-						     <inputbox>
-						        <typeprompt width="-1" count="20">
-							       <promptcol label="catname" matchmode="anywhere"></promptcol>
-							       <datasource>    
-							          <option dataset="@{select distinct catname from d_catcode where {#matchcondition#}}"></option> 
-                                   </datasource>
-						        </typeprompt>
+						 <inputbox>
+					    <typeprompt count="20" >
+							 <promptcol label="catname" value="catname" title="名称" matchmode="anywhere"></promptcol>
+							 <promptcol label="catno" value="catno" title="货号" matchmode="anywhere"></promptcol>				
+							      <datasource>
+							          <option dataset="@{select catno,catname from d_catcode where {#matchcondition#}}"></option>       
+							      </datasource>
+					    </typeprompt>
 						     </inputbox>
 					    </condition>
-				    <condition name="batchno" label="批号" labelposition="left">
-						<value>
+                        <condition name="txtcatno" label="货号" labelposition="left">
+						     <value>
 							<![CDATA[(trim(catno) like  '%#data#%' )]]>
-						</value>						   
+						</value>						     
+					    </condition>
+					    <condition name="txtbatchno" label="批号" labelposition="left"  >
+						     <value>
+							<![CDATA[(trim(batchno) like  '%#data#%' )]]>
+						</value>						     
 					    </condition>
 						
 						 
