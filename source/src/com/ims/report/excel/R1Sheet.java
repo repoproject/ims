@@ -31,11 +31,9 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
  * @date   2014年9月3日
  */
 public class R1Sheet implements ISheet{
-	private HSSFWorkbook wb;
-	private HSSFCellStyle dataCellStyle;
 	private HSSFSheet sheet;
-	private HSSFRow templateFooterRow;
 	private HSSFRow templateDataRow;
+	private String sheetName;
 
 	private int footerRowNum;
 	private int dataRowNum;
@@ -43,17 +41,32 @@ public class R1Sheet implements ISheet{
 	private String sql;
 	private List<Column> cols;
 	
-	private String sheetName;
-	private final int SHEET_INDEX = 5;
+	private Date startDate;
+	private Date endDate;
+	
+
+	/**
+	 * 指定开始时间到当期时间
+	 * @param sheet
+	 * @param startDate
+	 * @param endDate
+	 */
+	public R1Sheet(HSSFSheet sheet,Date startDate){
+		this.sheet = sheet;
+		this.sheetName=sheet.getSheetName();
+		this.startDate = startDate;
+		this.endDate = new Date();
+	}
 	
 	/**
-	 * 
-	 * @param wb
+	 * 指定开始时间和结束时间
+	 * @param sheet
 	 */
-	public R1Sheet(HSSFWorkbook wb){
-		this.wb = wb;
-		this.sheet = wb.getSheetAt(SHEET_INDEX);
-		this.sheetName=this.sheet.getSheetName();
+	public R1Sheet(HSSFSheet sheet,Date startDate,Date endDate){
+		this.sheet = sheet;
+		this.sheetName=sheet.getSheetName();
+		this.startDate = startDate;
+		this.endDate = endDate;
 	}
 	
 	/**
@@ -74,10 +87,8 @@ public class R1Sheet implements ISheet{
 	public void createSheet(){
 		loadConfig();
 		//第10行是模板尾行，poi无插入，所以复制此行，最后添加到最后
-		this.templateFooterRow = sheet.getRow(footerRowNum);
 		//模板中的数据行，获取格式
 		this.templateDataRow = sheet.getRow(dataRowNum);
-		this.dataCellStyle = this.templateDataRow.getCell(1).getCellStyle();
 		//设置表头数据
 		setHeader();
 		//设置数据
@@ -187,7 +198,7 @@ public class R1Sheet implements ISheet{
 	 */
 	private List<Object> queryData(){
 		List<Object> data = new ArrayList<Object>();
-		data = DBUtil.query(this.sql);
+		data = DBUtil.query(this.sql,this.startDate,this.endDate,this.startDate,this.endDate);
 		return data;
 	}
 	

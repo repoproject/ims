@@ -6,6 +6,7 @@ package com.ims.report;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.lang.reflect.Constructor;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -25,15 +26,18 @@ import com.ims.util.SysVar;
  */
 public class InventoryReport implements Runnable{
 	private static Logger logger = Logger.getLogger(InventoryReport.class);
-	private String startDate;
+	private Date startDate;
+	private Date endDate;
 	private HSSFWorkbook wb;
 	
-	public InventoryReport(String startDate){
+	public InventoryReport(Date startDate){
 		this.startDate = startDate;
+		this.endDate = new Date();
 	}
 	
-	public InventoryReport(String startDate,String endData){
+	public InventoryReport(Date startDate,Date endData){
 		this.startDate = startDate;
+		this.endDate = endData;
 	}
 
 	@Override
@@ -60,6 +64,7 @@ public class InventoryReport implements Runnable{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		this.wb = null;//释放
 	}
 	
 	/**
@@ -72,7 +77,7 @@ public class InventoryReport implements Runnable{
 			try {
 				Class clazz = Class.forName(sheet.getClassName());
 				Constructor constructor = clazz.getConstructor(String.class);
-				ISheet sheetObj = (ISheet) constructor.newInstance(this.startDate);
+				ISheet sheetObj = (ISheet) constructor.newInstance(sheet,this.startDate,this.endDate);
 				sheetObj.createSheet();
 			} catch (Exception e) {
 				logger.info("创建Excel的sheet失败，Sheet名称：" + sheet.getName());

@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -28,6 +29,7 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.util.Region;
 
 import com.ims.report.excel.R1Sheet;
+import com.ims.util.DateTimeUtil;
 import com.ims.util.ExcelUtil;
 import com.itextpdf.text.List;
 import com.wabacus.config.ConfigLoadManager;
@@ -57,11 +59,6 @@ public class ExcelExport  extends HttpServlet{
         
 		FileInputStream fileInputStream = new FileInputStream(path);
 		createExcel(fileInputStream);
-		
-		String startDate = "";
-		
-		InventoryReport reportor = new InventoryReport(startDate);
-		Thread reportThread = new Thread(reportor);
 
 		logger.info("Excel创建完毕，开始下载输出");
 		response.setContentType("application/vnd.ms-excel");	
@@ -75,8 +72,15 @@ public class ExcelExport  extends HttpServlet{
 	private void createExcel(InputStream is){
 		try {
 			wb = new HSSFWorkbook(is);
-			R1Sheet r1 = new R1Sheet(wb);
-			r1.createSheet();
+
+			Date startDate=DateTimeUtil.getDate("2014-08-26", DateTimeUtil.DEFAULT_FORMAT_DATE);
+			Date endDate = DateTimeUtil.getDate("2014-10-26", DateTimeUtil.DEFAULT_FORMAT_DATE);
+			
+			InventoryReport reportor = new InventoryReport(startDate,endDate);
+			reportor.run();
+//			Thread reportThread = new Thread(reportor);
+//			reportThread.start();
+			//r1.createSheet();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
