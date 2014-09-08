@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-09-06 23:33:21
+Date: 2014-09-08 18:27:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -365,7 +365,7 @@ CREATE TABLE `d_task` (
   `startDateTime` datetime DEFAULT NULL COMMENT '开始运行时间，如果需要在一个时间段运行，则此字段存在',
   `endDateTime` datetime DEFAULT NULL COMMENT '结束运行时间，如果一段时间之后停止执行，则需要配此字段',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of d_task
@@ -427,7 +427,8 @@ CREATE TABLE `d_var` (
 -- Records of d_var
 -- ----------------------------
 INSERT INTO `d_var` VALUES ('localmoney', '0', '本币为CNY人民币');
-INSERT INTO `d_var` VALUES ('reportpath', '/reports/', '报表保存路径');
+INSERT INTO `d_var` VALUES ('reportname', 'Inventory listing {yyyy-MM}.xls', null);
+INSERT INTO `d_var` VALUES ('reportpath', 'reports\\', '报表保存路径');
 INSERT INTO `d_var` VALUES ('taskserverip', '127.0.0.1', '任务服务器，多台服务器集群使用');
 
 -- ----------------------------
@@ -445,7 +446,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
 	a.indate
 FROM
 	b_in a,b_cat b
-WHERE a.catno = b.catno and a.batchno = b.batchno and a.price = b.price ;
+WHERE a.catno = b.catno and a.batchno = b.batchno and a.price = b.price ; ;
 
 -- ----------------------------
 -- View structure for r_out_view
@@ -465,7 +466,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
 	a.outdate
 FROM
 	b_out a,b_cat b
-WHERE a.catno = b.catno and a.batchno = b.batchno and a.price = b.price ;
+WHERE a.catno = b.catno and a.batchno = b.batchno and a.price = b.price ; ;
 
 -- ----------------------------
 -- View structure for r_view
@@ -505,7 +506,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
   o.outdate
 FROM
 	b_cat a LEFT JOIN r_in_view i ON a.id = i.id
-LEFT JOIN r_out_view o ON a.id=o.id ;
+LEFT JOIN r_out_view o ON a.id=o.id ; ;
 DROP TRIGGER IF EXISTS `tg_In_Insert_Before`;
 DELIMITER ;;
 CREATE TRIGGER `tg_In_Insert_Before` BEFORE INSERT ON `b_in` FOR EACH ROW begin
