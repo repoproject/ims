@@ -50,11 +50,26 @@
 				</col>
 							
 				
-				<col column="cause" label="Root Causes" >
-				    <inputbox type="textbox" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200)"  />
+				<col column="cause" label="Root Causes" >				    
+			     <inputbox type="textbox" styleproperty="colspan='2'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200)" >
+			        <typeprompt width="-1" count="200">
+				       <promptcol label="codename" matchmode="anywhere"></promptcol>
+				       <datasource>    
+				          <option dataset="@{SELECT  distinct codename FROM d_code WHERE d_code.codetype = 'rootcause' and {#matchcondition#}}"></option> 
+                                </datasource>
+			        </typeprompt>
+			     </inputbox>					    
+				    
 				</col>
 				<col column="section" label="Sections/Instruments"  br="true" >
-				    <inputbox type="textbox" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200)"  />
+				    <inputbox type="textbox" styleproperty="colspan='2'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200)" >
+			        <typeprompt width="-1" count="200">
+				       <promptcol label="codename" matchmode="anywhere"></promptcol>
+				       <datasource>    
+				          <option dataset="@{SELECT  distinct codename FROM d_code WHERE d_code.codetype = 'sections' and {#matchcondition#}}"></option> 
+                                </datasource>
+			        </typeprompt>
+			     </inputbox>
 				</col>
 				
 				<col column="machinename" label="设备名称*" >					

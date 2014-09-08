@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -28,6 +29,7 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.util.Region;
 
 import com.ims.report.excel.R1Sheet;
+import com.ims.util.DateTimeUtil;
 import com.ims.util.ExcelUtil;
 import com.itextpdf.text.List;
 import com.wabacus.config.ConfigLoadManager;
@@ -55,32 +57,27 @@ public class ExcelExport  extends HttpServlet{
 		String path = ExcelExport.class.getResource("").getPath() + "template.xls";
 		logger.info("template:" + path);
         
-		FileInputStream fileInputStream = new FileInputStream(path);
-		createExcel(fileInputStream);
-		
-		String startDate = "";
-		
-		InventoryReport reportor = new InventoryReport(startDate);
-		Thread reportThread = new Thread(reportor);
+		//FileInputStream fileInputStream = new FileInputStream(path);
+		createExcel();
 
-		logger.info("Excel创建完毕，开始下载输出");
-		response.setContentType("application/vnd.ms-excel");	
-		
-		ServletOutputStream out = response.getOutputStream();
-		this.wb.write(out);
-		out.flush();
-		out.close();
+//		logger.info("Excel创建完毕，开始下载输出");
+//		response.setContentType("application/vnd.ms-excel");	
+//		
+//		ServletOutputStream out = response.getOutputStream();
+//		this.wb.write(out);
+//		out.flush();
+//		out.close();
 	}
 	
-	private void createExcel(InputStream is){
-		try {
-			wb = new HSSFWorkbook(is);
-			R1Sheet r1 = new R1Sheet(wb);
-			r1.createSheet();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	private void createExcel(){
+	    Date startDate=DateTimeUtil.getDate("2014-08-26");
+		Date endDate = DateTimeUtil.getDate("2014-10-26");
+			
+		InventoryReport reportor = new InventoryReport(startDate,endDate);
+		reportor.run();
+//			Thread reportThread = new Thread(reportor);
+//			reportThread.start();
+			//r1.createSheet();
 	}
 	
 	
@@ -126,19 +123,20 @@ public class ExcelExport  extends HttpServlet{
 	
 	public static void main(String [] arc){
 		System.out.println("test");
-		try {
-			FileInputStream fileInputStream = new FileInputStream(ExcelExport.class.getResource("").getPath() + "template.xls");
-			
-			ExcelExport testExcelExport = new ExcelExport();
-			testExcelExport.createExcel(fileInputStream);
-		    FileOutputStream fStream = new FileOutputStream("D://test1.xls");
-		    testExcelExport.wb.write(fStream);
-		    fStream.flush();
-			fStream.close();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+//		try {
+//			FileInputStream fileInputStream = new FileInputStream(ExcelExport.class.getResource("").getPath() + "template.xls");
+//			
+//			ExcelExport testExcelExport = new ExcelExport();
+//			testExcelExport.createExcel(fileInputStream);
+//		    FileOutputStream fStream = new FileOutputStream("D://test1.xls");
+//		    testExcelExport.wb.write(fStream);
+//		    fStream.flush();
+//			fStream.close();
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 }

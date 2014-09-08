@@ -12,6 +12,7 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
+import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -31,11 +32,11 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
  * @date   2014年9月3日
  */
 public class R1Sheet implements ISheet{
-	private HSSFWorkbook wb;
-	private HSSFCellStyle dataCellStyle;
+	private static Logger logger = Logger.getLogger(R1Sheet.class);
 	private HSSFSheet sheet;
-	private HSSFRow templateFooterRow;
 	private HSSFRow templateDataRow;
+	private String sheetName;
+	private Sheet sheetConfig;
 
 	private int footerRowNum;
 	private int dataRowNum;
@@ -43,24 +44,40 @@ public class R1Sheet implements ISheet{
 	private String sql;
 	private List<Column> cols;
 	
-	private String sheetName;
-	private final int SHEET_INDEX = 5;
+	private Date startDate;
+	private Date endDate;
 	
 	/**
-	 * 
-	 * @param wb
+	 * 指定开始时间到当期时间
+	 * @param sheet
+	 * @param startDate
+	 * @param endDate
 	 */
-	public R1Sheet(HSSFWorkbook wb){
-		this.wb = wb;
-		this.sheet = wb.getSheetAt(SHEET_INDEX);
-		this.sheetName=this.sheet.getSheetName();
+	public R1Sheet(HSSFSheet sheet,Sheet config,Date startDate){
+		this.sheet = sheet;
+		this.sheetConfig = config;
+		this.sheetName=sheet.getSheetName();
+		this.startDate = startDate;
+		this.endDate = new Date();
+	}
+	
+	/**
+	 * 指定开始时间和结束时间
+	 * @param sheet
+	 */
+	public R1Sheet(HSSFSheet sheet,Sheet config,Date startDate,Date endDate){
+		this.sheet = sheet;
+		this.sheetConfig = config;
+		this.sheetName=sheet.getSheetName();
+		this.startDate = startDate;
+		this.endDate = endDate;
 	}
 	
 	/**
 	 * 加载配置属性
 	 */
 	private void loadConfig(){
-		Sheet sheetConfig = ExcelConfig.getSheet(sheetName);
+		logger.info("加载配置属性");
 		this.footerRowNum = sheetConfig.getFooterRowNum()-1;
 		this.dataRowNum = sheetConfig.getDataRowNum()-1;
 		this.startRow = sheetConfig.getDataStartNum()-1;
@@ -74,10 +91,8 @@ public class R1Sheet implements ISheet{
 	public void createSheet(){
 		loadConfig();
 		//第10行是模板尾行，poi无插入，所以复制此行，最后添加到最后
-		this.templateFooterRow = sheet.getRow(footerRowNum);
 		//模板中的数据行，获取格式
 		this.templateDataRow = sheet.getRow(dataRowNum);
-		this.dataCellStyle = this.templateDataRow.getCell(1).getCellStyle();
 		//设置表头数据
 		setHeader();
 		//设置数据
@@ -94,19 +109,20 @@ public class R1Sheet implements ISheet{
 	 * 设置日期汇率
 	 */
 	private void setHeader(){
+		logger.info("设置表头数据");
 		HSSFRow row = sheet.getRow(5);
 		HSSFCell cell = row.getCell(3);
 		if(cell == null)
 			cell = row.createCell(3);
 		//ExcelUtil.setCellValue(cell, "26/Aug/14");
-		Date date = DateTimeUtil.getDate("2014-08-26",DateTimeUtil.DEFAULT_FORMAT_DATE);
+		Date date = DateTimeUtil.getDate("2014-08-26");
 		ExcelUtil.setCellValue(cell, date);
 		
 
 		HSSFCell cell2 = row.getCell(16);
 		if(cell2 == null)
 			cell2 = row.createCell(16);
-		Date date1 = DateTimeUtil.getDate("2014-09-25",DateTimeUtil.DEFAULT_FORMAT_DATE);
+		Date date1 = DateTimeUtil.getDate("2014-09-25");
 		ExcelUtil.setCellValue(cell2, date1);
 	}
 	
@@ -122,6 +138,7 @@ public class R1Sheet implements ISheet{
 	 * sheet中填数
 	 */
 	private void setData(){
+		logger.info("设置数据");
 		List<Object> data = getData();
 		int rowCount = data.size();
 		
@@ -187,7 +204,7 @@ public class R1Sheet implements ISheet{
 	 */
 	private List<Object> queryData(){
 		List<Object> data = new ArrayList<Object>();
-		data = DBUtil.query(this.sql);
+		data = DBUtil.query(this.sql,this.startDate,this.endDate,this.startDate,this.endDate);
 		return data;
 	}
 	

@@ -17,6 +17,7 @@ public class SysConst {
 	 */
 	public class Var{
 		public static final String REPORT_PATH = "reportpath";
+		public static final String REPORT_NAME = "reportname";
 		public static final String LOCAL_MONEY = "localmoney";
 		public static final String TASK_SERVER_IP = "taskserverip";
 	}
