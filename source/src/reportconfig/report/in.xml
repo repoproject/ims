@@ -6,7 +6,7 @@
 	    <header>
 			<![CDATA[<p align="center"><font size="6"><b>入库管理</b></font></p>]]>
 		</header>
-		<report id="report1" title="入库列表（只能增/删/改上次库存统计后本人的入库记录）" rowselect="multiple-checkbox" type="editablelist" interceptor="com.ims.interceptor.DeleteIn" >
+		<report id="report1" title="入库列表（只能增/删/改上次库存统计后本人的入库记录）"  pagesize="13"  rowselect="multiple-checkbox" type="editablelist" interceptor="com.ims.interceptor.DeleteIn" >
 				<display mouseoverbgcolor="CCCCCC" >
 				<col column="{col-rowselect}" width="20"></col>
 					<col column="id" label="编号"  displaytype="hidden"/>
