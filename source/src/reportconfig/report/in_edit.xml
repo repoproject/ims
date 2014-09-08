@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
 	<page id="in_edit" js="/webresources/script/validate.js,/webresources/script/wabacus_api.js,webresources/script/wabacus_editsystem.js,/js/localJS/in.js"  css="/webresources/component/tiny_mce/themes/advanced/skins/o2k7/ui.css">
-		<report id="report1" title="request{txtname}入库信息" type="form" >
+		<report id="report1" title="request{txtname}入库信息" type="form" interceptor="com.ims.interceptor.InEdit">
 			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
 				<col column="ID" displaytype="hidden">
 				</col>
@@ -42,6 +42,16 @@
 					<inputbox type="datepicker" dateformat="yyyy-MM-dd" jsvalidate="isNotEmpty(#label#不允许为空);isDate(#label#格式不符合要求)"></inputbox>
 				</col>
 				
+				<col column="rtype" label="所属R" >
+					<inputbox type="selectbox"><option dataset="@{select codename,code from d_code where codetype='rtype' order by code*1}" label="codename" value="code"></option>
+					</inputbox>
+				</col>
+				<col column="catFrom" label="来源"  br="true">
+					<inputbox type="selectbox"><option dataset="@{select codename,code from d_code where codetype='catfrom'}" label="codename" value="code"></option>
+					</inputbox>
+				</col>
+				
+				
                 <col column="num" label="数量*" >
 					<inputbox  jsvalidate="isNotEmpty(#label#不允许为空);"  />
 				</col>
@@ -60,12 +70,6 @@
 					</inputbox>
 				</col>		
 				
-									
-				<col column="rtype" label="所属R"  displaytype="hidden">
-					<inputbox type="selectbox"><option dataset="@{select codename,code from d_code where codetype='rtype' order by code*1}" label="codename" value="code"></option>
-					</inputbox>
-				</col>
-				
 				<col column="productdate" label="生产日期*"  datatype="date{yyyy-MM-dd}"  >
 					<inputbox type="datepicker" dateformat="yyyy-MM-dd" jsvalidate="isNotEmpty(#label#不允许为空);isDate(#label#格式不符合要求)"></inputbox>
 				</col>
@@ -75,26 +79,22 @@
 				
                 <col column="dealer" label="供应商*" >
 					<inputbox   jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
-				</col>	
-				<col column="catFrom" label="来源"  br="true">
-					<inputbox type="selectbox"><option dataset="@{select codename,code from d_code where codetype='catfrom'}" label="codename" value="code"></option>
-					</inputbox>
-				</col>
-				
-				<col column="person" label="入库人*"  >
+				</col>				
+				<col column="person" label="入库人*"   br="true" >
 					<inputbox type="textbox" jsvalidate="isNotEmpty(#label#不允许为空);" defaultvalue="session{nickname}"></inputbox>
 				</col>
-				<col column="indate" label="入库时间*" datatype="date{yyyy-MM-dd}"  br="true"   >
+				
+				<col column="indate" label="入库时间*" datatype="date{yyyy-MM-dd}"   >
 					<inputbox type="datepicker"  dateformat="yyyy-MM-dd" jsvalidate="isNotEmpty(#label#不允许为空);isDate(#label#格式不符合要求)"></inputbox>
 				</col>
-				<col column="remark" label="备注">
+				<col column="remark" label="备注"  br="true" >
 					<inputbox type="textareabox" styleproperty="colspan='3'" valuestyleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
 				</col>
 			</display>
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT ID,(select codename from d_code where code=cattype and codetype='cattype') cattype,catno,catname,batchno,productdate,productdate,expiredate,indate,num,producer,dealer,reason,person,price,priceUnit,case when taxRate=0 then 0 else 1 end taxRate,rtype,catFrom,remark FROM b_in where  {#condition#}]]>
+						<![CDATA[SELECT ID, cattype,catno,catname,batchno,productdate,productdate,expiredate,indate,num,producer,dealer,reason,person,price,priceUnit,case when taxRate=0 then 0 else 1 end taxRate,rtype,catFrom,remark FROM b_in where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -107,10 +107,15 @@
 					values(@{cattype},@{catno},@{catname},@{batchno},@{productdate},@{expiredate},@{indate},@{num},@{producer},@{dealer},@{reason},@{person},@{price},@{priceUnit},@{taxRate},@{rtype},@{catFrom},@{remark});
 				</insert>
 				<update>
-					update b_in set catno=trim(@{catno}),catname=trim(@{catname}),batchno=trim(@{batchno}),productdate=@{productdate},expiredate=@{expiredate},indate=@{indate},num=@{num},producer=trim(@{producer}),dealer=trim(@{dealer}),reason=@{reason},person=trim(@{person}),price=@{price},priceUnit=@{priceUnit},taxRate=@{taxRate},rtype=@{rtype},catFrom=@{catFrom},remark=trim(@{remark}) 
+					update b_in set cattype=trim(@{cattype}), catno=trim(@{catno}),catname=trim(@{catname}),batchno=trim(@{batchno}),productdate=@{productdate},expiredate=@{expiredate},indate=@{indate},num=@{num},producer=trim(@{producer}),dealer=trim(@{dealer}),reason=@{reason},person=trim(@{person}),price=@{price},priceUnit=@{priceUnit},taxRate=@{taxRate},rtype=@{rtype},catFrom=@{catFrom},remark=trim(@{remark}) 
 					where ID=@{ID__old};
 				</update>
 			</sql>
+			<buttons>
+					<button  extends="${wabacus.button2.default}" name="button2" position="title" label="增加新试剂"  positionorder="3">
+	                  <![CDATA[window.location.href='/ims/ShowReport.wx?PAGEID=regent_edit&report1_ACCESSMODE=add&closePopupPage=true';]]>
+					</button>
+			 </buttons>
 			<format><!--
 				<value>
 					rrequest.getRequest().setAttribute("txtname",name);//存放request，以便显示标题时能取到
