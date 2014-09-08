@@ -1,21 +1,17 @@
 package com.ims.rule;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import com.ims.common.TaskData;
-import com.ims.interceptor.InEdit;
 import com.ims.util.DBUtil;
 import com.ims.util.DateTimeUtil;
 
 public class InOutRule {
 	
-	private static Logger log = Logger.getLogger(InEdit.class);
+	private static Logger log = Logger.getLogger(InOutRule.class);
 	/***
 	 * 
 	 * 入库操作时判断是否存在该试剂/耗材
@@ -63,12 +59,10 @@ public class InOutRule {
 	/***
 	 * 获取上次R统计时间
 	 * 
-	 * @return
 	 */
 	public static Date getRrundate() {
 		TaskData taskData = new TaskData();
 		return taskData.lastTaskDate();
-
 	}
 	/***
 	 * 获取指定货号、批号和单价的剩余库存
@@ -77,37 +71,49 @@ public class InOutRule {
 	 * @param strprice 单价
 	 * @return
 	 */
-	public static int getcatTotal(String strcatno ,String strbatchno,	String strprice)
+	public static int getcatTotal(String strcatno ,String strbatchno,	String strprice) 
 	{
 		int itotal = 0;
-		
+
+		String strtotal ="";
+		try{
 		// 查询库库存信息
 		String sql = "select total from b_cat where catno=? and batchno=? and price=?";
-		String strtotal = DBUtil.getOneValue(sql, strcatno , strbatchno, strprice);
-		
-		//查询出结果
+		strtotal = DBUtil.getOneValue(sql, strcatno, strbatchno,
+				strprice);
+		// 查询出结果
 		itotal = Integer.parseInt(strtotal);
-		
+		}
+		catch(Exception e)
+		{
+			log.error("字符串转int失败:" + Integer.parseInt(strtotal)+e.toString());
+		}
 		return itotal;
 	}
 	/***
-	 * 获取指定货号、批号和单价的出库数量
+	 * 
 	 * @param strcatno 货号
 	 * @param strbatchno 批号
 	 * @param strprice 单价
-	 * @return
+	 * @return 获取指定货号、批号和单价的已经出库数量
 	 */
-	public static int getoutTotal(String strcatno ,String strbatchno,	String strprice)
+	public static int getoutTotal(String strcatno ,String strbatchno,	String strprice) 
 	{
 		int itotal = 0;
-		
-		// 查询库库存信息
-		String sql = "select num from b_out where catno=? and batchno=? and price=?";
-		String strtotal = DBUtil.getOneValue(sql, strcatno , strbatchno, strprice);
-		
-		//查询出结果
-		itotal = Integer.parseInt(strtotal);
-		
+		String strtotal = "";
+		try {
+			// 查询库库存信息
+			String sql = "select num from b_out where catno=? and batchno=? and price=?";
+			strtotal = DBUtil.getOneValue(sql, strcatno, strbatchno,
+					strprice);
+
+			// 查询出结果
+			itotal = Integer.parseInt(strtotal);
+			
+		} catch (Exception e) {
+
+			log.error("字符串转int失败:" + Integer.parseInt(strtotal)+e.toString());
+		}
 		return itotal;
 	}
 }
