@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 
 import com.ims.util.DBUtil;
@@ -19,8 +20,10 @@ public class TaskData {
 	private Date thisMonth; //本月月结时间
 	private Date nextMonth; //下月月结时间
 	private Date lastMonth; //上月月结时间
+	private String dayRunTime; //每日任务运行
 	
 	public TaskData(){
+		this.dayRunTime = dayRunTime();
 		setMonthTaskTime();
 	}
 	
@@ -39,8 +42,7 @@ public class TaskData {
 	 * @return
 	 */
 	public Date todayRunTime(){
-		String runTime = dayRunTime();
-		Date date = DateTimeUtil.getToday(runTime);
+		Date date = DateTimeUtil.getToday(this.dayRunTime);
 		return date;
 	}
 	
@@ -105,7 +107,7 @@ public class TaskData {
 		for(Object obj : list){
 			Map<String, String> map = (Map)obj;
 			String flag = map.get("flag");
-			String runpoint = map.get("runPoint");
+			String runpoint = String.valueOf(map.get("runPoint"));
 			if(flag.equals(tm)){
 				this.thisMonth = getThisMonthRunDate(runpoint);
 			}
@@ -125,12 +127,13 @@ public class TaskData {
 	 * @return
 	 */
 	private Date getRunDate(String runpoint,int position){
+		//确认月份格式,如果数据配的是8那么修改为08
 		if(runpoint.length() == 1)
 			runpoint = "0" + runpoint;
 		Date date = new Date();
 		date = DateUtils.addMonths(date, position);
-		String dateStr = DateTimeUtil.toDateString(date, "yyyy-MM") + runpoint;
-		String dateTime = dateStr + dayRunTime();
+		String dateStr = DateTimeUtil.toDateString(date, "yyyy-MM-") + runpoint;
+		String dateTime = dateStr + " " + this.dayRunTime;
 		return DateTimeUtil.getDateTime(dateTime);
 	}
 	
