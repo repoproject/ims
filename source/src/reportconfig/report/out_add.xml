@@ -42,36 +42,7 @@
 					</inputbox>
 				</col>
 				
-				<col column="description" label="Validation description" >
-				    <inputbox  type="textbox"   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)"  />
-				</col>
-				<col column="projectCode" label="Project code"  br="true" >
-				    <inputbox type="textbox" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)"  />
-				</col>
-							
-				
-				<col column="cause" label="Root Causes" >				    
-			     <inputbox type="textbox" styleproperty="colspan='2'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200)" >
-			        <typeprompt width="-1" count="200">
-				       <promptcol label="codename" matchmode="anywhere"></promptcol>
-				       <datasource>    
-				          <option dataset="@{SELECT  distinct codename FROM d_code WHERE d_code.codetype = 'rootcause' and {#matchcondition#}}"></option> 
-                                </datasource>
-			        </typeprompt>
-			     </inputbox>					    
-				    
-				</col>
-				<col column="section" label="Sections/Instruments"  br="true" >
-				    <inputbox type="textbox" styleproperty="colspan='2'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200)" >
-			        <typeprompt width="-1" count="200">
-				       <promptcol label="codename" matchmode="anywhere"></promptcol>
-				       <datasource>    
-				          <option dataset="@{SELECT  distinct codename FROM d_code WHERE d_code.codetype = 'sections' and {#matchcondition#}}"></option> 
-                                </datasource>
-			        </typeprompt>
-			     </inputbox>
-				</col>
-				
+
 				<col column="machinename" label="设备名称*" >					
 					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan200(#label#长度应小于等于200);stripscript(#label#不能含有特殊字符);" >
 					    <typeprompt count="20"  callbackmethod="testOutPromptCallBack1">
@@ -94,6 +65,37 @@
 				<col column="outdate" label="出库日期*" datatype="date{yyyy-MM-dd}" br="true">
 					<inputbox type="datepicker" dateformat="yyyy-MM-dd" jsvalidate="isNotEmpty(#label#不允许为空);isDate(#label#格式不符合要求)"></inputbox>
 				</col>
+
+				<col column="description" label="Validation description" >
+				    <inputbox  type="textbox" styleproperty="title='针对Vaildation出库'"  jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)"  />
+				</col>
+				<col column="projectCode" label="Project code"  br="true" >
+				    <inputbox type="textbox" styleproperty="title='针对Vaildation出库'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)"  />
+				</col>
+							
+				
+				<col column="cause" label="Root Causes" >				    
+			     <inputbox type="textbox"  styleproperty="title='针对Discard出库'"   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200)" >
+			        <typeprompt width="-1" count="200">
+				       <promptcol label="codename" matchmode="anywhere"></promptcol>
+				       <datasource>    
+				          <option dataset="@{SELECT  distinct codename FROM d_code WHERE d_code.codetype = 'rootcause' and {#matchcondition#}}"></option> 
+                                </datasource>
+			        </typeprompt>
+			     </inputbox>				    
+				</col>				
+				<col column="section" label="Sections/Instruments"  br="true" >
+				    <inputbox type="textbox"  styleproperty="title='针对Discard出库'"  jsvalidate="isNotLongerThan200(#label#列长度应小于等于200)" >
+			        <typeprompt width="-1" count="200">
+				       <promptcol label="codename" matchmode="anywhere"></promptcol>
+				       <datasource>    
+				          <option dataset="@{SELECT  distinct codename FROM d_code WHERE d_code.codetype = 'sections' and {#matchcondition#}}"></option> 
+                                </datasource>
+			        </typeprompt>
+			     </inputbox>
+				</col>
+				
+				
 				<col column="remark" label="备注" br="true">
 					<inputbox type="textareabox" styleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
 				</col>

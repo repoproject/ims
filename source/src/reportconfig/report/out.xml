@@ -72,7 +72,7 @@
 				</value>
 			--></format>
 		</report>
-		<report id="report2" title="request{txtname}出库信息"  pagesize="12" rowselect="multiple-checkbox" type="editablelist" >
+		<report id="report2" title="出库信息" subtitle="(只能增/删/改上次库存统计后本人的出库记录)" pagesize="12" rowselect="multiple-checkbox" type="editablelist" >
 				<display mouseoverbgcolor="CCCCCC" >
 				<col column="{col-rowselect}" width="20"></col>    
 					<col column="{sequence:1}" label="序号" width="3%"/>
@@ -85,7 +85,8 @@
 					<col column="num" label="数量" datatype="int" clickorderby="true" width="5%"></col>
 					<col column="machinename" label="设备"  clickorderby="true" width="8%"/>
 					<col column="machineno" label="设备序号"  clickorderby="true" width="8%"/>
-					<col column="reason" label="原因" clickorderby="true" width="10%"></col>
+					<col column="reason" label="出库原因" clickorderby="true" width="10%"></col>
+					<col column="person" label="出库人" displaytype="hidden"  />
 					<col column="{editablelist-edit}" label="修改" width="4%"></col>
 				</display>
 			<sql>
@@ -98,6 +99,46 @@
 						<![CDATA[(ID = '#data#' )]]>
 						</value>
 					</condition>
+									
+					<condition name="txtbegin1" label="开始时间" labelposition="left">
+							<value>
+								<![CDATA[(outdate>=DATE('#data#'))]]>
+							</value>
+							<inputbox type="datepicker" dateformat="yyyy-MM-dd" styleproperty="title='针对出库时间'" jsvalidatetype="onsubmit" jsvalidate="isStartTimeLargerEnd1(#label#不能晚于结束时间);isDate(#label#格式不符合要求)"></inputbox>
+						</condition>
+						<condition name="txtend1" label="结束时间" labelposition="left">
+							<value>
+								<![CDATA[(outdate<=DATE('#data#'))]]>
+							</value>
+							<inputbox type="datepicker" dateformat="yyyy-MM-dd" styleproperty="title='针对出库时间'" jsvalidatetype="onsubmit" jsvalidate="isDate(#label#格式不符合要求)"></inputbox>
+						</condition>
+						
+						
+						<condition name="txtcatname" label="名称 " labelposition="left">
+						     <value>
+							<![CDATA[(trim(catname) like  '%#data#%' )]]>
+						</value>
+					 <inputbox>
+					    <typeprompt count="20" >
+							 <promptcol label="catname" value="catname" title="名称" matchmode="anywhere"></promptcol>
+							 <promptcol label="catno" value="catno" title="货号" matchmode="anywhere"></promptcol>				
+							      <datasource>
+							          <option dataset="@{select catno,catname from d_catcode where {#matchcondition#}}"></option>       
+							      </datasource>
+					    </typeprompt>
+					</inputbox>
+					    </condition>
+
+						<condition name="txtcatno" label="货号" labelposition="left">
+						     <value>
+							<![CDATA[(trim(catno) like  '%#data#%' )]]>
+						</value>						     
+					    </condition>
+					    <condition name="txtbatchno" label="批号" labelposition="left"  br="true" >
+						     <value>
+							<![CDATA[(trim(batchno) like  '%#data#%' )]]>
+						</value>						     
+					    </condition>					    
 				</select>	
 				
 				<update pageurl="report{out_edit.report1}" urlparams="txtid=@{id}"
