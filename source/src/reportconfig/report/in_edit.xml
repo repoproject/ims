@@ -94,7 +94,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT ID, cattype,catno,catname,batchno,productdate,productdate,expiredate,indate,num,producer,dealer,reason,person,price,priceUnit,case when taxRate=0 then 0 else 1 end taxRate,rtype,catFrom,remark FROM b_in where  {#condition#}]]>
+						<![CDATA[SELECT ID, cattype,catno,catname,batchno,productdate,productdate,expiredate,indate,num,producer,dealer,reason,person,round(price,2)price,priceUnit,case when taxRate=0 then 0 else 1 end taxRate,rtype,catFrom,remark FROM b_in where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>

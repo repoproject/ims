@@ -10,16 +10,17 @@
 	
 		<report id="report1" title="库存信息"  pagesize="12"   type="editablelist" interceptor="com.ims.interceptor.Out" >
 				<display mouseoverbgcolor="CCCCCC" >
-					<col column="{sequence:1}" label="序号" width="3%"/>
+					<col column="{sequence:1}" label="序号" width="4%"/>
 					<col column="id" label="序号"  displaytype="hidden"/>
-					<col column="catname" label="名称"  clickorderby="true" width="20%"/>
+					<col column="typename" label="类型" clickorderby="true" width="4%"></col>
+					<col column="catname" label="名称"  clickorderby="true" width="18%"/>
 					<col column="catno" label="货号"  clickorderby="true" width="10%"/>					
 					<col column="batchno" label="批号" clickorderby="true" width="10%"></col>		
 					<col column="price" label="单价" datatype="float" clickorderby="true" width="10%"></col>
 					<col column="priceUnit" label="货币"  clickorderby="true" width="10%"></col>					
 					<col column="total" label="库存" clickorderby="true" datatype="int" width="10%"></col>
 					<col column="expiredate" label="有效期" datatype="date{yyyy-MM-dd}" clickorderby="true" width="10%"></col>
-					<col column="ISEXP" label="提醒"  width="3%"  displaytype="hidden"></col>
+					<col column="ISEXP" label="提醒"   displaytype="hidden"></col>
 					<col column="dealer" label="供应商" clickorderby="true" width="10%"></col>
 					<col column="producer" label="生产商" clickorderby="true" width="10%"></col>
 					<col column="{editablelist-edit}" label="出库" width="5%"></col>
@@ -27,7 +28,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id, catno, catname, batchno, round(localprice, 2) localprice, round(price, 2) price, ( SELECT codename FROM d_code WHERE CODE = priceUnit AND codetype = 'money' ) priceUnit, total, expiredate,dealer, producer, CASE WHEN DATEDIFF(expiredate, CURRENT_DATE()) <= b_var.bizValue THEN "1" ELSE "0" END ISEXP FROM b_cat, b_var WHERE total > 0 AND bizkey = 'expireTime' and {#condition#} order by expiredate]]>
+						<![CDATA[SELECT id ,cattype,(select codename from d_code where codetype='cattype' and  code = cattype )typename, catno, catname, batchno, round(localprice, 2) localprice, round(price, 2) price, ( SELECT codename FROM d_code WHERE CODE = priceUnit AND codetype = 'money' ) priceUnit, total, expiredate,dealer, producer, CASE WHEN DATEDIFF(expiredate, CURRENT_DATE()) <= b_var.bizValue THEN "1" ELSE "0" END ISEXP FROM b_cat, b_var WHERE total > 0 AND bizkey = 'expireTime' and {#condition#} order by expiredate]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -76,11 +77,13 @@
 				<col column="{col-rowselect}" width="20"></col>    
 					<col column="{sequence:1}" label="序号" width="3%"/>
 					<col column="id" label="编号"  displaytype="hidden"  />
+					<col column="typename" label="类型" clickorderby="true" width="3%"></col>
 					<col column="outdate" label="出库日期" clickorderby="true" datatype="date{yyyy-MM-dd}" width="10%"></col>
 					<col column="catno" label="货号"  clickorderby="true" width="8%"/>
 					<col column="catname" label="名称"  clickorderby="true" width="15%"/>
 					<col column="batchno" label="批号" clickorderby="true" width="8%"></col>
-					<col column="localprice" label="单价CNY" datatype="float" clickorderby="true" width="6%"></col>
+					<col column="localprice" label="单价" datatype="float" clickorderby="true" width="8%"></col>
+					<col column="priceUnit" label="货币"  clickorderby="true" width="4%"></col>
 					<col column="num" label="数量" datatype="int" clickorderby="true" width="5%"></col>
 					<col column="machinename" label="设备"  clickorderby="true" width="8%"/>
 					<col column="machineno" label="设备序号"  clickorderby="true" width="8%"/>
@@ -91,7 +94,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id,catno,catname,machinename,machineno,batchno,person,outdate,round(localprice,2) localprice,num,(select codename from d_code where code=reason and codetype='outreason') reason FROM b_out  where  1=1 and {#condition#}]]>
+						<![CDATA[SELECT id,cattype,(select codename from d_code where codetype='cattype' and  code = cattype )typename,catno,catname,machinename,machineno,batchno,person,outdate,round(localprice,2) localprice,( SELECT codename FROM d_code WHERE CODE = priceUnit AND codetype = 'money' ) priceUnit,num,(select codename from d_code where code=reason and codetype='outreason') reason FROM b_out  where  1=1 and {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -113,7 +116,7 @@
 						</condition>
 						
 						
-						<condition name="txtcatname" label="名称 " labelposition="left">
+						<condition name="txtcatname1" label="名称 " labelposition="left">
 						     <value>
 							<![CDATA[(trim(catname) like  '%#data#%' )]]>
 						</value>
@@ -128,12 +131,12 @@
 					</inputbox>
 					    </condition>
 
-						<condition name="txtcatno" label="货号" labelposition="left">
+						<condition name="txtcatno1" label="货号" labelposition="left">
 						     <value>
 							<![CDATA[(trim(catno) like  '%#data#%' )]]>
 						</value>						     
 					    </condition>
-					    <condition name="txtbatchno" label="批号" labelposition="left"  >
+					    <condition name="txtbatchno1" label="批号" labelposition="left"  >
 						     <value>
 							<![CDATA[(trim(batchno) like  '%#data#%' )]]>
 						</value>						     
