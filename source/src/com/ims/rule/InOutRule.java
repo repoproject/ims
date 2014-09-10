@@ -42,17 +42,17 @@ public class InOutRule {
     }
 
     /***
-     * 判断入库时间是否晚于上月统计的时间，如果早或者等于则不能进行增、删、改
+     * 判断出入库时间是否晚于上月统计的时间，如果早或者等于则不能进行增、删、改
      *
      * @param strindate  yyyy-mm-dd
-     *            入库时间
+     *            出入库时间
      * @return false代表早于等于上月统计的时间，true代表晚于上月的统计时间
      */
-    public static boolean indateIsOK(String strindate) {
-        // 本次入库时间
-        Date indate = DateTimeUtil.getDate(strindate);
+    public static boolean indateIsOK(String strinoutdate) {
+        // 本次出入库时间
+        Date indate = DateTimeUtil.getDate(strinoutdate);
         Date rundate = getRrundate(); //上次统计时间
-        // 如果入库时间比统计时间晚于1天则可以入库，否则不行
+        // 如果出入库时间比统计时间晚至少于1天则可以出入库，否则不行
         if (indate.after(rundate))
             return true;
         else
@@ -119,4 +119,60 @@ public class InOutRule {
         }
         return itotal;
     }
+    
+    /***
+    *
+    * @param strcatno 货号
+    * @param strbatchno 批号
+    * @param strprice 单价
+    * @param strperson 出库人
+    * @return 获取指定货号、批号、单价和某个出库人的已经出库数量
+    */
+   public static int getoutTotalofPerson(String strcatno ,String strbatchno,String strprice,String strperson)
+   {
+       int itotal = 0;
+       String strtotal = "";
+       try {
+           // 查询库库存信息
+           String sql = "select num from b_out where catno=? and batchno=? and price=? and person=?";
+           strtotal = DBUtil.getOneValue(sql, strcatno, strbatchno,
+                   strprice,strperson);
+
+           // 查询出结果
+           itotal = Integer.parseInt(strtotal);
+
+       } catch (Exception e) {
+
+           log.error("字符串转int失败:" + Integer.parseInt(strtotal)+e.toString());
+       }
+       return itotal;
+   }
+    
+    
+    /***
+    *
+    * @param strcatno 货号
+    * @param strbatchno 批号
+    * @param strprice 单价
+    * @return 获取指定货号、批号和单价的已经入库数量
+    */
+   public static int getinTotal(String strcatno ,String strbatchno,	String strprice)
+   {
+       int itotal = 0;
+       String strtotal = "";
+       try {
+           // 查询库库存信息
+           String sql = "select num from b_in where catno=? and batchno=? and price=?";
+           strtotal = DBUtil.getOneValue(sql, strcatno, strbatchno,
+                   strprice);
+
+           // 查询出结果
+           itotal = Integer.parseInt(strtotal);
+
+       } catch (Exception e) {
+
+           log.error("字符串转int失败:" + Integer.parseInt(strtotal)+e.toString());
+       }
+       return itotal;
+   }
 }

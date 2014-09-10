@@ -8,9 +8,8 @@
 		</header>
 		<tabpanel id="tabpanel11"  margin="5px" titlestyle="2" >
 	
-		<report id="report1" title="库存信息"  pagesize="12"  rowselect="multiple-checkbox" type="editablelist" interceptor="com.ims.interceptor.Out" >
+		<report id="report1" title="库存信息"  pagesize="12"   type="editablelist" interceptor="com.ims.interceptor.Out" >
 				<display mouseoverbgcolor="CCCCCC" >
-				<col column="{col-rowselect}" width="20"></col>
 					<col column="{sequence:1}" label="序号" width="3%"/>
 					<col column="id" label="序号"  displaytype="hidden"/>
 					<col column="catname" label="名称"  clickorderby="true" width="20%"/>
@@ -72,11 +71,11 @@
 				</value>
 			--></format>
 		</report>
-		<report id="report2" title="出库信息" subtitle="(只能增/删/改上次库存统计后本人的出库记录)" pagesize="12" rowselect="multiple-checkbox" type="editablelist" >
+		<report id="report2" title="出库信息" subtitle="(只能修改和删除上月库存统计后本人的出库记录)" pagesize="12" rowselect="multiple-checkbox" type="editablelist" interceptor="com.ims.interceptor.Out">
 				<display mouseoverbgcolor="CCCCCC" >
 				<col column="{col-rowselect}" width="20"></col>    
 					<col column="{sequence:1}" label="序号" width="3%"/>
-					<col column="id" label="编号"  displaytype="hidden"/>
+					<col column="id" label="编号"  displaytype="hidden"  />
 					<col column="outdate" label="出库日期" clickorderby="true" datatype="date{yyyy-MM-dd}" width="10%"></col>
 					<col column="catno" label="货号"  clickorderby="true" width="8%"/>
 					<col column="catname" label="名称"  clickorderby="true" width="15%"/>
@@ -92,7 +91,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id,catno,catname,machinename,machineno,batchno,person,outdate,round(localprice,2) localprice,num,(select codename from d_code where code=reason and codetype='outreason') reason FROM b_out  where  {#condition#}]]>
+						<![CDATA[SELECT id,catno,catname,machinename,machineno,batchno,person,outdate,round(localprice,2) localprice,num,(select codename from d_code where code=reason and codetype='outreason') reason FROM b_out  where  1=1 and {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -134,17 +133,25 @@
 							<![CDATA[(trim(catno) like  '%#data#%' )]]>
 						</value>						     
 					    </condition>
-					    <condition name="txtbatchno" label="批号" labelposition="left"  br="true" >
+					    <condition name="txtbatchno" label="批号" labelposition="left"  >
 						     <value>
 							<![CDATA[(trim(batchno) like  '%#data#%' )]]>
 						</value>						     
-					    </condition>					    
+					    </condition>	
+					    
+                        <condition name="txtperson"  label="" labelposition="left" defaultvalue="session{nickname}" >
+						   <inputbox type="textbox"  styleproperty="style=display:none"  ></inputbox>
+						     <value>
+							<![CDATA[(trim(person) like  '%#data#%' )]]>
+						</value>						     
+					    </condition>				    
+					    				    
 				</select>	
 				
 				<update pageurl="report{out_edit.report1}" urlparams="txtid=@{id}"
 						popupparams="{title:'更新出库',width:800,height:400}">
 				</update>  
-				<delete confirmessage="是否删除[@{batchno}]对应的记录？">
+				<delete confirmessage="是否删除所选择的记录？">
 						delete from b_out where id=@{id__old};
 					  </delete>	
 			</sql>

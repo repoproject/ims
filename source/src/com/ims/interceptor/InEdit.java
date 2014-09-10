@@ -27,6 +27,11 @@ public class InEdit extends AbsInterceptorDefaultAdapter {
 
 	private static Logger log = Logger.getLogger(InEdit.class);
 
+	/***
+	 * 增加或修改入库记录时的业务规则校验：
+	 * 1、判断该试剂/耗材是否在库中存在，不存在则提示并不能保存
+	 * 2、判断入库时间是否晚于上次R统计，晚于才能修改，否则不能修改
+	 */
 	public int doSavePerRow(ReportRequest rrequest, ReportBean rbean,
 			Map<String, String> mRowData, Map<String, String> mParamValues,
 			AbsEditableReportEditDataBean editbean) {
@@ -92,7 +97,7 @@ public class InEdit extends AbsInterceptorDefaultAdapter {
 			// 判断入库时间是否晚于上次R统计，晚于才能增加，否则不能增加
 			if (!InOutRule.indateIsOK(strindate)) {
 				rrequest.getWResponse().getMessageCollector().alert(
-						"新增入库记录的入库时间[" + strindate + "]必须晚于上月统计库存的时间["
+						"新增的入库时间[" + strindate + "]必须晚于上月统计库存的时间["
 								+ strRDate + "]！", null, false);
 				return WX_RETURNVAL_TERMINATE;
 			}
@@ -116,7 +121,7 @@ public class InEdit extends AbsInterceptorDefaultAdapter {
 			// 判断入库时间是否晚于上次R统计，晚于才能修改，否则不能修改
 			if (!InOutRule.indateIsOK(strindate)) {
 				rrequest.getWResponse().getMessageCollector().alert(
-						"修改入库记录的入库时间[" + strindate + "]必须晚于上月统计库存的时间["
+						"修改的入库时间[" + strindate + "]必须晚于上月统计库存的时间["
 								+ strRDate + "]！", null, false);
 				return WX_RETURNVAL_TERMINATE;
 			}

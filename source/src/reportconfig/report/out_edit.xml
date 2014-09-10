@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
 	<page id="out_edit" js="/webresources/script/validate.js,/webresources/script/wabacus_api.js,webresources/script/wabacus_editsystem.js,/js/localJS/outedit.js">
-		<report id="report1" title="request{txtname}详细信息" type="editabledetail" >
+		<report id="report1" title="request{txtname}详细信息" type="editabledetail" interceptor="com.ims.interceptor.OutEdit" >
 			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
 				<col column="ID" displaytype="hidden">
 				</col>
@@ -101,7 +101,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT b_out.id, b_out.machineName, b_out.machineNo, b_out.catno, b_out.catname, b_out.batchno, b_out.cattype, b_out.person, b_out.outDate, round(b_out.price,2) price, b_out.priceUnit, b_out.localPrice, b_out.num, b_out.reason, b_out.remark, b_out.projectCode, b_out.description, b_out.cause, b_out.section, b_out.operator, b_out.makedate, b_out.modifydate, b_cat.total FROM b_cat, b_out WHERE b_out.catno = b_cat.catno AND b_out.batchno = b_cat.batchno AND b_out.price = b_cat.price and  {#condition#}]]>
+						<![CDATA[SELECT b_out.id, b_out.machineName, b_out.machineNo, b_out.catno, b_out.catname, b_out.batchno, b_out.cattype, b_out.person, b_out.outDate, round(b_out.price,2) price, b_out.priceUnit, b_out.localPrice, b_out.num, b_out.reason, b_out.remark, b_out.projectCode, b_out.description, b_out.cause, b_out.section, b_out.operator, b_out.makedate, b_out.modifydate, b_cat.total FROM b_cat, b_out WHERE b_out.catno = b_cat.catno AND b_out.batchno = b_cat.batchno AND b_out.price = b_cat.price  and {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
