@@ -92,6 +92,8 @@
 		
 		<report-file>report/mainpage.xml</report-file>
 		
+		<report-file>report/querycat.xml</report-file>
+		
 		
 		<!--		<report-file>report/queryin.xml</report-file><report-file pattern="true">report/(report_)(\S*?)(\.xml)</report-file>
 		<report-file>report/in.xml</report-file>

@@ -56,7 +56,7 @@
 					<inputbox  jsvalidate="isNotEmpty(#label#不允许为空);isPosNumber(#label#必须是大于0的整数)"  />
 				</col>
 				<col column="price" label="单价*"  br="true" >
-					<inputbox  jsvalidate="isNumeric(#label#必须是数字)" />
+					<inputbox  jsvalidate="isposNumeric(#label#必须是大于等于0的数字)" />
 				</col>
 				
 				<col column="priceUnit" label="货币" >
@@ -94,7 +94,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT ID, cattype,catno,catname,batchno,productdate,productdate,expiredate,indate,num,producer,dealer,reason,person,price,priceUnit,case when taxRate=0 then 0 else 1 end taxRate,rtype,catFrom,remark FROM b_in where  {#condition#}]]>
+						<![CDATA[SELECT ID, cattype,catno,catname,batchno,productdate,productdate,expiredate,indate,num,producer,dealer,reason,person,round(price,2)price,priceUnit,case when taxRate=0 then 0 else 1 end taxRate,rtype,catFrom,remark FROM b_in where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>

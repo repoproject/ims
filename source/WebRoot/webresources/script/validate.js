@@ -784,3 +784,18 @@ function isPosNumber(strValue)
 
 	return true;	
 } 
+
+/***
+ * 大于等于0的数字判断函数
+ * @param strValue
+ * @return
+ */
+function isposNumeric( strValue )
+{
+	if( isEmpty( strValue ) ) return true;
+	if( !checkExp(/^([1-9]\d*\.\d*|0\.\d+|[1-9]\d*|0)$/, strValue ))
+	{
+		return false;
+	}
+	return true;
+}

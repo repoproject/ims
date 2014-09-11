@@ -19,22 +19,24 @@
 					<col column="batchno" label="批号" clickorderby="true" width="6%"></col>
 					<col column="machinename" label="所属设备"  clickorderby="true" width="6%"/>
 					<col column="machineno" label="设备序号"  clickorderby="true" width="6%"/>
-					<col column="localprice" label="单价(RMB)" datatype="int" clickorderby="true" width="5%"></col>	
+                    <col column="price" label="原始单价"  clickorderby="true" width="6%"></col>
+					<col column="priceUnit" label="货币"  clickorderby="true" width="3%"></col>
+					<col column="localprice" label="单价(RMB)"  clickorderby="true" width="6%"></col>	
 					<col column="num" label="数量" datatype="int" clickorderby="true" width="4%"></col>
-					<col column="subtotal" label="小计(RMB)" datatype="int" clickorderby="true" width="5%"></col>					
+					<col column="subtotal" label="小计(RMB)"  clickorderby="true" width="6%"></col>					
 					<col column="remark" label="备注" clickorderby="true" width="8%"></col>
 				</display>
 				   <subdisplay>
 					    <statitems><!-- 定义要用到的统计项 -->
 						     <statitem property="item1" value="count(*)" datatype="int"></statitem>
-						     <statitem property="item2" value="max(localprice)" datatype="int"></statitem>
-						     <statitem property="item3" value="min(localprice)" datatype="int"></statitem>
+						     <statitem property="item2" value="max(localprice)" datatype="float"></statitem>
+						     <statitem property="item3" value="min(localprice)" datatype="float"></statitem>
 						     <statitem property="item4" value="sum(subtotal)" datatype="float"></statitem>
 					    </statitems>
 					    <subrow displaytype="page|report">
-						     <subcol property="sprop1" colspan="4" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
+						     <subcol property="sprop1" colspan="5" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
 						     <subcol property="sprop2" colspan="5" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
-						     <subcol property="sprop3" colspan="5" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
+						     <subcol property="sprop3" colspan="6" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
 					    </subrow>
 					    <format>
 						     <imports>
@@ -42,7 +44,7 @@
 						     </imports>
 						     <value>
 						<![CDATA[
-							sprop1="记录数合计 "+item1+"条";
+							sprop1="记录数合计："+item1+"条";
 							sprop2="最高单价(RMB)："+item2+"  最低单价(RMB)："+item3;
 							sprop3="Discard总价值(RMB)："+Tools.formatDouble(String.valueOf(item4),"#,###0.00");
 						]]>
@@ -52,7 +54,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id,catno,catname,machinename,machineno,batchno,person,outdate,num,(select codename from d_code where code=reason and codetype='outreason') reason,remark,localprice,(localprice*num) subtotal, (select codename from d_code where code=cattype and codetype='cattype') cattype FROM b_out where b_out.reason ='2'/*DISCARD是2*/ and 1=1 and {#condition#}  ]]>
+						<![CDATA[SELECT id,catno,catname,machinename,machineno,batchno,person,outdate,num,(select codename from d_code where code=reason and codetype='outreason') reason,remark,round(price,2)price,round(localprice,2)localprice,( SELECT codename FROM d_code WHERE CODE = priceUnit AND codetype = 'money' ) priceUnit,round((localprice*num),2) subtotal, (select codename from d_code where code=cattype and codetype='cattype') cattype FROM b_out where b_out.reason ='2'/*DISCARD是2*/ and 1=1 and {#condition#}  ]]>
 					</value>
 					<condition name="txtbegin1" label="开始时间" labelposition="left">
 							<value>

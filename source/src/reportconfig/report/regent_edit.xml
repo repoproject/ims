@@ -14,13 +14,13 @@
 					
 				</col>
 				
-				<col column="machinename" label="所属设备" br="true">
+				<col column="machinename" label="所属设备*" br="true">
 
 						     <inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" >
 						        <typeprompt width="-1" count="20">
 							       <promptcol label="machinename" matchmode="anywhere"></promptcol>
 							       <datasource>    
-							          <option dataset="@{select  machinename  from b_machine where {#matchcondition#}}"></option> 
+							          <option dataset="@{select  distinct machinename  from b_machine where {#matchcondition#}}"></option> 
                                    </datasource>
 						        </typeprompt>
 						     </inputbox>	

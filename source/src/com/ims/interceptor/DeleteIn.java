@@ -26,6 +26,11 @@ public class DeleteIn extends AbsInterceptorDefaultAdapter {
 
 	private static Logger log = Logger.getLogger(DeleteIn.class);
 
+	/***
+	 * 入库记录删除时的业务规则判断：
+	 * 1、判断入库时间是否晚于上次R统计，晚于才能删除，否则不能删除
+	 * 2、如果库存小于当前入库的数量，说明当前入库的已经存在出库，则不允许删除入库
+	 */
 	public int doSavePerRow(ReportRequest rrequest, ReportBean rbean,
 			Map<String, String> row, Map<String, String> mParamValues,
 			AbsEditableReportEditDataBean editbean) {
@@ -60,7 +65,7 @@ public class DeleteIn extends AbsInterceptorDefaultAdapter {
 
 			// 货号
 			strcatno = row.get("catno").trim();
-			// 名称
+			// 批号
 			strbatchno = row.get("batchno").trim();
 			// 单价
 			strprice = row.get("price").trim();
