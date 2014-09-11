@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications xmlns="http://www.wabacus.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
+	<page id="querycat" js="/webresources/script/validate.js">
+		<header>
+			<![CDATA[<p align="center"><font size="6"><b>查询库存</b></font></p>]]>
+		</header>	
+		<report id="report1" title="库存信息"  pagesize="13"   type="editablelist" interceptor="com.ims.interceptor.Out" >
+				<display mouseoverbgcolor="CCCCCC" >
+					<col column="{sequence:1}" label="序号" width="3%"/>
+					<col column="typename" label="类型" clickorderby="true" width="4%"></col>
+					<col column="id" label="ID"  displaytype="hidden"/>
+					<col column="catname" label="名称"  clickorderby="true" width="16%"/>
+					<col column="catno" label="货号"  clickorderby="true" width="7%"/>					
+					<col column="batchno" label="批号" clickorderby="true" width="6%"></col>		
+                    <col column="price" label="原始单价"  clickorderby="true" width="6%"></col>
+					<col column="priceUnit" label="货币"  clickorderby="true" width="3%"></col>
+					<col column="localprice" label="单价(RMB)"  clickorderby="true" width="6%"></col>	
+					<col column="total" label="库存" clickorderby="true" datatype="int" width="5%"></col>
+					<col column="subtotal" label="小计(RMB)"  clickorderby="true" width="7%"></col>
+					<col column="expiredate" label="有效期" datatype="date{yyyy-MM-dd}" clickorderby="true" width="8%"></col>
+					<col column="ISEXP" label="提醒"  displaytype="hidden"></col>
+					<col column="dealer" label="供应商" clickorderby="true" width="11%"></col>
+					<col column="producer" label="生产商" clickorderby="true" width="11%"></col>
+				</display>
+				   <subdisplay>
+					    <statitems><!-- 定义要用到的统计项 -->
+						     <statitem property="item1" value="count(*)" datatype="int"></statitem>
+						     <statitem property="item2" value="max(localprice)" datatype="float"></statitem>
+						     <statitem property="item3" value="min(localprice)" datatype="float"></statitem>
+						     <statitem property="item4" value="sum(subtotal)" datatype="float"></statitem>
+					    </statitems>
+					    <subrow displaytype="page|report">
+						     <subcol property="sprop1" colspan="4" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
+						     <subcol property="sprop2" colspan="4" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
+						     <subcol property="sprop3" colspan="5" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
+					    </subrow>
+					    <format>
+						     <imports>
+							      <import>com.wabacus.util.*</import>
+						     </imports>
+						     <value>
+						<![CDATA[
+							sprop1="记录数合计： "+item1+"条";
+							sprop2="最高单价(RMB)："+item2+"  最低单价(RMB)："+item3;
+							sprop3="库存总价值(RMB)："+Tools.formatDouble(String.valueOf(item4),"#,###0.00");
+						]]>
+						</value>
+					    </format>
+				   </subdisplay> 				
+			<sql>
+				<select>
+					<value>
+						<![CDATA[SELECT id, ( SELECT codename FROM d_code WHERE codetype = 'cattype' AND CODE = cattype ) typename, catno, catname, batchno, round(localprice, 2) localprice, round(price, 2) price, ( SELECT codename FROM d_code WHERE CODE = priceUnit AND codetype = 'money' ) priceUnit, total, ROUND(total * localPrice, 2) subtotal, expiredate, dealer, producer, CASE WHEN DATEDIFF(expiredate, CURRENT_DATE()) <= b_var.bizValue THEN "1" ELSE "0" END ISEXP FROM b_cat, b_var WHERE  bizkey = 'expireTime' and {#condition#} order by expiredate]]>
+					</value>
+					<condition name="txtid" hidden="true">
+						<value>
+						<![CDATA[(ID = '#data#' )]]>
+						</value>
+					</condition>						
+				   <condition name="txtcatname" label="名称" labelposition="left">
+						     <value>
+							<![CDATA[(trim(catname) like  '%#data#%' )]]>
+						</value>
+						 <inputbox>
+					    <typeprompt count="20" >
+							 <promptcol label="catname" value="catname" title="名称" matchmode="anywhere"></promptcol>
+							 <promptcol label="catno" value="catno" title="货号" matchmode="anywhere"></promptcol>				
+							      <datasource>
+							          <option dataset="@{select catno,catname from d_catcode where {#matchcondition#}}"></option>       
+							      </datasource>
+					    </typeprompt>
+						     </inputbox>
+					    </condition>
+                        <condition name="txtcatno" label="货号" labelposition="left">
+						     <value>
+							<![CDATA[(trim(catno) like  '%#data#%' )]]>
+						</value>						     
+					    </condition>
+					    <condition name="txtbatchno" label="批号" labelposition="left"  >
+						     <value>
+							<![CDATA[(trim(batchno) like  '%#data#%' )]]>
+						</value>						     
+					    </condition>
+					    <condition name="typename" label="  类型  " labelposition="left"  >						
+							<value> <![CDATA[(trim(cattype) = '#data#')]]>
+							</value>
+							<inputbox type="selectbox" >	
+							<option value="" label="全部"></option>						
+							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
+							</inputbox>
+						</condition>						
+					   <condition name="txtproducer" label="生产商" labelposition="left">
+						     <value>
+							<![CDATA[(trim(producer) like  '%#data#%' )]]>
+						</value>						     
+					    </condition>	 
+					    <condition name="txtdealer" label="供应商" labelposition="left"  br="true">
+						     <value>
+							<![CDATA[(trim(dealer) like  '%#data#%' )]]>
+						</value>						     
+					    </condition>
+						 
+				</select>
+				
+			</sql>
+			<format><!--
+				<value>
+					rrequest.getRequest().setAttribute("txtname",name);//存放request，以便显示标题时能取到
+				</value>
+			--></format>
+		</report>
+	
+	</page>
+	
+</applications>
