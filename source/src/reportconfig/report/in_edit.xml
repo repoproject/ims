@@ -19,7 +19,7 @@
 				</col>
 				
 				<col column="catname" label="名称*" >
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan200(#label#长度应小于等于200);stripscript(#label#不能含有特殊字符);" >
+					<inputbox type="textbox" jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan200(#label#长度应小于等于200);stripscript(#label#不能含有特殊字符);" >
 					    <typeprompt count="20"  callbackmethod="testTypePromptCallBack1">
 							 <promptcol label="catname" value="catname" title="名称" matchmode="anywhere"></promptcol>					    
 							 <promptcol label="catno" value="catno" title="货号" matchmode="anywhere"></promptcol>

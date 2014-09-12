@@ -3,6 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
 	<page id="out_edit" js="/webresources/script/validate.js,/webresources/script/wabacus_api.js,webresources/script/wabacus_editsystem.js,/js/localJS/outedit.js">
+
+		
 		<report id="report1" title="request{txtname}详细信息" type="editabledetail" interceptor="com.ims.interceptor.OutEdit" >
 			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
 				<col column="ID" displaytype="hidden">
@@ -11,7 +13,7 @@
 				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
 				<col column="catno" label="货号" br="true" >
-				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
+				    <inputbox type="textbox" styleproperty="disabled='disabled'"  />
 				</col>
 
 				<col column="batchno" label="批号" >
