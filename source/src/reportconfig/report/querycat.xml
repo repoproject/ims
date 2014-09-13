@@ -66,7 +66,7 @@
 						 <inputbox>
 					    <typeprompt count="20" >
 							 <promptcol label="catname" value="catname" title="名称" matchmode="anywhere"></promptcol>
-							 <promptcol label="catno" value="catno" title="货号" matchmode="anywhere"></promptcol>				
+							 <promptcol label="catno" value="catno" title="货号"></promptcol>				
 							      <datasource>
 							          <option dataset="@{select catno,catname from d_catcode where {#matchcondition#}}"></option>       
 							      </datasource>
@@ -76,7 +76,16 @@
                         <condition name="txtcatno" label="货号" labelposition="left">
 						     <value>
 							<![CDATA[(trim(catno) like  '%#data#%' )]]>
-						</value>						     
+						</value>
+						 <inputbox>
+					    <typeprompt count="20" >
+							 <promptcol label="catname" value="catname" title="名称" ></promptcol>
+							 <promptcol label="catno" value="catno" title="货号" matchmode="anywhere"></promptcol>				
+							      <datasource>
+							          <option dataset="@{select catno,catname from d_catcode where {#matchcondition#}}"></option>       
+							      </datasource>
+					    </typeprompt>
+						 </inputbox>												     
 					    </condition>
 					    <condition name="txtbatchno" label="批号" labelposition="left"  >
 						     <value>
