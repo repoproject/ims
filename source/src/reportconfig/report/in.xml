@@ -80,7 +80,7 @@
 						</value>						     
 					    </condition>					    
 				</select>
-				<insert pageurl="report{in_edit.report1}" popupparams="{title:'入库',width:800,height:400}"></insert>
+				<insert pageurl="report{in_add.report1}" popupparams="{title:'入库',width:800,height:400}"></insert>
 				<update pageurl="report{in_edit.report1}" urlparams="txtid=@{id}"
 						popupparams="{title:'修改入库',width:800,height:400}"></update>  
 				<delete confirmessage="是否删除所选中的记录？">

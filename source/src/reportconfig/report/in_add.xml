@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications xmlns="http://www.wabacus.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
+	<page id="in_add" js="/webresources/script/validate.js,/webresources/script/wabacus_api.js,webresources/script/wabacus_editsystem.js,/js/localJS/in_add.js"  css="/webresources/component/tiny_mce/themes/advanced/skins/o2k7/ui.css">
+		<report id="report1" title="request{txtname}入库信息" type="form" interceptor="com.ims.interceptor.InEdit">
+			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
+				<col column="ID" displaytype="hidden">
+				</col>
+				<col column="cattype" label="类型" >
+					<inputbox type="selectbox" >
+					    <option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
+					</inputbox>
+				</col>
+				<col column="reason" label="入库原因"  br="true" >
+					<inputbox type="selectbox" styleproperty="onfocus=test1()" >
+					    <option dataset="@{select codename,code from d_code where codetype='inreason'}" label="codename" value="code"></option>
+					</inputbox>
+				</col>
+				
+				<col column="catname" label="名称*" >
+					<inputbox type="textbox" jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan200(#label#长度应小于等于200);stripscript(#label#不能含有特殊字符);" >
+					    <typeprompt count="20"  callbackmethod="testTypePromptCallBack1">
+							 <promptcol label="catname" value="catname" title="名称" matchmode="anywhere"></promptcol>					    
+							 <promptcol label="catno" value="catno" title="货号" matchmode="anywhere"></promptcol>
+							      <datasource>
+							          <option dataset="@{select catno,catname from d_catcode where {#matchcondition#}}"></option>       
+							      </datasource>
+					    </typeprompt>					
+					</inputbox>
+				</col>
+				<col column="catno" label="货号*" br="true" >
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" >
+
+					</inputbox>
+				</col>
+				
+				<col column="batchno" label="批号*"  >
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				</col>
+				<col column="expiredate" label="有效期*"  datatype="date{yyyy-MM-dd}"  br="true">
+					<inputbox type="datepicker" dateformat="yyyy-MM-dd" jsvalidate="isNotEmpty(#label#不允许为空);isDate(#label#格式不符合要求)"></inputbox>
+				</col>
+				
+				<col column="rtype" label="所属R" >
+					<inputbox type="selectbox"><option dataset="@{select codename,code from d_code where codetype='rtype' order by code*1}" label="codename" value="code"></option>
+					</inputbox>
+				</col>
+				<col column="catFrom" label="来源"  br="true">
+					<inputbox type="selectbox"><option dataset="@{select codename,code from d_code where codetype='catfrom'}" label="codename" value="code"></option>
+					</inputbox>
+				</col>
+				
+				
+                <col column="num" label="数量*" >
+					<inputbox  jsvalidate="isNotEmpty(#label#不允许为空);isPosNumber(#label#必须是大于0的整数)"  />
+				</col>
+				<col column="price" label="单价*"  br="true" >
+					<inputbox  jsvalidate="isposNumeric(#label#必须是大于等于0的数字)" />
+				</col>
+				
+				<col column="priceUnit" label="货币" >
+					<inputbox type="selectbox" stypeproperty="size='300'">
+					    <option dataset="@{select codename,code from d_code where codetype='money'}" label="codename" value="code"></option>
+					</inputbox>
+				</col>
+				<col column="taxRate" label="含税"   br="true" > 
+					<inputbox type="selectbox" >
+					    <option dataset="@{select codename,code from d_code where codetype='bool'}" label="codename" value="code"></option>
+					</inputbox>
+				</col>		
+				
+				<col column="productdate" label="生产日期*"  datatype="date{yyyy-MM-dd}"  >
+					<inputbox type="datepicker" dateformat="yyyy-MM-dd" jsvalidate="isNotEmpty(#label#不允许为空);isDate(#label#格式不符合要求)"></inputbox>
+				</col>
+				<col column="producer" label="生产商*"  br="true">
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+				
+                <col column="dealer" label="供应商*" >
+					<inputbox   jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>				
+				<col column="person" label="入库人*"   br="true" >
+					<inputbox type="textbox" styleproperty="disabled='disabled'"  jsvalidate="isNotEmpty(#label#不允许为空);" defaultvalue="session{nickname}"></inputbox>
+				</col>
+				
+				<col column="indate" label="入库时间*" datatype="date{yyyy-MM-dd}"   >
+					<inputbox type="datepicker"  dateformat="yyyy-MM-dd" jsvalidate="isNotEmpty(#label#不允许为空);isDate(#label#格式不符合要求)"></inputbox>
+				</col>
+				<col column="remark" label="备注"  br="true" >
+					<inputbox type="textareabox" styleproperty="colspan='3'" valuestyleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+				</col>
+			</display>
+			<sql>
+				<select>
+					<value>
+						<![CDATA[SELECT ID, cattype,catno,catname,batchno,productdate,productdate,expiredate,indate,num,producer,dealer,reason,person,round(price,2)price,priceUnit,case when taxRate=0 then 0 else 1 end taxRate,rtype,catFrom,remark FROM b_in where  {#condition#}]]>
+					</value>
+					<condition name="txtid" hidden="true">
+						<value>
+						<![CDATA[(ID = '#data#' )]]>
+						</value>
+					</condition>
+				</select>
+				<insert>
+					insert into b_in(cattype,catno,catname,batchno,productdate,expiredate,indate,num,producer,dealer,reason,person,price,priceUnit,taxRate,rtype,catFrom,remark,operator,makedate, modifydate)
+					values(@{cattype},@{catno},@{catname},@{batchno},@{productdate},@{expiredate},@{indate},@{num},@{producer},@{dealer},@{reason},@{person},@{price},@{priceUnit},@{taxRate},@{rtype},@{catFrom},@{remark},session{nickname}, sysdate(),sysdate());
+				</insert>
+			</sql>
+			<buttons>
+					<button  extends="${wabacus.button2.default}" name="button2" position="title" label="增加新试剂"  positionorder="3">
+	                  <![CDATA[window.location.href='/ims/ShowReport.wx?PAGEID=regent_edit&report1_ACCESSMODE=add&closePopupPage=true';]]>
+					</button>
+			 </buttons>
+			<format><!--
+				<value>
+					rrequest.getRequest().setAttribute("txtname",name);//存放request，以便显示标题时能取到
+				</value>
+			--></format>
+		</report>
+	</page>
+	
+</applications>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications xmlns="http://www.wabacus.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
+	<page id="rate" js="/webresources/script/validate.js,/webresources/script/demo.js">
+		<header>
+			<![CDATA[<p align="center"><font size="6"><b>汇率管理</b></font></p>]]>
+		</header>
+		<report id="userlist" parenttitle="汇率管理" type="editablelist" cellresize="1" rowselect="multiple-checkbox" pagesize="13"  >
+				
+			  <interceptor>
+				<beforedisplay-perrow>
+					if(rowDataBean.getRowindex()==-1) return ;//标题行
+					if(rowDataBean.getRowindex()%2==1)
+					{
+						String style=rowDataBean.getRowstyleproperty();
+						if(style==null) style="";
+						style+=" style='background:#CFDFF8'";
+						rowDataBean.setRowstyleproperty(style);
+					}
+				</beforedisplay-perrow>
+
+			</interceptor>
+				<display mouseoverbgcolor="CCCCCC" >
+				<col column="{col-rowselect}" width="20"></col>
+					<col column="{sequence:1}" label="序号" width="5%"/>
+					<col column="id" label="编号"  displaytype="hidden"/>
+					<col column="localMoneyName" label="本币" clickorderby="true" width="15%"></col>
+					<col column="foreignMoneyName" label="外币" clickorderby="true" width="15%"></col>
+					<col column="rate" label="汇率"  clickorderby="true" width="15%"></col>
+					<col column="startDateTime" label="开始执行时间" datatype="date{yyyy-MM-dd}" clickorderby="true" width="10%"></col>
+					<col column="operator" label="修改人"  clickorderby="true" width="15%"></col>
+					<col column="modifytime" label="修改时间" datatype="timestamp{yyyy-MM-dd HH:mm:ss }" clickorderby="true" width="15%"></col>
+				</display>
+				<sql>
+				
+					<select>
+						<value>
+							<![CDATA[SELECT d_rate.localMoney, d_rate.id, d_rate.localMoneyName, d_rate.foreignMoney, d_rate.foreignMoneyName, d_rate.rate, d_rate.startDateTime, d_rate.operator, d_rate.maketime, d_rate.modifytime FROM d_rate  where {#condition#} ]]>
+						</value>						
+					    
+					    <condition name="foreignMoney" label="外币类型" labelposition="left">						
+							<value> <![CDATA[(trim(foreignMoney) = '#data#')]]>
+							</value>
+							<inputbox type="selectbox" >	
+							<option value="" label="全部"></option>						
+							<option dataset="@{select codename,code from d_code where codetype='money'}" label="codename" value="code"></option>
+							</inputbox>
+						</condition>
+						
+					</select>	
+					<insert pageurl="report{rate_edit.report1}" popupparams="{title:'新增汇率',width:400,height:300}"></insert>
+					<update pageurl="report{rate_edit.report1}" urlparams="txtid=@{id}"
+						popupparams="{title:'修改汇率',width:400,height:300}"></update>  
+					<delete confirmessage="是否删除选中的记录？">
+						delete from d_rate where id=@{id__old};
+					  </delete>							
+				</sql>
+				
+
+			</report>
+	</page>
+</applications>

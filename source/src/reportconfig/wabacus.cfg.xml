@@ -69,10 +69,17 @@
 	<!-- 注册所有报表配置文件 -->
 	<report-files>
 		<report-file>report/user.xml</report-file>
-		<report-file>report/user_edit.xml</report-file>
+		<report-file>report/user_edit.xml</report-file> 
+
+		<report-file>report/rate.xml</report-file>
+		<report-file>report/rate_edit.xml</report-file>
+		
+
 		
 		<report-file>report/in.xml</report-file>
 		<report-file>report/in_edit.xml</report-file>
+		<report-file>report/in_add.xml</report-file>
+		
 		<report-file>report/out.xml</report-file>
 		<report-file>report/out_add.xml</report-file>
 		<report-file>report/out_edit.xml</report-file>
