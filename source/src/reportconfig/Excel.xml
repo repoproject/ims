@@ -26,8 +26,8 @@
 							a.CNY,a.USD,a.SGD,a.EUR,a.GBP,a.localprice localprice,a.totalAmount,null as remark
 							FROM r_view a
 							WHERE
-								( a.indate IS NULL OR a.indate BETWEEN ? AND ?)
-							AND ( a.outdate IS NULL OR a.outdate BETWEEN ? AND ?)
+								( a.indate IS NULL OR a.indate BETWEEN date('2014-01-01') AND date('2015-01-01'))
+							AND ( a.outdate IS NULL OR a.outdate BETWEEN date('2014-01-01') AND date('2015-01-01'))
 							GROUP BY a.catno,a.catname,a.batchno,a.price,a.machineno,a.machineName
 			) T ORDER BY catname
         </sql>

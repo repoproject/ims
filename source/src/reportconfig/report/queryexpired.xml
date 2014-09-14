@@ -6,7 +6,7 @@
 		<header>
 			<![CDATA[<p align="center"><font size="6"><b>查询过期(Discard)</b></font></p>]]>
 		</header>		
-		<report id="report2" title="过期出库记录信息" rowselect="multiple-checkbox" type="editablelist" interceptor="com.ims.interceptor.QueryOut" >
+		<report id="report2" title="Discard出库记录（按照当前汇率计算）)" rowselect="multiple-checkbox" type="editablelist" interceptor="com.ims.interceptor.QueryOut" >
 				<display mouseoverbgcolor="CCCCCC" >
 				<col column="{col-rowselect}" width="20"></col>
 					<col column="id" label="编号"  displaytype="hidden"/>
@@ -54,7 +54,77 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id,catno,catname,machinename,machineno,batchno,person,outdate,num,(select codename from d_code where code=reason and codetype='outreason') reason,remark,round(price,2)price,round(localprice,2)localprice,( SELECT codename FROM d_code WHERE CODE = priceUnit AND codetype = 'money' ) priceUnit,round((localprice*num),2) subtotal, (select codename from d_code where code=cattype and codetype='cattype') cattype FROM b_out where b_out.reason ='2'/*DISCARD是2*/ and 1=1 and {#condition#}  ]]>
+						<![CDATA[
+								SELECT
+									id,
+									catno,
+									catname,
+									machinename,
+									machineno,
+									batchno,
+									person,
+									outdate,
+									num,
+									(
+										SELECT
+											codename
+										FROM
+											d_code
+										WHERE
+											CODE = reason
+										AND codetype = 'outreason'
+									) reason,
+									remark,
+									round(price, 2) price,
+									round(
+										price / (
+											SELECT
+												rate
+											FROM
+												d_rate
+											WHERE
+												localmoney = (
+													SELECT
+														sysvalue
+													FROM
+														d_var
+													WHERE
+														syskey = 'localmoney'
+												)
+											AND foreignmoney = priceUnit
+											AND sysdate() > startdatetime
+											ORDER BY
+												startDateTime DESC
+											LIMIT 1
+										),
+										2
+									) localprice,
+									(
+										SELECT
+											codename
+										FROM
+											d_code
+										WHERE
+											CODE = priceUnit
+										AND codetype = 'money'
+									) priceUnit,
+									round((localprice * num), 2) subtotal,
+									(
+										SELECT
+											codename
+										FROM
+											d_code
+										WHERE
+											CODE = cattype
+										AND codetype = 'cattype'
+									) cattype
+								FROM
+									b_out
+								WHERE
+									b_out.reason = '2' /*DISCARD是2*/
+								AND 1=1 
+								and {#condition#}                          
+                           ]]>
 					</value>
 					<condition name="txtbegin1" label="开始时间" labelposition="left">
 							<value>
