@@ -18,18 +18,15 @@ import com.wabacus.system.component.application.report.configbean.editablereport
 import com.wabacus.system.component.application.report.configbean.editablereport.EditableReportInsertDataBean;
 import com.wabacus.system.component.application.report.configbean.editablereport.EditableReportUpdateDataBean;
 import com.wabacus.system.intercept.AbsInterceptorDefaultAdapter;
-import com.wabacus.system.intercept.RowDataBean;
 
 /**
  * @author ChengNing
  * @date 2014年8月25日
  */
-public class InEdit extends AbsInterceptorDefaultAdapter {
+public class InAdd extends AbsInterceptorDefaultAdapter {
 
-	private static Logger log = Logger.getLogger(InEdit.class);
+	private static Logger log = Logger.getLogger(InAdd.class);
 
-
-	
 	/***
 	 * 修改入库记录时的业务规则校验：
 	 * 1、判断该试剂/耗材是否在库中存在，不存在则提示并不能保存
@@ -85,12 +82,9 @@ public class InEdit extends AbsInterceptorDefaultAdapter {
 					+ mRowData.get("catname") + " " + mRowData.get("indate")+Integer.parseInt(mRowData.get("num").trim())+e.toString());
 		}
 
+		//增加的业务规则判断
 		if (editbean instanceof EditableReportInsertDataBean) {
-			super.doSavePerRow(rrequest, rbean, mRowData, mParamValues,
-					editbean);
-		} 
-		//修改时的业务规则判断
-		else if (editbean instanceof EditableReportUpdateDataBean) {
+
 
 			// 判断该试剂/耗材是否在库中存在，不存在则提示并不能保存
 			if (!InOutRule.catIsExit(strcatno, strcatname)) {
@@ -100,41 +94,22 @@ public class InEdit extends AbsInterceptorDefaultAdapter {
 				return WX_RETURNVAL_TERMINATE;
 			}
 			
-			// 判断入库时间是否晚于上次R统计，晚于才能修改，否则不能修改
+			// 判断入库时间是否晚于上次R统计，晚于才能增加，否则不能增加
 			if (!InOutRule.indateIsOK(strindate)) {
 				rrequest.getWResponse().getMessageCollector().alert(
-						"修改的入库时间[" + strindate + "]必须晚于上月统计库存的时间["
+						"新增的入库时间[" + strindate + "]必须晚于上月统计库存的时间["
 								+ strRDate + "]！", null, false);
 				return WX_RETURNVAL_TERMINATE;
 			}
-
-			//调用函数获取出库数量
-			int outNum=0;
 			
-			try {
-				outNum = InOutRule.getoutTotal(strcatno, strbatchno, strprice);
-			} catch (Exception e) {
-				
-				log.error("调用失败InOutRule.getoutTotal(strcatno, strbatchno, strprice)失败:"  +e.toString());
-			}
-/*			//判断如果维护入库的数量小于出库量，则进行提示不能维护。即入库修改时修改的数量不能小于出库数量			
-			if(inNum<outNum){
-				rrequest.getWResponse().getMessageCollector().alert(
-						"修改试剂/耗材时的入库数量["+inNum+"]不能小于已经出库的数量["+outNum+"]!", null, false);
-				return WX_RETURNVAL_TERMINATE;
-			}*/	
-			//如果已经有相应的出库记录则不能再进行修改操作
-			if(outNum>0){
-				rrequest.getWResponse().getMessageCollector().alert(
-						"该试剂/耗材已经出库了["+outNum+"]个，不能进行修改操作，请先撤销所有出库后才能修改!", null, false);
-				return WX_RETURNVAL_TERMINATE;
-			}
-			
-			else {
+			super.doSavePerRow(rrequest, rbean, mRowData, mParamValues,
+					editbean);
 
+			
+		} 
+		else if (editbean instanceof EditableReportUpdateDataBean) {
 				super.doSavePerRow(rrequest, rbean, mRowData, mParamValues,
 						editbean);
-			}
 		} else if (editbean instanceof EditableReportSQLButtonDataBean) {
 
 			super.doSavePerRow(rrequest, rbean, mRowData, mParamValues,
