@@ -17,6 +17,7 @@ import com.wabacus.system.component.application.report.configbean.editablereport
 import com.wabacus.system.component.application.report.configbean.editablereport.EditableReportDeleteDataBean;
 import com.wabacus.system.component.application.report.configbean.editablereport.EditableReportUpdateDataBean;
 import com.wabacus.system.intercept.AbsInterceptorDefaultAdapter;
+import com.wabacus.system.intercept.RowDataBean;
 
 /**
  * @author ChengNing
@@ -26,6 +27,19 @@ public class DeleteIn extends AbsInterceptorDefaultAdapter {
 
 	private static Logger log = Logger.getLogger(DeleteIn.class);
 
+	public void beforeDisplayReportDataPerRow(ReportRequest rrequest,
+			ReportBean rbean, RowDataBean rowDataBean) {
+		if (rowDataBean.getRowindex() == -1)
+			return;// 标题行
+		if (rowDataBean.getRowindex() % 2 == 1) {
+			String style = rowDataBean.getRowstyleproperty();
+			if (style == null)
+				style = "";
+			style += " style='background:#CFDFF8'";
+			rowDataBean.setRowstyleproperty(style);
+		}
+	}
+	
 	/***
 	 * 入库记录删除时的业务规则判断：
 	 * 1、判断入库时间是否晚于上次R统计，晚于才能删除，否则不能删除
@@ -100,15 +114,20 @@ public class DeleteIn extends AbsInterceptorDefaultAdapter {
 
 			}
 		}
-
-		else {
-			super.doSavePerRow(rrequest, rbean, row, mParamValues, editbean);
-
-		}
-
+		else if (editbean instanceof EditableReportUpdateDataBean) {
+			rrequest.getWResponse().getMessageCollector().alert(
+					"jjjj", null, false);
+			
+			super.doSavePerRow(rrequest, rbean, row, mParamValues,
+					editbean);
+	}
 		return WX_RETURNVAL_SUCCESS;
 	}
 
+	
+
+	
+	
 	/**
 	 * 装载数据之前执行的函数
 	 * 

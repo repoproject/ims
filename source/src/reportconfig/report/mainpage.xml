@@ -5,13 +5,13 @@
 	<!-- 数据展示篇报表类型 -->
 	
 	
-	<page id="mainpage"   scrollY="true" height="3000">
+	<page id="mainpage"   scrollY="true" height="3000"  css='/css/mainpage.css'>
 	 <header  >
 			<![CDATA[<p align="center"><font size="5"><b>首页提醒</b></font></p>]]>
 		</header>
 		<hpanel id="hp1" margin="10px" >
-			 <panel id="panel"   width="550" height="220"   margin="6px" border="3" bordercolor="#6633FF">
-			<report id="report1" title="新批号提醒" pagesize="5"  bordercolor="#6633FF"  titlealign="center" width="100%" border="horizontal2"  template="${articlelist.report.template}">
+			 <panel id="panel"   width="550" height="220"   margin="6px" >
+			<report id="report1" title="新批号提醒" pagesize="5"  bordercolor="#6633FF"  titlealign="left" width="95%" border="horizontal2"  template="${articlelist.report.template}">
 				<display dataheader="" pagecolselect="false">
 					<col column="catno" label="货号" displaytype="hidden"/>
 					<col column="builtdate" label="入库日期" displaytype="hidden"/>
@@ -51,8 +51,8 @@
 			</report>
 			</panel>
 			
-			<panel id="pane2" width="550" height="220"  margin="6px" border="3" bordercolor="#6633FF">
-			<report id="report2"  title="过期预警"   pagesize="5"  bordercolor="#6633FF"  titlealign="center" width="100%" border="horizontal2"  template="${articlelist.report.template}">
+			<panel id="pane2" width="550" height="220"  margin="6px" >
+			<report id="report2"  title="过期预警"   pagesize="5"  bordercolor="#6633FF" align="right" titlealign="left" width="95%" border="horizontal2"  template="${articlelist.report.template}">
 				<display dataheader="" pagecolselect="false">
 					<col column="id" label="编号" displaytype="hidden"/>
 					<col column="builtdate" label="过期时间" displaytype="hidden"/>
@@ -93,8 +93,8 @@
 			</panel>
 		</hpanel>
 		<hpanel id="hp2" margin="10px" >
-			<panel id="pane3"   width="550" height="220"   margin="4px" border="3" bordercolor="#6633FF">
-			<report id="report3" title="库存预警"  pagesize="5"  bordercolor="#6633FF"  titlealign="center" width="100%" border="horizontal2"  template="${articlelist.report.template}">
+			<panel id="pane3"   width="550" height="220"   margin="4px" >
+			<report id="report3" title="库存预警"  pagesize="5"  bordercolor="#6633FF"  titlealign="left" width="95%" border="horizontal2"  template="${articlelist.report.template}">
 				<display dataheader="" pagecolselect="false">
 				<col column="id" label="编号" displaytype="hidden"/>
 					<col column="catno" label="货号" displaytype="hidden"/>
@@ -134,8 +134,8 @@
 				</format>
 			</report>
 			</panel>
-			<panel id="pane4"  width="550" height="220"   margin="4px" border="3" bordercolor="#6633FF">
-			<report id="report4" title="最新出入库"   pagesize="5"  bordercolor="#6633FF"  titlealign="center" width="100%" border="horizontal2"  template="${articlelist.report.template}">
+			<panel id="pane4"  width="550" height="220"   margin="4px" >
+			<report id="report4" title="最新出入库"   pagesize="5"  align="right"  bordercolor="#6633FF"  titlealign="left" width="95%" border="horizontal2"  template="${articlelist.report.template}">
 				<display dataheader="" pagecolselect="false">
 					<col column="id" label="编号" displaytype="hidden"/>
 					<col column="catno" label="货号" displaytype="hidden"/>

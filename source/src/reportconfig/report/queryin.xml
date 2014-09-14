@@ -13,10 +13,10 @@
 					<col column="{sequence:1}" label="序号" width="3%"/>
 					<col column="inDate" label="入库日期"  clickorderby="true" datatype="date{yyyy-MM-dd}" width="10%"/>
 					<col column="cattype" label="类型"  clickorderby="true" width="4%"/>
-					<col column="catno" label="货号"  clickorderby="true" width="8%"/>
 					<col column="catname" label="名称"  clickorderby="true" width="15%"/>
-					<col column="seq" label="编号"  clickorderby="true" width="8%" />
+					<col column="catno" label="货号"  clickorderby="true" width="8%"/>
 					<col column="batchno" label="批号"  clickorderby="true" width="8%"/>
+					<col column="seq" label="编号"  clickorderby="true" width="8%" />
 					<col column="num" label="数量"  datatype="int" clickorderby="true" width="8%"/>
 					<col column="localPrice" label="单价(RMB)"  clickorderby="true" width="8%"/>
 					<col column="person" label="入库人"  clickorderby="true" width="5%"/>

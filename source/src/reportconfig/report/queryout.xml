@@ -14,8 +14,8 @@
 					<col column="cattype" label="类型"  clickorderby="true" width="4%"/>
 					<col column="person" label="出库人" clickorderby="true" width="5%"></col>
 					<col column="outdate" label="出库日期" clickorderby="true" datatype="date{yyyy-MM-dd}" width="8%"></col>
-					<col column="catno" label="货号"  clickorderby="true" width="8%"/>
 					<col column="catname" label="名称"  clickorderby="true" width="15%"/>
+					<col column="catno" label="货号"  clickorderby="true" width="8%"/>
 					<col column="batchno" label="批号" clickorderby="true" width="8%"></col>
 					<col column="num" label="数量" datatype="int" clickorderby="true" width="5%"></col>
 					<col column="machinename" label="所属设备"  clickorderby="true" width="8%"/>
