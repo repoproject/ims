@@ -104,16 +104,18 @@ public class InventoryReport implements Runnable{
 		String serverRootPath = Sys.serverRootPath();
 		String reportPath = SysVar.getValue(SysConst.Var.REPORT_PATH);
 		reportPath = DateTimeUtil.format(reportPath, this.endDate);
+		reportPath = serverRootPath + reportPath;
 		File rFile= new File(reportPath);
 		rFile = rFile.isFile()?rFile.getParentFile():rFile;
 		if(!rFile.exists()){
-			if(rFile.mkdir())
-				reportPath = rFile.getName();
-			else
+			if(!rFile.mkdir())
 				logger.error("创建报表目录失败" + rFile.getPath());
 		}
 		String fileName = SysVar.getValue(SysConst.Var.REPORT_NAME);
 		fileName = DateTimeUtil.format(fileName, this.endDate);
-		return serverRootPath + reportPath + fileName;
+		return  reportPath + fileName;
 	}
+	
+	
+	
 }
