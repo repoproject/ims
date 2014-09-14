@@ -308,19 +308,30 @@ function checkFlash(){
 	var role = $("#roleFlag").val();
 	//高级用户分配用户管理权限
 	if(role == 1){
-		$("#userManage").html('<a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo31" external="true" fresh="false" >用户信息管理</a> ');
-		$("#inventoryStatics").html('<a href="excel.jsp" target="navTab" rel="ftpserverstat" external="true" fresh="false">库存统计</a>');
-		}else{
-		/*$("#userManage").html('<a href="javascript:void();" id="userInfo">用户基础信息维护</a>');
-		$("#userInfo").click(function(){
-			alert("当前用户不是高级用户，没有权限操作！");
-			return false;
-		});*/
+		//用户管理权限
+		$("#userManage").html('<a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo31"  external="true" fresh="false" >用户信息管理</a> ');
+		//汇率管理权限
+		$("#rateManage").html('<a href="ShowReport.wx?PAGEID=rate" target="navTab" rel="userbaseinfo32" external="true" fresh="false">汇率管理</a> ');		
+   
+		//导出出库
+		$("#exportOut").html('<a href="ShowReport.wx?PAGEID=exportout" target="navTab" rel="userbaseinfo25" external="true" fresh="false">导出出库</a>');
+	
+		//R统计权限
+		$("#inventoryStatics").html('<a href="excel.jsp" target="navTab" rel="userbaseinfo26" external="true" fresh="false">库存统计</a>');
+
+	}else{
+		
 		var temp0 = document.getElementById("userManage");
 		if(temp0) temp0.parentNode.removeChild(temp0);
-		//$("#userManage").parentNode.removeChild(this);
+
 		var temp1 = document.getElementById("inventoryStatics");
 		if(temp1) temp1.parentNode.removeChild(temp1);
+		
+		var temp2 = document.getElementById("rateManage");
+		if(temp2) temp2.parentNode.removeChild(temp2);
+		
+		var temp3 = document.getElementById("exportOut");
+		if(temp3) temp3.parentNode.removeChild(temp3);
 		
 		}
 	

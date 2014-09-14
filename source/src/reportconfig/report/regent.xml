@@ -68,7 +68,7 @@
 					    </condition>
 						
 						<condition name="typename" label="类型" labelposition="left">						
-							<value> <![CDATA[(trim(type) = '#data#')]]>
+							<value> <![CDATA[(trim(cattype) = '#data#')]]>
 							</value>
 							<inputbox type="selectbox" >	
 							<option value="" label="全部"></option>						
