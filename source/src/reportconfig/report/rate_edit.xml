@@ -17,7 +17,7 @@
 					<inputbox type="selectbox"   >
 					     <option dataset="@{select codename,code from d_code where codetype='money'}" label="codename" value="code"></option>       
 					</inputbox>
-
+  
 				</col>
 				
 				<col column="rate" label="汇率*" br="true"  >

@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
 	<page id="in_add" js="/webresources/script/validate.js,/webresources/script/wabacus_api.js,webresources/script/wabacus_editsystem.js,/js/localJS/in_add.js"  css="/webresources/component/tiny_mce/themes/advanced/skins/o2k7/ui.css">
-		<report id="report1" title="request{txtname}入库信息" type="form" interceptor="com.ims.interceptor.InEdit">
+		<report id="report1" title="request{txtname}入库信息" type="form" interceptor="com.ims.interceptor.InAdd">
 			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
 				<col column="ID" displaytype="hidden">
 				</col>

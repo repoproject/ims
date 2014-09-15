@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+
+body{
+body { _margin:0; _height:100%; /*IE6 BUG*/ background-image:url(../images/123.png) }
+}
+

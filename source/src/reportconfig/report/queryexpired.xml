@@ -14,8 +14,8 @@
 					<col column="cattype" label="类型"  clickorderby="true" width="3%"/>
 					<col column="person" label="出库人" clickorderby="true" width="4%"></col>
 					<col column="outdate" label="出库日期" clickorderby="true" datatype="date{yyyy-MM-dd}" width="6%"></col>
-					<col column="catno" label="货号"  clickorderby="true" width="6%"/>
 					<col column="catname" label="名称"  clickorderby="true" width="12%"/>
+					<col column="catno" label="货号"  clickorderby="true" width="6%"/>
 					<col column="batchno" label="批号" clickorderby="true" width="6%"></col>
 					<col column="machinename" label="所属设备"  clickorderby="true" width="6%"/>
 					<col column="machineno" label="设备序号"  clickorderby="true" width="6%"/>
@@ -77,7 +77,7 @@
 					 <inputbox>
 					    <typeprompt count="20" >
 							 <promptcol label="catname" value="catname" title="名称" matchmode="anywhere"></promptcol>
-							 <promptcol label="catno" value="catno" title="货号" matchmode="anywhere"></promptcol>				
+							 <promptcol label="catno" value="catno" title="货号" ></promptcol>				
 							      <datasource>
 							          <option dataset="@{select catno,catname from d_catcode where {#matchcondition#}}"></option>       
 							      </datasource>
@@ -88,7 +88,16 @@
 						<condition name="txtcatno" label="货号" labelposition="left" >
 						     <value>
 							<![CDATA[(trim(catno) like  '%#data#%' )]]>
-						</value>						     
+						</value>
+						 <inputbox>
+					    <typeprompt count="20" >
+							 <promptcol label="catname" value="catname" title="名称" ></promptcol>
+							 <promptcol label="catno" value="catno" title="货号" matchmode="anywhere"></promptcol>				
+							      <datasource>
+							          <option dataset="@{select catno,catname from d_catcode where {#matchcondition#}}"></option>       
+							      </datasource>
+					    </typeprompt>
+						 </inputbox>												     
 					    </condition>
 					    <condition name="txtbatchno" label="批号" labelposition="left" br="true" >
 						     <value>
