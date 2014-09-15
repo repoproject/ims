@@ -114,16 +114,25 @@ public class R1Sheet implements ISheet{
 		HSSFCell cell = row.getCell(3);
 		if(cell == null)
 			cell = row.createCell(3);
-		//ExcelUtil.setCellValue(cell, "26/Aug/14");
-		Date date = DateTimeUtil.getDate("2014-08-26");
-		ExcelUtil.setCellValue(cell, date);
+		ExcelUtil.setCellValue(cell, this.startDate);
 		
 
 		HSSFCell cell2 = row.getCell(16);
 		if(cell2 == null)
 			cell2 = row.createCell(16);
-		Date date1 = DateTimeUtil.getDate("2014-09-25");
-		ExcelUtil.setCellValue(cell2, date1);
+		ExcelUtil.setCellValue(cell2, this.endDate);
+		
+
+		HSSFRow row1 = sheet.getRow(2);
+		HSSFCell cell3 = row1.getCell(32);
+		if(cell3  == null)
+			cell3  = row1.createCell(32);
+		ExcelUtil.setCellValue(cell3 , this.startDate);
+		
+		HSSFCell cell4 = row1.getCell(35);
+		if(cell4 == null)
+			cell4 = row1.createCell(35);
+		ExcelUtil.setCellValue(cell4, this.endDate);
 	}
 	
 	/**
@@ -191,9 +200,11 @@ public class R1Sheet implements ISheet{
 				cell = row.createCell(index);
 			String valueName = col.getValue().toString();
 			Object value = rowData.get(valueName);
-			if(value == null || value.equals("0"))
-				value = StringUtils.EMPTY;
-			cell.setCellValue(value.toString());
+			ExcelUtil.setCellValue(cell, value);
+			String string = cell.getCellStyle().getDataFormatString();
+//			if(value == null || value.equals("0"))
+//				value = StringUtils.EMPTY;
+//			cell.setCellValue(value.toString());
 		}
 	}
 	

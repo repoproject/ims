@@ -9,15 +9,6 @@
      -->
     <Sheet name="R1-CHEM" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-	        select catno,catname,machineno,machinename,
-				 NULLIF(opening,0) opening,NULLIF(closing,0) closing,
-				NULLIF(invendor,0) invendor,NULLIF(inInterlab,0) inInterlab,NULLIF(inSponsor,0) inSponsor,
-				NULLIF(incharges,0) incharges, intotal,
-				NULLIF(outtrialtest,0) outtrialtest,NULLIF(outValidation,0) outValidation,
-				NULLIF(outdiscard,0) outdiscard,NULLIF(outIntelLab,0) outIntelLab,NULLIF(outSponsor,0) outSponsor,
-				NULLIF(outother,0) outother, outtotal,
-				CNY,USD,SGD,EUR,GBP,localprice,totalAmount,remark
-		     from(
 				SELECT a.catno,a.catname,a.batchno,a.machineno,a.machineName,a.price,
 							  closing+outtotal-intotal opening, sum(a.inVendor) invendor,  sum(a.inInterlab) ininterlab, sum(a.inSponsor) insponsor,
 							  sum(a.inCharges) incharges,sum(a.intotal) intotal,sum(outTrialTest) outtrialtest, sum(outValidation) outvalidation,
@@ -29,7 +20,7 @@
 								( a.indate IS NULL OR a.indate BETWEEN ? AND ?)
 							AND ( a.outdate IS NULL OR a.outdate BETWEEN ? AND ?)
 							GROUP BY a.catno,a.catname,a.batchno,a.price,a.machineno,a.machineName
-			) T ORDER BY catname
+			
         </sql>
         <col index="1" type="">catno</col>
         <col index="2" type=""></col>

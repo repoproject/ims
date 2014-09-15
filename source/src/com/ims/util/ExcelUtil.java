@@ -3,6 +3,7 @@
  */
 package com.ims.util;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -12,6 +13,7 @@ import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.Cell;
+
 
 /**
  * Excel 操作工具
@@ -112,6 +114,9 @@ public class ExcelUtil {
     	else if(value instanceof Integer){
     		cell.setCellValue((Integer)value);
     	}
+    	else if(value instanceof Long){
+    		cell.setCellValue(((Long)value).intValue());
+    	}
     	else if(value instanceof Date){
     		cell.setCellValue((Date)value);
     	}
@@ -120,6 +125,9 @@ public class ExcelUtil {
     	}
     	else if(value instanceof Double){
     		cell.setCellValue((Double)value);
+    	}
+    	else if(value instanceof BigDecimal){
+    		cell.setCellValue(((BigDecimal)value).doubleValue());
     	}
     	else{
     		cell.setCellValue(value.toString());
