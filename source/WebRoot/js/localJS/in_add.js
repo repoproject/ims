@@ -47,6 +47,7 @@ function testTypePromptCallBack1(textObj,colvaluesArr)
 		 return; 
      var name = colvaluesArr[0].value; 
      var no = colvaluesArr[1].value; 
-     setEditableReportColValue('in_add','report1',{catno:no,catname:name});
+     var seq = colvaluesArr[2].value; 
+     setEditableReportColValue('in_add','report1',{catno:no,catname:name,seq:seq});
 }
 

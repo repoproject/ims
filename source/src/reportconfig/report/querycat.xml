@@ -52,72 +52,78 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT
-								id,
-								(
-									SELECT
-										codename
-									FROM
-										d_code
-									WHERE
-										codetype = 'cattype'
-									AND CODE = cattype
-								) typename,
-								catno,
-								catname,
-								batchno,
-								round(
-									price / (
+						<![CDATA[
+					SELECT
+							*, ROUND(total * localprice, 2) subtotal
+						FROM
+							(
+								SELECT
+									id,
+									(
 										SELECT
-											rate
+											codename
 										FROM
-											d_rate
+											d_code
 										WHERE
-											localmoney = (
-												SELECT
-													sysvalue
-												FROM
-													d_var
-												WHERE
-													syskey = 'localmoney'
-											)
-										AND foreignmoney = priceUnit
-										AND sysdate() > startdatetime
-										ORDER BY
-											startDateTime DESC
-										LIMIT 1
-									),
-									2
-								) localprice,
-								round(price, 2) price,
-								(
-									SELECT
-										codename
-									FROM
-										d_code
-									WHERE
-										CODE = priceUnit
-									AND codetype = 'money'
-								) priceUnit,
-								total,
-								ROUND(total * localPrice, 2) subtotal,
-								expiredate,
-								dealer,
-								producer,
-								CASE
-							WHEN DATEDIFF(expiredate, CURRENT_DATE()) <= b_var.bizValue THEN
-								"1"
-							ELSE
-								"0"
-							END ISEXP
-							FROM
-								b_cat,
-								b_var
-							WHERE
-								bizkey = 'expireTime'
-							and {#condition#}
-							ORDER BY
-								expiredate]]>
+											codetype = 'cattype'
+										AND CODE = cattype
+									) typename,
+									catno,
+									catname,
+									batchno,
+									round(
+										price / (
+											SELECT
+												rate
+											FROM
+												d_rate
+											WHERE
+												localmoney = (
+													SELECT
+														sysvalue
+													FROM
+														d_var
+													WHERE
+														syskey = 'localmoney'
+												)
+											AND foreignmoney = priceUnit
+											AND sysdate() > startdatetime
+											ORDER BY
+												startDateTime DESC
+											LIMIT 1
+										),
+										2
+									) localprice,
+									round(price, 2) price,
+									(
+										SELECT
+											codename
+										FROM
+											d_code
+										WHERE
+											CODE = priceUnit
+										AND codetype = 'money'
+									) priceUnit,
+									total,
+									expiredate,
+									dealer,
+									producer,
+									CASE
+								WHEN DATEDIFF(expiredate, CURRENT_DATE()) <= b_var.bizValue THEN
+									"1"
+								ELSE
+									"0"
+								END ISEXP
+								FROM
+									b_cat,
+									b_var
+								WHERE
+									bizkey = 'expireTime'
+								AND {#condition#}
+							) a
+						ORDER BY
+							expiredate		
+						]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>

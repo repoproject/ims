@@ -82,19 +82,22 @@
 					<inputbox type="textbox" styleproperty="disabled='disabled'"  jsvalidate="isNotEmpty(#label#不允许为空);" defaultvalue="session{nickname}"></inputbox>
 				</col>
 
-				<col column="remark" label="备注"  >
+				<col column="seq" label="编号"  >
+					<inputbox type="textbox" styleproperty="disabled='disabled'"   />
+				</col>
+				<col column="remark" label="备注"  br="true" >
 					<inputbox type="textareabox" styleproperty="colspan='3'" valuestyleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
 				</col>
-				<col column="taxRate" label=""  displaytype="hidden"   br="true" > 
+				<col column="taxRate" label=""  displaytype="hidden"   > 
 					<inputbox type="selectbox" >
 					    <option dataset="@{select codename,code from d_code where codetype='bool'}" label="codename" value="code"></option>
 					</inputbox>
-				</col>
+				</col>		
 			</display>
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT ID, cattype,catno,catname,batchno,productdate,productdate,expiredate,indate,num,producer,dealer,reason,person,round(price,2)price,priceUnit,case when taxRate=0 then 0 else 1 end taxRate,rtype,catFrom,remark FROM b_in where  {#condition#}]]>
+						<![CDATA[SELECT ID, cattype,catno,catname,seq,batchno,productdate,productdate,expiredate,indate,num,producer,dealer,reason,person,round(price,2)price,priceUnit,case when taxRate=0 then 0 else 1 end taxRate,rtype,catFrom,remark FROM b_in where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -104,7 +107,7 @@
 				</select>
 			
 				<update>
-					update b_in set cattype=trim(@{cattype}), catno=trim(@{catno}),catname=trim(@{catname}),batchno=trim(@{batchno}),productdate=@{productdate},expiredate=@{expiredate},indate=@{indate},num=@{num},producer=trim(@{producer}),dealer=trim(@{dealer}),reason=@{reason},person=trim(@{person}),price=@{price},priceUnit=@{priceUnit},taxRate=@{taxRate},rtype=@{rtype},catFrom=@{catFrom},remark=trim(@{remark}),operator=session{nickname},modifydate=sysdate() 
+					update b_in set cattype=trim(@{cattype}), catno=trim(@{catno}),catname=trim(@{catname}),seq=trim(@{seq}),batchno=trim(@{batchno}),productdate=@{productdate},expiredate=@{expiredate},indate=@{indate},num=@{num},producer=trim(@{producer}),dealer=trim(@{dealer}),reason=@{reason},person=trim(@{person}),price=@{price},priceUnit=@{priceUnit},taxRate=@{taxRate},rtype=@{rtype},catFrom=@{catFrom},remark=trim(@{remark}),operator=session{nickname},modifydate=sysdate() 
 					where ID=@{ID__old};
 				</update>
 			</sql>

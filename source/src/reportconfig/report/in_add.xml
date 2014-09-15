@@ -23,8 +23,9 @@
 					    <typeprompt count="20"  callbackmethod="testTypePromptCallBack1">
 							 <promptcol label="catname" value="catname" title="名称" matchmode="anywhere"></promptcol>					    
 							 <promptcol label="catno" value="catno" title="货号" matchmode="anywhere"></promptcol>
+							 <promptcol label="seq" value="seq" title="编号" matchmode="anywhere"></promptcol>
 							      <datasource>
-							          <option dataset="@{select catno,catname from d_catcode where {#matchcondition#}}"></option>       
+							          <option dataset="@{select catno,catname,seq from d_catcode where {#matchcondition#}}"></option>       
 							      </datasource>
 					    </typeprompt>					
 					</inputbox>
@@ -82,10 +83,13 @@
 					<inputbox type="textbox" styleproperty="disabled='disabled'"  jsvalidate="isNotEmpty(#label#不允许为空);" defaultvalue="session{nickname}"></inputbox>
 				</col>
 
-				<col column="remark" label="备注"  >
+				<col column="seq" label="编号"  >
+					<inputbox type="textbox" styleproperty="disabled='disabled'"   />
+				</col>
+				<col column="remark" label="备注"  br="true" >
 					<inputbox type="textareabox" styleproperty="colspan='3'" valuestyleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
 				</col>
-				<col column="taxRate" label=""  displaytype="hidden"   br="true" > 
+				<col column="taxRate" label=""  displaytype="hidden"   > 
 					<inputbox type="selectbox" >
 					    <option dataset="@{select codename,code from d_code where codetype='bool'}" label="codename" value="code"></option>
 					</inputbox>
@@ -95,7 +99,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT ID, cattype,catno,catname,batchno,productdate,productdate,expiredate,indate,num,producer,dealer,reason,person,round(price,2)price,priceUnit,case when taxRate=0 then 0 else 1 end taxRate,rtype,catFrom,remark FROM b_in where  {#condition#}]]>
+						<![CDATA[SELECT ID, cattype,catno,catname,seq,batchno,productdate,productdate,expiredate,indate,num,producer,dealer,reason,person,round(price,2)price,priceUnit,case when taxRate=0 then 0 else 1 end taxRate,rtype,catFrom,remark FROM b_in where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -104,8 +108,8 @@
 					</condition>
 				</select>
 				<insert>
-					insert into b_in(cattype,catno,catname,batchno,productdate,expiredate,indate,num,producer,dealer,reason,person,price,priceUnit,taxRate,rtype,catFrom,remark,operator,makedate, modifydate)
-					values(@{cattype},@{catno},@{catname},@{batchno},@{productdate},@{expiredate},@{indate},@{num},@{producer},@{dealer},@{reason},@{person},@{price},@{priceUnit},@{taxRate},@{rtype},@{catFrom},@{remark},session{nickname}, sysdate(),sysdate());
+					insert into b_in(cattype,    catno,   catname,  batchno,    seq,  productdate,    expiredate,  indate,  num    ,producer    ,dealer,  reason    ,person  ,price   ,priceUnit   ,taxRate    ,rtype   ,catFrom  ,remark          ,operator  ,makedate,modifydate)
+					        values(@{cattype},@{catno},@{catname},@{batchno},@{seq},@{productdate},@{expiredate},@{indate},@{num},@{producer},@{dealer},@{reason},@{person},@{price},@{priceUnit},@{taxRate},@{rtype},@{catFrom},@{remark},session{nickname}, sysdate(),sysdate());
 				</insert>
 			</sql>
 			<buttons>

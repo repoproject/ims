@@ -3,7 +3,6 @@
  */
 package com.ims.interceptor;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
@@ -102,6 +101,23 @@ public class InAdd extends AbsInterceptorDefaultAdapter {
 				return WX_RETURNVAL_TERMINATE;
 			}
 			
+			// 判断是该货号和批号以前是否存在，不存在则给出提示存在则不用提示
+			if (!InOutRule.IsExitBatchno(strcatno, strbatchno)) {
+				
+				String val=rrequest.getStringAttribute("key"+mRowData.get("no"),"");
+				if(val.equals("true"))
+				{//已经在“确认”提示窗口中点击了“是”，则保存
+					return super.doSavePerRow(rrequest,rbean,mRowData,mParamValues,editbean);
+				}else if(val.equals("false"))
+				{//已经在“确认”提示窗口中点击了“否”，则不保存
+					return WX_RETURNVAL_SKIP;
+				}else
+				{
+					//开始保存，则在客户端弹出一个确认操作提示窗口				
+				rrequest.getWResponse().getMessageCollector().confirm("key"+mRowData.get("no"),"请注意！批号为[" +  strbatchno + "]的["
+						+strcatname + "]是第一次入库，需要继续保存吗？");
+				}
+			}
 			super.doSavePerRow(rrequest, rbean, mRowData, mParamValues,
 					editbean);
 
