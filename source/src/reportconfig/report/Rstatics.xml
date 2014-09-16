@@ -37,7 +37,7 @@
 						</condition>
 						<condition name="textname" label="文件名称" labelposition="left">
 							<value>
-								<![CDATA[(name)]]> 
+								<![CDATA[(trim(name) like  '%#data#%')]]> 
 							</value>
 							<inputbox type="textbox" jsvalidate="isNotLongerThan100(#label#列长度应小于等于100);stripscript(#label#不能含有特殊字符)">
 							
