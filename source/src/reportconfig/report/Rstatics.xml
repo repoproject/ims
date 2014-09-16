@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications xmlns="http://www.wabacus.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
+	<page xmlns="http://www.wabacus.com" id="Rstatics" js="/webresources/script/validate.js"  css="/webresources/component/tiny_mce/themes/advanced/skins/o2k7/ui.css">
+		<header>
+			<![CDATA[<p align="center"><font size="6"><b>库存统计</b></font></p>]]>
+		</header>
+		<report id="gwgl" parenttitle="库存统计下载页面" type="editablelist" cellresize="1" rowselect="multiple-checkbox" contextmenu="false"   pagesize="13">
+
+				<display mouseoverbgcolor="CCCCCC" >
+					<col column="{col-rowselect}" width="20"></col>
+				    <col column="{sequence:1}" label="序号" width="3%"/>
+					<col column="id" label="序号" width="5%" clickorderby="true" displaytype="hidden"/>
+					<col column="name" label="文件名称" clickorderby="true"  width="20%"></col>
+					<col column="path" label="路径" clickorderby="true"  width="20%"></col>
+					<col column="makedate" label="创建时间"  datatype="timestamp{yyyy-MM-dd HH:mm:ss}" clickorderby="true" width="15%"></col>
+					<col column="modifydate" label="修改时间" datatype="timestamp{yyyy-MM-dd HH:mm:ss}" clickorderby="true" width="15%"></col>
+					<col column="enclosure" label="附件" width="8%"></col>
+				</display>
+				<sql>
+					<select>
+						<value>
+							<![CDATA[SELECT id,name,makedate,modifydate,path,name as enclosure FROM b_file where 1=1 and {#condition#} order by id]]>
+						</value>
+					<condition name="txtbegin1" label="开始时间" labelposition="left">
+							<value>
+								<![CDATA[(makedate>=DATE('#data#'))]]>
+							</value>
+							<inputbox type="datepicker" dateformat="yyyy-MM-dd" styleproperty="title='针对创建时间'" jsvalidatetype="onsubmit" jsvalidate="isStartTimeLargerEnd1(#label#不能晚于结束时间);isDate(#label#格式不符合要求)"></inputbox>
+						</condition>
+						<condition name="txtend1" label="结束时间" labelposition="left">
+							<value>
+								<![CDATA[(makedate<=DATE('#data#'))]]>
+							</value>
+							<inputbox type="datepicker" dateformat="yyyy-MM-dd" styleproperty="title='针对创建时间'" jsvalidatetype="onsubmit" jsvalidate="isDate(#label#格式不符合要求)"></inputbox>
+						</condition>
+						<condition name="textname" label="文件名称" labelposition="left">
+							<value>
+								<![CDATA[(name)]]> 
+							</value>
+							<inputbox type="textbox" jsvalidate="isNotLongerThan100(#label#列长度应小于等于100);stripscript(#label#不能含有特殊字符)">
+							
+							</inputbox>
+						</condition>
+						
+						</select>					
+				</sql>
+				<format>
+				      <imports>
+						     <import>com.wabacus.util.*</import>
+				      </imports>					
+				      <value>
+				  <![CDATA[ 
+				  	if(enclosure!=null&&!enclosure.trim().equals(""))
+					{
+						String fullfilename = enclosure;
+						
+						//获取文件存放路径
+						//String filepathcode=WabacusUtils.encodeFilePath("D:\\downlist\\");
+						//相对路径
+						String filepathcode=WabacusUtils.encodeFilePath("relative{/reports}");
+						
+						
+						System.out.println("fullfilename-------"+fullfilename);
+						
+						enclosure="<a href=\"/ims/ShowReport.wx?ACTIONTYPE=download&serverfilepath="+filepathcode+"&serverfilename="+fullfilename+"\">下载附件</a>";
+						System.out.println(enclosure);
+					}else
+					{
+						enclosure="无附件";
+					}
+				  ]]>
+				  </value>
+				</format>
+			</report>
+	</page>
+</applications>

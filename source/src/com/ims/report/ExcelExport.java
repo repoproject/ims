@@ -26,6 +26,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.util.Region;
 
 import com.ims.report.excel.R1Sheet;
@@ -124,19 +125,48 @@ public class ExcelExport  extends HttpServlet{
 	public static void main(String [] arc){
 		System.out.println("test");
 		
-//		try {
-//			FileInputStream fileInputStream = new FileInputStream(ExcelExport.class.getResource("").getPath() + "template.xls");
-//			
-//			ExcelExport testExcelExport = new ExcelExport();
-//			testExcelExport.createExcel(fileInputStream);
-//		    FileOutputStream fStream = new FileOutputStream("D://test1.xls");
-//		    testExcelExport.wb.write(fStream);
-//		    fStream.flush();
-//			fStream.close();
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			FileInputStream fileInputStream = new FileInputStream(ExcelExport.class.getResource("").getPath() + "template.xls");
+			
+			ExcelExport testExcelExport = new ExcelExport();
+			testExcelExport.Test(fileInputStream);
+		    FileOutputStream fStream = new FileOutputStream("D://test1.xls");
+		    testExcelExport.wb.write(fStream);
+		    fStream.flush();
+			fStream.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void Test(FileInputStream is){
+		try {
+			this.wb = new HSSFWorkbook(is);
+			HSSFSheet sheet = wb.createSheet("test");
+			HSSFRow row = sheet.createRow(0);
+			HSSFCell cell = row.createCell(0);
+			
+			DataFormat hssfDF = wb.createDataFormat();
+			CellStyle doubleStyle = wb.createCellStyle(); //会计专用  
+			doubleStyle.setDataFormat(hssfDF.getFormat("_ * #,##0.00_ ;_ * \\-#,##0.00_ ;_ * \"-\"??_ ;_ @_ ")); //poi写入后为会计专用  
+//	        intStyle.setDataFormat(hssfDF.getFormat("0")); //poi写入后为会计专用  
+	        
+	        cell.setCellStyle(doubleStyle);
+	        cell.setCellValue(0);
+	       
+	        HSSFSheet sheet2 = wb.getSheetAt(5);
+	        HSSFRow row2 = sheet2.getRow(7);
+	        HSSFCell cell2 = row2.getCell(6);
+	        String string = cell2.getCellStyle().getDataFormatString();
+	        cell2.setCellValue(0);
+	        System.out.println(string);
+	        System.out.println(doubleStyle.getDataFormatString());
+	        
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
