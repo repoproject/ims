@@ -1,22 +1,22 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : gq
-Source Server Version : 50617
+Source Server         : mysql
+Source Server Version : 50510
 Source Host           : localhost:3306
 Source Database       : ims
 
 Target Server Type    : MYSQL
-Target Server Version : 50617
+Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-09-14 21:10:40
+Date: 2014-09-16 16:56:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `b_cat`
+-- Table structure for b_cat
 -- ----------------------------
 DROP TABLE IF EXISTS `b_cat`;
 CREATE TABLE `b_cat` (
@@ -40,16 +40,17 @@ CREATE TABLE `b_cat` (
   `makedate` datetime DEFAULT NULL,
   `modifydate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_cat
 -- ----------------------------
+INSERT INTO `b_cat` VALUES ('0', '0', '0', null, '0', null, null, null, null, null, '0.0000', null, null, null, null, null, null, null, null);
 INSERT INTO `b_cat` VALUES ('72', '测试出入库1', '测试出入库1', '0', '100', '17', '1', '2014-09-02 00:00:00', '999', '2014-09-30 00:00:00', '100.0000', '0', '100.0000', '999', null, null, null, '2014-09-14 15:41:55', '2014-09-14 19:56:21');
 INSERT INTO `b_cat` VALUES ('73', '测试出入库1', '测试出入库1', '0', '100', '1', '1', '2014-08-31 00:00:00', '31', '2014-10-11 00:00:00', '123.0000', '0', '123.0000', '131', null, null, null, '2014-09-14 21:00:11', '2014-09-14 21:00:11');
 
 -- ----------------------------
--- Table structure for `b_file`
+-- Table structure for b_file
 -- ----------------------------
 DROP TABLE IF EXISTS `b_file`;
 CREATE TABLE `b_file` (
@@ -67,7 +68,7 @@ CREATE TABLE `b_file` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `b_in`
+-- Table structure for b_in
 -- ----------------------------
 DROP TABLE IF EXISTS `b_in`;
 CREATE TABLE `b_in` (
@@ -107,7 +108,7 @@ INSERT INTO `b_in` VALUES ('59', '测试出入库1', '测试出入库1', null, '
 INSERT INTO `b_in` VALUES ('60', '测试出入库1', '测试出入库1', null, '100', '0', '31', '131', '2014-08-31 00:00:00', '0', '2014-10-11 00:00:00', '1', null, '123.0000', '0', '123.0000', '0.0000', '2014-09-01 00:00:00', null, '1', '0', '1', '313', '1', '2014-09-14 21:00:11', '2014-09-14 21:00:11');
 
 -- ----------------------------
--- Table structure for `b_machine`
+-- Table structure for b_machine
 -- ----------------------------
 DROP TABLE IF EXISTS `b_machine`;
 CREATE TABLE `b_machine` (
@@ -131,7 +132,7 @@ INSERT INTO `b_machine` VALUES ('4', '设备1', null, 'sb11', null, '', '22');
 INSERT INTO `b_machine` VALUES ('5', '22', null, '22', null, '22', '22');
 
 -- ----------------------------
--- Table structure for `b_out`
+-- Table structure for b_out
 -- ----------------------------
 DROP TABLE IF EXISTS `b_out`;
 CREATE TABLE `b_out` (
@@ -168,7 +169,7 @@ INSERT INTO `b_out` VALUES ('5', '22', '22', '测试出入库1', '测试出入�
 INSERT INTO `b_out` VALUES ('6', '22', '22', '测试出入库1', '测试出入库1', '100', '0', '1', '2014-09-15 00:00:00', '100.0000', '0', '100.0000', '1', '0', '', '', '', '', '', '1', '2014-09-14 19:56:21', '2014-09-14 19:56:21');
 
 -- ----------------------------
--- Table structure for `b_person`
+-- Table structure for b_person
 -- ----------------------------
 DROP TABLE IF EXISTS `b_person`;
 CREATE TABLE `b_person` (
@@ -183,7 +184,7 @@ CREATE TABLE `b_person` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `b_var`
+-- Table structure for b_var
 -- ----------------------------
 DROP TABLE IF EXISTS `b_var`;
 CREATE TABLE `b_var` (
@@ -204,7 +205,7 @@ INSERT INTO `b_var` VALUES ('outTime', '3', '出库后悔天数');
 INSERT INTO `b_var` VALUES ('stockthreshold', '10', '库存少于X件进行提醒的阈值');
 
 -- ----------------------------
--- Table structure for `d_catcode`
+-- Table structure for d_catcode
 -- ----------------------------
 DROP TABLE IF EXISTS `d_catcode`;
 CREATE TABLE `d_catcode` (
@@ -227,7 +228,7 @@ INSERT INTO `d_catcode` VALUES ('40', '测试出入库1', '1', '测试出入库1
 INSERT INTO `d_catcode` VALUES ('42', '测试出入库2', '', '测试出入库1', '0', '0', '', null, '设备2');
 
 -- ----------------------------
--- Table structure for `d_code`
+-- Table structure for d_code
 -- ----------------------------
 DROP TABLE IF EXISTS `d_code`;
 CREATE TABLE `d_code` (
@@ -303,7 +304,7 @@ INSERT INTO `d_code` VALUES ('sex', '0', '女', null);
 INSERT INTO `d_code` VALUES ('sex', '1', '男', null);
 
 -- ----------------------------
--- Table structure for `d_codetype`
+-- Table structure for d_codetype
 -- ----------------------------
 DROP TABLE IF EXISTS `d_codetype`;
 CREATE TABLE `d_codetype` (
@@ -329,7 +330,7 @@ INSERT INTO `d_codetype` VALUES ('rootcause', 'Discard的rootcause', '由于Disc
 INSERT INTO `d_codetype` VALUES ('sections', 'Discard的Sections', '由于Discard原因出库时填写的sections / instruments');
 
 -- ----------------------------
--- Table structure for `d_dept`
+-- Table structure for d_dept
 -- ----------------------------
 DROP TABLE IF EXISTS `d_dept`;
 CREATE TABLE `d_dept` (
@@ -349,7 +350,7 @@ CREATE TABLE `d_dept` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `d_rate`
+-- Table structure for d_rate
 -- ----------------------------
 DROP TABLE IF EXISTS `d_rate`;
 CREATE TABLE `d_rate` (
@@ -377,7 +378,7 @@ INSERT INTO `d_rate` VALUES ('5', '0', 'CNY', '4', 'GBP', '0.104938', '2014-01-0
 INSERT INTO `d_rate` VALUES ('6', '0', 'CNY', '1', 'USD', '0.159631', '2014-08-01 00:00:00', '001', '2014-09-03 15:04:50', '2014-09-03 15:04:52');
 
 -- ----------------------------
--- Table structure for `d_task`
+-- Table structure for d_task
 -- ----------------------------
 DROP TABLE IF EXISTS `d_task`;
 CREATE TABLE `d_task` (
@@ -412,7 +413,7 @@ INSERT INTO `d_task` VALUES ('12', 'monthtask', '每月定时任务11月份', '1
 INSERT INTO `d_task` VALUES ('13', 'monthtask', '每月定时任务12月份', '12', null, '26', 'M', '00:00:00', null, null);
 
 -- ----------------------------
--- Table structure for `d_user`
+-- Table structure for d_user
 -- ----------------------------
 DROP TABLE IF EXISTS `d_user`;
 CREATE TABLE `d_user` (
@@ -440,7 +441,7 @@ INSERT INTO `d_user` VALUES ('5', '444', '李四', null, '四儿', '1', '0', '0'
 INSERT INTO `d_user` VALUES ('6', '444', '王五', null, '乌尔', '1', '1', '1', null, '辅导费', null);
 
 -- ----------------------------
--- Table structure for `d_var`
+-- Table structure for d_var
 -- ----------------------------
 DROP TABLE IF EXISTS `d_var`;
 CREATE TABLE `d_var` (
@@ -459,22 +460,97 @@ INSERT INTO `d_var` VALUES ('reportpath', '\\reports\\', '报表保存路径');
 INSERT INTO `d_var` VALUES ('taskserverip', '127.0.0.1', '任务服务器，多台服务器集群使用');
 
 -- ----------------------------
--- View structure for `r_in_view`
+-- View structure for r_in_view
 -- ----------------------------
 DROP VIEW IF EXISTS `r_in_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `r_in_view` AS select `b`.`id` AS `id`,`a`.`catno` AS `catno`,`a`.`catName` AS `catname`,(case when (`a`.`reason` = '0') then `a`.`num` else 0 end) AS `inVendor`,(case when (`a`.`reason` = '1') then `a`.`num` else 0 end) AS `inInterlab`,(case when (`a`.`reason` = '2') then `a`.`num` else 0 end) AS `inSponsor`,(case when (`a`.`reason` = '3') then `a`.`num` else 0 end) AS `inCharges`,`a`.`inDate` AS `indate` from (`b_in` `a` join `b_cat` `b`) where ((`a`.`catno` = `b`.`catno`) and (`a`.`batchNo` = `b`.`batchno`) and (`a`.`price` = `b`.`price`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `r_in_view` AS SELECT
+	`b`.`id` AS `catid`,
+	(
+		CASE
+		WHEN (`a`.`reason` = '0') THEN
+			`a`.`num`
+		ELSE
+			0
+		END
+	) AS `inVendor`,
+	(
+		CASE
+		WHEN (`a`.`reason` = '1') THEN
+			`a`.`num`
+		ELSE
+			0
+		END
+	) AS `inInterlab`,
+	(
+		CASE
+		WHEN (`a`.`reason` = '2') THEN
+			`a`.`num`
+		ELSE
+			0
+		END
+	) AS `inSponsor`,
+	(
+		CASE
+		WHEN (`a`.`reason` = '3') THEN
+			`a`.`num`
+		ELSE
+			0
+		END
+	) AS `inCharges`,
+	`a`.`inDate` AS `indate`
+FROM
+	(`b_in` `a` JOIN `b_cat` `b`)
+WHERE
+	(
+		(`a`.`catno` = `b`.`catno`)
+		AND (
+			`a`.`batchNo` = `b`.`batchno`
+		)
+		AND (`a`.`price` = `b`.`price`)
+	) ;
 
 -- ----------------------------
--- View structure for `r_out_view`
+-- View structure for r_out_view
 -- ----------------------------
 DROP VIEW IF EXISTS `r_out_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `r_out_view` AS select `b`.`id` AS `id`,`a`.`catno` AS `catno`,`a`.`catname` AS `catname`,`a`.`price` AS `price`,(case when (`a`.`reason` = '0') then `a`.`num` else 0 end) AS `outTrialTest`,(case when (`a`.`reason` = '1') then `a`.`num` else 0 end) AS `outValidation`,(case when (`a`.`reason` = '2') then `a`.`num` else 0 end) AS `outDiscard`,(case when (`a`.`reason` = '3') then `a`.`num` else 0 end) AS `outIntelLab`,(case when (`a`.`reason` = '4') then `a`.`num` else 0 end) AS `outSponsor`,(case when (`a`.`reason` = '5') then `a`.`num` else 0 end) AS `outOthre`,`a`.`outDate` AS `outdate` from (`b_out` `a` join `b_cat` `b`) where ((`a`.`catno` = `b`.`catno`) and (`a`.`batchno` = `b`.`batchno`) and (`a`.`price` = `b`.`price`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `r_out_view` AS select `b`.`id` AS `catid`,(case when (`a`.`reason` = '0') then `a`.`num` else 0 end) AS `outTrialTest`,(case when (`a`.`reason` = '1') then `a`.`num` else 0 end) AS `outValidation`,(case when (`a`.`reason` = '2') then `a`.`num` else 0 end) AS `outDiscard`,(case when (`a`.`reason` = '3') then `a`.`num` else 0 end) AS `outIntelLab`,(case when (`a`.`reason` = '4') then `a`.`num` else 0 end) AS `outSponsor`,(case when (`a`.`reason` = '5') then `a`.`num` else 0 end) AS `outOthre`,`a`.`outDate` AS `outdate` from (`b_out` `a` join `b_cat` `b`) where ((`a`.`catno` = `b`.`catno`) and (`a`.`batchno` = `b`.`batchno`) and (`a`.`price` = `b`.`price`)) ;
 
 -- ----------------------------
--- View structure for `r_view`
+-- View structure for r_price_view
 -- ----------------------------
-DROP VIEW IF EXISTS `r_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `r_view` AS select `a`.`id` AS `id`,`a`.`catno` AS `catno`,`a`.`catname` AS `catname`,`a`.`batchno` AS `batchno`,`a`.`price` AS `price`,`a`.`priceUnit` AS `priceUnit`,`a`.`cattype` AS `cattype`,`a`.`machineNo` AS `machineno`,`a`.`machineName` AS `machineName`,`i`.`inVendor` AS `inVendor`,`i`.`inInterlab` AS `inInterlab`,`i`.`inSponsor` AS `inSponsor`,`i`.`inCharges` AS `inCharges`,(((`i`.`inVendor` + `i`.`inInterlab`) + `i`.`inSponsor`) + `i`.`inCharges`) AS `inTotal`,`o`.`outTrialTest` AS `outTrialTest`,`o`.`outValidation` AS `outValidation`,`o`.`outDiscard` AS `outDiscard`,`o`.`outIntelLab` AS `outIntelLab`,`o`.`outSponsor` AS `outSponsor`,`o`.`outOthre` AS `outOthre`,(((((`o`.`outTrialTest` + `o`.`outValidation`) + `o`.`outDiscard`) + `o`.`outIntelLab`) + `o`.`outSponsor`) + `o`.`outOthre`) AS `outTotal`,`a`.`total` AS `closing`,(case when (`a`.`priceUnit` = '0') then `a`.`price` end) AS `CNY`,(case when (`a`.`priceUnit` = '1') then `a`.`price` end) AS `USD`,(case when (`a`.`priceUnit` = '2') then `a`.`price` end) AS `SGD`,(case when (`a`.`priceUnit` = '3') then `a`.`price` end) AS `EUR`,(case when (`a`.`priceUnit` = '4') then `a`.`price` end) AS `GBP`,`a`.`localPrice` AS `localprice`,(`a`.`total` * `a`.`localPrice`) AS `totalAmount`,`i`.`indate` AS `indate`,`o`.`outdate` AS `outdate` from ((`b_cat` `a` left join `r_in_view` `i` on((`a`.`id` = `i`.`id`))) left join `r_out_view` `o` on((`a`.`id` = `o`.`id`))) ;
+DROP VIEW IF EXISTS `r_price_view`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `r_price_view` AS select a.id catid,(
+		CASE
+		WHEN (`a`.`priceUnit` = '0') THEN
+			`a`.`price`
+		END
+	) AS `CNY`,
+	(
+		CASE
+		WHEN (`a`.`priceUnit` = '1') THEN
+			`a`.`price`
+		END
+	) AS `USD`,
+	(
+		CASE
+		WHEN (`a`.`priceUnit` = '2') THEN
+			`a`.`price`
+		END
+	) AS `SGD`,
+	(
+		CASE
+		WHEN (`a`.`priceUnit` = '3') THEN
+			`a`.`price`
+		END
+	) AS `EUR`,
+	(
+		CASE
+		WHEN (`a`.`priceUnit` = '4') THEN
+			`a`.`price`
+		END
+	) AS `GBP`,
+(select round(a.price/b.rate,2) from d_rate b where b.foreignMoney = a.priceUnit ORDER BY startDateTime DESC  LIMIT 1) localPrice
+from b_cat a ;
 DROP TRIGGER IF EXISTS `tg_In_Insert_Before`;
 DELIMITER ;;
 CREATE TRIGGER `tg_In_Insert_Before` BEFORE INSERT ON `b_in` FOR EACH ROW begin

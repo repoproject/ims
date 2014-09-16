@@ -9,29 +9,64 @@
      -->
     <Sheet name="R1-CHEM" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-				SELECT a.catno,a.catname,a.batchno,a.machineno,a.machineName,a.price,
-							  closing+outtotal-intotal opening, sum(a.inVendor) invendor,  sum(a.inInterlab) ininterlab, sum(a.inSponsor) insponsor,
-							  sum(a.inCharges) incharges,sum(a.intotal) intotal,sum(outTrialTest) outtrialtest, sum(outValidation) outvalidation,
-							sum(outDiscard) outdiscard,sum(outIntelLab) outintellab,sum(outSponsor) outsponsor,
-							sum(outOthre) outother,sum(outTotal) outtotal,a.closing closing,
-							a.CNY,a.USD,a.SGD,a.EUR,a.GBP,a.localprice localprice,a.totalAmount,null as remark
-							FROM r_view a
+				SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,a.total+o.outTotal-i.inTotal opening,
+					i.inVendor,i.inCharges,i.inInterlab,i.inSponsor, i.inTotal,
+					o.outDiscard,o.outIntelLab,o.outOthre,o.outSponsor,o.outTrialTest,o.outValidation,o.outTotal,a.total closing,
+					p.CNY,p.EUR,p.GBP,p.SGD,p.USD,p.localprice,a.total*p.localprice,null as remark,
+					i.inTotal*p.localprice qtyIn,o.outTotal*p.localprice qtyOut,
+					0 checkQty,0 checkAmt,
+					0 pqtyIn,0 pqtyOut,
+					0 cqtyIn,0 cqtyOut 
+					from b_cat a LEFT JOIN
+					(
+							SELECT
+								ifnull(vin.catid, 0) catid,
+								SUM(vin.inVendor) inVendor,
+								SUM(vin.inCharges) inCharges,
+								SUM(vin.inInterlab) inInterlab,
+								SUM(vin.inSponsor) inSponsor,
+					      SUM(vin.inVendor) + SUM(vin.inCharges) + SUM(vin.inInterlab) + SUM(vin.inSponsor) inTotal
+							FROM
+								r_in_view vin
 							WHERE
-								( a.indate IS NULL OR a.indate BETWEEN ? AND ?)
-							AND ( a.outdate IS NULL OR a.outdate BETWEEN ? AND ?)
-							GROUP BY a.catno,a.catname,a.batchno,a.price,a.machineno,a.machineName
+								vin.indate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								vin.catid WITH ROLLUP
+					)i
+					on a.id = i.catid
+					LEFT JOIN
+					(
+							SELECT
+								ifnull(o.catid, 0) catid,
+								SUM(o.outDiscard) outDiscard,
+								SUM(o.outIntelLab) outIntelLab,
+								SUM(o.outOthre) outOthre,
+								SUM(o.outSponsor) outSponsor,
+								SUM(o.outTrialTest)outTrialTest ,
+								SUM(o.outValidation) outValidation,
+					      SUM(o.outDiscard) + SUM(o.outIntelLab)+SUM(o.outOthre)+SUM(o.outSponsor)+SUM(o.outTrialTest)+SUM(o.outValidation) outTotal
+							FROM
+								r_out_view o
+							WHERE
+								o.outdate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								o.catid WITH ROLLUP
+					)o on a.id=o.catid 
+					LEFT JOIN r_price_view p ON a.id=p.catid
 			
         </sql>
         <col index="1" type="">catno</col>
         <col index="2" type=""></col>
         <col index="3" type="">catname</col>
         <col index="4" type="">opening</col>
-        <col index="5" type="">invendor</col>
-        <col index="6" type="">ininterlab</col>
-        <col index="7" type="">insponsor</col>
-        <col index="8" type="">incharges</col>
-        <col index="9" type="">intotal</col>
-        <col index="10" type="">outtrialtest</col>
+        <col index="5" type="" sum="">invendor</col>
+        <col index="6" type="" sum="">ininterlab</col>
+        <col index="7" type="" sum="">insponsor</col>
+        <col index="8" type="" sum="">incharges</col>
+        <col index="9" type="" sum="">intotal</col>
+        <col index="10" type="" sum="">outtrialtest</col>
         <col index="11" type="">outvalidation</col>
         <col index="12" type="">outdiscard</col>
         <col index="13" type="">outintellab</col>

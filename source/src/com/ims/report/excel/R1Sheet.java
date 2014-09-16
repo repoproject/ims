@@ -201,10 +201,6 @@ public class R1Sheet implements ISheet{
 			String valueName = col.getValue().toString();
 			Object value = rowData.get(valueName);
 			ExcelUtil.setCellValue(cell, value);
-			String string = cell.getCellStyle().getDataFormatString();
-//			if(value == null || value.equals("0"))
-//				value = StringUtils.EMPTY;
-//			cell.setCellValue(value.toString());
 		}
 	}
 	
