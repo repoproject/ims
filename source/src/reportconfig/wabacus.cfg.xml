@@ -65,6 +65,7 @@
 	<!-- 注册所有全局资源文件 -->
 	<global-resources>
 		<resource-file>resources/resources_business_en.xml</resource-file>
+
 	</global-resources>
 	<!-- 注册所有报表配置文件 -->
 	<report-files>
@@ -100,6 +101,8 @@
 		<report-file>report/mainpage.xml</report-file>
 		
 		<report-file>report/querycat.xml</report-file>
+		
+		<report-file>report/Rstatics.xml</report-file>
 		
 		
 		<!--		<report-file>report/queryin.xml</report-file><report-file pattern="true">report/(report_)(\S*?)(\.xml)</report-file>

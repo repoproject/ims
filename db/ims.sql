@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-09-16 16:56:13
+Date: 2014-09-16 00:07:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,6 +23,7 @@ CREATE TABLE `b_cat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `catno` varchar(50) NOT NULL COMMENT '货号',
   `catname` varchar(255) DEFAULT NULL COMMENT '物品名称',
+  `seq` varchar(50) DEFAULT NULL COMMENT '编号，为全球统一编号预留',
   `cattype` varchar(50) DEFAULT NULL COMMENT '0-试剂,1-耗材',
   `batchno` varchar(50) NOT NULL COMMENT '批号',
   `total` int(11) DEFAULT NULL COMMENT '总数',
@@ -40,17 +41,51 @@ CREATE TABLE `b_cat` (
   `makedate` datetime DEFAULT NULL,
   `modifydate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_cat
 -- ----------------------------
-INSERT INTO `b_cat` VALUES ('0', '0', '0', null, '0', null, null, null, null, null, '0.0000', null, null, null, null, null, null, null, null);
-INSERT INTO `b_cat` VALUES ('72', '测试出入库1', '测试出入库1', '0', '100', '17', '1', '2014-09-02 00:00:00', '999', '2014-09-30 00:00:00', '100.0000', '0', '100.0000', '999', null, null, null, '2014-09-14 15:41:55', '2014-09-14 19:56:21');
-INSERT INTO `b_cat` VALUES ('73', '测试出入库1', '测试出入库1', '0', '100', '1', '1', '2014-08-31 00:00:00', '31', '2014-10-11 00:00:00', '123.0000', '0', '123.0000', '131', null, null, null, '2014-09-14 21:00:11', '2014-09-14 21:00:11');
+INSERT INTO `b_cat` VALUES ('72', '测试出入库1', '测试出入库1', null, '0', '100', '127', '1', '2014-09-02 00:00:00', '999', '2014-09-30 00:00:00', '100.0000', '0', '100.0000', '999', 'sb1', '设备1', null, '2014-09-10 15:41:55', '2014-09-15 22:37:49');
+INSERT INTO `b_cat` VALUES ('73', '测试出入库1', '测试出入库1', null, '0', '100', '126', '1', '2014-08-31 00:00:00', '31', '2014-10-11 00:00:00', '123.0000', '1', '123.0000', '131', 'sb11', '设备1', null, '2014-09-14 21:00:11', '2014-09-14 22:57:23');
+INSERT INTO `b_cat` VALUES ('74', '测试出入库2', '测试出入库1', null, '0', '222', '225', '1', '2014-09-14 00:00:00', '', '2014-08-31 00:00:00', '22.0000', '0', null, '33', null, null, null, '2014-09-14 22:05:51', '2014-09-14 22:08:00');
+INSERT INTO `b_cat` VALUES ('75', '测试出入库1', '测试出入库1', null, '0', '256', '136', '1', '2014-08-31 00:00:00', '10', '2014-10-11 00:00:00', '10.0000', '0', null, '10', null, null, null, '2014-09-15 20:49:52', '2014-09-15 20:49:52');
+INSERT INTO `b_cat` VALUES ('76', '测试出入库2', '测试出入库1', null, '0', '2-22-2-.5', '137', '1', null, '', '2014-10-10 00:00:00', '11.0000', '0', null, '', null, null, null, '2014-09-15 20:50:54', '2014-09-15 20:50:54');
+INSERT INTO `b_cat` VALUES ('77', '测试出入库1', '测试出入库1', null, '0', '111', '137', '1', null, '', '2014-10-10 00:00:00', '11.0000', '0', null, '', null, null, null, '2014-09-15 20:56:00', '2014-09-15 20:56:00');
+INSERT INTO `b_cat` VALUES ('78', '测试出入库1', '测试出入库1', null, '0', '000', '128', '1', null, '', '2014-09-15 00:00:00', '2.0000', '0', null, '', null, null, null, '2014-09-15 20:58:55', '2014-09-15 20:58:55');
+INSERT INTO `b_cat` VALUES ('79', '测试出入库1', '测试出入库1', null, '0', '99', '135', '1', null, '', '2014-09-15 00:00:00', '9.0000', '0', null, '', null, null, null, '2014-09-15 20:59:26', '2014-09-15 20:59:26');
+INSERT INTO `b_cat` VALUES ('80', '测试出入库1', '测试出入库1', null, '0', '2', '128', '1', null, '', '2014-09-15 00:00:00', '2.0000', '0', null, '', null, null, null, '2014-09-15 21:01:46', '2014-09-15 21:01:46');
+INSERT INTO `b_cat` VALUES ('81', '测试出入库1', '测试出入库1', null, '0', '3', '129', '1', null, '', '2014-09-15 00:00:00', '3.0000', '0', null, '', null, null, null, '2014-09-15 21:02:19', '2014-09-15 21:02:19');
+INSERT INTO `b_cat` VALUES ('82', '测试出入库1', '测试出入库1', null, '0', '7', '133', '1', null, '', '2014-09-15 00:00:00', '7.0000', '0', null, '', null, null, null, '2014-09-15 21:06:33', '2014-09-15 21:06:33');
+INSERT INTO `b_cat` VALUES ('83', '测试出入库2', '测试出入库1', null, '0', '33', '129', '1', null, '', '2014-09-15 00:00:00', '3.0000', '0', null, '', null, null, null, '2014-09-15 21:11:12', '2014-09-15 21:11:12');
+INSERT INTO `b_cat` VALUES ('84', '测试出入库2', '测试出入库1', null, '0', '4', '127', '1', null, '', '2014-09-15 00:00:00', '4.0000', '0', null, '', null, null, null, '2014-09-15 21:14:04', '2014-09-15 21:14:04');
+INSERT INTO `b_cat` VALUES ('85', '测试出入库2', '测试出入库1', null, '0', '568', '131', '1', null, '', '2014-09-15 00:00:00', '8.0000', '0', null, '', null, null, null, '2014-09-15 21:14:30', '2014-09-15 21:14:30');
+INSERT INTO `b_cat` VALUES ('86', '测试出入库2', '测试出入库1', null, '0', '789456', '130', '1', null, '', '2014-09-15 00:00:00', '7.0000', '0', null, '', null, null, null, '2014-09-15 21:16:33', '2014-09-15 21:16:33');
+INSERT INTO `b_cat` VALUES ('87', '测试出入库2', '测试出入库1', null, '0', '99999', '132', '1', null, '', '2014-09-15 00:00:00', '9.0000', '0', null, '', null, null, null, '2014-09-15 21:16:57', '2014-09-15 21:16:57');
+INSERT INTO `b_cat` VALUES ('88', '测试出入库2', '测试出入库1', null, '0', '444444', '127', '1', null, '', '2014-09-15 00:00:00', '4.0000', '0', null, '', null, null, null, '2014-09-15 21:17:24', '2014-09-15 21:17:24');
+INSERT INTO `b_cat` VALUES ('89', '测试出入库2', '测试出入库1', null, '0', '454545454', '127', '1', null, '', '2014-09-15 00:00:00', '4.0000', '0', null, '', null, null, null, '2014-09-15 21:18:27', '2014-09-15 21:18:27');
+INSERT INTO `b_cat` VALUES ('90', '测试出入库2', '测试出入库1', null, '0', '689', '131', '1', null, '', '2014-09-15 00:00:00', '8.0000', '0', null, '', null, null, null, '2014-09-15 21:19:55', '2014-09-15 21:19:55');
+INSERT INTO `b_cat` VALUES ('91', '测试出入库1', '测试出入库1', null, '0', '090909', '132', '1', null, '', '2014-09-15 00:00:00', '9.0000', '0', null, '', null, null, null, '2014-09-15 21:20:42', '2014-09-15 21:20:42');
+INSERT INTO `b_cat` VALUES ('92', '测试出入库1', '测试出入库1', null, '0', '020301', '124', '1', null, '', '2014-09-15 00:00:00', '1.0000', '0', null, '', null, null, null, '2014-09-15 21:21:35', '2014-09-15 21:21:35');
+INSERT INTO `b_cat` VALUES ('93', '测试出入库1', '测试出入库1', null, '0', '1.2.2.2', '125', '1', null, '', '2014-09-15 00:00:00', '2.0000', '0', null, '', null, null, null, '2014-09-15 21:22:25', '2014-09-15 21:22:25');
+INSERT INTO `b_cat` VALUES ('94', '测试出入库1', '测试出入库1', null, '0', '000.1.2', '124', '1', null, '', '2014-09-15 00:00:00', '1.0000', '0', null, '', null, null, null, '2014-09-15 21:27:38', '2014-09-15 21:27:38');
+INSERT INTO `b_cat` VALUES ('95', '测试出入库2', '测试出入库1', null, '0', '2.3.1.20', '125', '1', null, '', '2014-09-15 00:00:00', '2.0000', '0', null, '', null, null, null, '2014-09-15 21:28:49', '2014-09-15 21:28:49');
+INSERT INTO `b_cat` VALUES ('96', '测试出入库1', '测试出入库1', null, '0', '2.0.1.30.21', '124', '1', null, '', '2014-09-15 00:00:00', '1.0000', '0', null, '', null, null, null, '2014-09-15 21:30:07', '2014-09-15 21:30:07');
+INSERT INTO `b_cat` VALUES ('97', '测试出入库1', '测试出入库1', null, '0', '11323232', '124', '1', null, '', '2014-09-15 00:00:00', '1.0000', '0', null, '', null, null, null, '2014-09-15 21:31:41', '2014-09-15 21:31:41');
+INSERT INTO `b_cat` VALUES ('98', '测试出入库1', '测试出入库1', null, '0', '1.0.0.0.0.0.0', '124', '1', null, '', '2014-09-15 00:00:00', '1.0000', '0', null, '', null, null, null, '2014-09-15 21:33:06', '2014-09-15 21:33:06');
+INSERT INTO `b_cat` VALUES ('99', '测试出入库1', '测试出入库1', null, '0', '1.2.235.465-', '124', '1', null, '', '2014-09-16 00:00:00', '1.0000', '0', null, '', null, null, null, '2014-09-15 21:41:31', '2014-09-15 21:41:31');
+INSERT INTO `b_cat` VALUES ('100', '测试出入库1', '测试出入库1', null, '0', '1111.2222', '125', '1', null, '', '2014-09-15 00:00:00', '2.0000', '0', null, '', null, null, null, '2014-09-15 21:48:44', '2014-09-15 21:48:44');
+INSERT INTO `b_cat` VALUES ('101', '测试出入库1', '测试出入库1', null, '0', '1.0.2.230.5', '124', '1', null, '', '2014-09-15 00:00:00', '1.0000', '0', null, '', null, null, null, '2014-09-15 21:53:52', '2014-09-15 21:53:52');
+INSERT INTO `b_cat` VALUES ('102', '测试出入库1', '测试出入库1', null, '0', '1.0.2.21.01.2', '124', '1', null, '', '2014-09-15 00:00:00', '0.0100', '0', null, '', 'sb1', '设备1', null, '2014-09-15 22:35:03', '2014-09-15 22:37:54');
+INSERT INTO `b_cat` VALUES ('103', '测试出入库1', '测试出入库1', null, '0', '102030', '124', '1', null, '', '2014-09-15 00:00:00', '0.0001', '0', null, '', null, null, null, '2014-09-15 22:35:54', '2014-09-15 22:35:54');
+INSERT INTO `b_cat` VALUES ('104', '测试出入库2', '测试出入库1', null, '0', '123', '125', '1', null, '', '2014-09-15 00:00:00', '2.0000', '0', null, '', null, null, null, '2014-09-15 23:02:37', '2014-09-15 23:02:37');
+INSERT INTO `b_cat` VALUES ('105', '测试出入库1', '测试出入库1', null, '0', '11323232', '167', '5', null, '', '2014-09-16 00:00:00', '2.0000', '0', null, '', null, null, null, '2014-09-15 23:04:53', '2014-09-15 23:05:35');
+INSERT INTO `b_cat` VALUES ('106', '测试出入库2', '测试出入库1', null, '0', '111111111', '145', '1', null, '', '2014-09-15 00:00:00', '1.0000', '0', null, '', null, null, null, '2014-09-15 23:11:09', '2014-09-15 23:12:37');
+INSERT INTO `b_cat` VALUES ('108', '测试出入库2', '测试出入库1', '编号2', '0', '关1', '147', '1', null, '', '2014-09-15 00:00:00', '11.0000', '0', null, '', null, null, null, '2014-09-15 23:28:53', '2014-09-15 23:29:27');
+INSERT INTO `b_cat` VALUES ('109', '测试出入库2', '测试出入库1', '编号2', '0', '34567890', '147', '1', null, '', '2014-09-15 00:00:00', '11.0000', '0', null, '', null, null, null, '2014-09-15 23:33:13', '2014-09-15 23:41:09');
+INSERT INTO `b_cat` VALUES ('110', '测试出入库1', '测试出入库1', '编号1', '0', '0.12', '246', '1', null, '', '2014-09-15 00:00:00', '4.0000', '0', null, '', 'sb2', '设备2', null, '2014-09-15 23:46:51', '2014-09-15 23:53:31');
 
 -- ----------------------------
--- Table structure for b_file
 -- ----------------------------
 DROP TABLE IF EXISTS `b_file`;
 CREATE TABLE `b_file` (
@@ -68,14 +103,13 @@ CREATE TABLE `b_file` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for b_in
 -- ----------------------------
 DROP TABLE IF EXISTS `b_in`;
 CREATE TABLE `b_in` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '货号，试剂号耗材号',
   `catno` varchar(50) NOT NULL,
   `catName` varchar(255) DEFAULT NULL COMMENT '试剂名称，冗余，b_cat.name',
-  `seq` varchar(50) DEFAULT NULL,
+  `seq` varchar(50) DEFAULT NULL COMMENT '编号，为全球统一编号预留',
   `batchNo` varchar(50) DEFAULT NULL COMMENT '批号',
   `cattype` varchar(50) DEFAULT NULL,
   `producer` varchar(255) DEFAULT NULL COMMENT '生产商',
@@ -99,13 +133,51 @@ CREATE TABLE `b_in` (
   `makedate` datetime DEFAULT NULL COMMENT '产生日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8 COMMENT='试剂表';
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='试剂表';
 
 -- ----------------------------
 -- Records of b_in
 -- ----------------------------
-INSERT INTO `b_in` VALUES ('59', '测试出入库1', '测试出入库1', null, '100', '0', '999', '999', '2014-09-02 00:00:00', '1', '2014-09-30 00:00:00', '99', null, '100.0000', '0', '100.0000', '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '100', null, '2014-09-14 15:41:55', '2014-09-14 18:09:46');
+INSERT INTO `b_in` VALUES ('59', '测试出入库1', '测试出入库1', null, '100', '0', '999', '999', '2014-09-02 00:00:00', '1', '2014-09-30 00:00:00', '992', null, '100.0000', '0', '100.0000', '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '100', '1', '2014-09-14 15:41:55', '2014-09-14 22:14:26');
 INSERT INTO `b_in` VALUES ('60', '测试出入库1', '测试出入库1', null, '100', '0', '31', '131', '2014-08-31 00:00:00', '0', '2014-10-11 00:00:00', '1', null, '123.0000', '0', '123.0000', '0.0000', '2014-09-01 00:00:00', null, '1', '0', '1', '313', '1', '2014-09-14 21:00:11', '2014-09-14 21:00:11');
+INSERT INTO `b_in` VALUES ('61', '测试出入库2', '测试出入库1', null, '222', '0', '', '33', '2014-09-14 00:00:00', '0', '2014-08-31 00:00:00', '33', null, '22.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '1', '1', '33', '1', '2014-09-14 22:05:51', '2014-09-14 22:08:00');
+INSERT INTO `b_in` VALUES ('62', '测试出入库1', '测试出入库1', null, '256', '0', '10', '10', '2014-08-31 00:00:00', '0', '2014-10-11 00:00:00', '10', null, '10.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '10', '1', '2014-09-15 20:49:52', '2014-09-15 20:49:52');
+INSERT INTO `b_in` VALUES ('63', '测试出入库2', '测试出入库1', null, '2-22-2-.5', '0', '', '', null, '0', '2014-10-10 00:00:00', '11', null, '11.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 20:50:54', '2014-09-15 20:50:54');
+INSERT INTO `b_in` VALUES ('64', '测试出入库1', '测试出入库1', null, '111', '0', '', '', null, '0', '2014-10-10 00:00:00', '11', null, '11.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 20:56:00', '2014-09-15 20:56:00');
+INSERT INTO `b_in` VALUES ('65', '测试出入库1', '测试出入库1', null, '000', '0', '', '', null, '0', '2014-09-15 00:00:00', '2', null, '2.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 20:58:55', '2014-09-15 20:58:55');
+INSERT INTO `b_in` VALUES ('66', '测试出入库1', '测试出入库1', null, '99', '0', '', '', null, '0', '2014-09-15 00:00:00', '9', null, '9.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 20:59:26', '2014-09-15 20:59:26');
+INSERT INTO `b_in` VALUES ('67', '测试出入库1', '测试出入库1', null, '2', '0', '', '', null, '0', '2014-09-15 00:00:00', '2', null, '2.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:01:46', '2014-09-15 21:01:46');
+INSERT INTO `b_in` VALUES ('68', '测试出入库1', '测试出入库1', null, '3', '0', '', '', null, '0', '2014-09-15 00:00:00', '3', null, '3.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:02:19', '2014-09-15 21:02:19');
+INSERT INTO `b_in` VALUES ('69', '测试出入库1', '测试出入库1', null, '7', '0', '', '', null, '0', '2014-09-15 00:00:00', '7', null, '7.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:06:33', '2014-09-15 21:06:33');
+INSERT INTO `b_in` VALUES ('70', '测试出入库2', '测试出入库1', null, '33', '0', '', '', null, '0', '2014-09-15 00:00:00', '3', null, '3.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:11:12', '2014-09-15 21:11:12');
+INSERT INTO `b_in` VALUES ('71', '测试出入库2', '测试出入库1', null, '33', '0', '', '', null, '0', '2014-09-15 00:00:00', '3', null, '3.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:13:13', '2014-09-15 21:13:13');
+INSERT INTO `b_in` VALUES ('72', '测试出入库2', '测试出入库1', null, '4', '0', '', '', null, '0', '2014-09-15 00:00:00', '4', null, '4.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:14:04', '2014-09-15 21:14:04');
+INSERT INTO `b_in` VALUES ('73', '测试出入库2', '测试出入库1', null, '568', '0', '', '', null, '0', '2014-09-15 00:00:00', '8', null, '8.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:14:30', '2014-09-15 21:14:30');
+INSERT INTO `b_in` VALUES ('74', '测试出入库2', '测试出入库1', null, '789456', '0', '', '', null, '0', '2014-09-15 00:00:00', '7', null, '7.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:16:33', '2014-09-15 21:16:33');
+INSERT INTO `b_in` VALUES ('75', '测试出入库2', '测试出入库1', null, '99999', '0', '', '', null, '0', '2014-09-15 00:00:00', '9', null, '9.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:16:57', '2014-09-15 21:16:57');
+INSERT INTO `b_in` VALUES ('76', '测试出入库2', '测试出入库1', null, '444444', '0', '', '', null, '0', '2014-09-15 00:00:00', '4', null, '4.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:17:24', '2014-09-15 21:17:24');
+INSERT INTO `b_in` VALUES ('77', '测试出入库2', '测试出入库1', null, '454545454', '0', '', '', null, '0', '2014-09-15 00:00:00', '4', null, '4.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:18:27', '2014-09-15 21:18:27');
+INSERT INTO `b_in` VALUES ('78', '测试出入库2', '测试出入库1', null, '689', '0', '', '', null, '0', '2014-09-15 00:00:00', '8', null, '8.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:19:55', '2014-09-15 21:19:55');
+INSERT INTO `b_in` VALUES ('79', '测试出入库1', '测试出入库1', null, '090909', '0', '', '', null, '0', '2014-09-15 00:00:00', '9', null, '9.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:20:42', '2014-09-15 21:20:42');
+INSERT INTO `b_in` VALUES ('80', '测试出入库1', '测试出入库1', null, '020301', '0', '', '', null, '0', '2014-09-15 00:00:00', '1', null, '1.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:21:35', '2014-09-15 21:21:35');
+INSERT INTO `b_in` VALUES ('81', '测试出入库1', '测试出入库1', null, '1.2.2.2', '0', '', '', null, '0', '2014-09-15 00:00:00', '2', null, '2.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:22:25', '2014-09-15 21:22:25');
+INSERT INTO `b_in` VALUES ('82', '测试出入库1', '测试出入库1', null, '000.1.2', '0', '', '', null, '0', '2014-09-15 00:00:00', '1', null, '1.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:27:38', '2014-09-15 21:27:38');
+INSERT INTO `b_in` VALUES ('83', '测试出入库2', '测试出入库1', null, '2.3.1.20', '0', '', '', null, '0', '2014-09-15 00:00:00', '2', null, '2.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:28:49', '2014-09-15 21:28:49');
+INSERT INTO `b_in` VALUES ('84', '测试出入库1', '测试出入库1', null, '2.0.1.30.21', '0', '', '', null, '0', '2014-09-15 00:00:00', '1', null, '1.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:30:07', '2014-09-15 21:30:07');
+INSERT INTO `b_in` VALUES ('85', '测试出入库1', '测试出入库1', null, '11323232', '0', '', '', null, '0', '2014-09-15 00:00:00', '1', null, '1.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:31:41', '2014-09-15 21:31:41');
+INSERT INTO `b_in` VALUES ('86', '测试出入库1', '测试出入库1', null, '1.0.0.0.0.0.0', '0', '', '', null, '0', '2014-09-15 00:00:00', '1', null, '1.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:33:06', '2014-09-15 21:33:06');
+INSERT INTO `b_in` VALUES ('87', '测试出入库1', '测试出入库1', null, '1.2.235.465-', '0', '', '', null, '0', '2014-09-16 00:00:00', '1', null, '1.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:41:31', '2014-09-15 21:41:31');
+INSERT INTO `b_in` VALUES ('88', '测试出入库1', '测试出入库1', null, '1111.2222', '0', '', '', null, '0', '2014-09-15 00:00:00', '2', null, '2.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:48:44', '2014-09-15 21:48:44');
+INSERT INTO `b_in` VALUES ('89', '测试出入库1', '测试出入库1', null, '1.0.2.230.5', '0', '', '', null, '0', '2014-09-15 00:00:00', '1', null, '1.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 21:53:52', '2014-09-15 21:53:52');
+INSERT INTO `b_in` VALUES ('90', '测试出入库1', '测试出入库1', null, '1.0.2.21.01.2', '0', '', '', null, '0', '2014-09-15 00:00:00', '100', null, '0.0100', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 22:35:03', '2014-09-15 22:35:03');
+INSERT INTO `b_in` VALUES ('91', '测试出入库1', '测试出入库1', null, '102030', '0', '', '', null, '0', '2014-09-15 00:00:00', '1', null, '0.0001', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 22:35:54', '2014-09-15 22:35:54');
+INSERT INTO `b_in` VALUES ('92', '测试出入库2', '测试出入库1', '编号2', '123', '0', '', '', null, '0', '2014-09-15 00:00:00', '2', null, '2.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 23:02:37', '2014-09-15 23:02:37');
+INSERT INTO `b_in` VALUES ('93', '测试出入库1', '测试出入库1', '编号1', '11323232', '0', '', '', null, '0', '2014-09-16 00:00:00', '22', null, '2.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '5', '1', '1', '', '1', '2014-09-15 23:04:53', '2014-09-15 23:05:35');
+INSERT INTO `b_in` VALUES ('94', '测试出入库2', '测试出入库1', '编号2', '111111111', '0', '', '', null, '0', '2014-09-15 00:00:00', '11', null, '1.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 23:11:09', '2014-09-15 23:12:37');
+INSERT INTO `b_in` VALUES ('96', '测试出入库2', '测试出入库1', '编号2', '关1', '0', '', '', null, '0', '2014-09-15 00:00:00', '12', null, '11.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 23:28:53', '2014-09-15 23:29:27');
+INSERT INTO `b_in` VALUES ('97', '测试出入库2', '测试出入库1', '编号2', '34567890', '0', '', '', null, '0', '2014-09-15 00:00:00', '12', null, '11.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 23:33:13', '2014-09-15 23:41:09');
+INSERT INTO `b_in` VALUES ('98', '测试出入库1', '测试出入库1', '编号1', '0.12', '0', '', '', null, '0', '2014-09-15 00:00:00', '123', null, '4.0000', '0', null, '0.0000', '2014-09-15 00:00:00', null, '1', '0', '1', '', '1', '2014-09-15 23:46:51', '2014-09-15 23:47:44');
+INSERT INTO `b_in` VALUES ('99', '测试出入库1', '测试出入库1', '编号1', '100', '0', '', '', null, '0', '2014-09-16 00:00:00', '123', null, '123.0000', '0', null, '0.0000', '2014-09-16 00:00:00', null, '1', '0', '1', '', '1', '2014-09-16 00:02:27', '2014-09-16 00:02:27');
 
 -- ----------------------------
 -- Table structure for b_machine
@@ -141,6 +213,7 @@ CREATE TABLE `b_out` (
   `machineNo` varchar(50) DEFAULT NULL COMMENT '设备编号',
   `catno` varchar(50) NOT NULL,
   `catname` varchar(255) DEFAULT NULL,
+  `seq` varchar(50) DEFAULT '' COMMENT '编号，为全球统一编号预留',
   `batchno` varchar(50) NOT NULL COMMENT '批号',
   `cattype` varchar(50) DEFAULT NULL COMMENT '0-试剂,1-耗材',
   `person` varchar(255) DEFAULT NULL COMMENT '出库人',
@@ -159,14 +232,17 @@ CREATE TABLE `b_out` (
   `makedate` datetime DEFAULT NULL COMMENT '创建日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='出库记录';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='出库记录';
 
 -- ----------------------------
 -- Records of b_out
 -- ----------------------------
-INSERT INTO `b_out` VALUES ('4', '设备2', 'sb2', '测试出入库1', '测试出入库1', '100', '0', '1', '2014-09-15 00:00:00', '100.0000', '0', '100.0000', '100', '0', '', '', '', '', '', '1', '2014-09-14 18:56:56', '2014-09-14 18:56:56');
-INSERT INTO `b_out` VALUES ('5', '22', '22', '测试出入库1', '测试出入库1', '100', '0', '1', '2014-09-16 00:00:00', '100.0000', '0', '100.0000', '80', '0', '', '', '', '', '', '1', '2014-09-14 18:57:36', '2014-09-14 18:57:36');
-INSERT INTO `b_out` VALUES ('6', '22', '22', '测试出入库1', '测试出入库1', '100', '0', '1', '2014-09-15 00:00:00', '100.0000', '0', '100.0000', '1', '0', '', '', '', '', '', '1', '2014-09-14 19:56:21', '2014-09-14 19:56:21');
+INSERT INTO `b_out` VALUES ('8', '设备1', 'sb1', '测试出入库1', '测试出入库1', '', '100', '0', '1', '2014-09-15 00:00:00', '100.0000', '0', '100.0000', '2000', '2', '', '', '', '', '', '1', '2014-09-14 22:20:29', '2014-09-15 22:37:49');
+INSERT INTO `b_out` VALUES ('9', '设备1', 'sb1', '测试出入库1', '测试出入库1', '', '100', '0', '1', '2014-09-16 00:00:00', '100.0000', '0', '100.0000', '80', '0', '', '', '', '', '', '1', '2014-09-14 22:21:42', '2014-09-14 23:19:58');
+INSERT INTO `b_out` VALUES ('10', '设备1', 'sb1', '测试出入库1', '测试出入库1', '', '100', '0', '1', '2014-09-17 00:00:00', '100.0000', '0', '100.0000', '1', '0', '', '', '', '', '', '1', '2014-09-14 22:22:34', '2014-09-14 22:22:34');
+INSERT INTO `b_out` VALUES ('11', '设备1', 'sb1', '测试出入库1', '测试出入库1', '', '100', '0', '1', '2014-09-16 00:00:00', '100.0000', '0', '100.0000', '1', '2', '', '', '', '', '', '1', '2014-09-14 22:56:38', '2014-09-14 22:56:38');
+INSERT INTO `b_out` VALUES ('12', '设备1', 'sb11', '测试出入库1', '测试出入库1', '', '100', '0', '1', '2014-09-17 00:00:00', '123.0000', '1', '123.0000', '1', '2', '', '', '', '', '', '1', '2014-09-14 22:57:23', '2014-09-14 22:57:23');
+INSERT INTO `b_out` VALUES ('13', '设备1', 'sb1', '测试出入库1', '测试出入库1', '', '1.0.2.21.01.2', '0', '1', '2014-09-15 00:00:00', '0.0100', '0', '0.0000', '99', '2', '', '', '', '', '', '1', '2014-09-15 22:37:40', '2014-09-15 22:37:54');
 
 -- ----------------------------
 -- Table structure for b_person
@@ -219,13 +295,14 @@ CREATE TABLE `d_catcode` (
   `machineNo` int(11) DEFAULT NULL COMMENT '所属设备ID',
   `machinename` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '所属设备名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of d_catcode
 -- ----------------------------
-INSERT INTO `d_catcode` VALUES ('40', '测试出入库1', '1', '测试出入库1', '0', '1', '', null, '设备1');
-INSERT INTO `d_catcode` VALUES ('42', '测试出入库2', '', '测试出入库1', '0', '0', '', null, '设备2');
+INSERT INTO `d_catcode` VALUES ('40', '测试出入库1', '编号1', '测试出入库1', '0', '1', '', null, '设备1');
+INSERT INTO `d_catcode` VALUES ('42', '测试出入库2', '编号2', '测试出入库1', '0', '0', '', null, '设备2');
+INSERT INTO `d_catcode` VALUES ('43', '222', '222', '222', '1', '0', '', null, '设备1');
 
 -- ----------------------------
 -- Table structure for d_code
@@ -365,7 +442,7 @@ CREATE TABLE `d_rate` (
   `maketime` datetime DEFAULT NULL COMMENT '数据创建时间',
   `modifytime` datetime DEFAULT NULL COMMENT '数据修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of d_rate
@@ -399,6 +476,7 @@ CREATE TABLE `d_task` (
 -- Records of d_task
 -- ----------------------------
 INSERT INTO `d_task` VALUES ('1', 'daytask', '每日定时任务', '', null, '0', 'H', '17:50:00', '2014-09-14 00:00:00', '2099-09-03 13:20:58');
+INSERT INTO `d_task` VALUES ('1', 'daytask', '每日定时任务', '', null, '0', 'H', '21:40:00', '2014-09-14 00:00:00', '2099-09-03 13:20:58');
 INSERT INTO `d_task` VALUES ('2', 'monthtask', '每月定时任务1月份', '1', null, '26', 'M', '00:00:00', null, null);
 INSERT INTO `d_task` VALUES ('3', 'monthtask', '每月定时任务2月份', '2', null, '26', 'M', '00:00:00', null, null);
 INSERT INTO `d_task` VALUES ('4', 'monthtask', '每月定时任务3月份', '3', null, '26', 'M', '00:00:00', null, null);
@@ -407,7 +485,7 @@ INSERT INTO `d_task` VALUES ('6', 'monthtask', '每月定时任务5月份', '5',
 INSERT INTO `d_task` VALUES ('7', 'monthtask', '每月定时任务6月份', '6', null, '26', 'M', '00:00:00', null, null);
 INSERT INTO `d_task` VALUES ('8', 'monthtask', '每月定时任务7月份', '7', null, '26', 'M', '00:00:00', null, null);
 INSERT INTO `d_task` VALUES ('9', 'monthtask', '每月定时任务8月份', '8', null, '26', 'M', '00:00:00', null, null);
-INSERT INTO `d_task` VALUES ('10', 'monthtask', '每月定时任务9月份', '9', null, '26', 'M', '00:00:00', null, null);
+INSERT INTO `d_task` VALUES ('10', 'monthtask', '每月定时任务9月份', '9', null, '14', 'M', '00:00:00', null, null);
 INSERT INTO `d_task` VALUES ('11', 'monthtask', '每月定时任务10月份', '10', null, '26', 'M', '00:00:00', null, null);
 INSERT INTO `d_task` VALUES ('12', 'monthtask', '每月定时任务11月份', '11', null, '26', 'M', '00:00:00', null, null);
 INSERT INTO `d_task` VALUES ('13', 'monthtask', '每月定时任务12月份', '12', null, '26', 'M', '00:00:00', null, null);
@@ -460,7 +538,6 @@ INSERT INTO `d_var` VALUES ('reportpath', '\\reports\\', '报表保存路径');
 INSERT INTO `d_var` VALUES ('taskserverip', '127.0.0.1', '任务服务器，多台服务器集群使用');
 
 -- ----------------------------
--- View structure for r_in_view
 -- ----------------------------
 DROP VIEW IF EXISTS `r_in_view`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `r_in_view` AS SELECT
@@ -551,22 +628,6 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
 	) AS `GBP`,
 (select round(a.price/b.rate,2) from d_rate b where b.foreignMoney = a.priceUnit ORDER BY startDateTime DESC  LIMIT 1) localPrice
 from b_cat a ;
-DROP TRIGGER IF EXISTS `tg_In_Insert_Before`;
-DELIMITER ;;
-CREATE TRIGGER `tg_In_Insert_Before` BEFORE INSERT ON `b_in` FOR EACH ROW begin
-     -- 通过汇率计算本地单价
-     declare v_localmoney int;
-     declare v_rate double;
-     set v_rate = 1;
-     set v_localmoney = (select sysvalue from d_var where syskey='localmoney'); -- 得到本币
-     if(new.priceunit <> v_localmoney) then
-         set v_rate=(select rate from d_rate where localmoney = v_localmoney and foreignmoney=new.priceunit and sysdate() > startdatetime ORDER BY startDateTime desc limit 1); --  通过本币和单价换算汇率
-     end if;
-     set new.localprice = (new.price/v_rate);
-
-end
-;;
-DELIMITER ;
 DROP TRIGGER IF EXISTS `tg_In_Insert`;
 DELIMITER ;;
 CREATE TRIGGER `tg_In_Insert` AFTER INSERT ON `b_in` FOR EACH ROW begin
@@ -575,25 +636,9 @@ CREATE TRIGGER `tg_In_Insert` AFTER INSERT ON `b_in` FOR EACH ROW begin
      if cnt > 0 then
          update b_cat set total = (total+new.num) where catno=catno and batchno=batchno and price=price;
      else
-         insert into b_cat(catno,catname,cattype,batchno,total,rtype,productdate,producer,expiredate,price,priceunit,localprice,dealer,makedate,modifydate)
-          values(new.catno,new.catname,new.cattype,new.batchno,new.num,new.rtype,new.productdate,new.producer,new.expiredate,new.price,new.priceunit,new.localprice,new.dealer,sysdate(),sysdate());
+         insert into b_cat(catno,      catname,      cattype,       batchno,      seq,       total      ,rtype      ,productdate,       producer,       expiredate      ,price      ,priceunit       ,localprice      ,dealer , makedate  ,modifydate)
+                values(new.catno,new.catname,new.cattype,new.batchno,new.seq,new.num,new.rtype,new.productdate,new.producer,new.expiredate,new.price,new.priceunit,new.localprice,new.dealer, sysdate()       ,sysdate());
      end if;
-end
-;;
-DELIMITER ;
-DROP TRIGGER IF EXISTS `tg_In_Update_Before`;
-DELIMITER ;;
-CREATE TRIGGER `tg_In_Update_Before` BEFORE UPDATE ON `b_in` FOR EACH ROW begin
-     -- 通过汇率计算本地单价
-     declare v_localmoney int;
-     declare v_rate double;
-     set v_rate = 1;
-     set v_localmoney = (select sysvalue from d_var where syskey='localmoney'); -- 得到本币
-     if(new.priceunit <> v_localmoney) then
-         set v_rate=(select rate from d_rate where localmoney = v_localmoney and foreignmoney=new.priceunit and sysdate() > startdatetime ORDER BY startDateTime desc limit 1); --  通过本币和单价换算汇率
-     end if;
-     set new.localprice = (new.price/v_rate);
-
 end
 ;;
 DELIMITER ;
@@ -607,10 +652,11 @@ CREATE TRIGGER `tg_In_Update` AFTER UPDATE ON `b_in` FOR EACH ROW begin
    if old.catno = new.catno and old.batchno=new.batchno and old.price=new.price then
        update b_cat a set a.total = (a.total-old.num+new.num),a.modifydate=sysdate() where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
       UPDATE b_cat a
-        SET a.total = a.total + new.num,
+        SET 
               a.cattype = new.cattype,
               a.rtype = new.rtype,
               a.productdate = new.productdate,
+              a.seq=new.seq,
               a.producer = new.producer,
               a.expiredate = new.expiredate,              
               a.priceunit = new.priceunit,              
@@ -657,7 +703,7 @@ CREATE TRIGGER `tg_Out_Insert` BEFORE INSERT ON `b_out` FOR EACH ROW begin
      if v_total < new.num then
           set new.num = v_total;
      end if;
-     update b_cat set total = (v_total-new.num),modifydate=sysdate() where catno=new.catno and batchno=new.batchno and price=new.price;
+     update b_cat set total = (v_total-new.num),modifydate=sysdate() ,machineName =new.machineName,machineNo=new.machineNo where catno=new.catno and batchno=new.batchno and price=new.price;
      
 end
 ;;
@@ -673,16 +719,18 @@ CREATE TRIGGER `tg_Out_Update` BEFORE UPDATE ON `b_out` FOR EACH ROW begin
        if  v_total + old.num < new.num then 
            set new.num = v_total + old.num; -- 超额出库，设置最大出库数据为库存
        end if;
-        update b_cat a set a.total = (a.total+old.num-new.num),a.modifydate=sysdate() where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
+      -- 同时修改所属设备和编号  
+      update b_cat a set a.total = (a.total+old.num-new.num),a.modifydate=sysdate(),machineName =new.machineName,machineNo=new.machineNo where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
    else
-       --  修改前的出库数据归库
-       update b_cat a set a.total = a.total+old.num,a.modifydate=sysdate() where a.catno=old.catno and a.batchno=old.batchno and a.price=old.price;
+       --  修改前的出库数据归库 同时修改所属设备和编号
+       update b_cat a set a.total = a.total+old.num,a.modifydate=sysdate(),machineName =new.machineName,machineNo=new.machineNo where a.catno=old.catno and a.batchno=old.batchno and a.price=old.price;
       --  修改后的业务主键存在于库存中，则更新库存，不存在则出库数量为0
        if cnt > 0 then
            if v_total < new.num then
                set new.num = v_total; -- 超出库存，设定为库存
            end if;
-           update b_cat a set a.total=a.total-new.num,a.modifydate=sysdate() where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
+          --  同时修改所属设备和编号
+           update b_cat a set a.total=a.total-new.num,a.modifydate=sysdate(),machineName =new.machineName,machineNo=new.machineNo where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
        else
            set new.num = 0; --  通过修改，出库了一种没有库存的物品，则出库记录修改为0
         end if;

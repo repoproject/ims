@@ -30,7 +30,14 @@
 					    <option dataset="@{select codename,code from d_code where codetype='money'}" label="codename" value="code"></option>
 					</inputbox>
 				</col>
-				
+				<col column="seq" label="编号" >
+					<inputbox type="textbox" styleproperty="disabled='disabled'"  />					
+				</col>			
+				<col column="cattype" label="类别" br="true">
+					<inputbox type="selectbox" styleproperty="disabled='disabled'" >													
+							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
+					</inputbox>					
+				</col>					
 				<col column="localprice" label="本地价格" displaytype="hidden">
 				    <inputbox type="textbox" />
 				</col>
@@ -93,22 +100,16 @@
                                 </datasource>
 			        </typeprompt>
 			     </inputbox>
-				</col>
+				</col>				
 				
-				
-				<col column="remark" label="备注" >
+				<col column="remark" label="备注">
 					<inputbox type="textareabox" styleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
-				</col>
-				<col column="cattype" label="类别" br="true">
-					<inputbox type="selectbox" styleproperty="disabled='disabled'" >													
-							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
-					</inputbox>					
 				</col>					
 			</display>
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT b_out.id,b_out.cattype, b_out.machineName, b_out.machineNo, b_out.catno, b_out.catname, b_out.batchno, b_out.cattype, b_out.person, b_out.outDate, round(b_out.price,2) price, b_out.priceUnit, b_out.localPrice, b_out.num, b_out.reason, b_out.remark, b_out.projectCode, b_out.description, b_out.cause, b_out.section, b_out.operator, b_out.makedate, b_out.modifydate, b_cat.total FROM b_cat, b_out WHERE b_out.catno = b_cat.catno AND b_out.batchno = b_cat.batchno AND b_out.price = b_cat.price  and {#condition#}]]>
+						<![CDATA[SELECT b_out.id,b_out.cattype,b_out.seq, b_out.machineName, b_out.machineNo, b_out.catno, b_out.catname, b_out.batchno, b_out.cattype, b_out.person, b_out.outDate, round(b_out.price,2) price, b_out.priceUnit, b_out.localPrice, b_out.num, b_out.reason, b_out.remark, b_out.projectCode, b_out.description, b_out.cause, b_out.section, b_out.operator, b_out.makedate, b_out.modifydate, b_cat.total FROM b_cat, b_out WHERE b_out.catno = b_cat.catno AND b_out.batchno = b_cat.batchno AND b_out.price = b_cat.price  and {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -123,6 +124,7 @@
 					 machineno = TRIM(
 						@{ machineno }), catno = TRIM(@{ catno }),
 						catname = TRIM(@{ catname }),
+						seq=trim(@{seq}),
 						batchno = TRIM(@{ batchno }),
 						cattype= TRIM(@{ cattype }),
 						person = TRIM(@{ person }),
