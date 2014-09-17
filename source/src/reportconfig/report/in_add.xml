@@ -19,7 +19,7 @@
 				</col>
 				
 				<col column="catname" label="名称*" >
-					<inputbox type="textbox" jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan200(#label#长度应小于等于200);stripscript(#label#不能含有特殊字符);" >
+					<inputbox type="textbox" jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan200(#label#长度应小于等于200);" >
 					    <typeprompt count="20"  callbackmethod="testTypePromptCallBack1">
 							 <promptcol label="catname" value="catname" title="名称" matchmode="anywhere"></promptcol>					    
 							 <promptcol label="catno" value="catno" title="货号" matchmode="anywhere"></promptcol>
@@ -31,13 +31,13 @@
 					</inputbox>
 				</col>
 				<col column="catno" label="货号*" br="true" >
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" >
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);" >
 
 					</inputbox>
 				</col>
 				
 				<col column="batchno" label="批号*"  >
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);" />
 				</col>
 				<col column="expiredate" label="有效期*"  datatype="date{yyyy-MM-dd}"  br="true">
 					<inputbox type="datepicker" dateformat="yyyy-MM-dd" jsvalidate="isNotEmpty(#label#不允许为空);isDate(#label#格式不符合要求)"></inputbox>
@@ -66,14 +66,14 @@
 					</inputbox>
 				</col>
                 <col column="dealer" label="供应商" br="true">
-					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);" />
 				</col>		
 				
 				<col column="productdate" label="生产日期"  datatype="date{yyyy-MM-dd}"  >
 					<inputbox type="datepicker" dateformat="yyyy-MM-dd" jsvalidate="isDate(#label#格式不符合要求)"></inputbox>
 				</col>
 				<col column="producer" label="生产商"  br="true">
-					<inputbox jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+					<inputbox jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);" />
 				</col>
 								
 				<col column="indate" label="入库时间*" datatype="date{yyyy-MM-dd}"   >
@@ -87,7 +87,7 @@
 					<inputbox type="textbox" styleproperty="disabled='disabled'"   />
 				</col>
 				<col column="remark" label="备注"  br="true" >
-					<inputbox type="textareabox" styleproperty="colspan='3'" valuestyleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+					<inputbox type="textareabox" styleproperty="colspan='3'" valuestyleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);" />
 				</col>
 				<col column="taxRate" label=""  displaytype="hidden"   > 
 					<inputbox type="selectbox" >

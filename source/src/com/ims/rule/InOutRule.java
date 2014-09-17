@@ -103,7 +103,7 @@ public class InOutRule {
         String strtotal = "";
         try {
             // 查询库库存信息
-            String sql = "select num from b_out where catno=? and batchno=? and price=?";
+            String sql = "select sum(num) from b_out where catno=? and batchno=? and price=?";
             strtotal = DBUtil.getOneValue(sql, strcatno, strbatchno,
                     strprice);
 
@@ -131,7 +131,7 @@ public class InOutRule {
        String strtotal = "";
        try {
            // 查询库库存信息
-           String sql = "select num from b_out where catno=? and batchno=? and price=? and person=?";
+           String sql = "select sum(num) from b_out where catno=? and batchno=? and price=? and person=?";
            strtotal = DBUtil.getOneValue(sql, strcatno, strbatchno,
                    strprice,strperson);
 
@@ -159,7 +159,7 @@ public class InOutRule {
        String strtotal = "";
        try {
            // 查询库库存信息
-           String sql = "select num from b_in where catno=? and batchno=? and price=?";
+           String sql = "select sum(num) from b_in where catno=? and batchno=? and price=?";
            strtotal = DBUtil.getOneValue(sql, strcatno, strbatchno,
                    strprice);
 

@@ -91,7 +91,7 @@
 					<col column="catno" label="货号"  clickorderby="true" width="8%"/>
 					<col column="catname" label="名称"  clickorderby="true" width="15%"/>
 					<col column="batchno" label="批号" clickorderby="true" width="8%"></col>
-					<col column="localprice" label="单价" datatype="float" clickorderby="true" width="8%"></col>
+					<col column="price" label="单价" datatype="float" clickorderby="true" width="8%"></col>
 					<col column="priceUnit" label="货币"  clickorderby="true" width="4%"></col>
 					<col column="num" label="数量" datatype="int" clickorderby="true" width="5%"></col>
 					<col column="machinename" label="设备"  clickorderby="true" width="8%"/>
@@ -103,7 +103,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id,cattype,(select codename from d_code where codetype='cattype' and  code = cattype )typename,catno,catname,machinename,machineno,batchno,person,outdate,round(localprice,2) localprice,( SELECT codename FROM d_code WHERE CODE = priceUnit AND codetype = 'money' ) priceUnit,num,(select codename from d_code where code=reason and codetype='outreason') reason FROM b_out  where  1=1 and {#condition#}]]>
+						<![CDATA[SELECT id,cattype,(select codename from d_code where codetype='cattype' and  code = cattype )typename,catno,catname,machinename,machineno,batchno,person,outdate,round(price,2) price,( SELECT codename FROM d_code WHERE CODE = priceUnit AND codetype = 'money' ) priceUnit,num,(select codename from d_code where code=reason and codetype='outreason') reason FROM b_out  where  1=1 and {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -159,7 +159,6 @@
 					    </condition>				    
 					    				    
 				</select>	
-				
 				<update pageurl="report{out_edit.report1}" urlparams="txtid=@{id}"
 						popupparams="{title:'更新出库',width:800,height:400}">
 				</update>  

@@ -6,7 +6,7 @@
 		<header>
 			<![CDATA[<p align="center"><font size="6"><b>查询库存</b></font></p>]]>
 		</header>	
-		<report id="report1" title="库存信息（按照当前汇率计算）"  pagesize="13"   type="editablelist" interceptor="com.ims.interceptor.Out" >
+		<report id="report1" title="库存信息（如有外币货物则按照当前汇率计算）"  pagesize="13"   type="editablelist" interceptor="com.ims.interceptor.Out" >
 				<display mouseoverbgcolor="CCCCCC" >
 					<col column="{sequence:1}" label="序号" width="3%"/>
 					<col column="typename" label="类型" clickorderby="true" width="4%"></col>

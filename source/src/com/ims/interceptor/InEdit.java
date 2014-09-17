@@ -34,6 +34,7 @@ public class InEdit extends AbsInterceptorDefaultAdapter {
 	 * 修改入库记录时的业务规则校验：
 	 * 1、判断该试剂/耗材是否在库中存在，不存在则提示并不能保存
 	 * 2、判断入库时间是否晚于上次R统计，晚于才能修改，否则不能修改
+	 * 3、判断如果已经有出库记录，则不能删除
 	 */
 	public int doSavePerRow(ReportRequest rrequest, ReportBean rbean,
 			Map<String, String> mRowData, Map<String, String> mParamValues,
@@ -140,6 +141,7 @@ public class InEdit extends AbsInterceptorDefaultAdapter {
 			super.doSavePerRow(rrequest, rbean, mRowData, mParamValues,
 					editbean);
 		} else if (editbean instanceof EditableReportDeleteDataBean) {
+
 
 			super.doSavePerRow(rrequest, rbean, mRowData, mParamValues,
 					editbean);
