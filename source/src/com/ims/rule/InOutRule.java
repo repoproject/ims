@@ -1,8 +1,5 @@
 package com.ims.rule;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -174,5 +171,36 @@ public class InOutRule {
            log.error("字符串转int失败:" + Integer.parseInt(strtotal)+e.toString());
        }
        return itotal;
+   }
+   
+   /***
+    * 判断该货号和批号的试剂耗材是否在库存表中存在
+    * @param strcatno 货号
+    * @param strbatchno 批号
+    * @return 如果存在返回true，否则返回false
+    */
+   public static boolean IsExitBatchno(String strcatno ,String strbatchno)
+   {
+	   String strtotal ="";
+	   int itotal=0;
+	   try{
+		// 查询库库存信息
+           String sql = "select count(id) from b_cat where catno=? and batchno=? ";
+           strtotal = DBUtil.getOneValue(sql, strcatno, strbatchno);
+
+           // 查询出结果
+           itotal = Integer.parseInt(strtotal);
+	   }
+	   catch (Exception e) {
+
+           log.error("字符串转int失败:" + Integer.parseInt(strtotal)+e.toString());
+       }
+	   //不存在相同货号的试剂，需要提示
+	   if(itotal<=0)
+
+		   return false;
+	   else
+		   return true;
+
    }
 }
