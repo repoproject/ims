@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -153,8 +154,10 @@ public class SheetConfigParser {
 	private Column marshalColumn(Element colEle){
 		String index=colEle.attributeValue("index");
 		String type=colEle.attributeValue("type");
+		
+		boolean sum = StringUtils.equals(colEle.attributeValue("sum"), "true")?true:false;
 		String value = colEle.getText();
-		Column obj = new Column(Integer.valueOf(index), type, value);
+		Column obj = new Column(Integer.valueOf(index), type, value,sum);
 		return obj;
 	}
 }

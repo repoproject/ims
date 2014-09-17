@@ -3,6 +3,7 @@
  */
 package com.ims.report.excel;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,6 +19,7 @@ import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.eclipse.jdt.internal.compiler.ast.ThisReference;
 
 import com.ims.report.config.Column;
 import com.ims.report.config.ExcelConfig;
@@ -43,6 +45,8 @@ public class R1Sheet implements ISheet{
 	private int startRow;
 	private String sql;
 	private List<Column> cols;
+
+	Map<Object, Object> footerData = null;
 	
 	private Date startDate;
 	private Date endDate;
@@ -150,6 +154,8 @@ public class R1Sheet implements ISheet{
 		logger.info("设置数据");
 		List<Object> data = getData();
 		int rowCount = data.size();
+		//得到footer数据
+		getFooterData(data);
 		
 		//得到数据之后先设置尾行,否则模板行会被覆盖
 		moveFooter(rowCount);
@@ -164,6 +170,44 @@ public class R1Sheet implements ISheet{
 			if(row == null)
 				row = sheet.createRow(rowIndex);
 			setRowData(row, rowData);
+		}
+		
+		//设置最后一行数据
+		setFooterData(this.sheet.getRow(this.footerRowNum + rowCount-2));
+	}
+	
+	private void getFooterData(List<Object> data){
+		if(data.size() > 0){
+			footerData = new HashMap<Object, Object>();
+			Map map = (Map)data.get(0);
+			Iterator i = map.keySet().iterator();
+			while(i.hasNext()){
+				footerData.put(i.next(), null);
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @param footerRow
+	 */
+	private void setFooterData(HSSFRow footerRow){
+		for(int j=0;j<this.cols.size();j++){
+			Column col = this.cols.get(j);
+			if(!col.getSum()){
+				continue;
+			}
+			//模板中配置的列
+			int index = Integer.valueOf(col.getIndex());
+			index--;//转换为下表从0开始
+			HSSFCell cell = footerRow.getCell(index);
+			if(cell == null)
+				cell = footerRow.createCell(index);
+			String valueName = col.getValue().toString();
+			Object value = this.footerData.get(valueName);
+			if(value!=null){
+			    ExcelUtil.setCellValue(cell, value);
+			}
 		}
 	}
 	
@@ -201,6 +245,46 @@ public class R1Sheet implements ISheet{
 			String valueName = col.getValue().toString();
 			Object value = rowData.get(valueName);
 			ExcelUtil.setCellValue(cell, value);
+			if(col.getSum()){
+				calFooterData(valueName, value);
+			}
+		}
+	}
+	
+	/**
+	 * 合计行求值
+	 * @param key
+	 * @param value
+	 */
+	private void calFooterData(String key,Object value){
+		if(value == null)
+			return;
+		try{
+			Object objValue = this.footerData.get(key);
+			double sum = 0.0;
+			if(value instanceof Integer){
+				if(value == null) value = 0;
+				if(objValue == null) objValue = 0;
+				this.footerData.put(key, (Integer)value + (Integer)objValue);
+			}
+			else if(value instanceof Long){
+				if(value == null) value = new Long(0);
+				if(objValue == null) objValue = new Long(0);;
+				this.footerData.put(key, (Long)value + (Long)objValue);
+			}
+			else if(value instanceof Double){
+				if(value == null) value = 0;
+				if(objValue == null) objValue = 0;
+				this.footerData.put(key, (Double)value + (Double)objValue);
+			}
+			else if(value instanceof BigDecimal){
+				if(value == null) value = new BigDecimal(0);
+				if(objValue == null) objValue = new BigDecimal(0);
+				this.footerData.put(key, ((BigDecimal)value).add((BigDecimal)objValue));
+			}
+		}
+		catch (Exception e) {
+			logger.error(e.getMessage() + "合计出错，列：" + key + " 值  " + value.toString());
 		}
 	}
 	
