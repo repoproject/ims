@@ -55,6 +55,7 @@
 								o.catid WITH ROLLUP
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+					where date('2014-01-01') != ? and date('2014-01-01') != ?  
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -82,30 +83,64 @@
         <col index="23" type="">localprice</col>
         <col index="24" type="">totalAmount</col>
         <col index="25" type="">remark</col>
+        <col index="26" type="">qtyIn</col>
+        <col index="27" type="">qtyOut</col>
+        <col index="29" type="">checkQty</col>
+        <col index="30" type="">checkAmt</col>
+        <col index="32" type="">pqtyIn</col>
+        <col index="33" type="">pqtyOut</col>
+        <col index="35" type="">cqtyIn</col>
+        <col index="36" type="">cqtyOut</col>
     </Sheet>
     <Sheet name="R2-LCMS_Micro" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-	        select catno,catname,machineno,machinename,
-				 NULLIF(opening,0) opening,NULLIF(closing,0) closing,
-				NULLIF(invendor,0) invendor,NULLIF(inInterlab,0) inInterlab,NULLIF(inSponsor,0) inSponsor,
-				NULLIF(incharges,0) incharges, intotal,
-				NULLIF(outtrialtest,0) outtrialtest,NULLIF(outValidation,0) outValidation,
-				NULLIF(outdiscard,0) outdiscard,NULLIF(outIntelLab,0) outIntelLab,NULLIF(outSponsor,0) outSponsor,
-				NULLIF(outother,0) outother, outtotal,
-				CNY,USD,SGD,EUR,GBP,localprice,totalAmount,remark
-		     from(
-				SELECT a.catno,a.catname,a.batchno,a.machineno,a.machineName,a.price,
-							  closing+outtotal-intotal opening, sum(a.inVendor) invendor,  sum(a.inInterlab) ininterlab, sum(a.inSponsor) insponsor,
-							  sum(a.inCharges) incharges,sum(a.intotal) intotal,sum(outTrialTest) outtrialtest, sum(outValidation) outvalidation,
-							sum(outDiscard) outdiscard,sum(outIntelLab) outintellab,sum(outSponsor) outsponsor,
-							sum(outOthre) outother,sum(outTotal) outtotal,a.closing closing,
-							a.CNY,a.USD,a.SGD,a.EUR,a.GBP,a.localprice localprice,a.totalAmount,null as remark
-							FROM r_view a
+				SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,a.total+o.outTotal-i.inTotal opening,
+					i.inVendor,i.inCharges,i.inInterlab,i.inSponsor, i.inTotal,
+					o.outDiscard,o.outIntelLab,o.outOthre,o.outSponsor,o.outTrialTest,o.outValidation,o.outTotal,a.total closing,
+					p.CNY,p.EUR,p.GBP,p.SGD,p.USD,p.localprice,a.total*p.localprice,null as remark,
+					i.inTotal*p.localprice qtyIn,o.outTotal*p.localprice qtyOut,
+					0 checkQty,0 checkAmt,
+					0 pqtyIn,0 pqtyOut,
+					0 cqtyIn,0 cqtyOut 
+					from b_cat a LEFT JOIN
+					(
+							SELECT
+								ifnull(vin.catid, 0) catid,
+								SUM(vin.inVendor) inVendor,
+								SUM(vin.inCharges) inCharges,
+								SUM(vin.inInterlab) inInterlab,
+								SUM(vin.inSponsor) inSponsor,
+					      SUM(vin.inVendor) + SUM(vin.inCharges) + SUM(vin.inInterlab) + SUM(vin.inSponsor) inTotal
+							FROM
+								r_in_view vin
 							WHERE
-								( a.indate IS NULL OR a.indate BETWEEN ? AND ?)
-							AND ( a.outdate IS NULL OR a.outdate BETWEEN ? AND ?)
-							GROUP BY a.catno,a.catname,a.batchno,a.price,a.machineno,a.machineName
-			) T ORDER BY catname
+								vin.indate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								vin.catid WITH ROLLUP
+					)i
+					on a.id = i.catid
+					LEFT JOIN
+					(
+							SELECT
+								ifnull(o.catid, 0) catid,
+								SUM(o.outDiscard) outDiscard,
+								SUM(o.outIntelLab) outIntelLab,
+								SUM(o.outOthre) outOthre,
+								SUM(o.outSponsor) outSponsor,
+								SUM(o.outTrialTest)outTrialTest ,
+								SUM(o.outValidation) outValidation,
+					      SUM(o.outDiscard) + SUM(o.outIntelLab)+SUM(o.outOthre)+SUM(o.outSponsor)+SUM(o.outTrialTest)+SUM(o.outValidation) outTotal
+							FROM
+								r_out_view o
+							WHERE
+								o.outdate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								o.catid WITH ROLLUP
+					)o on a.id=o.catid 
+					LEFT JOIN r_price_view p ON a.id=p.catid
+					where date('2014-01-01') != ? and date('2014-01-01') != ?  
         </sql>
         <col index="1" type="">catno</col>
         <col index="2" type=""></col>
@@ -132,30 +167,64 @@
         <col index="23" type="">localprice</col>
         <col index="24" type="">totalAmount</col>
         <col index="25" type="">remark</col>
+        <col index="26" type="">qtyIn</col>
+        <col index="27" type="">qtyOut</col>
+        <col index="29" type="">checkQty</col>
+        <col index="30" type="">checkAmt</col>
+        <col index="32" type="">pqtyIn</col>
+        <col index="33" type="">pqtyOut</col>
+        <col index="35" type="">cqtyIn</col>
+        <col index="36" type="">cqtyOut</col>
     </Sheet>
     <Sheet name="R3-Hema_Flow" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-	        select catno,catname,machineno,machinename,
-				 NULLIF(opening,0) opening,NULLIF(closing,0) closing,
-				NULLIF(invendor,0) invendor,NULLIF(inInterlab,0) inInterlab,NULLIF(inSponsor,0) inSponsor,
-				NULLIF(incharges,0) incharges, intotal,
-				NULLIF(outtrialtest,0) outtrialtest,NULLIF(outValidation,0) outValidation,
-				NULLIF(outdiscard,0) outdiscard,NULLIF(outIntelLab,0) outIntelLab,NULLIF(outSponsor,0) outSponsor,
-				NULLIF(outother,0) outother, outtotal,
-				CNY,USD,SGD,EUR,GBP,localprice,totalAmount,remark
-		     from(
-				SELECT a.catno,a.catname,a.batchno,a.machineno,a.machineName,a.price,
-							  closing+outtotal-intotal opening, sum(a.inVendor) invendor,  sum(a.inInterlab) ininterlab, sum(a.inSponsor) insponsor,
-							  sum(a.inCharges) incharges,sum(a.intotal) intotal,sum(outTrialTest) outtrialtest, sum(outValidation) outvalidation,
-							sum(outDiscard) outdiscard,sum(outIntelLab) outintellab,sum(outSponsor) outsponsor,
-							sum(outOthre) outother,sum(outTotal) outtotal,a.closing closing,
-							a.CNY,a.USD,a.SGD,a.EUR,a.GBP,a.localprice localprice,a.totalAmount,null as remark
-							FROM r_view a
+				SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,a.total+o.outTotal-i.inTotal opening,
+					i.inVendor,i.inCharges,i.inInterlab,i.inSponsor, i.inTotal,
+					o.outDiscard,o.outIntelLab,o.outOthre,o.outSponsor,o.outTrialTest,o.outValidation,o.outTotal,a.total closing,
+					p.CNY,p.EUR,p.GBP,p.SGD,p.USD,p.localprice,a.total*p.localprice,null as remark,
+					i.inTotal*p.localprice qtyIn,o.outTotal*p.localprice qtyOut,
+					0 checkQty,0 checkAmt,
+					0 pqtyIn,0 pqtyOut,
+					0 cqtyIn,0 cqtyOut 
+					from b_cat a LEFT JOIN
+					(
+							SELECT
+								ifnull(vin.catid, 0) catid,
+								SUM(vin.inVendor) inVendor,
+								SUM(vin.inCharges) inCharges,
+								SUM(vin.inInterlab) inInterlab,
+								SUM(vin.inSponsor) inSponsor,
+					      SUM(vin.inVendor) + SUM(vin.inCharges) + SUM(vin.inInterlab) + SUM(vin.inSponsor) inTotal
+							FROM
+								r_in_view vin
 							WHERE
-								( a.indate IS NULL OR a.indate BETWEEN ? AND ?)
-							AND ( a.outdate IS NULL OR a.outdate BETWEEN ? AND ?)
-							GROUP BY a.catno,a.catname,a.batchno,a.price,a.machineno,a.machineName
-			) T ORDER BY catname
+								vin.indate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								vin.catid WITH ROLLUP
+					)i
+					on a.id = i.catid
+					LEFT JOIN
+					(
+							SELECT
+								ifnull(o.catid, 0) catid,
+								SUM(o.outDiscard) outDiscard,
+								SUM(o.outIntelLab) outIntelLab,
+								SUM(o.outOthre) outOthre,
+								SUM(o.outSponsor) outSponsor,
+								SUM(o.outTrialTest)outTrialTest ,
+								SUM(o.outValidation) outValidation,
+					      SUM(o.outDiscard) + SUM(o.outIntelLab)+SUM(o.outOthre)+SUM(o.outSponsor)+SUM(o.outTrialTest)+SUM(o.outValidation) outTotal
+							FROM
+								r_out_view o
+							WHERE
+								o.outdate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								o.catid WITH ROLLUP
+					)o on a.id=o.catid 
+					LEFT JOIN r_price_view p ON a.id=p.catid
+					where date('2014-01-01') != ? and date('2014-01-01') != ?  
         </sql>
         <col index="1" type="">catno</col>
         <col index="2" type=""></col>
@@ -182,30 +251,64 @@
         <col index="23" type="">localprice</col>
         <col index="24" type="">totalAmount</col>
         <col index="25" type="">remark</col>
+        <col index="26" type="">qtyIn</col>
+        <col index="27" type="">qtyOut</col>
+        <col index="29" type="">checkQty</col>
+        <col index="30" type="">checkAmt</col>
+        <col index="32" type="">pqtyIn</col>
+        <col index="33" type="">pqtyOut</col>
+        <col index="35" type="">cqtyIn</col>
+        <col index="36" type="">cqtyOut</col>
     </Sheet>
     <Sheet name="R4-Variant" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-	        select catno,catname,machineno,machinename,
-				 NULLIF(opening,0) opening,NULLIF(closing,0) closing,
-				NULLIF(invendor,0) invendor,NULLIF(inInterlab,0) inInterlab,NULLIF(inSponsor,0) inSponsor,
-				NULLIF(incharges,0) incharges, intotal,
-				NULLIF(outtrialtest,0) outtrialtest,NULLIF(outValidation,0) outValidation,
-				NULLIF(outdiscard,0) outdiscard,NULLIF(outIntelLab,0) outIntelLab,NULLIF(outSponsor,0) outSponsor,
-				NULLIF(outother,0) outother, outtotal,
-				CNY,USD,SGD,EUR,GBP,localprice,totalAmount,remark
-		     from(
-				SELECT a.catno,a.catname,a.batchno,a.machineno,a.machineName,a.price,
-							  closing+outtotal-intotal opening, sum(a.inVendor) invendor,  sum(a.inInterlab) ininterlab, sum(a.inSponsor) insponsor,
-							  sum(a.inCharges) incharges,sum(a.intotal) intotal,sum(outTrialTest) outtrialtest, sum(outValidation) outvalidation,
-							sum(outDiscard) outdiscard,sum(outIntelLab) outintellab,sum(outSponsor) outsponsor,
-							sum(outOthre) outother,sum(outTotal) outtotal,a.closing closing,
-							a.CNY,a.USD,a.SGD,a.EUR,a.GBP,a.localprice localprice,a.totalAmount,null as remark
-							FROM r_view a
+				SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,a.total+o.outTotal-i.inTotal opening,
+					i.inVendor,i.inCharges,i.inInterlab,i.inSponsor, i.inTotal,
+					o.outDiscard,o.outIntelLab,o.outOthre,o.outSponsor,o.outTrialTest,o.outValidation,o.outTotal,a.total closing,
+					p.CNY,p.EUR,p.GBP,p.SGD,p.USD,p.localprice,a.total*p.localprice,null as remark,
+					i.inTotal*p.localprice qtyIn,o.outTotal*p.localprice qtyOut,
+					0 checkQty,0 checkAmt,
+					0 pqtyIn,0 pqtyOut,
+					0 cqtyIn,0 cqtyOut 
+					from b_cat a LEFT JOIN
+					(
+							SELECT
+								ifnull(vin.catid, 0) catid,
+								SUM(vin.inVendor) inVendor,
+								SUM(vin.inCharges) inCharges,
+								SUM(vin.inInterlab) inInterlab,
+								SUM(vin.inSponsor) inSponsor,
+					      SUM(vin.inVendor) + SUM(vin.inCharges) + SUM(vin.inInterlab) + SUM(vin.inSponsor) inTotal
+							FROM
+								r_in_view vin
 							WHERE
-								( a.indate IS NULL OR a.indate BETWEEN ? AND ?)
-							AND ( a.outdate IS NULL OR a.outdate BETWEEN ? AND ?)
-							GROUP BY a.catno,a.catname,a.batchno,a.price,a.machineno,a.machineName
-			) T ORDER BY catname
+								vin.indate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								vin.catid WITH ROLLUP
+					)i
+					on a.id = i.catid
+					LEFT JOIN
+					(
+							SELECT
+								ifnull(o.catid, 0) catid,
+								SUM(o.outDiscard) outDiscard,
+								SUM(o.outIntelLab) outIntelLab,
+								SUM(o.outOthre) outOthre,
+								SUM(o.outSponsor) outSponsor,
+								SUM(o.outTrialTest)outTrialTest ,
+								SUM(o.outValidation) outValidation,
+					      SUM(o.outDiscard) + SUM(o.outIntelLab)+SUM(o.outOthre)+SUM(o.outSponsor)+SUM(o.outTrialTest)+SUM(o.outValidation) outTotal
+							FROM
+								r_out_view o
+							WHERE
+								o.outdate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								o.catid WITH ROLLUP
+					)o on a.id=o.catid 
+					LEFT JOIN r_price_view p ON a.id=p.catid
+					where date('2014-01-01') != ? and date('2014-01-01') != ?  
         </sql>
         <col index="1" type="">catno</col>
         <col index="2" type=""></col>
@@ -232,30 +335,64 @@
         <col index="23" type="">localprice</col>
         <col index="24" type="">totalAmount</col>
         <col index="25" type="">remark</col>
+        <col index="26" type="">qtyIn</col>
+        <col index="27" type="">qtyOut</col>
+        <col index="29" type="">checkQty</col>
+        <col index="30" type="">checkAmt</col>
+        <col index="32" type="">pqtyIn</col>
+        <col index="33" type="">pqtyOut</col>
+        <col index="35" type="">cqtyIn</col>
+        <col index="36" type="">cqtyOut</col>
     </Sheet>
     <Sheet name="R5-Oversea" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-	        select catno,catname,machineno,machinename,
-				 NULLIF(opening,0) opening,NULLIF(closing,0) closing,
-				NULLIF(invendor,0) invendor,NULLIF(inInterlab,0) inInterlab,NULLIF(inSponsor,0) inSponsor,
-				NULLIF(incharges,0) incharges, intotal,
-				NULLIF(outtrialtest,0) outtrialtest,NULLIF(outValidation,0) outValidation,
-				NULLIF(outdiscard,0) outdiscard,NULLIF(outIntelLab,0) outIntelLab,NULLIF(outSponsor,0) outSponsor,
-				NULLIF(outother,0) outother, outtotal,
-				CNY,USD,SGD,EUR,GBP,localprice,totalAmount,remark
-		     from(
-				SELECT a.catno,a.catname,a.batchno,a.machineno,a.machineName,a.price,
-							  closing+outtotal-intotal opening, sum(a.inVendor) invendor,  sum(a.inInterlab) ininterlab, sum(a.inSponsor) insponsor,
-							  sum(a.inCharges) incharges,sum(a.intotal) intotal,sum(outTrialTest) outtrialtest, sum(outValidation) outvalidation,
-							sum(outDiscard) outdiscard,sum(outIntelLab) outintellab,sum(outSponsor) outsponsor,
-							sum(outOthre) outother,sum(outTotal) outtotal,a.closing closing,
-							a.CNY,a.USD,a.SGD,a.EUR,a.GBP,a.localprice localprice,a.totalAmount,null as remark
-							FROM r_view a
+				SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,a.total+o.outTotal-i.inTotal opening,
+					i.inVendor,i.inCharges,i.inInterlab,i.inSponsor, i.inTotal,
+					o.outDiscard,o.outIntelLab,o.outOthre,o.outSponsor,o.outTrialTest,o.outValidation,o.outTotal,a.total closing,
+					p.CNY,p.EUR,p.GBP,p.SGD,p.USD,p.localprice,a.total*p.localprice,null as remark,
+					i.inTotal*p.localprice qtyIn,o.outTotal*p.localprice qtyOut,
+					0 checkQty,0 checkAmt,
+					0 pqtyIn,0 pqtyOut,
+					0 cqtyIn,0 cqtyOut 
+					from b_cat a LEFT JOIN
+					(
+							SELECT
+								ifnull(vin.catid, 0) catid,
+								SUM(vin.inVendor) inVendor,
+								SUM(vin.inCharges) inCharges,
+								SUM(vin.inInterlab) inInterlab,
+								SUM(vin.inSponsor) inSponsor,
+					      SUM(vin.inVendor) + SUM(vin.inCharges) + SUM(vin.inInterlab) + SUM(vin.inSponsor) inTotal
+							FROM
+								r_in_view vin
 							WHERE
-								( a.indate IS NULL OR a.indate BETWEEN ? AND ?)
-							AND ( a.outdate IS NULL OR a.outdate BETWEEN ? AND ?)
-							GROUP BY a.catno,a.catname,a.batchno,a.price,a.machineno,a.machineName
-			) T ORDER BY catname
+								vin.indate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								vin.catid WITH ROLLUP
+					)i
+					on a.id = i.catid
+					LEFT JOIN
+					(
+							SELECT
+								ifnull(o.catid, 0) catid,
+								SUM(o.outDiscard) outDiscard,
+								SUM(o.outIntelLab) outIntelLab,
+								SUM(o.outOthre) outOthre,
+								SUM(o.outSponsor) outSponsor,
+								SUM(o.outTrialTest)outTrialTest ,
+								SUM(o.outValidation) outValidation,
+					      SUM(o.outDiscard) + SUM(o.outIntelLab)+SUM(o.outOthre)+SUM(o.outSponsor)+SUM(o.outTrialTest)+SUM(o.outValidation) outTotal
+							FROM
+								r_out_view o
+							WHERE
+								o.outdate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								o.catid WITH ROLLUP
+					)o on a.id=o.catid 
+					LEFT JOIN r_price_view p ON a.id=p.catid
+					where date('2014-01-01') != ? and date('2014-01-01') != ?  
         </sql>
         <col index="1" type="">catno</col>
         <col index="2" type=""></col>
@@ -282,30 +419,64 @@
         <col index="23" type="">localprice</col>
         <col index="24" type="">totalAmount</col>
         <col index="25" type="">remark</col>
+        <col index="26" type="">qtyIn</col>
+        <col index="27" type="">qtyOut</col>
+        <col index="29" type="">checkQty</col>
+        <col index="30" type="">checkAmt</col>
+        <col index="32" type="">pqtyIn</col>
+        <col index="33" type="">pqtyOut</col>
+        <col index="35" type="">cqtyIn</col>
+        <col index="36" type="">cqtyOut</col>
     </Sheet>
     <Sheet name="R6-PCR" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-	        select catno,catname,machineno,machinename,
-				 NULLIF(opening,0) opening,NULLIF(closing,0) closing,
-				NULLIF(invendor,0) invendor,NULLIF(inInterlab,0) inInterlab,NULLIF(inSponsor,0) inSponsor,
-				NULLIF(incharges,0) incharges, intotal,
-				NULLIF(outtrialtest,0) outtrialtest,NULLIF(outValidation,0) outValidation,
-				NULLIF(outdiscard,0) outdiscard,NULLIF(outIntelLab,0) outIntelLab,NULLIF(outSponsor,0) outSponsor,
-				NULLIF(outother,0) outother, outtotal,
-				CNY,USD,SGD,EUR,GBP,localprice,totalAmount,remark
-		     from(
-				SELECT a.catno,a.catname,a.batchno,a.machineno,a.machineName,a.price,
-							  closing+outtotal-intotal opening, sum(a.inVendor) invendor,  sum(a.inInterlab) ininterlab, sum(a.inSponsor) insponsor,
-							  sum(a.inCharges) incharges,sum(a.intotal) intotal,sum(outTrialTest) outtrialtest, sum(outValidation) outvalidation,
-							sum(outDiscard) outdiscard,sum(outIntelLab) outintellab,sum(outSponsor) outsponsor,
-							sum(outOthre) outother,sum(outTotal) outtotal,a.closing closing,
-							a.CNY,a.USD,a.SGD,a.EUR,a.GBP,a.localprice localprice,a.totalAmount,null as remark
-							FROM r_view a
+				SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,a.total+o.outTotal-i.inTotal opening,
+					i.inVendor,i.inCharges,i.inInterlab,i.inSponsor, i.inTotal,
+					o.outDiscard,o.outIntelLab,o.outOthre,o.outSponsor,o.outTrialTest,o.outValidation,o.outTotal,a.total closing,
+					p.CNY,p.EUR,p.GBP,p.SGD,p.USD,p.localprice,a.total*p.localprice,null as remark,
+					i.inTotal*p.localprice qtyIn,o.outTotal*p.localprice qtyOut,
+					0 checkQty,0 checkAmt,
+					0 pqtyIn,0 pqtyOut,
+					0 cqtyIn,0 cqtyOut 
+					from b_cat a LEFT JOIN
+					(
+							SELECT
+								ifnull(vin.catid, 0) catid,
+								SUM(vin.inVendor) inVendor,
+								SUM(vin.inCharges) inCharges,
+								SUM(vin.inInterlab) inInterlab,
+								SUM(vin.inSponsor) inSponsor,
+					      SUM(vin.inVendor) + SUM(vin.inCharges) + SUM(vin.inInterlab) + SUM(vin.inSponsor) inTotal
+							FROM
+								r_in_view vin
 							WHERE
-								( a.indate IS NULL OR a.indate BETWEEN ? AND ?)
-							AND ( a.outdate IS NULL OR a.outdate BETWEEN ? AND ?)
-							GROUP BY a.catno,a.catname,a.batchno,a.price,a.machineno,a.machineName
-			) T ORDER BY catname
+								vin.indate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								vin.catid WITH ROLLUP
+					)i
+					on a.id = i.catid
+					LEFT JOIN
+					(
+							SELECT
+								ifnull(o.catid, 0) catid,
+								SUM(o.outDiscard) outDiscard,
+								SUM(o.outIntelLab) outIntelLab,
+								SUM(o.outOthre) outOthre,
+								SUM(o.outSponsor) outSponsor,
+								SUM(o.outTrialTest)outTrialTest ,
+								SUM(o.outValidation) outValidation,
+					      SUM(o.outDiscard) + SUM(o.outIntelLab)+SUM(o.outOthre)+SUM(o.outSponsor)+SUM(o.outTrialTest)+SUM(o.outValidation) outTotal
+							FROM
+								r_out_view o
+							WHERE
+								o.outdate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								o.catid WITH ROLLUP
+					)o on a.id=o.catid 
+					LEFT JOIN r_price_view p ON a.id=p.catid
+					where date('2014-01-01') != ? and date('2014-01-01') != ?  
         </sql>
         <col index="1" type="">catno</col>
         <col index="2" type=""></col>
@@ -332,30 +503,64 @@
         <col index="23" type="">localprice</col>
         <col index="24" type="">totalAmount</col>
         <col index="25" type="">remark</col>
+        <col index="26" type="">qtyIn</col>
+        <col index="27" type="">qtyOut</col>
+        <col index="29" type="">checkQty</col>
+        <col index="30" type="">checkAmt</col>
+        <col index="32" type="">pqtyIn</col>
+        <col index="33" type="">pqtyOut</col>
+        <col index="35" type="">cqtyIn</col>
+        <col index="36" type="">cqtyOut</col>
     </Sheet>
     <Sheet name="R7-Urine" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-	        select catno,catname,machineno,machinename,
-				 NULLIF(opening,0) opening,NULLIF(closing,0) closing,
-				NULLIF(invendor,0) invendor,NULLIF(inInterlab,0) inInterlab,NULLIF(inSponsor,0) inSponsor,
-				NULLIF(incharges,0) incharges, intotal,
-				NULLIF(outtrialtest,0) outtrialtest,NULLIF(outValidation,0) outValidation,
-				NULLIF(outdiscard,0) outdiscard,NULLIF(outIntelLab,0) outIntelLab,NULLIF(outSponsor,0) outSponsor,
-				NULLIF(outother,0) outother, outtotal,
-				CNY,USD,SGD,EUR,GBP,localprice,totalAmount,remark
-		     from(
-				SELECT a.catno,a.catname,a.batchno,a.machineno,a.machineName,a.price,
-							  closing+outtotal-intotal opening, sum(a.inVendor) invendor,  sum(a.inInterlab) ininterlab, sum(a.inSponsor) insponsor,
-							  sum(a.inCharges) incharges,sum(a.intotal) intotal,sum(outTrialTest) outtrialtest, sum(outValidation) outvalidation,
-							sum(outDiscard) outdiscard,sum(outIntelLab) outintellab,sum(outSponsor) outsponsor,
-							sum(outOthre) outother,sum(outTotal) outtotal,a.closing closing,
-							a.CNY,a.USD,a.SGD,a.EUR,a.GBP,a.localprice localprice,a.totalAmount,null as remark
-							FROM r_view a
+				SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,a.total+o.outTotal-i.inTotal opening,
+					i.inVendor,i.inCharges,i.inInterlab,i.inSponsor, i.inTotal,
+					o.outDiscard,o.outIntelLab,o.outOthre,o.outSponsor,o.outTrialTest,o.outValidation,o.outTotal,a.total closing,
+					p.CNY,p.EUR,p.GBP,p.SGD,p.USD,p.localprice,a.total*p.localprice,null as remark,
+					i.inTotal*p.localprice qtyIn,o.outTotal*p.localprice qtyOut,
+					0 checkQty,0 checkAmt,
+					0 pqtyIn,0 pqtyOut,
+					0 cqtyIn,0 cqtyOut 
+					from b_cat a LEFT JOIN
+					(
+							SELECT
+								ifnull(vin.catid, 0) catid,
+								SUM(vin.inVendor) inVendor,
+								SUM(vin.inCharges) inCharges,
+								SUM(vin.inInterlab) inInterlab,
+								SUM(vin.inSponsor) inSponsor,
+					      SUM(vin.inVendor) + SUM(vin.inCharges) + SUM(vin.inInterlab) + SUM(vin.inSponsor) inTotal
+							FROM
+								r_in_view vin
 							WHERE
-								( a.indate IS NULL OR a.indate BETWEEN ? AND ?)
-							AND ( a.outdate IS NULL OR a.outdate BETWEEN ? AND ?)
-							GROUP BY a.catno,a.catname,a.batchno,a.price,a.machineno,a.machineName
-			) T ORDER BY catname
+								vin.indate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								vin.catid WITH ROLLUP
+					)i
+					on a.id = i.catid
+					LEFT JOIN
+					(
+							SELECT
+								ifnull(o.catid, 0) catid,
+								SUM(o.outDiscard) outDiscard,
+								SUM(o.outIntelLab) outIntelLab,
+								SUM(o.outOthre) outOthre,
+								SUM(o.outSponsor) outSponsor,
+								SUM(o.outTrialTest)outTrialTest ,
+								SUM(o.outValidation) outValidation,
+					      SUM(o.outDiscard) + SUM(o.outIntelLab)+SUM(o.outOthre)+SUM(o.outSponsor)+SUM(o.outTrialTest)+SUM(o.outValidation) outTotal
+							FROM
+								r_out_view o
+							WHERE
+								o.outdate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								o.catid WITH ROLLUP
+					)o on a.id=o.catid 
+					LEFT JOIN r_price_view p ON a.id=p.catid
+					where date('2014-01-01') != ? and date('2014-01-01') != ?  
         </sql>
         <col index="1" type="">catno</col>
         <col index="2" type=""></col>
@@ -382,30 +587,64 @@
         <col index="23" type="">localprice</col>
         <col index="24" type="">totalAmount</col>
         <col index="25" type="">remark</col>
+        <col index="26" type="">qtyIn</col>
+        <col index="27" type="">qtyOut</col>
+        <col index="29" type="">checkQty</col>
+        <col index="30" type="">checkAmt</col>
+        <col index="32" type="">pqtyIn</col>
+        <col index="33" type="">pqtyOut</col>
+        <col index="35" type="">cqtyIn</col>
+        <col index="36" type="">cqtyOut</col>
     </Sheet>
     <Sheet name="R8-Cent_Immu_Liai_Mini" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-	        select catno,catname,machineno,machinename,
-				 NULLIF(opening,0) opening,NULLIF(closing,0) closing,
-				NULLIF(invendor,0) invendor,NULLIF(inInterlab,0) inInterlab,NULLIF(inSponsor,0) inSponsor,
-				NULLIF(incharges,0) incharges, intotal,
-				NULLIF(outtrialtest,0) outtrialtest,NULLIF(outValidation,0) outValidation,
-				NULLIF(outdiscard,0) outdiscard,NULLIF(outIntelLab,0) outIntelLab,NULLIF(outSponsor,0) outSponsor,
-				NULLIF(outother,0) outother, outtotal,
-				CNY,USD,SGD,EUR,GBP,localprice,totalAmount,remark
-		     from(
-				SELECT a.catno,a.catname,a.batchno,a.machineno,a.machineName,a.price,
-							  closing+outtotal-intotal opening, sum(a.inVendor) invendor,  sum(a.inInterlab) ininterlab, sum(a.inSponsor) insponsor,
-							  sum(a.inCharges) incharges,sum(a.intotal) intotal,sum(outTrialTest) outtrialtest, sum(outValidation) outvalidation,
-							sum(outDiscard) outdiscard,sum(outIntelLab) outintellab,sum(outSponsor) outsponsor,
-							sum(outOthre) outother,sum(outTotal) outtotal,a.closing closing,
-							a.CNY,a.USD,a.SGD,a.EUR,a.GBP,a.localprice localprice,a.totalAmount,null as remark
-							FROM r_view a
+				SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,a.total+o.outTotal-i.inTotal opening,
+					i.inVendor,i.inCharges,i.inInterlab,i.inSponsor, i.inTotal,
+					o.outDiscard,o.outIntelLab,o.outOthre,o.outSponsor,o.outTrialTest,o.outValidation,o.outTotal,a.total closing,
+					p.CNY,p.EUR,p.GBP,p.SGD,p.USD,p.localprice,a.total*p.localprice,null as remark,
+					i.inTotal*p.localprice qtyIn,o.outTotal*p.localprice qtyOut,
+					0 checkQty,0 checkAmt,
+					0 pqtyIn,0 pqtyOut,
+					0 cqtyIn,0 cqtyOut 
+					from b_cat a LEFT JOIN
+					(
+							SELECT
+								ifnull(vin.catid, 0) catid,
+								SUM(vin.inVendor) inVendor,
+								SUM(vin.inCharges) inCharges,
+								SUM(vin.inInterlab) inInterlab,
+								SUM(vin.inSponsor) inSponsor,
+					      SUM(vin.inVendor) + SUM(vin.inCharges) + SUM(vin.inInterlab) + SUM(vin.inSponsor) inTotal
+							FROM
+								r_in_view vin
 							WHERE
-								( a.indate IS NULL OR a.indate BETWEEN ? AND ?)
-							AND ( a.outdate IS NULL OR a.outdate BETWEEN ? AND ?)
-							GROUP BY a.catno,a.catname,a.batchno,a.price,a.machineno,a.machineName
-			) T ORDER BY catname
+								vin.indate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								vin.catid WITH ROLLUP
+					)i
+					on a.id = i.catid
+					LEFT JOIN
+					(
+							SELECT
+								ifnull(o.catid, 0) catid,
+								SUM(o.outDiscard) outDiscard,
+								SUM(o.outIntelLab) outIntelLab,
+								SUM(o.outOthre) outOthre,
+								SUM(o.outSponsor) outSponsor,
+								SUM(o.outTrialTest)outTrialTest ,
+								SUM(o.outValidation) outValidation,
+					      SUM(o.outDiscard) + SUM(o.outIntelLab)+SUM(o.outOthre)+SUM(o.outSponsor)+SUM(o.outTrialTest)+SUM(o.outValidation) outTotal
+							FROM
+								r_out_view o
+							WHERE
+								o.outdate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								o.catid WITH ROLLUP
+					)o on a.id=o.catid 
+					LEFT JOIN r_price_view p ON a.id=p.catid
+					where date('2014-01-01') != ? and date('2014-01-01') != ?  
         </sql>
         <col index="1" type="">catno</col>
         <col index="2" type=""></col>
@@ -432,30 +671,64 @@
         <col index="23" type="">localprice</col>
         <col index="24" type="">totalAmount</col>
         <col index="25" type="">remark</col>
+        <col index="26" type="">qtyIn</col>
+        <col index="27" type="">qtyOut</col>
+        <col index="29" type="">checkQty</col>
+        <col index="30" type="">checkAmt</col>
+        <col index="32" type="">pqtyIn</col>
+        <col index="33" type="">pqtyOut</col>
+        <col index="35" type="">cqtyIn</col>
+        <col index="36" type="">cqtyOut</col>
     </Sheet>
     <Sheet name="R9-Elisa" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-	        select catno,catname,machineno,machinename,
-				 NULLIF(opening,0) opening,NULLIF(closing,0) closing,
-				NULLIF(invendor,0) invendor,NULLIF(inInterlab,0) inInterlab,NULLIF(inSponsor,0) inSponsor,
-				NULLIF(incharges,0) incharges, intotal,
-				NULLIF(outtrialtest,0) outtrialtest,NULLIF(outValidation,0) outValidation,
-				NULLIF(outdiscard,0) outdiscard,NULLIF(outIntelLab,0) outIntelLab,NULLIF(outSponsor,0) outSponsor,
-				NULLIF(outother,0) outother, outtotal,
-				CNY,USD,SGD,EUR,GBP,localprice,totalAmount,remark
-		     from(
-				SELECT a.catno,a.catname,a.batchno,a.machineno,a.machineName,a.price,
-							  closing+outtotal-intotal opening, sum(a.inVendor) invendor,  sum(a.inInterlab) ininterlab, sum(a.inSponsor) insponsor,
-							  sum(a.inCharges) incharges,sum(a.intotal) intotal,sum(outTrialTest) outtrialtest, sum(outValidation) outvalidation,
-							sum(outDiscard) outdiscard,sum(outIntelLab) outintellab,sum(outSponsor) outsponsor,
-							sum(outOthre) outother,sum(outTotal) outtotal,a.closing closing,
-							a.CNY,a.USD,a.SGD,a.EUR,a.GBP,a.localprice localprice,a.totalAmount,null as remark
-							FROM r_view a
+				SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,a.total+o.outTotal-i.inTotal opening,
+					i.inVendor,i.inCharges,i.inInterlab,i.inSponsor, i.inTotal,
+					o.outDiscard,o.outIntelLab,o.outOthre,o.outSponsor,o.outTrialTest,o.outValidation,o.outTotal,a.total closing,
+					p.CNY,p.EUR,p.GBP,p.SGD,p.USD,p.localprice,a.total*p.localprice,null as remark,
+					i.inTotal*p.localprice qtyIn,o.outTotal*p.localprice qtyOut,
+					0 checkQty,0 checkAmt,
+					0 pqtyIn,0 pqtyOut,
+					0 cqtyIn,0 cqtyOut 
+					from b_cat a LEFT JOIN
+					(
+							SELECT
+								ifnull(vin.catid, 0) catid,
+								SUM(vin.inVendor) inVendor,
+								SUM(vin.inCharges) inCharges,
+								SUM(vin.inInterlab) inInterlab,
+								SUM(vin.inSponsor) inSponsor,
+					      SUM(vin.inVendor) + SUM(vin.inCharges) + SUM(vin.inInterlab) + SUM(vin.inSponsor) inTotal
+							FROM
+								r_in_view vin
 							WHERE
-								( a.indate IS NULL OR a.indate BETWEEN ? AND ?)
-							AND ( a.outdate IS NULL OR a.outdate BETWEEN ? AND ?)
-							GROUP BY a.catno,a.catname,a.batchno,a.price,a.machineno,a.machineName
-			) T ORDER BY catname
+								vin.indate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								vin.catid WITH ROLLUP
+					)i
+					on a.id = i.catid
+					LEFT JOIN
+					(
+							SELECT
+								ifnull(o.catid, 0) catid,
+								SUM(o.outDiscard) outDiscard,
+								SUM(o.outIntelLab) outIntelLab,
+								SUM(o.outOthre) outOthre,
+								SUM(o.outSponsor) outSponsor,
+								SUM(o.outTrialTest)outTrialTest ,
+								SUM(o.outValidation) outValidation,
+					      SUM(o.outDiscard) + SUM(o.outIntelLab)+SUM(o.outOthre)+SUM(o.outSponsor)+SUM(o.outTrialTest)+SUM(o.outValidation) outTotal
+							FROM
+								r_out_view o
+							WHERE
+								o.outdate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								o.catid WITH ROLLUP
+					)o on a.id=o.catid 
+					LEFT JOIN r_price_view p ON a.id=p.catid
+					where date('2014-01-01') != ? and date('2014-01-01') != ?  
         </sql>
         <col index="1" type="">catno</col>
         <col index="2" type=""></col>
@@ -482,30 +755,64 @@
         <col index="23" type="">localprice</col>
         <col index="24" type="">totalAmount</col>
         <col index="25" type="">remark</col>
+        <col index="26" type="">qtyIn</col>
+        <col index="27" type="">qtyOut</col>
+        <col index="29" type="">checkQty</col>
+        <col index="30" type="">checkAmt</col>
+        <col index="32" type="">pqtyIn</col>
+        <col index="33" type="">pqtyOut</col>
+        <col index="35" type="">cqtyIn</col>
+        <col index="36" type="">cqtyOut</col>
     </Sheet>
     <Sheet name="Lab_Gen_Supplier" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-	        select catno,catname,machineno,machinename,
-				 NULLIF(opening,0) opening,NULLIF(closing,0) closing,
-				NULLIF(invendor,0) invendor,NULLIF(inInterlab,0) inInterlab,NULLIF(inSponsor,0) inSponsor,
-				NULLIF(incharges,0) incharges, intotal,
-				NULLIF(outtrialtest,0) outtrialtest,NULLIF(outValidation,0) outValidation,
-				NULLIF(outdiscard,0) outdiscard,NULLIF(outIntelLab,0) outIntelLab,NULLIF(outSponsor,0) outSponsor,
-				NULLIF(outother,0) outother, outtotal,
-				CNY,USD,SGD,EUR,GBP,localprice,totalAmount,remark
-		     from(
-				SELECT a.catno,a.catname,a.batchno,a.machineno,a.machineName,a.price,
-							  closing+outtotal-intotal opening, sum(a.inVendor) invendor,  sum(a.inInterlab) ininterlab, sum(a.inSponsor) insponsor,
-							  sum(a.inCharges) incharges,sum(a.intotal) intotal,sum(outTrialTest) outtrialtest, sum(outValidation) outvalidation,
-							sum(outDiscard) outdiscard,sum(outIntelLab) outintellab,sum(outSponsor) outsponsor,
-							sum(outOthre) outother,sum(outTotal) outtotal,a.closing closing,
-							a.CNY,a.USD,a.SGD,a.EUR,a.GBP,a.localprice localprice,a.totalAmount,null as remark
-							FROM r_view a
+				SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,a.total+o.outTotal-i.inTotal opening,
+					i.inVendor,i.inCharges,i.inInterlab,i.inSponsor, i.inTotal,
+					o.outDiscard,o.outIntelLab,o.outOthre,o.outSponsor,o.outTrialTest,o.outValidation,o.outTotal,a.total closing,
+					p.CNY,p.EUR,p.GBP,p.SGD,p.USD,p.localprice,a.total*p.localprice,null as remark,
+					i.inTotal*p.localprice qtyIn,o.outTotal*p.localprice qtyOut,
+					0 checkQty,0 checkAmt,
+					0 pqtyIn,0 pqtyOut,
+					0 cqtyIn,0 cqtyOut 
+					from b_cat a LEFT JOIN
+					(
+							SELECT
+								ifnull(vin.catid, 0) catid,
+								SUM(vin.inVendor) inVendor,
+								SUM(vin.inCharges) inCharges,
+								SUM(vin.inInterlab) inInterlab,
+								SUM(vin.inSponsor) inSponsor,
+					      SUM(vin.inVendor) + SUM(vin.inCharges) + SUM(vin.inInterlab) + SUM(vin.inSponsor) inTotal
+							FROM
+								r_in_view vin
 							WHERE
-								( a.indate IS NULL OR a.indate BETWEEN ? AND ?)
-							AND ( a.outdate IS NULL OR a.outdate BETWEEN ? AND ?)
-							GROUP BY a.catno,a.catname,a.batchno,a.price,a.machineno,a.machineName
-			) T ORDER BY catname
+								vin.indate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								vin.catid WITH ROLLUP
+					)i
+					on a.id = i.catid
+					LEFT JOIN
+					(
+							SELECT
+								ifnull(o.catid, 0) catid,
+								SUM(o.outDiscard) outDiscard,
+								SUM(o.outIntelLab) outIntelLab,
+								SUM(o.outOthre) outOthre,
+								SUM(o.outSponsor) outSponsor,
+								SUM(o.outTrialTest)outTrialTest ,
+								SUM(o.outValidation) outValidation,
+					      SUM(o.outDiscard) + SUM(o.outIntelLab)+SUM(o.outOthre)+SUM(o.outSponsor)+SUM(o.outTrialTest)+SUM(o.outValidation) outTotal
+							FROM
+								r_out_view o
+							WHERE
+								o.outdate BETWEEN DATE('2014-01-01')
+							AND DATE('2015-01-01')
+							GROUP BY
+								o.catid WITH ROLLUP
+					)o on a.id=o.catid 
+					LEFT JOIN r_price_view p ON a.id=p.catid
+					where date('2014-01-01') != ? and date('2014-01-01') != ?  
         </sql>
         <col index="1" type="">catno</col>
         <col index="2" type=""></col>
@@ -532,6 +839,14 @@
         <col index="23" type="">localprice</col>
         <col index="24" type="">totalAmount</col>
         <col index="25" type="">remark</col>
+        <col index="26" type="">qtyIn</col>
+        <col index="27" type="">qtyOut</col>
+        <col index="29" type="">checkQty</col>
+        <col index="30" type="">checkAmt</col>
+        <col index="32" type="">pqtyIn</col>
+        <col index="33" type="">pqtyOut</col>
+        <col index="35" type="">cqtyIn</col>
+        <col index="36" type="">cqtyOut</col>
     </Sheet>
     <Sheet name="CTM_Suppliers_DTW" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
@@ -581,7 +896,15 @@
         <col index="22" type="">GBP</col>
         <col index="23" type="">localprice</col>
         <col index="24" type="">totalAmount</col>
-        <col index="25" type="">remark</col>CTM_Suppliers_DTW
+        <col index="25" type="">remark</col>
+        <col index="26" type="">qtyIn</col>
+        <col index="27" type="">qtyOut</col>
+        <col index="29" type="">checkQty</col>
+        <col index="30" type="">checkAmt</col>
+        <col index="32" type="">pqtyIn</col>
+        <col index="33" type="">pqtyOut</col>
+        <col index="35" type="">cqtyIn</col>
+        <col index="36" type="">cqtyOut</col>
     </Sheet>
     <Sheet name="Discard_CLab" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
@@ -707,6 +1030,14 @@
         <col index="23" type="">localprice</col>
         <col index="24" type="">totalAmount</col>
         <col index="25" type="">remark</col>
+        <col index="26" type="">qtyIn</col>
+        <col index="27" type="">qtyOut</col>
+        <col index="29" type="">checkQty</col>
+        <col index="30" type="">checkAmt</col>
+        <col index="32" type="">pqtyIn</col>
+        <col index="33" type="">pqtyOut</col>
+        <col index="35" type="">cqtyIn</col>
+        <col index="36" type="">cqtyOut</col>
     </Sheet>
     <Sheet name="Discard_APLab" dataRowNum="5" dataStartNum="5" footerRowNum="6" class="com.ims.report.excel.R1Sheet">
         <sql>
