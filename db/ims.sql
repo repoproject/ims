@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-09-18 20:38:13
+Date: 2014-09-18 21:02:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -546,5 +546,122 @@ BEGIN
 
 	RETURN (v_outMoney);
 END
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tg_In_Insert`;
+DELIMITER ;;
+CREATE TRIGGER `tg_In_Insert` AFTER INSERT ON `b_in` FOR EACH ROW begin
+     declare cnt int;
+     set cnt=(select count(id) from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
+     if cnt > 0 then
+         update b_cat set total = (total+new.num) where catno=catno and batchno=batchno and price=price;
+     else
+         insert into b_cat(catno,      catname,      cattype,       batchno,      seq,       total      ,rtype      ,productdate,       producer,       expiredate      ,price      ,priceunit       ,localprice      ,dealer , makedate  ,modifydate)
+                values(new.catno,new.catname,new.cattype,new.batchno,new.seq,new.num,new.rtype,new.productdate,new.producer,new.expiredate,new.price,new.priceunit,new.localprice,new.dealer, sysdate()       ,sysdate());
+     end if;
+end
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tg_In_Update`;
+DELIMITER ;;
+CREATE TRIGGER `tg_In_Update` AFTER UPDATE ON `b_in` FOR EACH ROW begin
+   declare cnt int;
+   -- 判断库存表中原来是否有该试剂耗材
+   set cnt=(select count(id) from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
+   -- 如果修改的不是业务主键，目前只能走此分支，界面已经校验业务主键不能修改
+   if old.catno = new.catno and old.batchno=new.batchno and old.price=new.price then
+       update b_cat a set a.total = (a.total-old.num+new.num),a.modifydate=sysdate() where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
+      UPDATE b_cat a
+        SET 
+              a.cattype = new.cattype,
+              a.rtype = new.rtype,
+              a.productdate = new.productdate,
+              a.seq=new.seq,
+              a.producer = new.producer,
+              a.expiredate = new.expiredate,              
+              a.priceunit = new.priceunit,              
+              a.dealer = new.dealer
+              WHERE
+	a.catno = new.catno
+             AND a.batchno = new.batchno
+             AND a.price = new.price;
+   else 
+       -- 业务主键修改，先恢复修改前试剂的库存数量
+       update b_cat a set a.total = a.total-old.num,a.modifydate=sysdate() where a.catno=old.catno and a.batchno=old.batchno and a.price=old.price;
+       if cnt > 0 then
+      -- 新试剂库存中存在，则更新新试剂的库存数量
+           update b_cat a set a.total=a.total+new.num where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
+     
+       else
+           insert into b_cat(catno,         catname,      cattype,        batchno,  total,    rtype,    productdate,    producer,    expiredate,    price,    priceunit,    localprice,        dealer,makedate,modifydate)
+                     values(new.catno,new.catname,new.cattype,new.batchno,new.num,new.rtype,new.productdate,new.producer,new.expiredate,new.price,new.priceunit,new.localprice,new.dealer,sysdate(),sysdate());
+       end if;
+   end if;
+end
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tg_In_Delete`;
+DELIMITER ;;
+CREATE TRIGGER `tg_In_Delete` AFTER DELETE ON `b_in` FOR EACH ROW begin
+     declare v_total,v_delnum int;
+     set v_total=(select total from b_cat a where a.catno=old.catno and a.batchno=old.batchno and a.price=old.price);
+     set v_delnum = old.num;
+     if v_total < old.num  then
+          set v_delnum = v_total;  --  只能删掉未出库的入库物品，已经出库的不能删除
+          -- 已经出库的重新入库,这里无法实现，需要在程序中处理
+          end if;
+     update b_cat set total = v_total-v_delnum,modifydate=sysdate() where catno=old.catno and batchno=old.batchno and price=old.price;
+     
+end
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tg_Out_Insert`;
+DELIMITER ;;
+CREATE TRIGGER `tg_Out_Insert` BEFORE INSERT ON `b_out` FOR EACH ROW begin
+     declare v_total,v_num int;
+     set v_total=(select total from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
+     if v_total < new.num then
+          set new.num = v_total;
+     end if;
+     update b_cat set total = (v_total-new.num),modifydate=sysdate() ,machineName =new.machineName,machineNo=new.machineNo where catno=new.catno and batchno=new.batchno and price=new.price;
+     
+end
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tg_Out_Update`;
+DELIMITER ;;
+CREATE TRIGGER `tg_Out_Update` BEFORE UPDATE ON `b_out` FOR EACH ROW begin
+   declare cnt,v_total int;
+   set cnt=(select count(id) from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
+   set v_total=(select total from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
+   --  修改的时候可能会修改业务主键，这里判断
+   if old.catno = new.catno and old.batchno=new.batchno and old.price=new.price then
+       if  v_total + old.num < new.num then 
+           set new.num = v_total + old.num; -- 超额出库，设置最大出库数据为库存
+       end if;
+      -- 同时修改所属设备和编号  
+      update b_cat a set a.total = (a.total+old.num-new.num),a.modifydate=sysdate(),machineName =new.machineName,machineNo=new.machineNo where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
+   else
+       --  修改前的出库数据归库 同时修改所属设备和编号
+       update b_cat a set a.total = a.total+old.num,a.modifydate=sysdate(),machineName =new.machineName,machineNo=new.machineNo where a.catno=old.catno and a.batchno=old.batchno and a.price=old.price;
+      --  修改后的业务主键存在于库存中，则更新库存，不存在则出库数量为0
+       if cnt > 0 then
+           if v_total < new.num then
+               set new.num = v_total; -- 超出库存，设定为库存
+           end if;
+          --  同时修改所属设备和编号
+           update b_cat a set a.total=a.total-new.num,a.modifydate=sysdate(),machineName =new.machineName,machineNo=new.machineNo where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
+       else
+           set new.num = 0; --  通过修改，出库了一种没有库存的物品，则出库记录修改为0
+        end if;
+   end if;
+end
+;;
+DELIMITER ;
+DROP TRIGGER IF EXISTS `tg_Out_Delete`;
+DELIMITER ;;
+CREATE TRIGGER `tg_Out_Delete` AFTER DELETE ON `b_out` FOR EACH ROW begin
+     update b_cat set total = total+old.num,modifydate=sysdate() where catno=old.catno and batchno=old.batchno and price=old.price;   
+end
 ;;
 DELIMITER ;
