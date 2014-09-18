@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-09-18 08:58:55
+Date: 2014-09-18 20:38:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -489,7 +489,7 @@ INSERT INTO `d_var` VALUES ('taskserverip', '127.0.0.1', '任务服务器，多�
 -- View structure for r_in_view
 -- ----------------------------
 DROP VIEW IF EXISTS `r_in_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `r_in_view` AS select `b`.`id` AS `catid`,(case when (`a`.`reason` = '0') then `a`.`num` else 0 end) AS `inVendor`,(case when (`a`.`reason` = '1') then `a`.`num` else 0 end) AS `inInterlab`,(case when (`a`.`reason` = '2') then `a`.`num` else 0 end) AS `inSponsor`,(case when (`a`.`reason` = '3') then `a`.`num` else 0 end) AS `inCharges`,`a`.`inDate` AS `indate` from (`b_in` `a` join `b_cat` `b`) where ((`a`.`catno` = `b`.`catno`) and (`a`.`batchNo` = `b`.`batchno`) and (`a`.`price` = `b`.`price`)) ; ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `r_in_view` AS select `b`.`id` AS `catid`,(case when (`a`.`reason` = '0') then `a`.`num` else 0 end) AS `inVendor`,(case when (`a`.`reason` = '1') then `a`.`num` else 0 end) AS `inInterlab`,(case when (`a`.`reason` = '2') then `a`.`num` else 0 end) AS `inSponsor`,(case when (`a`.`reason` = '3') then `a`.`num` else 0 end) AS `inCharges`,`a`.`inDate` AS `indate` from (`b_in` `a` join `b_cat` `b`) where ((`a`.`catno` = `b`.`catno`) and (`a`.`batchNo` = `b`.`batchno`) and (`a`.`price` = `b`.`price`)) ;
 
 -- ----------------------------
 -- View structure for r_out_view
@@ -501,121 +501,50 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW
 -- View structure for r_price_view
 -- ----------------------------
 DROP VIEW IF EXISTS `r_price_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `r_price_view` AS select `a`.`id` AS `catid`,(case when (`a`.`priceUnit` = '0') then `a`.`price` end) AS `CNY`,(case when (`a`.`priceUnit` = '1') then `a`.`price` end) AS `USD`,(case when (`a`.`priceUnit` = '2') then `a`.`price` end) AS `SGD`,(case when (`a`.`priceUnit` = '3') then `a`.`price` end) AS `EUR`,(case when (`a`.`priceUnit` = '4') then `a`.`price` end) AS `GBP`,(select round((`a`.`price` / `b`.`rate`),2) from `d_rate` `b` where (`b`.`foreignMoney` = `a`.`priceUnit`) order by `b`.`startDateTime` desc limit 1) AS `localPrice` from `b_cat` `a` ; ;
-DROP TRIGGER IF EXISTS `tg_In_Insert`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `r_price_view` AS select `a`.`id` AS `catid`,(case when (`a`.`priceUnit` = '0') then `a`.`price` end) AS `CNY`,(case when (`a`.`priceUnit` = '1') then `a`.`price` end) AS `USD`,(case when (`a`.`priceUnit` = '2') then `a`.`price` end) AS `SGD`,(case when (`a`.`priceUnit` = '3') then `a`.`price` end) AS `EUR`,(case when (`a`.`priceUnit` = '4') then `a`.`price` end) AS `GBP`,(select round((`a`.`price` / `b`.`rate`),2) from `d_rate` `b` where (`b`.`foreignMoney` = `a`.`priceUnit`) order by `b`.`startDateTime` desc limit 1) AS `localPrice` from `b_cat` `a` ;
+
+-- ----------------------------
+-- Function structure for getCodeName
+-- ----------------------------
+DROP FUNCTION IF EXISTS `getCodeName`;
 DELIMITER ;;
-CREATE TRIGGER `tg_In_Insert` AFTER INSERT ON `b_in` FOR EACH ROW begin
-     declare cnt int;
-     set cnt=(select count(id) from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
-     if cnt > 0 then
-         update b_cat set total = (total+new.num) where catno=new.catno and batchno=new.batchno and price=new.price;
-     else
-         insert into b_cat(catno,      catname,      cattype,       batchno,      seq,       total      ,rtype      ,productdate,       producer,       expiredate      ,price      ,priceunit       ,localprice      ,dealer , makedate  ,modifydate)
-                values(new.catno,new.catname,new.cattype,new.batchno,new.seq,new.num,new.rtype,new.productdate,new.producer,new.expiredate,new.price,new.priceunit,new.localprice,new.dealer, sysdate()       ,sysdate());
-     end if;
-end
+CREATE DEFINER=`root`@`localhost` FUNCTION `getCodeName`(`p_codeType` varchar(255),`p_code` varchar(255)) RETURNS varchar(255) CHARSET utf8
+BEGIN
+	declare v_codeName VARCHAR(255);
+
+  set v_codeName=(select a.codename from d_code a where a.codetype=p_codeType and a.code=p_code LIMIT 1);
+
+	return (v_codeName);
+
+END
 ;;
 DELIMITER ;
-DROP TRIGGER IF EXISTS `tg_In_Update`;
+
+-- ----------------------------
+-- Function structure for getMoney
+-- ----------------------------
+DROP FUNCTION IF EXISTS `getMoney`;
 DELIMITER ;;
-CREATE TRIGGER `tg_In_Update` AFTER UPDATE ON `b_in` FOR EACH ROW begin
-   declare cnt int;
-   -- 判断库存表中原来是否有该试剂耗材
-   set cnt=(select count(id) from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
-   -- 如果修改的不是业务主键，目前只能走此分支，界面已经校验业务主键不能修改
-   if old.catno = new.catno and old.batchno=new.batchno and old.price=new.price then
-       update b_cat a set a.total = (a.total-old.num+new.num),a.modifydate=sysdate() where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
-      UPDATE b_cat a
-        SET 
-              a.cattype = new.cattype,
-              a.rtype = new.rtype,
-              a.productdate = new.productdate,
-              a.seq=new.seq,
-              a.producer = new.producer,
-              a.expiredate = new.expiredate,              
-              a.priceunit = new.priceunit,              
-              a.dealer = new.dealer
-              WHERE
-	a.catno = new.catno
-             AND a.batchno = new.batchno
-             AND a.price = new.price;
-   else 
-       -- 业务主键修改，先恢复修改前试剂的库存数量
-       update b_cat a set a.total = a.total-old.num,a.modifydate=sysdate() where a.catno=old.catno and a.batchno=old.batchno and a.price=old.price;
-       if cnt > 0 then
-      -- 新试剂库存中存在，则更新新试剂的库存数量
-           update b_cat a set a.total=a.total+new.num where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
-     
-       else
-           insert into b_cat(catno,         catname,      cattype,        batchno,  total,    rtype,    productdate,    producer,    expiredate,    price,    priceunit,    localprice,        dealer,makedate,modifydate)
-                     values(new.catno,new.catname,new.cattype,new.batchno,new.num,new.rtype,new.productdate,new.producer,new.expiredate,new.price,new.priceunit,new.localprice,new.dealer,sysdate(),sysdate());
-       end if;
-   end if;
-end
-;;
-DELIMITER ;
-DROP TRIGGER IF EXISTS `tg_In_Delete`;
-DELIMITER ;;
-CREATE TRIGGER `tg_In_Delete` AFTER DELETE ON `b_in` FOR EACH ROW begin
-     declare v_total,v_delnum int;
-     set v_total=(select total from b_cat a where a.catno=old.catno and a.batchno=old.batchno and a.price=old.price);
-     set v_delnum = old.num;
-     if v_total < old.num  then
-          set v_delnum = v_total;  --  只能删掉未出库的入库物品，已经出库的不能删除
-          -- 已经出库的重新入库,这里无法实现，需要在程序中处理
-          end if;
-     update b_cat set total = v_total-v_delnum,modifydate=sysdate() where catno=old.catno and batchno=old.batchno and price=old.price;
-     
-end
-;;
-DELIMITER ;
-DROP TRIGGER IF EXISTS `tg_Out_Insert`;
-DELIMITER ;;
-CREATE TRIGGER `tg_Out_Insert` BEFORE INSERT ON `b_out` FOR EACH ROW begin
-     declare v_total,v_num int;
-     set v_total=(select total from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
-     if v_total < new.num then
-          set new.num = v_total;
-     end if;
-     update b_cat set total = (v_total-new.num),modifydate=sysdate() ,machineName =new.machineName,machineNo=new.machineNo where catno=new.catno and batchno=new.batchno and price=new.price;
-     
-end
-;;
-DELIMITER ;
-DROP TRIGGER IF EXISTS `tg_Out_Update`;
-DELIMITER ;;
-CREATE TRIGGER `tg_Out_Update` BEFORE UPDATE ON `b_out` FOR EACH ROW begin
-   declare cnt,v_total int;
-   set cnt=(select count(id) from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
-   set v_total=(select total from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
-   --  修改的时候可能会修改业务主键，这里判断
-   if old.catno = new.catno and old.batchno=new.batchno and old.price=new.price then
-       if  v_total + old.num < new.num then 
-           set new.num = v_total + old.num; -- 超额出库，设置最大出库数据为库存
-       end if;
-      -- 同时修改所属设备和编号  
-      update b_cat a set a.total = (a.total+old.num-new.num),a.modifydate=sysdate(),machineName =new.machineName,machineNo=new.machineNo where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
-   else
-       --  修改前的出库数据归库 同时修改所属设备和编号
-       update b_cat a set a.total = a.total+old.num,a.modifydate=sysdate(),machineName =new.machineName,machineNo=new.machineNo where a.catno=old.catno and a.batchno=old.batchno and a.price=old.price;
-      --  修改后的业务主键存在于库存中，则更新库存，不存在则出库数量为0
-       if cnt > 0 then
-           if v_total < new.num then
-               set new.num = v_total; -- 超出库存，设定为库存
-           end if;
-          --  同时修改所属设备和编号
-           update b_cat a set a.total=a.total-new.num,a.modifydate=sysdate(),machineName =new.machineName,machineNo=new.machineNo where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price;
-       else
-           set new.num = 0; --  通过修改，出库了一种没有库存的物品，则出库记录修改为0
-        end if;
-   end if;
-end
-;;
-DELIMITER ;
-DROP TRIGGER IF EXISTS `tg_Out_Delete`;
-DELIMITER ;;
-CREATE TRIGGER `tg_Out_Delete` AFTER DELETE ON `b_out` FOR EACH ROW begin
-     update b_cat set total = total+old.num,modifydate=sysdate() where catno=old.catno and batchno=old.batchno and price=old.price;   
-end
+CREATE DEFINER=`root`@`localhost` FUNCTION `getMoney`(`p_inMoneyType` varchar(255),`p_inMoney` double,`p_outMoneyType` varchar(255)) RETURNS double
+BEGIN
+	-- 统一转换为本币，然后转换为目标币
+  DECLARE v_outMoney,v_localMoney,v_rate DOUBLE;
+  DECLARE v_localMoneyType VARCHAR(255);
+  
+  -- 系统中配置的本币
+  set v_localMoneyType = (select sysvalue from d_var where syskey='localmoney' LIMIT 1);
+  
+  -- 输入币种与本币的最新汇率
+  set v_rate = (select a.rate from d_rate a where a.localmoney = v_localMoneyType and a.foreignMoney = p_inMoneyType ORDER BY a.startdatetime desc limit 1);
+  -- 输入币种换算成本币的价值
+  set v_localMoney = p_inMoney / v_rate;
+
+  -- 得到本币与输出币种之间的最新汇率
+  set v_rate = (select a.rate from d_rate a where a.localmoney = v_localMoneyType and a.foreignMoney = p_outMoneyType ORDER BY a.startdatetime desc limit 1);
+  -- 将本币换算成输出币种的价值
+  set v_outMoney = v_localMoney * v_rate;
+
+	RETURN (v_outMoney);
+END
 ;;
 DELIMITER ;
