@@ -901,124 +901,57 @@
     </Sheet>
     <Sheet name="Discard_CLab" dataRowNum="5" dataStartNum="5" footerRowNum="7" class="com.ims.report.excel.R1Sheet">
         <sql>
-			SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
-			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
-			ifnull(o.outDiscard,0) outDiscard,ifnull(o.outIntelLab,0) outIntelLab,ifnull(o.outOther,0) outOther,ifnull(o.outSponsor,0) outSponsor,ifnull(o.outTrialTest,0) outTrialTest,ifnull(o.outValidation,0) outValidation,ifnull(o.outTotal,0) outTotal,ifnull(a.total,0) closing,
-			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
-			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
-			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
-			from b_cat a LEFT JOIN
-					(
-							SELECT
-								ifnull(vin.catid, 0) catid,
-								SUM(vin.inVendor) inVendor,
-								SUM(vin.inCharges) inCharges,
-								SUM(vin.inInterlab) inInterlab,
-								SUM(vin.inSponsor) inSponsor,
-					      SUM(vin.inVendor) + SUM(vin.inCharges) + SUM(vin.inInterlab) + SUM(vin.inSponsor) inTotal
-							FROM
-								r_in_view vin
-							WHERE
-								vin.indate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
-					)i
-					on a.id = i.catid
-					LEFT JOIN
-					(
-							SELECT
-								ifnull(o.catid, 0) catid,
-								SUM(o.outDiscard) outDiscard,
-								SUM(o.outIntelLab) outIntelLab,
-								SUM(outOther) outOther,
-								SUM(o.outSponsor) outSponsor,
-								SUM(o.outTrialTest)outTrialTest ,
-								SUM(o.outValidation) outValidation,
-					      SUM(o.outDiscard) + SUM(o.outIntelLab)+SUM(outOther)+SUM(o.outSponsor)+SUM(o.outTrialTest)+SUM(o.outValidation) outTotal
-							FROM
-								r_out_view o
-							WHERE
-								o.outdate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
-					)o on a.id=o.catid 
-					LEFT JOIN r_price_view p ON a.id=p.catid
-					where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
-			
+			select @rownum:=@rownum+1 rownum,t.* from(
+				select @rownum:=0 ,a.outDate,a.description,a.catno,
+					a.price,(select codename from d_code where codetype='money' and code=a.priceUnit) currency,
+					b.expiredate,a.num qty,a.num*a.price totalAmnt,null as addComment,
+					(select codename from d_code where codetype='rootcause' and code=a.cause) rootCause,a.section,
+					b.producer,b.dealer,null as catFrom
+				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
+				-- and a.reason='2'
+				ORDER BY a.outDate ASC
+			)t
+			where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
         </sql>
-        <col index="1" type="">catno</col>
-        <col index="2" type=""></col>
-        <col index="3" type="">catname</col>
-        <col index="4" type="">opening</col>
-        <col index="5" type="">invendor</col>
-        <col index="6" type="">ininterlab</col>
-        <col index="7" type="">insponsor</col>
-        <col index="8" type="">incharges</col>
-        <col index="9" type="">intotal</col>
-        <col index="10" type="">outtrialtest</col>
-        <col index="11" type="">outvalidation</col>
-        <col index="12" type="">outdiscard</col>
-        <col index="13" type="">outintellab</col>
-        <col index="14" type="">outsponsor</col>
-        <col index="15" type="">outother</col>
+        <col index="1" type="">rownum</col>
+        <col index="2" type="">outDate</col>
+        <col index="3" type="">description</col>
+        <col index="4" type="">catno</col>
+        <col index="5" type="">price</col>
+        <col index="6" type="">currency</col>
+        <col index="7" type="">expiredate</col>
+        <col index="8" type="">qty</col>
+        <col index="9" type="">totalAmnt</col>
+        <col index="10" type="">addComment</col>
+        <col index="11" type="">rootCause</col>
+        <col index="12" type="">section</col>
+        <col index="13" type="">producer</col>
+        <col index="14" type="">dealer</col>
+        <col index="15" type="">catFrom</col>
     </Sheet>
-    <Sheet name="Validation_CLab" dataRowNum="4" dataStartNum="4" footerRowNum="7" class="com.ims.report.excel.R1Sheet">
+    <Sheet name="Validation_CLab" dataStartNum="4" dataRowNum="5" footerRowNum="6" class="com.ims.report.excel.R1Sheet">
         <sql>
-			SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
-			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
-			ifnull(o.outDiscard,0) outDiscard,ifnull(o.outIntelLab,0) outIntelLab,ifnull(o.outOther,0) outOther,ifnull(o.outSponsor,0) outSponsor,ifnull(o.outTrialTest,0) outTrialTest,ifnull(o.outValidation,0) outValidation,ifnull(o.outTotal,0) outTotal,ifnull(a.total,0) closing,
-			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
-			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
-			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
-			from b_cat a LEFT JOIN
-					(
-							SELECT
-								ifnull(vin.catid, 0) catid,
-								SUM(vin.inVendor) inVendor,
-								SUM(vin.inCharges) inCharges,
-								SUM(vin.inInterlab) inInterlab,
-								SUM(vin.inSponsor) inSponsor,
-					      SUM(vin.inVendor) + SUM(vin.inCharges) + SUM(vin.inInterlab) + SUM(vin.inSponsor) inTotal
-							FROM
-								r_in_view vin
-							WHERE
-								vin.indate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
-					)i
-					on a.id = i.catid
-					LEFT JOIN
-					(
-							SELECT
-								ifnull(o.catid, 0) catid,
-								SUM(o.outDiscard) outDiscard,
-								SUM(o.outIntelLab) outIntelLab,
-								SUM(outOther) outOther,
-								SUM(o.outSponsor) outSponsor,
-								SUM(o.outTrialTest)outTrialTest ,
-								SUM(o.outValidation) outValidation,
-					      SUM(o.outDiscard) + SUM(o.outIntelLab)+SUM(outOther)+SUM(o.outSponsor)+SUM(o.outTrialTest)+SUM(o.outValidation) outTotal
-							FROM
-								r_out_view o
-							WHERE
-								o.outdate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
-					)o on a.id=o.catid 
-					LEFT JOIN r_price_view p ON a.id=p.catid
-					where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
-			
+			select t.section, t.outDate,t.description,t.rType,t.catname,t.qty,t.priceCNY,
+			t.priceCNY*t.qty totalCostCNY,t.priceUSD*t.qty totalCostUSD,t.projectCode
+			from(
+				select a.section,a.outDate,a.description,getCodeName('rtype',b.rType) rType,a.catname,a.num qty,
+				round(getMoney(a.priceUnit,a.price,'0'),2) priceCNY,round(getMoney(a.priceUnit,a.price,'1'),2) priceUSD,a.projectCode
+				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
+				-- and a.reason='1'
+				ORDER BY a.outDate ASC
+			) t
+			where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
         </sql>
-        <col index="1" type="">catno</col>
-        <col index="2" type=""></col>
-        <col index="3" type="">catname</col>
-        <col index="4" type="">opening</col>
-        <col index="5" type="">invendor</col>
-        <col index="6" type="">ininterlab</col>
-        <col index="7" type="">insponsor</col>
-        <col index="8" type="">incharges</col>
-        <col index="9" type="">intotal</col>
-        <col index="10" type="">outtrialtest</col>
+        <col index="1" type="">section</col>
+        <col index="2" type="">outDate</col>
+        <col index="3" type="">description</col>
+        <col index="4" type="">rType</col>
+        <col index="5" type="">catname</col>
+        <col index="6" type="">qty</col>
+        <col index="7" type="">priceCNY</col>
+        <col index="8" type="" >totalCostCNY</col>
+        <col index="9" type="" >totalCostUSD</col>
+        <col index="10" type="">projectCode</col>
     </Sheet>
     <Sheet name="R10-Oncology" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
@@ -1103,123 +1036,57 @@
     </Sheet>
     <Sheet name="Discard_APLab" dataRowNum="5" dataStartNum="5" footerRowNum="7" class="com.ims.report.excel.R1Sheet">
         <sql>
-			SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
-			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
-			ifnull(o.outDiscard,0) outDiscard,ifnull(o.outIntelLab,0) outIntelLab,ifnull(o.outOther,0) outOther,ifnull(o.outSponsor,0) outSponsor,ifnull(o.outTrialTest,0) outTrialTest,ifnull(o.outValidation,0) outValidation,ifnull(o.outTotal,0) outTotal,ifnull(a.total,0) closing,
-			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
-			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
-			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
-			from b_cat a LEFT JOIN
-					(
-							SELECT
-								ifnull(vin.catid, 0) catid,
-								SUM(vin.inVendor) inVendor,
-								SUM(vin.inCharges) inCharges,
-								SUM(vin.inInterlab) inInterlab,
-								SUM(vin.inSponsor) inSponsor,
-					      SUM(vin.inVendor) + SUM(vin.inCharges) + SUM(vin.inInterlab) + SUM(vin.inSponsor) inTotal
-							FROM
-								r_in_view vin
-							WHERE
-								vin.indate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
-					)i
-					on a.id = i.catid
-					LEFT JOIN
-					(
-							SELECT
-								ifnull(o.catid, 0) catid,
-								SUM(o.outDiscard) outDiscard,
-								SUM(o.outIntelLab) outIntelLab,
-								SUM(outOther) outOther,
-								SUM(o.outSponsor) outSponsor,
-								SUM(o.outTrialTest)outTrialTest ,
-								SUM(o.outValidation) outValidation,
-					      SUM(o.outDiscard) + SUM(o.outIntelLab)+SUM(outOther)+SUM(o.outSponsor)+SUM(o.outTrialTest)+SUM(o.outValidation) outTotal
-							FROM
-								r_out_view o
-							WHERE
-								o.outdate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
-					)o on a.id=o.catid 
-					LEFT JOIN r_price_view p ON a.id=p.catid
-					where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
-			
+			select @rownum:=@rownum+1 rownum,t.* from(
+				select @rownum:=0 ,a.outDate,a.description,a.catno,
+					a.price,(select codename from d_code where codetype='money' and code=a.priceUnit) currency,
+					b.expiredate,a.num qty,a.num*a.price totalAmnt,null as addComment,
+					(select codename from d_code where codetype='rootcause' and code=a.cause) rootCause,a.section,
+					b.producer,b.dealer,null as catFrom
+				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
+				-- and a.reason='2'
+				ORDER BY a.outDate ASC
+			)t
+			where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
         </sql>
-        <col index="1" type="">catno</col>
-        <col index="2" type=""></col>
-        <col index="3" type="">catname</col>
-        <col index="4" type="">opening</col>
-        <col index="5" type="">invendor</col>
-        <col index="6" type="">ininterlab</col>
-        <col index="7" type="">insponsor</col>
-        <col index="8" type="">incharges</col>
-        <col index="9" type="">intotal</col>
-        <col index="10" type="">outtrialtest</col>
-        <col index="11" type="">outvalidation</col>
-        <col index="12" type="">outdiscard</col>
-        <col index="13" type="">outintellab</col>
-        <col index="14" type="">outsponsor</col>
-        <col index="15" type="">outother</col>
+        <col index="1" type="">rownum</col>
+        <col index="2" type="">outDate</col>
+        <col index="3" type="">description</col>
+        <col index="4" type="">catno</col>
+        <col index="5" type="">price</col>
+        <col index="6" type="">currency</col>
+        <col index="7" type="">expiredate</col>
+        <col index="8" type="">qty</col>
+        <col index="9" type="">totalAmnt</col>
+        <col index="10" type="">addComment</col>
+        <col index="11" type="">rootCause</col>
+        <col index="12" type="">section</col>
+        <col index="13" type="">producer</col>
+        <col index="14" type="">dealer</col>
+        <col index="15" type="">catFrom</col>
     </Sheet>
-    <Sheet name="Validation_APLab" dataRowNum="4" dataStartNum="4" footerRowNum="6" class="com.ims.report.excel.R1Sheet">
+    <Sheet name="Validation_APLab" dataStartNum="4" dataRowNum="5" footerRowNum="6" class="com.ims.report.excel.R1Sheet">
         <sql>
-			SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
-			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
-			ifnull(o.outDiscard,0) outDiscard,ifnull(o.outIntelLab,0) outIntelLab,ifnull(o.outOther,0) outOther,ifnull(o.outSponsor,0) outSponsor,ifnull(o.outTrialTest,0) outTrialTest,ifnull(o.outValidation,0) outValidation,ifnull(o.outTotal,0) outTotal,ifnull(a.total,0) closing,
-			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
-			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
-			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
-			from b_cat a LEFT JOIN
-					(
-							SELECT
-								ifnull(vin.catid, 0) catid,
-								SUM(vin.inVendor) inVendor,
-								SUM(vin.inCharges) inCharges,
-								SUM(vin.inInterlab) inInterlab,
-								SUM(vin.inSponsor) inSponsor,
-					      SUM(vin.inVendor) + SUM(vin.inCharges) + SUM(vin.inInterlab) + SUM(vin.inSponsor) inTotal
-							FROM
-								r_in_view vin
-							WHERE
-								vin.indate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
-					)i
-					on a.id = i.catid
-					LEFT JOIN
-					(
-							SELECT
-								ifnull(o.catid, 0) catid,
-								SUM(o.outDiscard) outDiscard,
-								SUM(o.outIntelLab) outIntelLab,
-								SUM(outOther) outOther,
-								SUM(o.outSponsor) outSponsor,
-								SUM(o.outTrialTest)outTrialTest ,
-								SUM(o.outValidation) outValidation,
-					      SUM(o.outDiscard) + SUM(o.outIntelLab)+SUM(outOther)+SUM(o.outSponsor)+SUM(o.outTrialTest)+SUM(o.outValidation) outTotal
-							FROM
-								r_out_view o
-							WHERE
-								o.outdate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
-					)o on a.id=o.catid 
-					LEFT JOIN r_price_view p ON a.id=p.catid
-					where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
-			
+			select t.section, t.outDate,t.description,t.rType,t.catname,t.qty,t.priceCNY,
+			t.priceCNY*t.qty totalCostCNY,t.priceUSD*t.qty totalCostUSD,t.projectCode
+			from(
+				select a.section,a.outDate,a.description,getCodeName('rtype',b.rType) rType,a.catname,a.num qty,
+				round(getMoney(a.priceUnit,a.price,'0'),2) priceCNY,round(getMoney(a.priceUnit,a.price,'1'),2) priceUSD,a.projectCode
+				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
+				-- and a.reason='1'
+				ORDER BY a.outDate ASC
+			) t 
+			where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
         </sql>
-        <col index="1" type="">catno</col>
-        <col index="2" type=""></col>
-        <col index="3" type="">catname</col>
-        <col index="4" type="">opening</col>
-        <col index="5" type="">invendor</col>
-        <col index="6" type="">ininterlab</col>
-        <col index="7" type="">insponsor</col>
-        <col index="8" type="">incharges</col>
-        <col index="9" type="">intotal</col>
+        <col index="1" type="">section</col>
+        <col index="2" type="">outDate</col>
+        <col index="3" type="">description</col>
+        <col index="4" type="">rType</col>
+        <col index="5" type="">catname</col>
+        <col index="6" type="">qty</col>
+        <col index="7" type="">priceCNY</col>
+        <col index="8" type="" >totalCostCNY</col>
+        <col index="9" type="" >totalCostUSD</col>
+        <col index="10" type="">projectCode</col>
     </Sheet>
    
 </Excel>

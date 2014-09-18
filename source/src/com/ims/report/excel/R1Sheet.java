@@ -273,8 +273,8 @@ public class R1Sheet implements ISheet{
 				this.footerData.put(key, (Long)value + (Long)objValue);
 			}
 			else if(value instanceof Double){
-				if(value == null) value = 0;
-				if(objValue == null) objValue = 0;
+				if(value == null) value = 0.0;
+				if(objValue == null) objValue = 0.0;
 				this.footerData.put(key, (Double)value + (Double)objValue);
 			}
 			else if(value instanceof BigDecimal){
