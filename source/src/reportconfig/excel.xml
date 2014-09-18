@@ -949,8 +949,8 @@
         <col index="5" type="">catname</col>
         <col index="6" type="">qty</col>
         <col index="7" type="">priceCNY</col>
-        <col index="8" type="" sum="true">totalCostCNY</col>
-        <col index="9" type="" sum="true">totalCostUSD</col>
+        <col index="8" type="" >totalCostCNY</col>
+        <col index="9" type="" >totalCostUSD</col>
         <col index="10" type="">projectCode</col>
     </Sheet>
     <Sheet name="R10-Oncology" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
@@ -1084,8 +1084,8 @@
         <col index="5" type="">catname</col>
         <col index="6" type="">qty</col>
         <col index="7" type="">priceCNY</col>
-        <col index="8" type="" sum="true">totalCostCNY</col>
-        <col index="9" type="" sum="true">totalCostUSD</col>
+        <col index="8" type="" >totalCostCNY</col>
+        <col index="9" type="" >totalCostUSD</col>
         <col index="10" type="">projectCode</col>
     </Sheet>
    
