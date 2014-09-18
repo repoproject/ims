@@ -39,10 +39,9 @@ public class DeleteIn extends AbsInterceptorDefaultAdapter {
 			rowDataBean.setRowstyleproperty(style);
 		}
 	}
-	
+
 	/***
-	 * 入库记录删除时的业务规则判断：
-	 * 1、判断入库时间是否晚于上次R统计，晚于才能删除，否则不能删除
+	 * 入库记录删除时的业务规则判断： 1、判断入库时间是否晚于上次R统计，晚于才能删除，否则不能删除
 	 * 2、如果库存小于当前入库的数量，说明当前入库的已经存在出库，则不允许删除入库
 	 */
 	public int doSavePerRow(ReportRequest rrequest, ReportBean rbean,
@@ -100,34 +99,40 @@ public class DeleteIn extends AbsInterceptorDefaultAdapter {
 						"删除入库记录的入库时间[" + strindate + "]必须晚于上月统计库存的时间["
 								+ strRDate + "]！", null, false);
 				return WX_RETURNVAL_TERMINATE;
-			}
+			}	
 
-			// 如果库存小于当前入库的数量，说明当前入库的已经存在出库，则不允许删除入库
-			if (total < delNum) {
-				rrequest.getWResponse().getMessageCollector().alert(
-						"当前入库已经存在被出库的情况，不允许删除", null, false);
+			// 调用函数获取出库数量
+			int outNum = 0;
+
+			try {
+				//如果有出库记录则不能删除
+				outNum = InOutRule.getoutTotal(strcatno, strbatchno, strprice);
+			} catch (Exception e) {
+
+				log
+						.error("调用失败InOutRule.getoutTotal(strcatno, strbatchno, strprice)失败:"
+								+ e.toString());
+			}
+			if (outNum > 0) {
+				rrequest.getWResponse().getMessageCollector()
+						.alert(
+								"该试剂/耗材已经出库了[" + outNum
+										+ "]个，不能进行删除，请先撤销所有出库记录后才能删除入库记录!",
+								null, false);
 				return WX_RETURNVAL_TERMINATE;
-			} else {
-				super
-						.doSavePerRow(rrequest, rbean, row, mParamValues,
-								editbean);
 
 			}
+			super.doSavePerRow(rrequest, rbean, row, mParamValues, editbean);
+
+		} else if (editbean instanceof EditableReportUpdateDataBean) {
+			rrequest.getWResponse().getMessageCollector().alert("jjjj", null,
+					false);
+
+			super.doSavePerRow(rrequest, rbean, row, mParamValues, editbean);
 		}
-		else if (editbean instanceof EditableReportUpdateDataBean) {
-			rrequest.getWResponse().getMessageCollector().alert(
-					"jjjj", null, false);
-			
-			super.doSavePerRow(rrequest, rbean, row, mParamValues,
-					editbean);
-	}
 		return WX_RETURNVAL_SUCCESS;
 	}
 
-	
-
-	
-	
 	/**
 	 * 装载数据之前执行的函数
 	 * 

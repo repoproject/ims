@@ -14,9 +14,9 @@
 					
 				</col>
 				
-				<col column="machinename" label="所属设备*" br="true">
+				<col column="machinename" label="所属设备*" displaytype="hidden" br="true">
 
-						     <inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" >
+						     <inputbox jsvalidate="isNotLongerThan20(#label#长度应小于等于20);" >
 						        <typeprompt width="-1" count="20">
 							       <promptcol label="machinename" matchmode="anywhere"></promptcol>
 							       <datasource>    
@@ -26,11 +26,11 @@
 						     </inputbox>	
 				</col>
 				<col column="catname" label="名称*" br="true">
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于100);stripscript(#label#不能含有特殊字符);" />
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan100(#label#长度应小于等于100);" />
 				</col>
 				
 				<col column="catno" label="货号*" br="true">
-					<inputbox   jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+					<inputbox   jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);" />
 				</col>		
 					
 				<col column="seq" label="编号" br="true" >
@@ -40,7 +40,7 @@
 				    <inputbox type="textbox" defaultvalue='0'  styleproperty="rows='3'" jsvalidate="isNumber(#label#必须是整数);" />			
 				</col>
 				<col column="remark" label="备注">
-					<inputbox type="textareabox" styleproperty="rows='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
+					<inputbox type="textareabox" styleproperty="rows='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);" />
 				</col>
 			</display>
 			<sql>

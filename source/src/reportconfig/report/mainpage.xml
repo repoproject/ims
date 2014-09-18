@@ -20,7 +20,7 @@
 				</display>
 				<sql>
 					<value>
-						<![CDATA[SELECT DISTINCT b_cat.id, b_cat.catno, b_cat.catname, b_cat.batchno, b_cat.makedate, b_cat.makedate AS builtdate, CONCAT( date_format(b_cat.makedate, '%Y-%c-%d'), '新入库', b_in.num, '个', b_cat.batchno, '的', b_cat.catname ) description FROM b_cat LEFT JOIN b_in ON b_in.price = b_cat.price AND b_in.catno = b_cat.catno AND b_in.batchNo = b_cat.batchno, b_var WHERE DATEDIFF( CURRENT_DATE (), b_cat.makedate ) <= b_var.bizValue AND DATEDIFF( CURRENT_DATE (), b_cat.makedate ) >= 0 AND b_var.bizkey = 'banchTime' AND NOT EXISTS ( SELECT 1 FROM b_cat b WHERE b.batchno = b_cat.batchno AND b_cat.makedate < CURRENT_DATE () - b_var.bizValue ) ORDER BY b_cat.makedate DESC]]>
+						<![CDATA[SELECT DISTINCT b_cat.id, b_cat.catno, b_cat.catname, b_cat.batchno, b_cat.makedate, b_cat.makedate AS builtdate, CONCAT( date_format(b_cat.makedate, '%Y-%c-%d'), '新入库', b_in.num, '个批号为[', b_cat.batchno, ']的', b_cat.catname ) description FROM b_cat LEFT JOIN b_in ON b_in.price = b_cat.price AND b_in.catno = b_cat.catno AND b_in.batchNo = b_cat.batchno, b_var WHERE DATEDIFF( CURRENT_DATE (), b_cat.makedate ) <= b_var.bizValue AND DATEDIFF( CURRENT_DATE (), b_cat.makedate ) >= 0 AND b_var.bizkey = 'banchTime' AND NOT EXISTS ( SELECT 1 FROM b_cat b WHERE b.batchno = b_cat.batchno AND b_cat.makedate < CURRENT_DATE () - b_var.bizValue ) ORDER BY b_cat.makedate DESC]]>
 					</value>					
 				</sql>
 				<format>
@@ -33,7 +33,7 @@
 						if(!description.equals(""))
 						{
 							String fulldesc=description;
-							if(description.length()>40) description=description.substring(0,30)+"...";
+							if(description.length()>60) description=description.substring(0,50)+"...";
 							description=description.replaceAll("<p>","");
 							description=description.replaceAll("</p>","");
 							if(rrequest.getShowtype()== Consts.DISPLAY_ON_PLAINEXCEL)
@@ -74,7 +74,7 @@
 						if(!description.equals(""))
 						{
 							String fulldesc=description;
-							if(description.length()>40) description=description.substring(0,30)+"...";
+							if(description.length()>60) description=description.substring(0,50)+"...";
 							description=description.replaceAll("<p>","");
 							description=description.replaceAll("</p>","");
 							if(rrequest.getShowtype()== Consts.DISPLAY_ON_PLAINEXCEL)
@@ -117,7 +117,7 @@
 						if(!description.equals(""))
 						{
 							String fulldesc=description;
-							if(description.length()>40) description=description.substring(0,30)+"...";
+							if(description.length()>60) description=description.substring(0,50)+"...";
 							description=description.replaceAll("<p>","");
 							description=description.replaceAll("</p>","");
 							if(rrequest.getShowtype()== Consts.DISPLAY_ON_PLAINEXCEL)
@@ -145,7 +145,59 @@
 				</display>
 				<sql>
 					<value>
-						<![CDATA[SELECT b_in.id id,b_in.catName as catName,b_in.catno as catno,b_in.inDate as builtdate,b_in.person as person,b_in.num AS num,CONCAT(b_in.person,'入库',b_in.num,'个',b_in.catName,'(',b_in.batchNo,')') description FROM b_in ,b_var where b_var.bizkey='newinout' and DATEDIFF(CURDATE(),b_in.inDate) <=b_var.bizValue and DATEDIFF(CURDATE(),b_in.inDate)>=0 UNION ALL  SELECT b_out.id as id,b_out.catname as catName,b_out.catno as catno,b_out.outDate as builtdate,b_out.person as person,b_out.num as num,CONCAT(b_out.person,'出库',b_out.num,'个',b_out.catName,'(',b_out.batchNo,')') description FROM b_out ,b_var where b_var.bizkey='newinout' and DATEDIFF(CURDATE(),b_out.outDate) <=b_var.bizValue and DATEDIFF(CURDATE(),b_out.outDate)>=0 ORDER BY builtdate DESC ]]>
+						<![CDATA[SELECT
+								b_in.id id,
+								b_in.catName AS catName,
+								b_in.catno AS catno,
+								b_in.inDate AS builtdate,
+								b_in.person AS person,
+								b_in.num AS num,
+							  b_in.modifydate AS modifytime,
+								CONCAT(
+									b_in.person,
+									'入库',
+									b_in.num,
+									'个',
+									b_in.catName,
+									'(',
+									b_in.batchNo,
+									')'
+								) description
+							FROM
+								b_in,
+								b_var
+							WHERE
+								b_var.bizkey = 'newinout'
+							AND DATEDIFF(CURDATE(), b_in.inDate) <= b_var.bizValue
+							AND DATEDIFF(CURDATE(), b_in.inDate) >= 0
+							UNION ALL
+								SELECT
+									b_out.id AS id,
+									b_out.catname AS catName,
+									b_out.catno AS catno,
+									b_out.outDate AS builtdate,
+									b_out.person AS person,
+									b_out.num AS num,
+							    b_out.modifydate AS modifytime,
+									CONCAT(
+										b_out.person,
+										'出库',
+										b_out.num,
+										'个',
+										b_out.catName,
+										'(',
+										b_out.batchNo,
+										')'
+									) description
+								FROM
+									b_out,
+									b_var
+								WHERE
+									b_var.bizkey = 'newinout'
+								AND DATEDIFF(CURDATE(), b_out.outDate) <= b_var.bizValue
+								AND DATEDIFF(CURDATE(), b_out.outDate) >= 0
+								ORDER BY
+									modifytime DESC]]>
 					</value>					
 				</sql>
 				<format>
@@ -158,7 +210,7 @@
 						if(!description.equals(""))
 						{
 							String fulldesc=description;
-							if(description.length()>40) description=description.substring(0,30)+"...";
+							if(description.length()>60) description=description.substring(0,50)+"...";
 							description=description.replaceAll("<p>","");
 							description=description.replaceAll("</p>","");
 							if(rrequest.getShowtype()== Consts.DISPLAY_ON_PLAINEXCEL)
