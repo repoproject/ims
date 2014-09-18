@@ -20,6 +20,7 @@
 					<col column="priceUnit" label="货币"  clickorderby="true" width="10%"></col>					
 					<col column="total" label="库存" clickorderby="true" datatype="int" width="10%"></col>
 					<col column="expiredate" label="有效期" datatype="date{yyyy-MM-dd}" clickorderby="true" width="10%"></col>
+					<col column="Rname" label="R组"   clickorderby="true" width="3%"/>
 					<col column="ISEXP" label="提醒"   displaytype="hidden"></col>
 					<col column="dealer" label="供应商" clickorderby="true" width="10%"></col>
 					<col column="producer" label="生产商" clickorderby="true" width="10%"></col>
@@ -28,7 +29,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id ,cattype,(select codename from d_code where codetype='cattype' and  code = cattype )typename, catno, catname, batchno, round(localprice, 2) localprice, round(price, 2) price, ( SELECT codename FROM d_code WHERE CODE = priceUnit AND codetype = 'money' ) priceUnit, total, expiredate,dealer, producer, CASE WHEN DATEDIFF(expiredate, CURRENT_DATE()) <= b_var.bizValue THEN "1" ELSE "0" END ISEXP FROM b_cat, b_var WHERE total > 0 AND bizkey = 'expireTime' and {#condition#} order by expiredate]]>
+						<![CDATA[SELECT id ,cattype,(select codename from d_code where codetype='cattype' and  code = cattype )typename,(select codename from d_code where code=rtype and codetype='rtype')Rname, catno, catname, batchno, round(localprice, 2) localprice, round(price, 2) price, ( SELECT codename FROM d_code WHERE CODE = priceUnit AND codetype = 'money' ) priceUnit, total, expiredate,dealer, producer, CASE WHEN DATEDIFF(expiredate, CURRENT_DATE()) <= b_var.bizValue THEN "1" ELSE "0" END ISEXP FROM b_cat, b_var WHERE total > 0 AND bizkey = 'expireTime' and {#condition#} order by expiredate]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -68,7 +69,14 @@
 							<![CDATA[(trim(batchno) like  '%#data#%' )]]>
 						</value>						     
 					    </condition>
-						
+						 <condition name="txtrtype" label="R组" labelposition="left">						
+							<value> <![CDATA[(trim(rtype) = '#data#')]]>
+							</value>
+							<inputbox type="selectbox" >	
+							<option value="" label="全部"></option>						
+							<option dataset="@{select codename,code from d_code where codetype='rtype' order by code}" label="codename" value="code"></option>
+							</inputbox>
+						</condition>
 						 
 				</select>
 				<update pageurl="report{out_add.report1}" urlparams="txtid=@{id}"
@@ -89,7 +97,7 @@
 					<col column="typename" label="类型" clickorderby="true" width="3%"></col>
 					<col column="outdate" label="出库日期" clickorderby="true" datatype="date{yyyy-MM-dd}" width="10%"></col>
 					<col column="catno" label="货号"  clickorderby="true" width="8%"/>
-					<col column="catname" label="名称"  clickorderby="true" width="15%"/>
+					<col column="catname" label="名称"  clickorderby="true" width="12%"/>
 					<col column="batchno" label="批号" clickorderby="true" width="8%"></col>
 					<col column="price" label="单价" datatype="float" clickorderby="true" width="8%"></col>
 					<col column="priceUnit" label="货币"  clickorderby="true" width="4%"></col>
@@ -117,7 +125,7 @@
 							</value>
 							<inputbox type="datepicker" dateformat="yyyy-MM-dd" styleproperty="title='针对出库时间'" jsvalidatetype="onsubmit" jsvalidate="isStartTimeLargerEnd1(#label#不能晚于结束时间);isDate(#label#格式不符合要求)"></inputbox>
 						</condition>
-						<condition name="txtend1" label="结束时间" labelposition="left">
+						<condition name="txtend1" label="结束时间" labelposition="left" >
 							<value>
 								<![CDATA[(outdate<=DATE('#data#'))]]>
 							</value>
@@ -125,7 +133,7 @@
 						</condition>
 						
 						
-						<condition name="txtcatname1" label="名称 " labelposition="left">
+						<condition name="txtcatname1" label="名 称 " labelposition="left">
 						     <value>
 							<![CDATA[(trim(catname) like  '%#data#%' )]]>
 						</value>
@@ -145,7 +153,7 @@
 							<![CDATA[(trim(catno) like  '%#data#%' )]]>
 						</value>						     
 					    </condition>
-					    <condition name="txtbatchno1" label="批号" labelposition="left"  >
+					    <condition name="txtbatchno1" label="批 号" labelposition="left"  >
 						     <value>
 							<![CDATA[(trim(batchno) like  '%#data#%' )]]>
 						</value>						     
@@ -156,7 +164,8 @@
 						     <value>
 							<![CDATA[(trim(person) like  '%#data#%' )]]>
 						</value>						     
-					    </condition>				    
+					    </condition>
+					     				    
 					    				    
 				</select>	
 				<update pageurl="report{out_edit.report1}" urlparams="txtid=@{id}"
