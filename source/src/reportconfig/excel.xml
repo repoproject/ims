@@ -56,7 +56,7 @@
 			
         </sql>
         <col index="1" type="">catno</col>
-        <col index="2" type=""></col>
+        <col index="2" type="">machineNo</col>
         <col index="3" type="">catname</col>
         <col index="4" type="" sum="true">opening</col>
         <col index="5" type="" sum="true">inVendor</col>
@@ -89,7 +89,7 @@
         <col index="35" type="" sum="true">cqtyIn</col>
         <col index="36" type="" sum="true">cqtyOut</col>
     </Sheet>
-    <Sheet name="R2-LCMS_Micro" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
+    <Sheet name="R2-LCMS_Micro" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R2Sheet">
         <sql>
 			SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
@@ -137,7 +137,7 @@
 			
         </sql>
         <col index="1" type="">catno</col>
-        <col index="2" type=""></col>
+        <col index="2" type="">machineNo</col>
         <col index="3" type="">catname</col>
         <col index="4" type="" sum="true">opening</col>
         <col index="5" type="" sum="true">inVendor</col>
@@ -218,7 +218,7 @@
 			
         </sql>
         <col index="1" type="">catno</col>
-        <col index="2" type=""></col>
+        <col index="2" type="">machineNo</col>
         <col index="3" type="">catname</col>
         <col index="4" type="" sum="true">opening</col>
         <col index="5" type="" sum="true">inVendor</col>
@@ -299,7 +299,7 @@
 			
         </sql>
         <col index="1" type="">catno</col>
-        <col index="2" type=""></col>
+        <col index="2" type="">machineNo</col>
         <col index="3" type="">catname</col>
         <col index="4" type="" sum="true">opening</col>
         <col index="5" type="" sum="true">inVendor</col>
@@ -380,7 +380,7 @@
 			
         </sql>
         <col index="1" type="">catno</col>
-        <col index="2" type=""></col>
+        <col index="2" type="">machineNo</col>
         <col index="3" type="">catname</col>
         <col index="4" type="" sum="true">opening</col>
         <col index="5" type="" sum="true">inVendor</col>
@@ -461,7 +461,7 @@
 			
         </sql>
         <col index="1" type="">catno</col>
-        <col index="2" type=""></col>
+        <col index="2" type="">machineNo</col>
         <col index="3" type="">catname</col>
         <col index="4" type="" sum="true">opening</col>
         <col index="5" type="" sum="true">inVendor</col>
@@ -542,7 +542,7 @@
 			
         </sql>
         <col index="1" type="">catno</col>
-        <col index="2" type=""></col>
+        <col index="2" type="">machineNo</col>
         <col index="3" type="">catname</col>
         <col index="4" type="" sum="true">opening</col>
         <col index="5" type="" sum="true">inVendor</col>
@@ -623,7 +623,7 @@
 			
         </sql>
         <col index="1" type="">catno</col>
-        <col index="2" type=""></col>
+        <col index="2" type="">machineNo</col>
         <col index="3" type="">catname</col>
         <col index="4" type="" sum="true">opening</col>
         <col index="5" type="" sum="true">inVendor</col>
@@ -704,7 +704,7 @@
 			
         </sql>
         <col index="1" type="">catno</col>
-        <col index="2" type=""></col>
+        <col index="2" type="">machineNo</col>
         <col index="3" type="">catname</col>
         <col index="4" type="" sum="true">opening</col>
         <col index="5" type="" sum="true">inVendor</col>
@@ -785,7 +785,7 @@
 			
         </sql>
         <col index="1" type="">catno</col>
-        <col index="2" type=""></col>
+        <col index="2" type="">machineNo</col>
         <col index="3" type="">catname</col>
         <col index="4" type="" sum="true">opening</col>
         <col index="5" type="" sum="true">inVendor</col>
@@ -866,7 +866,7 @@
 			
         </sql>
         <col index="1" type="">catno</col>
-        <col index="2" type=""></col>
+        <col index="2" type="">machineNo</col>
         <col index="3" type="">catname</col>
         <col index="4" type="" sum="true">opening</col>
         <col index="5" type="" sum="true">inVendor</col>
@@ -899,7 +899,7 @@
         <col index="35" type="" sum="true">cqtyIn</col>
         <col index="36" type="" sum="true">cqtyOut</col>
     </Sheet>
-    <Sheet name="Discard_CLab" dataRowNum="5" dataStartNum="5" footerRowNum="7" class="com.ims.report.excel.R1Sheet">
+    <Sheet name="Discard_CLab" dataRowNum="5" dataStartNum="5" footerRowNum="7" class="com.ims.report.excel.DiscardCLabSheet">
         <sql>
 			select @rownum:=@rownum+1 rownum,t.* from(
 				select @rownum:=0 ,a.outDate,a.description,a.catno,
@@ -929,7 +929,7 @@
         <col index="14" type="">dealer</col>
         <col index="15" type="">catFrom</col>
     </Sheet>
-    <Sheet name="Validation_CLab" dataStartNum="4" dataRowNum="5" footerRowNum="6" class="com.ims.report.excel.R1Sheet">
+    <Sheet name="Validation_CLab" dataStartNum="4" dataRowNum="5" footerRowNum="6" class="com.ims.report.excel.ValidationCLabSheet">
         <sql>
 			select t.section, t.outDate,t.description,t.rType,t.catname,t.qty,t.priceCNY,
 			t.priceCNY*t.qty totalCostCNY,t.priceUSD*t.qty totalCostUSD,t.projectCode
@@ -1001,7 +1001,7 @@
 			
         </sql>
         <col index="1" type="">catno</col>
-        <col index="2" type=""></col>
+        <col index="2" type="">machineNo</col>
         <col index="3" type="">catname</col>
         <col index="4" type="" sum="true">opening</col>
         <col index="5" type="" sum="true">inVendor</col>
@@ -1034,7 +1034,7 @@
         <col index="35" type="" sum="true">cqtyIn</col>
         <col index="36" type="" sum="true">cqtyOut</col>
     </Sheet>
-    <Sheet name="Discard_APLab" dataRowNum="5" dataStartNum="5" footerRowNum="7" class="com.ims.report.excel.R1Sheet">
+    <Sheet name="Discard_APLab" dataRowNum="5" dataStartNum="5" footerRowNum="7" class="com.ims.report.excel.DiscardCLabSheet">
         <sql>
 			select @rownum:=@rownum+1 rownum,t.* from(
 				select @rownum:=0 ,a.outDate,a.description,a.catno,
@@ -1064,7 +1064,7 @@
         <col index="14" type="">dealer</col>
         <col index="15" type="">catFrom</col>
     </Sheet>
-    <Sheet name="Validation_APLab" dataStartNum="4" dataRowNum="5" footerRowNum="6" class="com.ims.report.excel.R1Sheet">
+    <Sheet name="Validation_APLab" dataStartNum="4" dataRowNum="5" footerRowNum="6" class="com.ims.report.excel.ValidationCLabSheet">
         <sql>
 			select t.section, t.outDate,t.description,t.rType,t.catname,t.qty,t.priceCNY,
 			t.priceCNY*t.qty totalCostCNY,t.priceUSD*t.qty totalCostUSD,t.projectCode

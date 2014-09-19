@@ -17,6 +17,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import com.ims.common.SysConst;
 import com.ims.report.config.ExcelConfig;
 import com.ims.report.config.Sheet;
+import com.ims.report.excel.AbsRSheet;
 import com.ims.report.excel.ISheet;
 import com.ims.util.DateTimeUtil;
 import com.ims.util.Sys;
@@ -86,7 +87,7 @@ public class InventoryReport implements Runnable{
 				}
 				Class clazz = Class.forName(config.getClassName());
 				Constructor constructor = clazz.getConstructor(HSSFSheet.class,Sheet.class,Date.class,Date.class);
-				ISheet sheetObj = (ISheet) constructor.newInstance(excelSheet,config,this.startDate,this.endDate);
+				ISheet sheetObj = (ISheet)constructor.newInstance(excelSheet,config,this.startDate,this.endDate);
 				sheetObj.createSheet();
 			} catch (Exception e) {
 				logger.error("创建Excel的sheet失败，Sheet名称：" + config.getName() + "处理类" + config.getClassName());
