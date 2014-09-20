@@ -12,18 +12,18 @@
 				<display mouseoverbgcolor="CCCCCC" >
 					<col column="{sequence:1}" label="序号" width="4%"/>
 					<col column="id" label="序号"  displaytype="hidden"/>
-					<col column="typename" label="类型" clickorderby="true" width="4%"></col>
+					<col column="typename" label="类型" clickorderby="true" width="3%"></col>
 					<col column="catname" label="名称"  clickorderby="true" width="18%"/>
-					<col column="catno" label="货号"  clickorderby="true" width="10%"/>					
-					<col column="batchno" label="批号" clickorderby="true" width="10%"></col>		
-					<col column="price" label="单价" datatype="float" clickorderby="true" width="10%"></col>
-					<col column="priceUnit" label="货币"  clickorderby="true" width="10%"></col>					
-					<col column="total" label="库存" clickorderby="true" datatype="int" width="10%"></col>
+					<col column="catno" label="货号"  clickorderby="true" width="12%"/>					
+					<col column="batchno" label="批号" clickorderby="true" width="12%"></col>		
+					<col column="price" label="单价" datatype="float" clickorderby="true" width="8%"></col>
+					<col column="priceUnit" label="货币"  clickorderby="true" width="3%"></col>					
+					<col column="total" label="库存" clickorderby="true" datatype="int" width="5%"></col>
 					<col column="expiredate" label="有效期" datatype="date{yyyy-MM-dd}" clickorderby="true" width="10%"></col>
-					<col column="Rname" label="R组"   clickorderby="true" width="3%"/>
+					<col column="Rname" label="R组"   clickorderby="true" width="6%"/>
 					<col column="ISEXP" label="提醒"   displaytype="hidden"></col>
-					<col column="dealer" label="供应商" clickorderby="true" width="10%"></col>
-					<col column="producer" label="生产商" clickorderby="true" width="10%"></col>
+					<col column="dealer" label="供应商" clickorderby="true" width="8%"></col>
+					<col column="producer" label="生产商" clickorderby="true" width="8%"></col>
 					<col column="{editablelist-edit}" label="出库" width="5%"></col>
 				</display>
 			<sql>
@@ -95,23 +95,24 @@
 					<col column="{sequence:1}" label="序号" width="3%"/>
 					<col column="id" label="编号"  displaytype="hidden"  />
 					<col column="typename" label="类型" clickorderby="true" width="3%"></col>
-					<col column="outdate" label="出库日期" clickorderby="true" datatype="date{yyyy-MM-dd}" width="10%"></col>
+					<col column="outdate" label="出库日期" clickorderby="true" datatype="date{yyyy-MM-dd}" width="6%"></col>
 					<col column="catno" label="货号"  clickorderby="true" width="8%"/>
 					<col column="catname" label="名称"  clickorderby="true" width="12%"/>
 					<col column="batchno" label="批号" clickorderby="true" width="8%"></col>
-					<col column="price" label="单价" datatype="float" clickorderby="true" width="8%"></col>
-					<col column="priceUnit" label="货币"  clickorderby="true" width="4%"></col>
+					<col column="price" label="单价" datatype="float" clickorderby="true" width="6%"></col>
+					<col column="priceUnit" label="货币"  clickorderby="true" width="3%"></col>
 					<col column="num" label="数量" datatype="int" clickorderby="true" width="5%"></col>
 					<col column="machinename" label="设备"  clickorderby="true" width="8%"/>
-					<col column="machineno" label="设备序号"  clickorderby="true" width="8%"/>
-					<col column="reason" label="出库原因" clickorderby="true" width="10%"></col>
+					<col column="machineno" label="设备序号"  clickorderby="true" width="6%"/>
+					<col column="reason" label="出库原因" clickorderby="true" width="8%"></col>
 					<col column="person" label="出库人" displaytype="hidden"  />
+					<col column="Rname" label="R组"   clickorderby="true" width="3%"/>
 					<col column="{editablelist-edit}" label="修改" width="4%"></col>
 				</display>
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id,cattype,(select codename from d_code where codetype='cattype' and  code = cattype )typename,catno,catname,machinename,machineno,batchno,person,outdate,round(price,2) price,( SELECT codename FROM d_code WHERE CODE = priceUnit AND codetype = 'money' ) priceUnit,num,(select codename from d_code where code=reason and codetype='outreason') reason FROM b_out  where  1=1 and {#condition#}]]>
+						<![CDATA[SELECT id,cattype,(select codename from d_code where code=rtype and codetype='rtype')Rname,(select codename from d_code where codetype='cattype' and  code = cattype )typename,catno,catname,machinename,machineno,batchno,person,outdate,round(price,2) price,( SELECT codename FROM d_code WHERE CODE = priceUnit AND codetype = 'money' ) priceUnit,num,(select codename from d_code where code=reason and codetype='outreason') reason FROM b_out  where  1=1 and {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
