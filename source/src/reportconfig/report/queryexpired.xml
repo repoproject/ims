@@ -10,21 +10,23 @@
 				<display mouseoverbgcolor="CCCCCC" >
 				<col column="{col-rowselect}" width="20"></col>
 					<col column="id" label="编号"  displaytype="hidden"/>
-					<col column="{sequence:1}" label="序号" width="3%"/>
+					<col column="{sequence:1}" label="序号" width="2%"/>
 					<col column="cattype" label="类型"  clickorderby="true" width="3%"/>
-					<col column="person" label="出库人" clickorderby="true" width="4%"></col>
+					<col column="person" label="出库人" clickorderby="true" width="3%"></col>
 					<col column="outdate" label="出库日期" clickorderby="true" datatype="date{yyyy-MM-dd}" width="6%"></col>
 					<col column="catname" label="名称"  clickorderby="true" width="12%"/>
-					<col column="catno" label="货号"  clickorderby="true" width="6%"/>
-					<col column="batchno" label="批号" clickorderby="true" width="6%"></col>
-					<col column="machinename" label="所属设备"  clickorderby="true" width="6%"/>
-					<col column="machineno" label="设备序号"  clickorderby="true" width="6%"/>
-                    <col column="price" label="原始单价"  clickorderby="true" width="6%"></col>
+					<col column="catno" label="货号"  clickorderby="true" width="7%"/>
+					<col column="batchno" label="批号" clickorderby="true" width="7%"></col>
+					<col column="machinename" label="设备"  clickorderby="true" width="6%"/>
+					<col column="machineno" label="设备序号"  clickorderby="true" width="4%"/>
+                    <col column="price" label="原始单价"  clickorderby="true" width="3%"></col>
 					<col column="priceUnit" label="货币"  clickorderby="true" width="3%"></col>
-					<col column="localprice" label="单价(RMB)"  clickorderby="true" width="6%"></col>	
-					<col column="num" label="数量" datatype="int" clickorderby="true" width="4%"></col>
-					<col column="subtotal" label="小计(RMB)"  clickorderby="true" width="6%"></col>					
-					<col column="remark" label="备注" clickorderby="true" width="8%"></col>
+					<col column="localprice" label="单价（RMB）"  clickorderby="true" width="6%"></col>	
+					<col column="num" label="数量" datatype="int" clickorderby="true" width="3%"></col>
+					<col column="subtotal" label="小计(RMB)"  clickorderby="true" width="4%"></col>	
+					<col column="cause" label="Root Causes" clickorderby="true" width="8%"></col>					    
+					<col column="section" label="Sections"  clickorderby="true" width="4%"></col>
+					<col column="remark" label="备注" clickorderby="true" width="5%"></col>
 				</display>
 				   <subdisplay>
 					    <statitems><!-- 定义要用到的统计项 -->
@@ -34,8 +36,8 @@
 						     <statitem property="item4" value="sum(subtotal)" datatype="float"></statitem>
 					    </statitems>
 					    <subrow displaytype="page|report">
-						     <subcol property="sprop1" colspan="5" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
-						     <subcol property="sprop2" colspan="5" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
+						     <subcol property="sprop1" colspan="6" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
+						     <subcol property="sprop2" colspan="6" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
 						     <subcol property="sprop3" colspan="6" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
 					    </subrow>
 					    <format>
@@ -55,6 +57,10 @@
 				<select>
 					<value>
 						<![CDATA[
+							SELECT
+							*, ROUND(num * localprice, 2) subtotal
+						FROM
+							(	
 								SELECT
 									id,
 									catno,
@@ -108,7 +114,6 @@
 											CODE = priceUnit
 										AND codetype = 'money'
 									) priceUnit,
-									round((localprice * num), 2) subtotal,
 									(
 										SELECT
 											codename
@@ -118,12 +123,15 @@
 											CODE = cattype
 										AND codetype = 'cattype'
 									) cattype
+									,cause
+									,section
 								FROM
 									b_out
 								WHERE
 									b_out.reason = '2' /*DISCARD是2*/
 								AND 1=1 
-								and {#condition#}                          
+								and {#condition#}  
+								)a                        
                            ]]>
 					</value>
 					<condition name="txtbegin1" label="开始时间" labelposition="left">

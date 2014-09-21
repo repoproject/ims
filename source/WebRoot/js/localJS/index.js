@@ -319,6 +319,9 @@ function checkFlash(){
 		//R统计权限
 		$("#inventoryStatics").html('<a href="excel.jsp" target="navTab" rel="userbaseinfo26" external="true" fresh="false">库存统计</a>');
 
+		//库存导入
+		$("#inventoryStatics").html('<a href="ShowReport.wx?PAGEID=importcat" target="navTab" rel="userbaseinfo25" external="true" fresh="false">库存导入</a>');
+
 	}else{
 		
 		var temp0 = document.getElementById("userManage");

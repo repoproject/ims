@@ -104,7 +104,11 @@
 			     </inputbox>
 				</col>
 											
-				
+
+				<col column="rtype" label="所属R" >
+					<inputbox type="selectbox" styleproperty="disabled='disabled'" ><option dataset="@{select codename,code from d_code where codetype='rtype' order by code}" label="codename" value="code"></option>
+					</inputbox>
+				</col>				
 				<col column="remark" label="备注">
 					<inputbox type="textareabox" styleproperty="colspan='3'" jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);stripscript(#label#不能含有特殊字符)" />
 				</col>
@@ -113,7 +117,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT ID,cattype, seq,( SELECT codename FROM d_code WHERE codetype = 'cattype' AND CODE = cattype ) typename, NULL machinename, NULL machineno, NULL projectCode, NULL description, NULL cause, NULL section, catno, catname, batchno, NULL num, total, round(price, 2) price, priceUnit, localprice, NULL person, NULL reason, sysdate() outdate, NULL remark FROM b_cat where  {#condition#}]]>
+						<![CDATA[SELECT ID,cattype, seq,rtype,( SELECT codename FROM d_code WHERE codetype = 'cattype' AND CODE = cattype ) typename, NULL machinename, NULL machineno, NULL projectCode, NULL description, NULL cause, NULL section, catno, catname, batchno, NULL num, total, round(price, 2) price, priceUnit, localprice, NULL person, NULL reason, sysdate() outdate, NULL remark FROM b_cat where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -122,8 +126,8 @@
 					</condition>
 				</select>
 				<update>
-				    insert into b_out(machinename,  machineno,  cattype,  catno,    catname,  batchno,   seq,    person,   outdate,   price,   priceUnit,   localprice,   num,   reason,   remark,operator,makedate, modifydate,projectCode,description,cause,section)
-					         values(@{machinename},@{machineno},@{cattype},@{catno},@{catname},@{batchno},@{seq},@{person},@{outdate},@{price},@{priceUnit},@{localprice},@{num},@{reason},@{remark},session{nickname},  sysdate(),sysdate(),@{projectCode},@{description},@{cause},@{section});
+				    insert into b_out(machinename,  machineno,  cattype,   rtype,     catno,    catname,  batchno,   seq,    person,   outdate,   price,   priceUnit,   localprice,   num,   reason,   remark,operator,makedate, modifydate,projectCode,description,cause,section)
+					         values(@{machinename},@{machineno},@{cattype},@{rtype},@{catno},@{catname},@{batchno},@{seq},@{person},@{outdate},@{price},@{priceUnit},@{localprice},@{num},@{reason},@{remark},session{nickname},  sysdate(),sysdate(),@{projectCode},@{description},@{cause},@{section});
 				</update>
 			</sql>
 			<format><!--

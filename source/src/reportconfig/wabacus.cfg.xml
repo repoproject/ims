@@ -104,6 +104,8 @@
 		
 		<report-file>report/Rstatics.xml</report-file>
 		
+	<!--	<report-file>report/importcat.xml</report-file>-->
+		
 		
 		<!--		<report-file>report/queryin.xml</report-file><report-file pattern="true">report/(report_)(\S*?)(\.xml)</report-file>
 		<report-file>report/in.xml</report-file>

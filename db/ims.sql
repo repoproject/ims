@@ -1,22 +1,22 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : mysql
-Source Server Version : 50510
+Source Server         : gq
+Source Server Version : 50617
 Source Host           : localhost:3306
 Source Database       : ims
 
 Target Server Type    : MYSQL
-Target Server Version : 50510
+Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2014-09-18 21:02:25
+Date: 2014-09-20 22:51:05
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for b_cat
+-- Table structure for `b_cat`
 -- ----------------------------
 DROP TABLE IF EXISTS `b_cat`;
 CREATE TABLE `b_cat` (
@@ -41,26 +41,14 @@ CREATE TABLE `b_cat` (
   `makedate` datetime DEFAULT NULL,
   `modifydate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_cat
 -- ----------------------------
-INSERT INTO `b_cat` VALUES ('111', '11970909216', 'ALB', '', '0', '1', '3', '1', null, '', '2014-09-18 00:00:00', '1.0000', '0', null, '', '12', 'Bio-rad Controls for Modular', null, '2014-09-17 20:21:18', '2014-09-17 22:30:13');
-INSERT INTO `b_cat` VALUES ('112', '11970909216', 'ALB', '', '0', '2', '2', '1', null, '', '2014-10-11 00:00:00', '2.0000', '0', null, '', '12', 'Bio-rad Controls for Modular', null, '2014-09-17 20:21:49', '2014-09-17 22:58:58');
-INSERT INTO `b_cat` VALUES ('113', '11970909216', 'ALB', '', '0', '3', '4', '1', null, '', '2014-10-11 00:00:00', '3.0000', '0', null, '', '12', 'Bio-rad Controls for Modular', null, '2014-09-17 20:22:10', '2014-09-17 23:00:09');
-INSERT INTO `b_cat` VALUES ('114', '11970909216', 'ALB', '', '0', '4', '0', '1', null, '', '2014-10-11 00:00:00', '4.0000', '0', null, '', '1', 'Modular Reagent', null, '2014-09-17 20:22:34', '2014-09-17 22:59:50');
-INSERT INTO `b_cat` VALUES ('115', '11970909216', 'ALB', '', '0', '1', '0', '1', null, '', '2014-10-11 00:00:00', '0.0000', '0', null, '', null, null, null, '2014-09-17 20:44:08', '2014-09-17 22:51:42');
-INSERT INTO `b_cat` VALUES ('116', '11970909216', 'ALB', '', '0', '5', '3', '1', null, '', '2014-10-11 00:00:00', '5.0000', '0', null, '', '3', 'E411', null, '2014-09-17 20:54:04', '2014-09-17 21:28:52');
-INSERT INTO `b_cat` VALUES ('117', '11970909216', 'ALB', '', '0', '7', '0', '1', null, '', '2014-10-11 00:00:00', '7.0000', '0', null, '', '12', 'Bio-rad Controls for Modular', null, '2014-09-17 21:34:04', '2014-09-17 21:49:25');
-INSERT INTO `b_cat` VALUES ('118', '11970909216', 'ALB', '', '0', '8', '0', '1', null, '', '2014-10-11 00:00:00', '8.0000', '0', null, '', null, null, null, '2014-09-17 21:50:45', '2014-09-17 21:52:21');
-INSERT INTO `b_cat` VALUES ('119', '11970909216', 'ALB', '', '0', '8', '0', '1', null, '', '2014-10-11 00:00:00', '7.0000', '0', null, '', '12', 'Bio-rad Controls for Modular', null, '2014-09-17 21:52:21', '2014-09-17 22:08:56');
-INSERT INTO `b_cat` VALUES ('120', '11183974216', 'ISE Cal Low', '', '0', '1', '7', '1', null, '', '2014-10-10 00:00:00', '10.0000', '0', null, '', '3', 'E411', null, '2014-09-17 22:47:56', '2014-09-17 22:48:40');
-INSERT INTO `b_cat` VALUES ('121', '04880285190', 'Cell wash solution / NaOH', '', '0', '6', '13', '1', null, '', '2014-10-11 00:00:00', '6.0000', '0', null, '', null, null, null, '2014-09-17 22:57:55', '2014-09-17 22:57:55');
-INSERT INTO `b_cat` VALUES ('122', '11183974216', 'ISE Cal Low', '', '0', '1', '5', '1', null, '', '2014-10-11 00:00:00', '111.0000', '0', null, '', null, null, null, '2014-09-17 23:28:21', '2014-09-17 23:28:21');
 
 -- ----------------------------
--- Table structure for b_file
+-- Table structure for `b_file`
 -- ----------------------------
 DROP TABLE IF EXISTS `b_file`;
 CREATE TABLE `b_file` (
@@ -80,7 +68,7 @@ INSERT INTO `b_file` VALUES ('1', 'final.xlsx', 'd:\\downlist', 'xlsx', '2014-09
 INSERT INTO `b_file` VALUES ('2', 'Inventory listing 2014-6 final.xlsx', 'd:\\downlist', 'xlsx', null, null);
 
 -- ----------------------------
--- Table structure for b_in
+-- Table structure for `b_in`
 -- ----------------------------
 DROP TABLE IF EXISTS `b_in`;
 CREATE TABLE `b_in` (
@@ -111,23 +99,14 @@ CREATE TABLE `b_in` (
   `makedate` datetime DEFAULT NULL COMMENT '产生日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8 COMMENT='试剂表';
+) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8 COMMENT='试剂表';
 
 -- ----------------------------
 -- Records of b_in
 -- ----------------------------
-INSERT INTO `b_in` VALUES ('100', '11970909216', 'ALB', '', '1', '0', '', '', null, '0', '2014-09-18 00:00:00', '3', null, '1.0000', '0', null, '0.0000', '2014-09-17 00:00:00', null, '1', '0', '1', '', '1', '2014-09-17 20:21:18', '2014-09-17 22:27:12');
-INSERT INTO `b_in` VALUES ('104', '11970909216', 'ALB', '', '1', '0', '', '', null, '0', '2014-10-11 00:00:00', '4', null, '1.0000', '0', null, '0.0000', '2014-09-18 00:00:00', null, '1', '0', '1', '', '1', '2014-09-17 20:40:21', '2014-09-17 20:40:21');
-INSERT INTO `b_in` VALUES ('108', '11970909216', 'ALB', '', '1', '0', '', '', null, '0', '2014-10-11 00:00:00', '1', null, '1.0000', '0', null, '0.0000', '2014-09-17 00:00:00', null, '1', '0', '1', '', '1', '2014-09-17 20:51:17', '2014-09-17 20:51:17');
-INSERT INTO `b_in` VALUES ('109', '11970909216', 'ALB', '', '2', '0', '', '', null, '0', '2014-10-11 00:00:00', '2', null, '2.0000', '0', null, '0.0000', '2014-09-17 00:00:00', null, '1', '0', '1', '', '1', '2014-09-17 20:52:38', '2014-09-17 20:53:07');
-INSERT INTO `b_in` VALUES ('118', '11183974216', 'ISE Cal Low', '', '1', '0', '', '', null, '0', '2014-10-10 00:00:00', '8', null, '10.0000', '0', null, '0.0000', '2014-09-17 00:00:00', null, '1', '0', '1', '', '1', '2014-09-17 22:47:56', '2014-09-17 22:48:17');
-INSERT INTO `b_in` VALUES ('119', '04880285190', 'Cell wash solution / NaOH', '', '6', '0', '', '', null, '0', '2014-10-11 00:00:00', '6', null, '6.0000', '0', null, '0.0000', '2014-09-17 00:00:00', null, '1', '0', '1', '', '1', '2014-09-17 22:57:55', '2014-09-17 22:57:55');
-INSERT INTO `b_in` VALUES ('120', '04880285190', 'Cell wash solution / NaOH', '', '6', '0', '', '', null, '0', '2014-10-11 00:00:00', '6', null, '6.0000', '0', null, '0.0000', '2014-09-17 00:00:00', null, '1', '0', '1', '', '1', '2014-09-17 23:05:03', '2014-09-17 23:05:03');
-INSERT INTO `b_in` VALUES ('121', '04880285190', 'Cell wash solution / NaOH', '', '6', '0', '', '', null, '0', '2014-10-11 00:00:00', '1', null, '6.0000', '0', null, '0.0000', '2014-09-17 00:00:00', null, '1', '0', '1', '', '1', '2014-09-17 23:06:36', '2014-09-17 23:06:36');
-INSERT INTO `b_in` VALUES ('122', '11183974216', 'ISE Cal Low', '', '1', '0', '', '', null, '0', '2014-10-11 00:00:00', '5', null, '111.0000', '0', null, '0.0000', '2014-09-17 00:00:00', null, '1', '0', '1', '', '1', '2014-09-17 23:28:21', '2014-09-17 23:28:21');
 
 -- ----------------------------
--- Table structure for b_machine
+-- Table structure for `b_machine`
 -- ----------------------------
 DROP TABLE IF EXISTS `b_machine`;
 CREATE TABLE `b_machine` (
@@ -149,7 +128,7 @@ INSERT INTO `b_machine` VALUES ('8', 'Bio-rad Controls for Modular', null, '12',
 INSERT INTO `b_machine` VALUES ('9', 'E411', null, '3', null, '', '3');
 
 -- ----------------------------
--- Table structure for b_out
+-- Table structure for `b_out`
 -- ----------------------------
 DROP TABLE IF EXISTS `b_out`;
 CREATE TABLE `b_out` (
@@ -158,6 +137,7 @@ CREATE TABLE `b_out` (
   `machineNo` varchar(50) DEFAULT NULL COMMENT '设备编号',
   `catno` varchar(50) NOT NULL,
   `catname` varchar(255) DEFAULT NULL,
+  `rType` varchar(50) DEFAULT NULL COMMENT '分组，按照R特性分组',
   `seq` varchar(50) DEFAULT '' COMMENT '编号，为全球统一编号预留',
   `batchno` varchar(50) NOT NULL COMMENT '批号',
   `cattype` varchar(50) DEFAULT NULL COMMENT '0-试剂,1-耗材',
@@ -177,20 +157,14 @@ CREATE TABLE `b_out` (
   `makedate` datetime DEFAULT NULL COMMENT '创建日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='出库记录';
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='出库记录';
 
 -- ----------------------------
 -- Records of b_out
 -- ----------------------------
-INSERT INTO `b_out` VALUES ('20', 'Modular Reagent', '1', '11970909216', 'ALB', '', '1', '0', '1', '2014-09-17 00:00:00', '1.0000', '0', '0.0000', '5', '0', '', '', '', '', '', '1', '2014-09-17 22:29:31', '2014-09-17 22:29:31');
-INSERT INTO `b_out` VALUES ('21', 'Bio-rad Controls for Modular', '12', '11970909216', 'ALB', '', '1', '0', '1', '2014-09-17 00:00:00', '1.0000', '0', '0.0000', '2', '0', '', '', '', '', '', '1', '2014-09-17 22:30:13', '2014-09-17 22:30:13');
-INSERT INTO `b_out` VALUES ('22', 'E411', '3', '11183974216', 'ISE Cal Low', '', '1', '0', '1', '2014-09-17 00:00:00', '10.0000', '0', '0.0000', '1', '0', '', '', '', '', '', '1', '2014-09-17 22:48:40', '2014-09-17 22:48:40');
-INSERT INTO `b_out` VALUES ('23', 'Bio-rad Controls for Modular', '12', '11970909216', 'ALB', '', '2', '0', '1', '2014-09-17 00:00:00', '2.0000', '0', '0.0000', '6', '0', '', '', '', '', '', '1', '2014-09-17 22:58:58', '2014-09-17 22:58:58');
-INSERT INTO `b_out` VALUES ('24', 'Modular Reagent', '1', '11970909216', 'ALB', '', '4', '0', '1', '2014-09-17 00:00:00', '4.0000', '0', '0.0000', '6', '0', '', '', '', '', '', '1', '2014-09-17 22:59:50', '2014-09-17 22:59:50');
-INSERT INTO `b_out` VALUES ('25', 'Bio-rad Controls for Modular', '12', '11970909216', 'ALB', '', '3', '0', '1', '2014-09-17 00:00:00', '3.0000', '0', '0.0000', '2', '0', '', '', '', '', '', '1', '2014-09-17 23:00:09', '2014-09-17 23:00:09');
 
 -- ----------------------------
--- Table structure for b_person
+-- Table structure for `b_person`
 -- ----------------------------
 DROP TABLE IF EXISTS `b_person`;
 CREATE TABLE `b_person` (
@@ -205,7 +179,7 @@ CREATE TABLE `b_person` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for b_var
+-- Table structure for `b_var`
 -- ----------------------------
 DROP TABLE IF EXISTS `b_var`;
 CREATE TABLE `b_var` (
@@ -226,7 +200,7 @@ INSERT INTO `b_var` VALUES ('outTime', '3', '出库后悔天数');
 INSERT INTO `b_var` VALUES ('stockthreshold', '10', '库存少于X件进行提醒的阈值');
 
 -- ----------------------------
--- Table structure for d_catcode
+-- Table structure for `d_catcode`
 -- ----------------------------
 DROP TABLE IF EXISTS `d_catcode`;
 CREATE TABLE `d_catcode` (
@@ -254,7 +228,7 @@ INSERT INTO `d_catcode` VALUES ('49', '595', '', 'Liquichek Immunology Control L
 INSERT INTO `d_catcode` VALUES ('50', '596', '', 'Liquichek Immunology Control Level 3(6x3ml)', '0', '6', '', null, '');
 
 -- ----------------------------
--- Table structure for d_code
+-- Table structure for `d_code`
 -- ----------------------------
 DROP TABLE IF EXISTS `d_code`;
 CREATE TABLE `d_code` (
@@ -330,7 +304,7 @@ INSERT INTO `d_code` VALUES ('sex', '0', '女', null);
 INSERT INTO `d_code` VALUES ('sex', '1', '男', null);
 
 -- ----------------------------
--- Table structure for d_codetype
+-- Table structure for `d_codetype`
 -- ----------------------------
 DROP TABLE IF EXISTS `d_codetype`;
 CREATE TABLE `d_codetype` (
@@ -356,7 +330,7 @@ INSERT INTO `d_codetype` VALUES ('rootcause', 'Discard的rootcause', '由于Disc
 INSERT INTO `d_codetype` VALUES ('sections', 'Discard的Sections', '由于Discard原因出库时填写的sections / instruments');
 
 -- ----------------------------
--- Table structure for d_dept
+-- Table structure for `d_dept`
 -- ----------------------------
 DROP TABLE IF EXISTS `d_dept`;
 CREATE TABLE `d_dept` (
@@ -376,7 +350,7 @@ CREATE TABLE `d_dept` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for d_rate
+-- Table structure for `d_rate`
 -- ----------------------------
 DROP TABLE IF EXISTS `d_rate`;
 CREATE TABLE `d_rate` (
@@ -404,7 +378,7 @@ INSERT INTO `d_rate` VALUES ('5', '0', 'CNY', '4', 'GBP', '0.104938', '2014-01-0
 INSERT INTO `d_rate` VALUES ('6', '0', 'CNY', '1', 'USD', '0.159631', '2014-08-01 00:00:00', '001', '2014-09-03 15:04:50', '2014-09-03 15:04:52');
 
 -- ----------------------------
--- Table structure for d_task
+-- Table structure for `d_task`
 -- ----------------------------
 DROP TABLE IF EXISTS `d_task`;
 CREATE TABLE `d_task` (
@@ -439,7 +413,7 @@ INSERT INTO `d_task` VALUES ('12', 'monthtask', '每月定时任务11月份', '1
 INSERT INTO `d_task` VALUES ('13', 'monthtask', '每月定时任务12月份', '12', null, '26', 'M', '00:00:00', null, null);
 
 -- ----------------------------
--- Table structure for d_user
+-- Table structure for `d_user`
 -- ----------------------------
 DROP TABLE IF EXISTS `d_user`;
 CREATE TABLE `d_user` (
@@ -467,7 +441,7 @@ INSERT INTO `d_user` VALUES ('5', '444', '李四', null, '四儿', '1', '0', '0'
 INSERT INTO `d_user` VALUES ('6', '444', '王五', null, '乌尔', '1', '1', '1', null, '辅导费', null);
 
 -- ----------------------------
--- Table structure for d_var
+-- Table structure for `d_var`
 -- ----------------------------
 DROP TABLE IF EXISTS `d_var`;
 CREATE TABLE `d_var` (
@@ -486,25 +460,25 @@ INSERT INTO `d_var` VALUES ('reportpath', '\\reports\\', '报表保存路径');
 INSERT INTO `d_var` VALUES ('taskserverip', '127.0.0.1', '任务服务器，多台服务器集群使用');
 
 -- ----------------------------
--- View structure for r_in_view
+-- View structure for `r_in_view`
 -- ----------------------------
 DROP VIEW IF EXISTS `r_in_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `r_in_view` AS select `b`.`id` AS `catid`,(case when (`a`.`reason` = '0') then `a`.`num` else 0 end) AS `inVendor`,(case when (`a`.`reason` = '1') then `a`.`num` else 0 end) AS `inInterlab`,(case when (`a`.`reason` = '2') then `a`.`num` else 0 end) AS `inSponsor`,(case when (`a`.`reason` = '3') then `a`.`num` else 0 end) AS `inCharges`,`a`.`inDate` AS `indate` from (`b_in` `a` join `b_cat` `b`) where ((`a`.`catno` = `b`.`catno`) and (`a`.`batchNo` = `b`.`batchno`) and (`a`.`price` = `b`.`price`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `r_in_view` AS select `b`.`id` AS `catid`,(case when (`a`.`reason` = '0') then `a`.`num` else 0 end) AS `inVendor`,(case when (`a`.`reason` = '1') then `a`.`num` else 0 end) AS `inInterlab`,(case when (`a`.`reason` = '2') then `a`.`num` else 0 end) AS `inSponsor`,(case when (`a`.`reason` = '3') then `a`.`num` else 0 end) AS `inCharges`,`a`.`inDate` AS `indate` from (`b_in` `a` join `b_cat` `b`) where ((`a`.`catno` = `b`.`catno`) and (`a`.`batchNo` = `b`.`batchno`) and (`a`.`price` = `b`.`price`)) ;
 
 -- ----------------------------
--- View structure for r_out_view
+-- View structure for `r_out_view`
 -- ----------------------------
 DROP VIEW IF EXISTS `r_out_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `r_out_view` AS select `b`.`id` AS `catid`,(case when (`a`.`reason` = '0') then `a`.`num` else 0 end) AS `outTrialTest`,(case when (`a`.`reason` = '1') then `a`.`num` else 0 end) AS `outValidation`,(case when (`a`.`reason` = '2') then `a`.`num` else 0 end) AS `outDiscard`,(case when (`a`.`reason` = '3') then `a`.`num` else 0 end) AS `outIntelLab`,(case when (`a`.`reason` = '4') then `a`.`num` else 0 end) AS `outSponsor`,(case when (`a`.`reason` = '5') then `a`.`num` else 0 end) AS `outOther`,`a`.`outDate` AS `outdate` from (`b_out` `a` join `b_cat` `b`) where ((`a`.`catno` = `b`.`catno`) and (`a`.`batchno` = `b`.`batchno`) and (`a`.`price` = `b`.`price`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `r_out_view` AS select `b`.`id` AS `catid`,(case when (`a`.`reason` = '0') then `a`.`num` else 0 end) AS `outTrialTest`,(case when (`a`.`reason` = '1') then `a`.`num` else 0 end) AS `outValidation`,(case when (`a`.`reason` = '2') then `a`.`num` else 0 end) AS `outDiscard`,(case when (`a`.`reason` = '3') then `a`.`num` else 0 end) AS `outIntelLab`,(case when (`a`.`reason` = '4') then `a`.`num` else 0 end) AS `outSponsor`,(case when (`a`.`reason` = '5') then `a`.`num` else 0 end) AS `outOther`,`a`.`outDate` AS `outdate` from (`b_out` `a` join `b_cat` `b`) where ((`a`.`catno` = `b`.`catno`) and (`a`.`batchno` = `b`.`batchno`) and (`a`.`price` = `b`.`price`)) ;
 
 -- ----------------------------
--- View structure for r_price_view
+-- View structure for `r_price_view`
 -- ----------------------------
 DROP VIEW IF EXISTS `r_price_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `r_price_view` AS select `a`.`id` AS `catid`,(case when (`a`.`priceUnit` = '0') then `a`.`price` end) AS `CNY`,(case when (`a`.`priceUnit` = '1') then `a`.`price` end) AS `USD`,(case when (`a`.`priceUnit` = '2') then `a`.`price` end) AS `SGD`,(case when (`a`.`priceUnit` = '3') then `a`.`price` end) AS `EUR`,(case when (`a`.`priceUnit` = '4') then `a`.`price` end) AS `GBP`,(select round((`a`.`price` / `b`.`rate`),2) from `d_rate` `b` where (`b`.`foreignMoney` = `a`.`priceUnit`) order by `b`.`startDateTime` desc limit 1) AS `localPrice` from `b_cat` `a` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `r_price_view` AS select `a`.`id` AS `catid`,(case when (`a`.`priceUnit` = '0') then `a`.`price` end) AS `CNY`,(case when (`a`.`priceUnit` = '1') then `a`.`price` end) AS `USD`,(case when (`a`.`priceUnit` = '2') then `a`.`price` end) AS `SGD`,(case when (`a`.`priceUnit` = '3') then `a`.`price` end) AS `EUR`,(case when (`a`.`priceUnit` = '4') then `a`.`price` end) AS `GBP`,(select round((`a`.`price` / `b`.`rate`),2) from `d_rate` `b` where (`b`.`foreignMoney` = `a`.`priceUnit`) order by `b`.`startDateTime` desc limit 1) AS `localPrice` from `b_cat` `a` ;
 
 -- ----------------------------
--- Function structure for getCodeName
+-- Function structure for `getCodeName`
 -- ----------------------------
 DROP FUNCTION IF EXISTS `getCodeName`;
 DELIMITER ;;
@@ -521,7 +495,7 @@ END
 DELIMITER ;
 
 -- ----------------------------
--- Function structure for getMoney
+-- Function structure for `getMoney`
 -- ----------------------------
 DROP FUNCTION IF EXISTS `getMoney`;
 DELIMITER ;;
