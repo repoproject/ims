@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2014-09-20 22:51:05
+Date: 2014-09-21 23:42:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -34,6 +34,7 @@ CREATE TABLE `b_cat` (
   `price` decimal(10,4) NOT NULL,
   `priceUnit` varchar(50) DEFAULT NULL,
   `localPrice` decimal(10,4) DEFAULT NULL,
+  `catFrom` varchar(50) DEFAULT NULL COMMENT '来源，oversea，local',
   `dealer` varchar(255) DEFAULT NULL,
   `machineNo` varchar(50) DEFAULT NULL,
   `machineName` varchar(255) DEFAULT NULL,
@@ -41,7 +42,7 @@ CREATE TABLE `b_cat` (
   `makedate` datetime DEFAULT NULL,
   `modifydate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_cat
@@ -92,14 +93,14 @@ CREATE TABLE `b_in` (
   `inDate` datetime DEFAULT NULL COMMENT '入库日期',
   `machineName` varchar(50) DEFAULT NULL COMMENT '设备编号',
   `rtype` varchar(50) DEFAULT NULL COMMENT 'R分类',
-  `catFrom` varchar(100) DEFAULT NULL COMMENT '来源，oversea，local',
+  `catFrom` varchar(50) DEFAULT NULL COMMENT '来源，oversea，local',
   `person` varchar(50) DEFAULT NULL COMMENT '入库人',
   `remark` varchar(500) DEFAULT NULL COMMENT '备注',
   `operator` varchar(255) DEFAULT NULL COMMENT '当前用户',
   `makedate` datetime DEFAULT NULL COMMENT '产生日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8 COMMENT='试剂表';
+) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8 COMMENT='试剂表';
 
 -- ----------------------------
 -- Records of b_in
@@ -157,7 +158,7 @@ CREATE TABLE `b_out` (
   `makedate` datetime DEFAULT NULL COMMENT '创建日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='出库记录';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='出库记录';
 
 -- ----------------------------
 -- Records of b_out
@@ -274,6 +275,7 @@ INSERT INTO `d_code` VALUES ('rootcause', '6', '6.Incorrect reagent forecast (ov
 INSERT INTO `d_code` VALUES ('rootcause', '7', '7.Lot-to-Lot verification or failure.', null);
 INSERT INTO `d_code` VALUES ('rtype', '1', 'R1', null);
 INSERT INTO `d_code` VALUES ('rtype', '10', 'R10', null);
+INSERT INTO `d_code` VALUES ('rtype', '11', 'CTM', 'CTM Suppliers_DTW');
 INSERT INTO `d_code` VALUES ('rtype', '2', 'R2', null);
 INSERT INTO `d_code` VALUES ('rtype', '3', 'R3', null);
 INSERT INTO `d_code` VALUES ('rtype', '4', 'R4', null);
@@ -530,8 +532,8 @@ CREATE TRIGGER `tg_In_Insert` AFTER INSERT ON `b_in` FOR EACH ROW begin
      if cnt > 0 then
          update b_cat set total = (total+new.num) where catno=catno and batchno=batchno and price=price;
      else
-         insert into b_cat(catno,      catname,      cattype,       batchno,      seq,       total      ,rtype      ,productdate,       producer,       expiredate      ,price      ,priceunit       ,localprice      ,dealer , makedate  ,modifydate)
-                values(new.catno,new.catname,new.cattype,new.batchno,new.seq,new.num,new.rtype,new.productdate,new.producer,new.expiredate,new.price,new.priceunit,new.localprice,new.dealer, sysdate()       ,sysdate());
+         insert into b_cat(catno,      catname,      cattype,       batchno,      seq,       total      ,rtype      ,productdate,       producer,       catFrom  ,    expiredate      ,price      ,priceunit       ,localprice      ,dealer , makedate     ,modifydate)
+                values(new.catno,new.catname,new.cattype,new.batchno,new.seq,new.num,new.rtype,new.productdate,new.producer,new.catFrom,new.expiredate,new.price,new.priceunit,new.localprice,new.dealer, sysdate()       ,sysdate());
      end if;
 end
 ;;

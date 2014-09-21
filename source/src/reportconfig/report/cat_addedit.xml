@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications xmlns="http://www.wabacus.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
+	<page id="cat_addedit" js="/webresources/script/validate.js,/webresources/script/wabacus_api.js,webresources/script/wabacus_editsystem.js">
+		<report id="report1" title="request{txtname}详细信息" type="form" >
+			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
+				<col column="ID" displaytype="hidden">
+				</col>
+				<col column="catname" label="名称*" >
+					<inputbox type="textbox" jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan200(#label#长度应小于等于200);" >
+					    <typeprompt count="20"  callbackmethod="testTypePromptCallBack1">
+							 <promptcol label="catname" value="catname" title="名称" matchmode="anywhere"></promptcol>					    
+							 <promptcol label="catno" value="catno" title="货号" matchmode="anywhere"></promptcol>
+							 <promptcol label="seq" value="seq" title="编号" matchmode="anywhere"></promptcol>
+							      <datasource>
+							          <option dataset="@{select catno,catname,seq from d_catcode where {#matchcondition#}}"></option>       
+							      </datasource>
+					    </typeprompt>					
+					</inputbox>
+				</col>
+				<col column="catno" label="货号*" br="true" >
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);" >
+
+					</inputbox>
+				</col>
+				
+				<col column="batchno" label="批号*"  >
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);" />
+				</col>
+				<col column="total" label="库存*" br="true">
+				    <inputbox type="textbox" jsvalidate="isNotEmpty(#label#不允许为空);isPosNumber(#label#必须是大于0的整数)" />
+				</col>
+				
+				<col column="price" label="单价*" >
+				    <inputbox type="textbox" jsvalidate="isNotEmpty(#label#不允许为空);isposNumeric(#label#必须是大于等于0的数字)" />
+				</col>
+				<col column="priceUnit" label="货币" br="true">
+					<inputbox type="selectbox" >
+					    <option dataset="@{select codename,code from d_code where codetype='money'}" label="codename" value="code"></option>
+					</inputbox>
+				</col>
+				
+				<col column="seq" label="编号" >
+					<inputbox type="textbox" />					
+				</col>			
+				<col column="cattype" label="类别" br="true">
+					<inputbox type="selectbox"  >													
+							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
+					</inputbox>					
+				</col>
+								
+				<col column="localprice" label="本地价格" displaytype="hidden">
+				    <inputbox type="textbox" />
+				</col>
+				
+                <col column="dealer" label="供应商">
+					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);" />
+				</col>		
+                <col column="expiredate" label="过期日期*"  datatype="date{yyyy-MM-dd}"  br="true" >
+					<inputbox type="datepicker" dateformat="yyyy-MM-dd" jsvalidate="isDate(#label#格式不符合要求)"></inputbox>
+				</col>			
+
+				<col column="producer" label="生产商"  >
+					<inputbox jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);" />
+				</col>					
+				<col column="productdate" label="生产日期"  datatype="date{yyyy-MM-dd}"  br="true" >
+					<inputbox type="datepicker" dateformat="yyyy-MM-dd" jsvalidate="isDate(#label#格式不符合要求)"></inputbox>
+				</col>
+
+			
+				<col column="rtype" label="所属R">
+					<inputbox type="selectbox"  ><option dataset="@{select codename,code from d_code where codetype='rtype' order by code}" label="codename" value="code"></option>
+					</inputbox>
+				</col>				
+				<col column="catFrom" label="来源"  br="true">
+					<inputbox type="selectbox"><option dataset="@{select codename,code from d_code where codetype='catfrom'}" label="codename" value="code"></option>
+					</inputbox>
+				</col>			
+	
+			</display>
+			<sql>
+				<select>
+					<value>
+						<![CDATA[
+                               SELECT
+									b_cat.id,
+									b_cat.catno,
+									b_cat.catname,
+									b_cat.seq,
+									b_cat.cattype,
+									b_cat.batchno,
+									b_cat.total,
+									b_cat.rType,
+									b_cat.productDate,
+									b_cat.producer,
+									b_cat.expiredate,
+									b_cat.price,
+									b_cat.priceUnit,
+									b_cat.localPrice,
+									b_cat.dealer,
+									b_cat.machineNo,
+									b_cat.machineName,
+									b_cat.operator,
+									b_cat.makedate,
+									b_cat.modifydate,
+									b_cat.catFrom
+									FROM
+									b_cat
+                                where  {#condition#}]]>
+					</value>
+					<condition name="txtid" hidden="true">
+						<value>
+						<![CDATA[(ID = '#data#' )]]>
+						</value>
+					</condition>
+				</select>
+				<insert>
+				 insert into b_cat(catno,  catname,cattype,batchno,seq,total,rtype,productdate,producer,catFrom,expiredate,price,priceUnit,localprice,dealer, makedate   ,modifydate)
+                            values(catno,  catname,cattype,batchno,seq,total,rtype,productdate,producer,catFrom,expiredate,price,priceUnit,localprice,dealer, sysdate()  ,sysdate());
+   				</insert>
+				<update>
+				UPDATE b_cat
+					SET catno = trim(@{ catno }),
+					 catname = trim(@{ catname }),
+					 cattype = trim(@{ cattype }),
+					 batchno = trim(@{ batchno }),
+					 seq = trim(@{ seq }),
+					 total = trim(@{ total }),
+					 rtype = trim(@{ rtype }),
+					 productdate = trim(@{ productdate }),
+					 producer = trim(@{ producer }),
+					 catFrom = trim(@{ catFrom }),
+					 expiredate = trim(@{ expiredate }),
+					 price = trim(@{ price }),
+					 priceUnit = trim(@{ priceUnit }),
+					 localprice = trim(@{ localprice }),
+					 dealer = trim(@{dealer }),
+					 modifydate = sysdate()
+					where ID=@{ID__old};
+				</update>
+			</sql>
+			<format><!--
+				<value>
+					rrequest.getRequest().setAttribute("txtname",name);//存放request，以便显示标题时能取到
+				</value>
+			--></format>
+		</report>
+	</page>
+	
+</applications>
