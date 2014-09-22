@@ -79,22 +79,23 @@ public class R1Sheet extends AbsRSheet implements ISheet{
 	@Override
 	protected List<Object> formatData(List<Object> data) {
 		Map<String,String> mNoList = new HashMap<String,String>();
-		String mNo = "";
+		int mechineSeq = 0;
+		String mName = "";
 		Map<Object, Object> rowMap = null;
 		for(int i=0;i<data.size();i++){
 			rowMap = (Map)data.get(i);
-			if(rowMap.get("machineNo") == null)
+			if(rowMap.get("machineName") == null)
 				continue;
-			mNo = rowMap.get("machineNo").toString();
+			mName = rowMap.get("machineName").toString();
 			//单独显示机器行，机器名称显示在试剂名称列
-			if(!mNoList.containsKey(mNo)){
+			if(!mNoList.containsKey(mName)){
 				Map<String, String> mRow = new HashMap<String, String>();
-				mRow.put("machineNo", mNo);
+				mRow.put("machineNo", String.valueOf(mechineSeq++));
 				mRow.put("catname", rowMap.get("machineName").toString());
 				//机器行添加到数据集中
 				data.add(i, mRow);
 				i++;
-				mNoList.put(mNo, "");
+				mNoList.put(mName, "");
 			}
 			//非机器行不显示机器
 			rowMap.put("machineNo", "");

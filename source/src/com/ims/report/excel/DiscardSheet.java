@@ -15,12 +15,13 @@ import com.ims.report.config.Sheet;
 import com.ims.util.ExcelUtil;
 
 /**
+ * 如果CP和AP的不一样，可以分别继承本类
  * @author ChengNing
  * @date   2014-9-6
  */
-public class DiscardCLabSheet extends AbsRSheet implements ISheet {
+public class DiscardSheet extends AbsRSheet implements ISheet {
 	
-	private static Logger logger = Logger.getLogger(DiscardCLabSheet.class);
+	private static Logger logger = Logger.getLogger(DiscardSheet.class);
 
 	/**
 	 * 
@@ -28,7 +29,7 @@ public class DiscardCLabSheet extends AbsRSheet implements ISheet {
 	 * @param config
 	 * @param startDate
 	 */
-	public DiscardCLabSheet(HSSFSheet sheet, Sheet config, Date startDate) {
+	public DiscardSheet(HSSFSheet sheet, Sheet config, Date startDate) {
 		super(sheet, config, startDate);
 	}
 	
@@ -36,7 +37,7 @@ public class DiscardCLabSheet extends AbsRSheet implements ISheet {
 	 * 指定开始时间和结束时间
 	 * @param sheet
 	 */
-	public DiscardCLabSheet(HSSFSheet sheet,Sheet config,Date startDate,Date endDate){
+	public DiscardSheet(HSSFSheet sheet,Sheet config,Date startDate,Date endDate){
 		super(sheet, config, startDate,endDate);
 	}
 

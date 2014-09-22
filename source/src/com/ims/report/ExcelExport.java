@@ -129,7 +129,8 @@ public class ExcelExport  extends HttpServlet{
 			FileInputStream fileInputStream = new FileInputStream(ExcelExport.class.getResource("").getPath() + "template.xls");
 			
 			ExcelExport testExcelExport = new ExcelExport();
-			testExcelExport.Test(fileInputStream);
+			testExcelExport.createExcel();
+			//testExcelExport.Test(fileInputStream);
 		    FileOutputStream fStream = new FileOutputStream("D://test1.xls");
 		    testExcelExport.wb.write(fStream);
 		    fStream.flush();

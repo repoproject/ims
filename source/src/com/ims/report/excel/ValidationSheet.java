@@ -18,9 +18,9 @@ import com.ims.util.ExcelUtil;
  * @author ChengNing
  * @date   2014-9-6
  */
-public class ValidationCLabSheet extends AbsRSheet implements ISheet{
+public class ValidationSheet extends AbsRSheet implements ISheet{
 	
-	private static Logger logger = Logger.getLogger(ValidationCLabSheet.class);
+	private static Logger logger = Logger.getLogger(ValidationSheet.class);
 
 	/**
 	 * 
@@ -28,7 +28,7 @@ public class ValidationCLabSheet extends AbsRSheet implements ISheet{
 	 * @param config
 	 * @param startDate
 	 */
-	public ValidationCLabSheet(HSSFSheet sheet, Sheet config, Date startDate) {
+	public ValidationSheet(HSSFSheet sheet, Sheet config, Date startDate) {
 		super(sheet, config, startDate);
 	}
 	
@@ -36,7 +36,7 @@ public class ValidationCLabSheet extends AbsRSheet implements ISheet{
 	 * 指定开始时间和结束时间
 	 * @param sheet
 	 */
-	public ValidationCLabSheet(HSSFSheet sheet,Sheet config,Date startDate,Date endDate){
+	public ValidationSheet(HSSFSheet sheet,Sheet config,Date startDate,Date endDate){
 		super(sheet, config, startDate,endDate);
 	}
 
