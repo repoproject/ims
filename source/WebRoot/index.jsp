@@ -163,8 +163,8 @@ $(function(){
 									<li><a href="ShowReport.wx?PAGEID=queryin" target="navTab" rel="userbaseinfo22" external="true" fresh="false">入库查询</a></li>
 									<li><a href="ShowReport.wx?PAGEID=queryexpired" target="navTab" rel="userbaseinfo23" external="true" fresh="false">查询过期</a></li>
 									<li><a href="ShowReport.wx?PAGEID=querycat" target="navTab" rel="userbaseinfo24" external="true" fresh="false">库存查询</a></li>
-									<li id="exportOut"></li>
-									 <li id="inventoryStatics"></li>
+									<li id="exportOut"></li>									 
+									 <li id="inventoryStatics"></li>									 
 									 <li><a href="ShowReport.wx?PAGEID=Rstatics" target="navTab" rel="userbaseinfo25" external="true" fresh="false">R统计</a></li>
 								</ul>
 							</li>
@@ -173,7 +173,7 @@ $(function(){
 								    <li id="userManage"></li>
 								    <li id="rateManage"></li>
 								    <li id="importcat"></li>
-									<li><a href="ShowReport.wx?PAGEID=equip" target="navTab" rel="userbaseinfo32" external="true" fresh="false">设备信息</a></li>
+									<li><a href="ShowReport.wx?PAGEID=equip" target="navTab" rel="userbaseinfo34" external="true" fresh="false">设备信息</a></li>
 									<li><a href="ChangePWD.jsp" target="dialog" rel="changepassword" width="600" mask="true">修改密码</a></li>
                                       
 								</ul>
