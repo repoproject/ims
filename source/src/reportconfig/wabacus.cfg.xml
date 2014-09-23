@@ -22,6 +22,7 @@
 		<item name="skin" value="vista"/>
 		<item name="prompt-dialog-type" value="artdialog"/>
 		<!-- 提示组件类型 ymprompt;artdialog-->
+		<item name="default-dataimport-filepath" value="d:\test"/>
 	</system>
 	<datasources default="ds_mysql">
 		<datasource name="ds_mysql" type="com.wabacus.config.database.datasource.C3P0DataSource" dbtype="com.wabacus.config.database.type.MySql">
@@ -54,7 +55,7 @@
 			<property name="url">jdbc:jtds:sqlserver://localhost:1433;DatabaseName=szseWebDB3</property>
 			<property name="user">sa</property>
 			<property name="password">111111</property>
-		</datasource-->
+		</datasource--> 
 	</datasources>
 	<inputbox-types/>
 	<!-- 配置本项目中所有报表页面都必须包含的js文件 -->
@@ -65,7 +66,7 @@
 	<!-- 注册所有全局资源文件 -->
 	<global-resources>
 		<resource-file>resources/resources_business_en.xml</resource-file>
-
+		<resource-file>resources/resources_importdata.xml</resource-file>
 	</global-resources>
 	<!-- 注册所有报表配置文件 -->
 	<report-files>
@@ -104,7 +105,8 @@
 		
 		<report-file>report/Rstatics.xml</report-file>
 		
-	<!--	<report-file>report/importcat.xml</report-file>-->
+		<report-file>report/importcat.xml</report-file>
+		<report-file>report/cat_addedit.xml</report-file>
 		
 		
 		<!--		<report-file>report/queryin.xml</report-file><report-file pattern="true">report/(report_)(\S*?)(\.xml)</report-file>
