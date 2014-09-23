@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns="http://www.wabacus.com"
+			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.resources.xsd">
+	<resource key="dataimport.multifiles"
+				 type="com.wabacus.config.resource.dataimport.DataImportRes">
+		<dataimport filetype="excel" filename="data4.xls"  filepath="d:\test"
+			colnamerowindex="1"  autodetect="false"  tablename="b_cat" importtype="overwrite">
+			<columnmap type="name" matchmode="lazy"/>
+		</dataimport>
+	</resource>
+ 
+	<resource key="dataimport.multifiles2"
+				 type="com.wabacus.config.resource.dataimport.DataImportRes">
+		<dataimport filetype="excel" filename="cat.xls" filepath="d:\test"
+			colnamerowindex="1" autodetect="true" keyfields="catno;batchno;price"  tablename="b_cat" importtype="overwrite">
+			<columnmap type="name" matchmode="lazy"/>
+		</dataimport>
+	</resource>
+</resources>
