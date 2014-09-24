@@ -111,7 +111,8 @@ public abstract class AbsRSheet implements ISheet {
 	 */
 	protected void moveFooter(int rowCount){
 		int moveCount = rowCount-(this.footerRowNum-this.startRow);
-		this.sheet.shiftRows(this.footerRowNum, this.sheet.getLastRowNum(), moveCount);
+		ExcelUtil.moveRow(this.sheet, this.footerRowNum, moveCount,this.dataRowNum);
+		//this.sheet.shiftRows(this.footerRowNum, this.sheet.getLastRowNum(), moveCount);
 	}
 	
 	/**

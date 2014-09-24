@@ -48,5 +48,51 @@ public class ExcelUtilTest {
 		assertEquals(source.getCellType(), target.getCellType());
 	    assertEquals(source.getStringCellValue(), target.getStringCellValue());
 	}
+	
+	@Test
+	public void testMoveFormula(){
+		String formula = "SUM(A1:F1)";
+		String expected = "SUM(A5:F5)";
+		int moveCount = 4;
+		String actual = ExcelUtil.moveFormula(formula, moveCount);
+		
+		assertEquals(expected, actual);
+		
+	}
+	
+	@Test
+	public void testMoveFormulaByInsert(){
+
+		String formula = "SUM(A3:A7)";
+		int insertRow1 = 3; //第4行插入
+		int moveCount = 1;
+		
+
+		//范围内测试
+		String expected1 = "SUM(A3:A8)";
+		String actual = ExcelUtil.moveFormula(formula, moveCount,insertRow1);
+		assertEquals(expected1, actual);
+		
+		//边界检查
+		String expected2 = "SUM(A4:A8)";
+		int insertRow2 = 2;//第3行插入
+		String actual2 = ExcelUtil.moveFormula(formula, moveCount,insertRow2);
+		assertEquals(expected2, actual2);
+		
+		//范围外检查
+		String expected3 = "SUM(A4:A8)";
+		int insertRow3 = 1;//第2行插入
+		String actual3 = ExcelUtil.moveFormula(formula, moveCount,insertRow3);
+		assertEquals(expected3, actual3);
+		
+		//绝对引用符号检查
+		formula = "=A1*B1*$C$1";
+		String expected4 = "=A2*B2*$C$1";
+		int insertRow4 = 0;//第1行插入
+		String actual4 = ExcelUtil.moveFormula(formula, moveCount,insertRow4);
+		assertEquals(expected4, actual4);
+		
+		
+	}
 
 }
