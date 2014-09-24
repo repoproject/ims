@@ -27,6 +27,8 @@ import org.apache.poi.ss.usermodel.Cell;
  */
 public class ExcelUtil {
 	private static Logger logger = Logger.getLogger(ExcelUtil.class);
+	
+	public static final String ABSOLUTE_CHAR = "$";
 
 	/**
 	 * copy row
@@ -140,18 +142,19 @@ public class ExcelUtil {
 	 * 移动行公式
 	 * @param formula   移动之前的公式
 	 * @param moveRowCount 移动的行数
-	 * @param insertRowNum 导致移动的行号,Excel中的行号，下标从1开始，公式中比此数大的行才更新，如果比此行小，则不用更新
+	 * @param insertRowNum 导致移动的行号,Excel中的行号，下标从0开始，公式中比此数大的行才更新，如果比此行小，则不用更新
 	 * @return
 	 */
 	public static String moveFormula(String formula,int moveRowCount,int insertRowNum){
-		//=开始的是赋值，直接赋值过去即可
-		if(formula.startsWith("=") || moveRowCount == 0){
+		if(moveRowCount == 0){
 			return formula;
 		}
 		List<String> sRowNumList = new ArrayList<String>();
 		List<String> tRowNumList = new ArrayList<String>();
+		StringBuilder sb = new StringBuilder();
 		char[] chs = formula.toCharArray();
 		boolean flag = false;
+		boolean isStable = false; //固定符号$标识
 		String numStr = "";
 		for(char c : chs){
 			String s = String.valueOf(c);
@@ -159,26 +162,40 @@ public class ExcelUtil {
 				flag = true;
 				numStr = numStr + s;
 			}
-			else{
+			else if(StringUtils.equals(s, ABSOLUTE_CHAR)){
+				isStable = true;
 				flag = false;
 			}
-			if(flag && !StringUtils.isBlank(numStr)){
+			else{
+				isStable = false;
+				flag = false;
+			}
+			//是数字，并且不是被绝对引用，且numStr不是空（针对多位数），
+			if(flag && !isStable && !StringUtils.isBlank(numStr)){
 				int rowNum = Integer.parseInt(numStr);
 				String sRowNum = String.valueOf(rowNum);
 				String tRowNum = String.valueOf(rowNum + moveRowCount);
 				numStr = "";
-				if(!sRowNumList.contains(sRowNum) && rowNum>=insertRowNum){
-					sRowNumList.add(sRowNum);
-					tRowNumList.add(tRowNum);
+				if(/*!sRowNumList.contains(sRowNum) && */rowNum>insertRowNum){
+//					sRowNumList.add(sRowNum);
+//					tRowNumList.add(tRowNum);
+					sb.append(tRowNum);
 				}
+				else{
+					sb.append(sRowNum);
+				}
+			}
+			else{
+				sb.append(s);
 			}
 		}
 		
-		for(int i=0;i<sRowNumList.size();i++){
-			String sRowNum = sRowNumList.get(i);
-			String tRowNum = tRowNumList.get(i);
-			formula = formula.replaceAll(sRowNum, tRowNum);
-		}
+//		for(int i=0;i<sRowNumList.size();i++){
+//			String sRowNum = sRowNumList.get(i);
+//			String tRowNum = tRowNumList.get(i);
+//			formula = formula.replaceAll(sRowNum, tRowNum);
+//		}
+		formula = sb.toString();
 		return formula;
 	}
 	
@@ -244,8 +261,8 @@ public class ExcelUtil {
     		for(int j=0;j<row.getLastCellNum();j++){
     			HSSFCell cell = row.getCell(j);
     			if(cell.getCellType()== cell.CELL_TYPE_FORMULA){
-    				//移动公式，引起的变化点是移动之前的行，并且需要转换为excel的自然行号，下标从1开始
-    				formula = moveFormula(formula, moveCount,startRowIndex-moveCount + 1);
+    				//移动公式，引起的变化点是移动之前的行，下标从0开始
+    				formula = moveFormula(formula, moveCount,startRowIndex-moveCount);
     				cell.setCellFormula(formula);
     			}
     		}

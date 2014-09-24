@@ -64,7 +64,7 @@ public class ExcelUtilTest {
 	public void testMoveFormulaByInsert(){
 
 		String formula = "SUM(A3:A7)";
-		int insertRow1 = 4; //第4行插入
+		int insertRow1 = 3; //第4行插入
 		int moveCount = 1;
 		
 
@@ -75,15 +75,22 @@ public class ExcelUtilTest {
 		
 		//边界检查
 		String expected2 = "SUM(A4:A8)";
-		int insertRow2 = 3;
+		int insertRow2 = 2;//第3行插入
 		String actual2 = ExcelUtil.moveFormula(formula, moveCount,insertRow2);
 		assertEquals(expected2, actual2);
 		
 		//范围外检查
 		String expected3 = "SUM(A4:A8)";
-		int insertRow3 = 2;
+		int insertRow3 = 1;//第2行插入
 		String actual3 = ExcelUtil.moveFormula(formula, moveCount,insertRow3);
 		assertEquals(expected3, actual3);
+		
+		//绝对引用符号检查
+		formula = "=A1*B1*$C$1";
+		String expected4 = "=A2*B2*$C$1";
+		int insertRow4 = 0;//第1行插入
+		String actual4 = ExcelUtil.moveFormula(formula, moveCount,insertRow4);
+		assertEquals(expected4, actual4);
 		
 		
 	}
