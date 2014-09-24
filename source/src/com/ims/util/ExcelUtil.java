@@ -97,6 +97,9 @@ public class ExcelUtil {
 		case Cell.CELL_TYPE_BLANK:
 			//do nothing
 			break;
+		case Cell.CELL_TYPE_FORMULA:
+			target.setCellFormula(source.getCellFormula());
+			break;
 		default:
 			logger.error("类型为" + source.getCellType() + "无法复制");
 			break;
@@ -129,6 +132,18 @@ public class ExcelUtil {
 	 * @return   移动之后的公式
 	 */
 	public static String moveFormula(String formula,int moveRowCount){
+		return moveFormula(formula,moveRowCount,0);
+	}
+	
+
+	/**
+	 * 移动行公式
+	 * @param formula   移动之前的公式
+	 * @param moveRowCount 移动的行数
+	 * @param insertRowNum 导致移动的行号,Excel中的行号，下标从1开始，公式中比此数大的行才更新，如果比此行小，则不用更新
+	 * @return
+	 */
+	public static String moveFormula(String formula,int moveRowCount,int insertRowNum){
 		//=开始的是赋值，直接赋值过去即可
 		if(formula.startsWith("=") || moveRowCount == 0){
 			return formula;
@@ -147,12 +162,12 @@ public class ExcelUtil {
 			else{
 				flag = false;
 			}
-			if(!flag && StringUtils.isBlank(numStr)){
-				int rowNum = Integer.parseInt(numStr) + 1;
+			if(flag && !StringUtils.isBlank(numStr)){
+				int rowNum = Integer.parseInt(numStr);
 				String sRowNum = String.valueOf(rowNum);
 				String tRowNum = String.valueOf(rowNum + moveRowCount);
 				numStr = "";
-				if(!sRowNumList.contains(sRowNum)){
+				if(!sRowNumList.contains(sRowNum) && rowNum>=insertRowNum){
 					sRowNumList.add(sRowNum);
 					tRowNumList.add(tRowNum);
 				}
@@ -162,9 +177,21 @@ public class ExcelUtil {
 		for(int i=0;i<sRowNumList.size();i++){
 			String sRowNum = sRowNumList.get(i);
 			String tRowNum = tRowNumList.get(i);
-			formula.replaceAll(sRowNum, tRowNum);
+			formula = formula.replaceAll(sRowNum, tRowNum);
 		}
 		return formula;
+	}
+	
+
+	/**
+	 * 由于insert导致其后方的行号需要移动，此时公式的变化为，大于插入行号的需要移动，小于的不用变动
+	 * @param formula    移动之前的公式
+	 * @param moveRowCount  移动的行数
+	 * @param insertRowNum  导致移动的行号,公式中比此数大的行才更新，如果比此行小，则不用更新
+	 * @return
+	 */
+	public static String moveFormulaByInsert(String formula,int moveRowCount,int insertRowNum){
+		return moveFormula(formula,moveRowCount,insertRowNum);
 	}
 	
 	/**
@@ -174,9 +201,9 @@ public class ExcelUtil {
 	 * @param moveColCount    移动列
 	 * @return   计算之后的公式
 	 */
-	public static String moveFormula(String formula,int moveRowCount,int moveColCount){
+	public static String moveFormula(){
 		//TODO:no implement
-		return formula;
+		return null;
 	}
 	
 	/**
@@ -192,6 +219,10 @@ public class ExcelUtil {
     	copyRow(row, insertRow);
     }
     
+    public static void insertRow(HSSFSheet sheet,HSSFRow row,int rowIndex,int rowCount){
+    	
+    }
+    
     
     /**
      * 移动行
@@ -200,15 +231,44 @@ public class ExcelUtil {
      * @param moveCount    移动的距离eg 5 向后移动5行
      */
     public static void moveRow(HSSFSheet sheet,int startRowIndex,int moveCount){
-    	sheet.shiftRows(startRowIndex, sheet.getLastRowNum(), moveCount);
-    	//移动公式
+    	int lastRowNum = sheet.getLastRowNum();
+    	sheet.shiftRows(startRowIndex, lastRowNum, moveCount);
+    	
+    	//移动之后的范围
+    	startRowIndex += moveCount;
+    	lastRowNum += moveCount;
+    	//更新移动之后的行的公式
     	String formula = "";
-    	for(int i=startRowIndex;i<sheet.getLastRowNum();i++){
+    	for(int i=startRowIndex;i<lastRowNum;i++){
     		HSSFRow row = sheet.getRow(i);
     		for(int j=0;j<row.getLastCellNum();j++){
     			HSSFCell cell = row.getCell(j);
     			if(cell.getCellType()== cell.CELL_TYPE_FORMULA){
-    				formula = moveFormula(formula, moveCount);
+    				//移动公式，引起的变化点是移动之前的行，并且需要转换为excel的自然行号，下标从1开始
+    				formula = moveFormula(formula, moveCount,startRowIndex-moveCount + 1);
+    				cell.setCellFormula(formula);
+    			}
+    		}
+    	}
+    }
+    
+    public static void moveRow(HSSFSheet sheet,int startRowIndex,int moveCount,int insertPoint){
+    	int lastRowNum = sheet.getLastRowNum();
+    	sheet.shiftRows(startRowIndex, lastRowNum, moveCount);
+    	
+    	//移动之后的范围
+    	startRowIndex += moveCount;
+    	lastRowNum += moveCount;
+    	//更新移动之后的行的公式
+    	String formula = "";
+    	for(int i=startRowIndex;i<lastRowNum;i++){
+    		HSSFRow row = sheet.getRow(i);
+    		for(int j=0;j<row.getLastCellNum();j++){
+    			HSSFCell cell = row.getCell(j);
+    			if(cell!= null && cell.getCellType()== cell.CELL_TYPE_FORMULA){
+    				//移动公式，引起的变化点是移动之前的行，并且需要转换为excel的自然行号，下标从1开始
+    				formula = cell.getCellFormula();
+    				formula = moveFormula(formula, moveCount,insertPoint + 1);
     				cell.setCellFormula(formula);
     			}
     		}

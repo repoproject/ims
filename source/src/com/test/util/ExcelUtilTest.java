@@ -48,5 +48,44 @@ public class ExcelUtilTest {
 		assertEquals(source.getCellType(), target.getCellType());
 	    assertEquals(source.getStringCellValue(), target.getStringCellValue());
 	}
+	
+	@Test
+	public void testMoveFormula(){
+		String formula = "SUM(A1:F1)";
+		String expected = "SUM(A5:F5)";
+		int moveCount = 4;
+		String actual = ExcelUtil.moveFormula(formula, moveCount);
+		
+		assertEquals(expected, actual);
+		
+	}
+	
+	@Test
+	public void testMoveFormulaByInsert(){
+
+		String formula = "SUM(A3:A7)";
+		int insertRow1 = 4; //第4行插入
+		int moveCount = 1;
+		
+
+		//范围内测试
+		String expected1 = "SUM(A3:A8)";
+		String actual = ExcelUtil.moveFormula(formula, moveCount,insertRow1);
+		assertEquals(expected1, actual);
+		
+		//边界检查
+		String expected2 = "SUM(A4:A8)";
+		int insertRow2 = 3;
+		String actual2 = ExcelUtil.moveFormula(formula, moveCount,insertRow2);
+		assertEquals(expected2, actual2);
+		
+		//范围外检查
+		String expected3 = "SUM(A4:A8)";
+		int insertRow3 = 2;
+		String actual3 = ExcelUtil.moveFormula(formula, moveCount,insertRow3);
+		assertEquals(expected3, actual3);
+		
+		
+	}
 
 }
