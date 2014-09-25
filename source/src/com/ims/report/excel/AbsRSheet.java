@@ -122,6 +122,10 @@ public abstract class AbsRSheet implements ISheet {
 		logger.info("设置数据");
 		List<Object> data = getData();
 		int rowCount = data.size();
+		logger.info("到数据总数===" + rowCount);
+		if(rowCount == 0){
+			return ;
+		}
 		//得到footer数据
 		getFooterData(data);
 		
