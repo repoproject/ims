@@ -11,6 +11,9 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 
+import com.ims.dao.RateDao;
+import com.ims.model.Rate;
+import com.ims.model.sysEnum.MoneyType;
 import com.ims.report.config.Sheet;
 import com.ims.util.ExcelUtil;
 
@@ -53,7 +56,15 @@ public class ValidationSheet extends AbsRSheet implements ISheet{
 		if(cell == null)
 			cell = row.createCell(colIndex);
 		ExcelUtil.setCellValue(cell, this.endDate);
+		//设置汇率
+		colIndex = 8;
+		HSSFCell rateCell = row.getCell(colIndex);
+		RateDao rateDao = new RateDao();
+		Rate rate = rateDao.getCurrentRate();
+		ExcelUtil.setCellValue(rateCell, rate.getValue(MoneyType.USD));
+		
 	}
+	
 
 	/**
 	 * 
