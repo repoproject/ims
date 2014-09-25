@@ -11,6 +11,7 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 
+import com.ims.report.SaveReportData;
 import com.ims.report.config.Sheet;
 import com.ims.util.ExcelUtil;
 
@@ -62,6 +63,16 @@ public class DiscardSheet extends AbsRSheet implements ISheet {
 	@Override
 	protected List<Object> formatData(List<Object> data) {
 		return data;
+	}
+	
+	/**
+	 * 单开线程保存备份报表数据
+	 */
+	@Override
+	protected void saveData(List<Object> data) {
+		SaveReportData save = new SaveReportData(SaveReportData.ReportType.R,data);
+		Thread saveThread = new Thread(save, "saveReportData");
+		saveThread.start();
 	}
 
 }

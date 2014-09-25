@@ -15,9 +15,10 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import com.ims.common.SysConst;
+import com.ims.dao.FileDao;
+import com.ims.model.FileReport;
 import com.ims.report.config.ExcelConfig;
 import com.ims.report.config.Sheet;
-import com.ims.report.excel.AbsRSheet;
 import com.ims.report.excel.ISheet;
 import com.ims.util.DateTimeUtil;
 import com.ims.util.Sys;
@@ -33,6 +34,7 @@ public class InventoryReport implements Runnable{
 	private Date startDate;
 	private Date endDate;
 	private HSSFWorkbook wb;
+	private FileReport reportFile;
 	
 	public InventoryReport(Date startDate){
 		this.startDate = startDate;
@@ -59,16 +61,38 @@ public class InventoryReport implements Runnable{
 			FileInputStream fileInputStream = new FileInputStream(ExcelExport.class.getResource("").getPath() + "template.xls");
 			this.wb = new HSSFWorkbook(fileInputStream);
 			this.createExcel();
+			
+			save();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		this.wb = null;//释放
+	}
+	
+	/**
+	 * 保存报表成果物
+	 */
+	private void save(){
+		try {
+			this.reportFile = new FileReport();
 			String filePath = getFilePath();
 		    FileOutputStream fStream = new FileOutputStream(filePath);
 		    this.wb.write(fStream);
 		    fStream.flush();
 			fStream.close();
 			logger.info("报表文件保存成功" + filePath);
+			FileDao fileDao = new FileDao();
+			int re = fileDao.saveOrUpdate(this.reportFile);
+			if(re > 0){
+				logger.info("文件保存在数据库成功");
+			}else{
+				logger.info("文件保存在数据库失败");
+			}
 		} catch (Exception e) {
+			logger.info("报表文件保存异常");
 			e.printStackTrace();
 		}
-		this.wb = null;//释放
 	}
 	
 	/**
@@ -105,6 +129,7 @@ public class InventoryReport implements Runnable{
 		String serverRootPath = Sys.serverRootPath();
 		String reportPath = SysVar.getValue(SysConst.Var.REPORT_PATH);
 		reportPath = DateTimeUtil.format(reportPath, this.endDate);
+		this.reportFile.setPath(reportPath);
 		reportPath = serverRootPath + reportPath;
 		File rFile= new File(reportPath);
 		rFile = rFile.isFile()?rFile.getParentFile():rFile;
@@ -114,6 +139,7 @@ public class InventoryReport implements Runnable{
 		}
 		String fileName = SysVar.getValue(SysConst.Var.REPORT_NAME);
 		fileName = DateTimeUtil.format(fileName, this.endDate);
+		this.reportFile.setName(fileName);
 		return  reportPath + fileName;
 	}
 	

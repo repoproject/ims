@@ -13,6 +13,10 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 
+import com.ims.dao.RateDao;
+import com.ims.model.Rate;
+import com.ims.model.sysEnum.MoneyType;
+import com.ims.report.SaveReportData;
 import com.ims.report.config.Sheet;
 import com.ims.util.ExcelUtil;
 
@@ -71,6 +75,42 @@ public class R1Sheet extends AbsRSheet implements ISheet{
 		if(cell4 == null)
 			cell4 = row1.createCell(35);
 		ExcelUtil.setCellValue(cell4, this.endDate);
+		
+		setRate();
+	}
+	
+	/**
+	 * 设置表头汇率数据
+	 */
+	private void setRate(){
+		RateDao rateDao = new RateDao();
+		Rate rate = rateDao.getCurrentRate();
+		
+		HSSFRow rateRow = this.sheet.getRow(6);
+		HSSFCell cellCNY = rateRow.getCell(17);
+		if(cellCNY == null)
+			cellCNY = rateRow.createCell(17);
+		ExcelUtil.setCellValue(cellCNY, rate.getValue(MoneyType.CNY));
+		
+		HSSFCell cellUSD = rateRow.getCell(18);
+		if(cellUSD == null)
+			cellUSD = rateRow.createCell(18);
+		ExcelUtil.setCellValue(cellUSD, rate.getValue(MoneyType.USD));
+		
+		HSSFCell cellSGD = rateRow.getCell(19);
+		if(cellSGD == null)
+			cellSGD = rateRow.createCell(19);
+		ExcelUtil.setCellValue(cellSGD, rate.getValue(MoneyType.SGD));
+		
+		HSSFCell cellEUR = rateRow.getCell(20);
+		if(cellEUR == null)
+			cellEUR = rateRow.createCell(20);
+		ExcelUtil.setCellValue(cellEUR, rate.getValue(MoneyType.EUR));
+		
+		HSSFCell cellGBP = rateRow.getCell(21);
+		if(cellGBP == null)
+			cellGBP = rateRow.createCell(21);
+		ExcelUtil.setCellValue(cellGBP, rate.getValue(MoneyType.GBP));
 	}
 
 	/**
@@ -102,5 +142,16 @@ public class R1Sheet extends AbsRSheet implements ISheet{
 		}
 		return data;
 	}
+	
+	/**
+	 * 单开线程保存备份报表数据
+	 */
+	@Override
+	protected void saveData(List<Object> data) {
+		SaveReportData save = new SaveReportData(SaveReportData.ReportType.R,data);
+		Thread saveThread = new Thread(save, "saveReportData");
+		saveThread.start();
+	}
+	
 	
 }
