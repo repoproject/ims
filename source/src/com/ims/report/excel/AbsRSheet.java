@@ -276,6 +276,7 @@ public abstract class AbsRSheet implements ISheet {
 	protected List<Object> getData(){
 		List<Object> data = queryData();
 		data = formatData(data);
+		saveData(data);
 		return data;
 	}
 
@@ -291,5 +292,13 @@ public abstract class AbsRSheet implements ISheet {
 	 * @return
 	 */
 	protected abstract List<Object> formatData(List<Object> data);
+	
+	/**
+	 * 数据是否保存由子类决定
+	 * 如果实现请使用多线程完成，不影响当前的报表线程
+	 * @param data
+	 * @return
+	 */
+	protected abstract void saveData(List<Object> data);
 
 }

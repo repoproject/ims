@@ -14,6 +14,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import com.ims.dao.RateDao;
 import com.ims.model.Rate;
 import com.ims.model.sysEnum.MoneyType;
+import com.ims.report.SaveReportData;
 import com.ims.report.config.Sheet;
 import com.ims.util.ExcelUtil;
 
@@ -73,6 +74,16 @@ public class ValidationSheet extends AbsRSheet implements ISheet{
 	protected List<Object> formatData(List<Object> data) {
 
 		return data;
+	}
+	
+	/**
+	 * 单开线程保存备份报表数据
+	 */
+	@Override
+	protected void saveData(List<Object> data) {
+		SaveReportData save = new SaveReportData(SaveReportData.ReportType.R,data);
+		Thread saveThread = new Thread(save, "saveReportData");
+		saveThread.start();
 	}
 
 }
