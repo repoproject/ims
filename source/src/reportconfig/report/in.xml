@@ -40,7 +40,7 @@
 					<col column="producer" label="生产商"  clickorderby="true" width="8%"/>
 					<col column="reason" label="入库原因"  clickorderby="true" width="8%"/>
 					<col column="person" label="入库人"   displaytype="hidden"/>
-					<col column="{editablelist-edit}" label="修改"></col>
+					<col column="{editablelist-edit}" label="修改" width="5%"></col>
 				</display>
 			<sql>
 				<select>

@@ -173,7 +173,7 @@ $(function(){
 								    <li id="userManage"></li>
 								    <li id="rateManage"></li>
 								    <li id="importcat"></li>
-									<li><a href="ShowReport.wx?PAGEID=equip" target="navTab" rel="userbaseinfo34" external="true" fresh="false">设备信息</a></li>
+									<li><a href="ShowReport.wx?PAGEID=equip" target="navTab" rel="userbaseinfo34" external="true" fresh="false">设备信息管理</a></li>
 									<li><a href="ChangePWD.jsp" target="dialog" rel="changepassword" width="600" mask="true">修改密码</a></li>
                                       
 								</ul>
