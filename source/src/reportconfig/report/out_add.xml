@@ -53,7 +53,7 @@
 				
 
 				<col column="machinename" label="设备名称*" >					
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan200(#label#长度应小于等于200);stripscript(#label#不能含有特殊字符);" >
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan200(#label#长度应小于等于200);" >
 					    <typeprompt count="20"  callbackmethod="testOutPromptCallBack1">
 							 <promptcol label="machinename" value="machinename" title="名称" matchmode="anywhere"></promptcol>					    
 							 <promptcol label="machineno" value="machineno" title="序号S/N" matchmode="anywhere"></promptcol>

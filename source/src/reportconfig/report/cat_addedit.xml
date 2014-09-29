@@ -40,33 +40,40 @@
 					    <option dataset="@{select codename,code from d_code where codetype='money'}" label="codename" value="code"></option>
 					</inputbox>
 				</col>
-				
-				<col column="seq" label="编号" >
-					<inputbox type="textbox" styleproperty="disabled='disabled'"/>					
-				</col>			
+
+				<col column="machineName" label="设备名称*" >					
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan200(#label#长度应小于等于200);" >
+			        <typeprompt width="-1" count="200">
+				       <promptcol label="machineName" matchmode="anywhere"></promptcol>
+				       <datasource>    
+				          <option dataset="@{select distinct machinename from b_machine where {#matchcondition#}}"></option> 
+                                </datasource>
+			        </typeprompt>
+					</inputbox>
+                 </col>  
 				<col column="cattype" label="类别" br="true">
 					<inputbox type="selectbox"  >													
 							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
 					</inputbox>					
 				</col>
-								
+
 				<col column="localprice" label="本地价格" displaytype="hidden">
 				    <inputbox type="textbox" />
 				</col>
 				
-                <col column="dealer" label="供应商">
-					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);" />
-				</col>		
-                <col column="expiredate" label="过期日期*"  datatype="date{yyyy-MM-dd}"  br="true" >
+                <col column="expiredate" label="过期日期*"  datatype="date{yyyy-MM-dd}"   >
 					<inputbox type="datepicker" dateformat="yyyy-MM-dd" jsvalidate="isDate(#label#格式不符合要求)"></inputbox>
 				</col>			
-
-				<col column="producer" label="生产商"  >
-					<inputbox jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);" />
-				</col>					
 				<col column="productdate" label="生产日期"  datatype="date{yyyy-MM-dd}"  br="true" >
 					<inputbox type="datepicker" dateformat="yyyy-MM-dd" jsvalidate="isDate(#label#格式不符合要求)"></inputbox>
 				</col>
+
+                <col column="dealer" label="供应商">
+					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);" />
+				</col>		
+				<col column="producer" label="生产商" br="true" >
+					<inputbox jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);" />
+				</col>					
 
 			
 				<col column="rtype" label="所属R">
@@ -76,6 +83,10 @@
 				<col column="catFrom" label="来源"  br="true">
 					<inputbox type="selectbox"><option dataset="@{select codename,code from d_code where codetype='catfrom'}" label="codename" value="code"></option>
 					</inputbox>
+				</col>			
+
+				<col column="seq" label="编号" >
+					<inputbox type="textbox" styleproperty="disabled='disabled'"/>					
 				</col>			
 	
 			</display>
@@ -95,7 +106,7 @@
 									b_cat.productDate,
 									b_cat.producer,
 									b_cat.expiredate,
-									b_cat.price,
+									round(b_cat.price,2) price,
 									b_cat.priceUnit,
 									b_cat.localPrice,
 									b_cat.dealer,
@@ -132,6 +143,7 @@
 							priceUnit,
 							localprice,
 							dealer,
+							machineName,
 							makedate,
 							modifydate
 						)
@@ -152,6 +164,7 @@
 								trim(@{priceUnit}),
 								trim(@{localprice}),
 								trim(@{dealer}),
+							    trim(@{machineName}),
 								sysdate(),
 								sysdate()
 							);							
@@ -173,6 +186,7 @@
 					 priceUnit = trim(@{ priceUnit }),
 					 localprice = trim(@{ localprice }),
 					 dealer = trim(@{dealer }),
+					 machineName = trim(@{machineName}),
 					 modifydate = sysdate()
 					where ID=@{ID__old};
 				</update>

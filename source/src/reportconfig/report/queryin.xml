@@ -100,7 +100,7 @@
 						</condition>
 						
 						
-						<condition name="txtcatname" label="名             称" labelposition="left">
+						<condition name="txtcatname" label="名 称" labelposition="left">
 						     <value>
 							<![CDATA[(trim(catname) like  '%#data#%' )]]>
 						</value>
@@ -129,7 +129,7 @@
 						 </inputbox>											     
 					    </condition>
                         
-					    <condition name="typename" label="类型" labelposition="left">						
+					    <condition name="typename" label="类型" labelposition="left" br="true">						
 							<value> <![CDATA[(trim(cattype) = '#data#')]]>
 							</value>
 							<inputbox type="selectbox" >	
@@ -137,7 +137,7 @@
 							<option dataset="@{select codename,code from d_code where codetype='cattype' order by code}" label="codename" value="code"></option>
 							</inputbox>
 						</condition>
-					    <condition name="txtinreason"   label="入库原因" labelposition="left"  br="true">						
+					    <condition name="txtinreason"   label="入库原因" labelposition="left"  >						
 							<value> <![CDATA[(trim(reason) = '#data#')]]>
 							</value>
 							<inputbox type="selectbox" >	
