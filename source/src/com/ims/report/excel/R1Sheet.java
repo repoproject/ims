@@ -119,7 +119,8 @@ public class R1Sheet extends AbsRSheet implements ISheet{
 	@Override
 	protected List<Object> formatData(List<Object> data) {
 		Map<String,String> mNoList = new HashMap<String,String>();
-		int mechineSeq = 0;
+		//机器序号从1开始 by gq 2014-9-29
+		int mechineSeq = 1;
 		String mName = "";
 		Map<Object, Object> rowMap = null;
 		for(int i=0;i<data.size();i++){
