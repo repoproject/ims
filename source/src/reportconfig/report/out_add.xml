@@ -117,7 +117,7 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT ID,cattype, seq,rtype,( SELECT codename FROM d_code WHERE codetype = 'cattype' AND CODE = cattype ) typename, NULL machinename, NULL machineno, NULL projectCode, NULL description, NULL cause, NULL section, catno, catname, batchno, NULL num, total, round(price, 2) price, priceUnit, localprice, NULL person, NULL reason, sysdate() outdate, NULL remark FROM b_cat where  {#condition#}]]>
+						<![CDATA[SELECT ID,cattype, seq,rtype,( SELECT codename FROM d_code WHERE codetype = 'cattype' AND CODE = cattype ) typename,  machinename, NULL machineno, NULL projectCode, NULL description, NULL cause, NULL section, catno, catname, batchno, NULL num, total, round(price, 2) price, priceUnit, localprice, NULL person, NULL reason, sysdate() outdate, NULL remark FROM b_cat where  {#condition#}]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>

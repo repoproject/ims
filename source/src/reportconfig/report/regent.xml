@@ -25,13 +25,13 @@
 					<col column="{sequence:1}" label="序号" width="3%"/>
 					<col column="id" label="编号"  displaytype="hidden"/>					
 					<col column="typename" label="类型" clickorderby="true" width="10%"></col>
-					<col column="catname" label="名称" clickorderby="true" width="25%"></col>
+					<col column="catname" label="名称" clickorderby="true" width="15%"></col>
 					<col column="catno" label="货号" clickorderby="true" width="20%"></col>
 					<col column="seq" label="编号"   width="10%"/>
-					<col column="machinename" label="所属设备" displaytype="hidden" ></col>
+					<col column="machinename" label="所属设备" width="10%"></col>
 	
 					<col column="orde" label="排序号" clickorderby="true" width="10%"></col>
-					<col column="remark" label="备注" clickorderby="true" width="15%"></col>					
+					<col column="remark" label="备注" clickorderby="true" width="10%"></col>					
 				</display>
 				<sql>
 				

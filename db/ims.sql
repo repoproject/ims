@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2014-09-29 22:25:57
+Date: 2014-10-06 14:22:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -42,14 +42,11 @@ CREATE TABLE `b_cat` (
   `makedate` datetime DEFAULT NULL,
   `modifydate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=136 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_cat
 -- ----------------------------
-INSERT INTO `b_cat` VALUES ('133', '04880285190', 'Cell wash solution / NaOH', '', '0', '1234', '0', '1', '2014-08-31 00:00:00', '华北XX制药剂厂', '2014-10-11 00:00:00', '1.0000', '0', null, '0', '万岚世途', '12', 'Bio-rad Controls for Modular', null, '2014-09-27 23:51:46', '2014-09-28 00:25:43');
-INSERT INTO `b_cat` VALUES ('134', '04880285190', 'Cell wash solution / NaOH', '', '0', '123', '17', '10', '2014-10-11 00:00:00', '2', '2014-10-11 00:00:00', '12.0000', '0', null, '0', '1', '3', 'E411', null, '2014-09-28 18:56:19', '2014-09-28 19:00:05');
-INSERT INTO `b_cat` VALUES ('135', '04880455190', 'ISE Internal Standard', '', '0', '213', '1', '1', null, '', '2014-10-04 00:00:00', '2.0000', '0', null, '0', '', null, null, null, '2014-09-28 18:57:22', '2014-09-28 18:57:22');
 
 -- ----------------------------
 -- Table structure for `b_file`
@@ -63,14 +60,12 @@ CREATE TABLE `b_file` (
   `makedate` datetime DEFAULT NULL COMMENT '文件生成日期',
   `modifydate` datetime DEFAULT NULL COMMENT '文件修改日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_file
 -- ----------------------------
-INSERT INTO `b_file` VALUES ('1', 'final.xlsx', 'd:\\downlist', 'xlsx', '2014-09-16 23:59:54', '2014-09-16 23:59:58');
-INSERT INTO `b_file` VALUES ('2', 'Inventory listing 2014-6 final.xlsx', 'd:\\downlist', 'xlsx', null, null);
-INSERT INTO `b_file` VALUES ('3', 'Inventory listing 2014-10.xls', '\\reports\\', null, '2014-09-25 19:52:51', '2014-09-25 19:52:51');
+INSERT INTO `b_file` VALUES ('4', 'Inventory listing 2014-10.xls', '\\reports\\', null, '2014-10-06 13:31:59', '2014-10-06 13:32:04');
 
 -- ----------------------------
 -- Table structure for `b_in`
@@ -104,14 +99,11 @@ CREATE TABLE `b_in` (
   `makedate` datetime DEFAULT NULL COMMENT '产生日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=136 DEFAULT CHARSET=utf8 COMMENT='试剂表';
+) ENGINE=InnoDB AUTO_INCREMENT=140 DEFAULT CHARSET=utf8 COMMENT='试剂表';
 
 -- ----------------------------
 -- Records of b_in
 -- ----------------------------
-INSERT INTO `b_in` VALUES ('133', '04880285190', 'Cell wash solution / NaOH', '', '1234', '0', '华北XX制药剂厂', '万岚世途', '2014-08-31 00:00:00', '0', '2014-10-11 00:00:00', '1', null, '1.0000', '0', null, '0.0000', '2014-09-27 00:00:00', null, '1', '0', '1', '', '1', '2014-09-27 23:51:46', '2014-09-28 00:03:31');
-INSERT INTO `b_in` VALUES ('134', '04880285190', 'Cell wash solution / NaOH', '', '123', '0', '2', '1', '2014-10-11 00:00:00', '0', '2014-10-11 00:00:00', '22', null, '12.0000', '0', null, '0.0000', '2014-09-28 00:00:00', null, '10', '0', '1', '12', '1', '2014-09-28 18:56:19', '2014-09-28 18:56:19');
-INSERT INTO `b_in` VALUES ('135', '04880455190', 'ISE Internal Standard', '', '213', '0', '', '', null, '0', '2014-10-04 00:00:00', '1', null, '2.0000', '0', null, '0.0000', '2014-09-28 00:00:00', null, '1', '0', '1', '', '1', '2014-09-28 18:57:22', '2014-09-28 18:57:22');
 
 -- ----------------------------
 -- Table structure for `b_machine`
@@ -165,13 +157,11 @@ CREATE TABLE `b_out` (
   `makedate` datetime DEFAULT NULL COMMENT '创建日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='出库记录';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='出库记录';
 
 -- ----------------------------
 -- Records of b_out
 -- ----------------------------
-INSERT INTO `b_out` VALUES ('1', 'Bio-rad Controls for Modular', '12', '04880285190', 'Cell wash solution / NaOH', '1', '', '1234', '0', '1', '2014-09-28 00:00:00', '1.0000', '0', '0.0000', '1', '1', '', '', '', '', '', '1', '2014-09-28 00:25:43', '2014-09-28 00:25:43');
-INSERT INTO `b_out` VALUES ('2', 'E411', '3', '04880285190', 'Cell wash solution / NaOH', '10', '', '123', '0', '1', '2014-09-28 00:00:00', '12.0000', '0', '0.0000', '5', '0', '', '', '', '', '', '1', '2014-09-28 19:00:05', '2014-09-28 19:00:05');
 
 -- ----------------------------
 -- Table structure for `b_person`
@@ -342,11 +332,11 @@ CREATE TABLE `d_catcode` (
 -- ----------------------------
 INSERT INTO `d_catcode` VALUES ('44', '11183974216', '', 'ISE Cal Low', '0', '1', '', null, '');
 INSERT INTO `d_catcode` VALUES ('45', '04880455190', '', 'ISE Internal Standard', '0', '2', '', null, '');
-INSERT INTO `d_catcode` VALUES ('46', '04880285190', '', 'Cell wash solution / NaOH', '0', '0', '', null, '');
-INSERT INTO `d_catcode` VALUES ('47', '11970909216', '', 'ALB', '0', '3', '', null, '');
+INSERT INTO `d_catcode` VALUES ('46', '04880285190', '111', 'Cell wash solution / NaOH', '0', '0', '', null, '1');
+INSERT INTO `d_catcode` VALUES ('47', '11970909216', 'rte', 'ALB', '0', '3', '', null, 'E411');
 INSERT INTO `d_catcode` VALUES ('48', '594', '', 'Liquichek Immunology Control Level 1(6x3ml)', '0', '4', '', null, '');
 INSERT INTO `d_catcode` VALUES ('49', '595', '', 'Liquichek Immunology Control Level 2(6x3ml)', '0', '5', '', null, '');
-INSERT INTO `d_catcode` VALUES ('50', '596', '', 'Liquichek Immunology Control Level 3(6x3ml)', '0', '6', '', null, '');
+INSERT INTO `d_catcode` VALUES ('50', '596', '', 'Liquichek Immunology Control Level 3(6x3ml)', '0', '6', '', null, 'E411');
 
 -- ----------------------------
 -- Table structure for `d_code`
@@ -652,8 +642,8 @@ CREATE TRIGGER `tg_In_Insert` AFTER INSERT ON `b_in` FOR EACH ROW begin
      if cnt > 0 then
          update b_cat set total = (total+new.num) where catno=catno and batchno=batchno and price=price;
      else
-         insert into b_cat(catno,      catname,      cattype,       batchno,      seq,       total      ,rtype      ,productdate,       producer,       catFrom  ,    expiredate      ,price      ,priceunit       ,localprice      ,dealer , makedate     ,modifydate)
-                values(new.catno,new.catname,new.cattype,new.batchno,new.seq,new.num,new.rtype,new.productdate,new.producer,new.catFrom,new.expiredate,new.price,new.priceunit,new.localprice,new.dealer, sysdate()       ,sysdate());
+         insert into b_cat(catno,      catname,      cattype,       batchno,      seq,       total      ,rtype      ,productdate,       producer,       catFrom  ,    expiredate      ,price      ,priceunit       ,localprice      ,dealer , makedate  ,modifydate       ,machinename)
+                values(new.catno,new.catname,new.cattype,new.batchno,new.seq,new.num,new.rtype,new.productdate,new.producer,new.catFrom,new.expiredate,new.price,new.priceunit,new.localprice,new.dealer, sysdate()   ,sysdate()    ,new.machinename);
      end if;
 end
 ;;

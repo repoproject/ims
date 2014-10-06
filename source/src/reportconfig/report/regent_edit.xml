@@ -14,7 +14,7 @@
 					
 				</col>
 				
-				<col column="machinename" label="所属设备*" displaytype="hidden" br="true">
+				<col column="machinename" label="所属设备*"  br="true">
 
 						     <inputbox jsvalidate="isNotLongerThan20(#label#长度应小于等于20);" >
 						        <typeprompt width="-1" count="20">
