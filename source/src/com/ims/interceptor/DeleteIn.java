@@ -152,8 +152,8 @@ public class DeleteIn extends AbsInterceptorDefaultAdapter {
 		rrequest.getWResponse().getResponse().setHeader("Pragma", "No-cache");
 
 		// 判断查询字符串中是否含有占位符（1=1）和开始时间查询条件
-		if (sql.contains("1=1") && !sql.contains("b_in.indate>=DATE")
-				&& !sql.contains("b_in.indate<=DATE")) {
+		if (sql.contains("1=1") && !sql.contains("i.indate>=DATE")
+				&& !sql.contains("i.indate<=DATE")) {
 
 			SimpleDateFormat sf1 = new SimpleDateFormat("yyyy-MM-dd");
 			SimpleDateFormat sf2 = new SimpleDateFormat("yyyy-MM-dd");
@@ -171,8 +171,8 @@ public class DeleteIn extends AbsInterceptorDefaultAdapter {
 			rrequest.setAttribute("txtbegin1", time2);
 			rrequest.setAttribute("txtend1", time1);
 
-			sql = sql.replaceAll("1=1", "(b_in.indate>=DATE('" + time2
-					+ "')) and (b_in.indate<=DATE('" + time1 + "'))");
+			sql = sql.replaceAll("1=1", "(i.indate>=DATE('" + time2
+					+ "')) and (i.indate<=DATE('" + time1 + "'))");
 		}
 
 		// 返回数据库查询语句字符串
