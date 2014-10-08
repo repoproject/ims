@@ -52,7 +52,7 @@
 							AND DATE('2015-01-01')
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?
+					where a.rType =1 and date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?
 					order by a.machineName asc  
 			
         </sql>
@@ -134,7 +134,7 @@
 							AND DATE('2015-01-01')
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-		    where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+		    where a.rType =2 and date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
 		    order by a.machineName asc 
         </sql>
         <col index="1" type="">catno</col>
@@ -215,7 +215,7 @@
 							AND DATE('2015-01-01')
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where  a.rType =3 and date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -296,7 +296,7 @@
 							AND DATE('2015-01-01')
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where a.rType =4 and  date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -377,7 +377,7 @@
 							AND DATE('2015-01-01')
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where a.rType =5 and  date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -458,7 +458,7 @@
 							AND DATE('2015-01-01')
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where a.rType =6 and  date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -539,7 +539,7 @@
 							AND DATE('2015-01-01')
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where a.rType =7 and  date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -620,7 +620,7 @@
 							AND DATE('2015-01-01')
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where a.rType =8 and  date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -701,7 +701,7 @@
 							AND DATE('2015-01-01')
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where a.rType =9 and  date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -782,7 +782,7 @@
 							AND DATE('2015-01-01')
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where a.rType =20 and  date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -863,7 +863,7 @@
 							AND DATE('2015-01-01')
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where a.rType =11 and  date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -908,10 +908,10 @@
 					b.expiredate,a.num qty,a.num*a.price totalAmnt,getCodeName('rootcause',a.cause) rootCause,a.section,
 					b.producer,b.dealer,null as catFrom
 				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
-				-- and a.reason='2'
+				and (a.rType between 1 and 9) and a.reason='2'
 				ORDER BY a.outDate ASC
 			)t
-			where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+			where  date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
         </sql>
         <col index="1" type="">rownum</col>
         <col index="2" type="">outDate</col>
@@ -936,7 +936,7 @@
 				select a.section,a.outDate,a.description,getCodeName('rtype',b.rType) rType,a.catname,a.num qty,
 				round(getMoney(a.priceUnit,a.price,'0'),2) priceCNY,round(getMoney(a.priceUnit,a.price,'1'),2) priceUSD,a.projectCode
 				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
-				-- and a.reason='1'
+				and (a.rType between 1 and 9) and a.reason='1'
 				ORDER BY a.outDate ASC
 			) t
 			where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
@@ -996,7 +996,7 @@
 							AND DATE('2015-01-01')
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where (a.rType=10) and date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -1041,7 +1041,7 @@
 					b.expiredate,a.num qty,a.num*a.price totalAmnt,getCodeName('rootcause',a.cause) rootCause,a.section,
 					b.producer,b.dealer,null as catFrom
 				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
-				-- and a.reason='2'
+				and (a.rType=10) and  a.reason='2'
 				ORDER BY a.outDate ASC
 			)t
 			where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
@@ -1069,7 +1069,7 @@
 				select a.section,a.outDate,a.description,getCodeName('rtype',b.rType) rType,a.catname,a.num qty,
 				round(getMoney(a.priceUnit,a.price,'0'),2) priceCNY,round(getMoney(a.priceUnit,a.price,'1'),2) priceUSD,a.projectCode
 				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
-				-- and a.reason='1'
+				and (a.rType=10) and a.reason='1'
 				ORDER BY a.outDate ASC
 			) t 
 			where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  

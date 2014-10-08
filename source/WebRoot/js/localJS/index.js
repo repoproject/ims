@@ -308,19 +308,20 @@ function checkFlash(){
 	var role = $("#roleFlag").val();
 	//高级用户分配用户管理权限
 	if(role == 1){
+		//导出出库
+		$("#exportOut").html('<a href="ShowReport.wx?PAGEID=exportout" target="navTab" rel="userbaseinfo25" external="true" fresh="false">导出出库</a>');
+
+		//R统计权限
+		$("#inventoryStatics").html('<a href="excel.jsp" target="navTab" rel="userbaseinfo26" external="true" fresh="false">库存统计</a>');
+		
+		
 		//用户管理权限
 		$("#userManage").html('<a href="ShowReport.wx?PAGEID=user" target="navTab" rel="userbaseinfo31"  external="true" fresh="false" >用户信息管理</a> ');
 		//汇率管理权限
 		$("#rateManage").html('<a href="ShowReport.wx?PAGEID=rate" target="navTab" rel="userbaseinfo32" external="true" fresh="false">汇率管理</a> ');		
    
-		//导出出库
-		$("#exportOut").html('<a href="ShowReport.wx?PAGEID=exportout" target="navTab" rel="userbaseinfo25" external="true" fresh="false">导出出库</a>');
-	
-		//R统计权限
-		$("#inventoryStatics").html('<a href="excel.jsp" target="navTab" rel="userbaseinfo26" external="true" fresh="false">库存统计</a>');
-
 		//库存导入
-		$("#inventoryStatics").html('<a href="ShowReport.wx?PAGEID=importcat" target="navTab" rel="userbaseinfo25" external="true" fresh="false">库存导入</a>');
+		$("#importcat").html('<a href="ShowReport.wx?PAGEID=importcat" target="navTab" rel="userbaseinfo33" external="true" fresh="false">库存导入</a>');
 
 	}else{
 		
@@ -336,6 +337,8 @@ function checkFlash(){
 		var temp3 = document.getElementById("exportOut");
 		if(temp3) temp3.parentNode.removeChild(temp3);
 		
+		var temp4 = document.getElementById("importcat");
+		if(temp4) temp4.parentNode.removeChild(temp4);
 		}
 	
 	//若浏览器端没装flash。提示安装

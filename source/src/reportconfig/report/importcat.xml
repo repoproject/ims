@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications xmlns="http://www.wabacus.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
+	<page id="importcat2">
+		<report id="report1" title="库存导入和维护" rowselect="multiple-checkbox"  type="editablelist" pagesize="20">
+			<display mouseoverbgcolor="CCCCCC">
+				<col column="id" label="序号" width="3%" />
+				<col column="cattype" label="类型" clickorderby="true"
+					width="3%"></col>
+				<col column="catname" label="名称" clickorderby="true" width="14%" />
+				<col column="catno" label="货号" clickorderby="true" width="10%" />
+				<col column="batchno" label="批号" clickorderby="true" width="10%"></col>
+				<col column="price" label="单价" datatype="float" clickorderby="true"
+					width="4%"></col>
+				<col column="priceUnit" label="货币" clickorderby="true" width="3%"></col>
+				<col column="total" label="库存" clickorderby="true" datatype="int"
+					width="4%"></col>
+				<col column="expiredate" label="有效期" datatype="date{yyyy-MM-dd}"
+					clickorderby="true" width="6%"></col>
+					<col column="productDate" label="生产日期" datatype="date{yyyy-MM-dd}"
+					clickorderby="true" width="6%"></col>
+				<col column="machineName" label="设备" clickorderby="true" width="8%"></col>
+				<col column="Rname" label="R组" clickorderby="true" width="3%" />
+				
+				<col column="catFrom" label="来源" clickorderby="true" width="5%"></col>
+				<col column="dealer" label="供应商" clickorderby="true" width="8%"></col>
+				<col column="producer" label="生产商" clickorderby="true" width="8%"></col>
+				<col column="{editablelist-edit}" label="修改" width="4%"></col>
+			</display>
+			<sql>
+				<select>
+					<value>
+					<![CDATA[SELECT id ,productDate,machineName,(select codename from d_code where code=catFrom and codetype='catFrom') catFrom,(select codename from d_code where code=cattype and codetype='cattype') cattype,rtype,(select codename from d_code where code=rtype and codetype='rtype')Rname, catno, catname, batchno, localprice, price,(select codename from d_code where code=priceUnit and codetype='money') priceUnit, total, expiredate,dealer, producer, CASE WHEN DATEDIFF(expiredate, CURRENT_DATE()) <= b_var.bizValue THEN "1" ELSE "0" END ISEXP FROM b_cat, b_var WHERE total > 0 AND bizkey = 'expireTime' and {#condition#} order by expiredate]]>
+				</value>
+					<condition name="txtid" hidden="true">
+						<value>
+						<![CDATA[(ID = '#data#' )]]> 
+						</value>
+					</condition>
+					<condition name="txtcatname" label="名称" labelposition="left">
+						<value>
+							<![CDATA[(trim(catname) like  '%#data#%' )]]>
+						</value>
+						<inputbox>
+							<typeprompt count="20">
+								<promptcol label="catname" value="catname" title="名称"
+									matchmode="anywhere"></promptcol>
+								<promptcol label="catno" value="catno" title="货号"></promptcol>
+								<datasource>
+									<option
+										dataset="@{select catno,catname from d_catcode where {#matchcondition#}}"></option>
+								</datasource>
+							</typeprompt>
+						</inputbox>
+					</condition>
+					<condition name="txtcatno" label="货号" labelposition="left">
+						<value>
+							<![CDATA[(trim(catno) like  '%#data#%' )]]>
+						</value>
+						<inputbox>
+							<typeprompt count="20">
+								<promptcol label="catname" value="catname" title="名称"></promptcol>
+								<promptcol label="catno" value="catno" title="货号"
+									matchmode="anywhere"></promptcol>
+								<datasource>
+									<option
+										dataset="@{select catno,catname from d_catcode where {#matchcondition#}}"></option>
+								</datasource>
+							</typeprompt>
+						</inputbox>
+					</condition>
+					<condition name="txtbatchno" label="批号" labelposition="left">
+						<value>
+							<![CDATA[(trim(batchno) like  '%#data#%' )]]>
+						</value>
+					</condition>
+				</select>
+					<insert pageurl="report{cat_addedit.report1}" popupparams="{title:'新增库存',width:800,height:400}"></insert>
+					<update pageurl="report{cat_addedit.report1}" urlparams="txtid=@{id}"
+						popupparams="{title:'修改库存',width:800,height:400}"></update>  
+					<delete confirmessage="是否删除所选的记录？">
+						delete from b_cat where id=@{id__old};
+					  </delete>	
+			</sql>
+		</report>
+	</page>
+	<page id="importcat">
+		<report id="report1" title="测试数据导入" extends="importcat2.report1">
+			<buttons>
+				<button name="btn1" label="同步导入" extends="${dataimport.button.default}">
+					<dataimport ref="${dataimport.multifiles2}" popupparams="{width:300,height:200}" />
+				</button>
+			</buttons>
+		</report>
+	</page>
+
+</applications>
