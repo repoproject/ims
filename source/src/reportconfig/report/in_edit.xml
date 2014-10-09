@@ -107,7 +107,7 @@
 				</select>
 			
 				<update>
-					update b_in set cattype=trim(@{cattype}), catno=trim(@{catno}),catname=trim(@{catname}),seq=trim(@{seq}),batchno=trim(@{batchno}),productdate=@{productdate},expiredate=@{expiredate},indate=@{indate},num=@{num},producer=trim(@{producer}),dealer=trim(@{dealer}),reason=@{reason},person=trim(@{person}),price=@{price},priceUnit=@{priceUnit},taxRate=@{taxRate},rtype=@{rtype},catFrom=@{catFrom},remark=trim(@{remark}),operator=session{nickname},modifydate=sysdate() 
+					update b_in set cattype=trim(@{cattype}), catno=trim(@{catno}),catname=trim(@{catname}),seq=trim(@{seq}),batchno=trim(@{batchno}),productdate=@{productdate},expiredate=@{expiredate},indate=@{indate},num=@{num},producer=trim(@{producer}),dealer=trim(@{dealer}),reason=@{reason},person=trim(@{person}),price=@{price},priceUnit=@{priceUnit},rtype=@{rtype},catFrom=@{catFrom},remark=trim(@{remark}),operator=session{nickname},modifydate=sysdate() 
 					where ID=@{ID__old};
 				</update>
 			</sql>

@@ -126,8 +126,8 @@
 					</condition>
 				</select>
 				<update>
-				    insert into b_out(machinename,  machineno,  cattype,   rtype,     catno,    catname,  batchno,   seq,    person,   outdate,   price,   priceUnit,   localprice,   num,   reason,   remark,operator,makedate, modifydate,projectCode,description,cause,section)
-					         values(@{machinename},@{machineno},@{cattype},@{rtype},@{catno},@{catname},@{batchno},@{seq},@{person},@{outdate},@{price},@{priceUnit},@{localprice},@{num},@{reason},@{remark},session{nickname},  sysdate(),sysdate(),@{projectCode},@{description},@{cause},@{section});
+				    insert into b_out(machinename,  machineno,  cattype,   rtype,     catno,    catname,  batchno,   seq,    person,   outdate,   price,   priceUnit, num,   reason,   remark,operator,makedate, modifydate,projectCode,description,cause,section)
+					         values(@{machinename},@{machineno},@{cattype},@{rtype},@{catno},@{catname},@{batchno},@{seq},@{person},@{outdate},@{price},@{priceUnit},@{num},@{reason},@{remark},session{nickname},  sysdate(),sysdate(),@{projectCode},@{description},@{cause},@{section});
 				</update>
 			</sql>
 			<format><!--

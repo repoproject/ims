@@ -113,8 +113,8 @@
 					</condition>
 				</select>
 				<insert>
-					insert into b_in(cattype,    catno,   catname,  batchno,    seq,  productdate,    expiredate,  indate,  num    ,producer    ,dealer,  reason    ,person  ,price   ,priceUnit   ,taxRate    ,rtype   ,catFrom  ,remark,   machinename,         operator  ,makedate, modifydate)
-					        values(@{cattype},@{catno},@{catname},@{batchno},@{seq},@{productdate},@{expiredate},@{indate},@{num},@{producer},@{dealer},@{reason},@{person},@{price},@{priceUnit},@{taxRate},@{rtype},@{catFrom},@{remark},@{machinename},session{nickname}, sysdate(),sysdate());
+					insert into b_in(cattype,    catno,   catname,  batchno,    seq,  productdate,    expiredate,  indate,  num    ,producer    ,dealer,  reason    ,person  ,price   ,priceUnit, rtype   ,catFrom  ,remark,   machinename,         operator  ,makedate, modifydate)
+					        values(@{cattype},@{catno},@{catname},@{batchno},@{seq},@{productdate},@{expiredate},@{indate},@{num},@{producer},@{dealer},@{reason},@{person},@{price},@{priceUnit},@{rtype},@{catFrom},@{remark},@{machinename},session{nickname}, sysdate(),sysdate());
 				</insert>
 			</sql>
 			<buttons>

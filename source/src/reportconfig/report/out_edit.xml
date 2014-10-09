@@ -137,7 +137,6 @@
 						outdate = TRIM(@{ outdate }),
 						price = TRIM(@{ price }),
 						priceUnit = TRIM(@{ priceUnit }),
-						localprice = TRIM(@{ localprice }),
 						num =@{ num }, reason = TRIM(@{ reason }),
 						remark = TRIM(@{ remark }),
 						operator=session{nickname},modifydate=sysdate(),
