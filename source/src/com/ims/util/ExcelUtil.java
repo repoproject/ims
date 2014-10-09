@@ -242,34 +242,45 @@ public class ExcelUtil {
     
     
     /**
-     * 移动行
+     * 移动行及其后所有行
      * @param sheet   sheet
      * @param startRowIndex   移动开始行，移动行的行号
      * @param moveCount    移动的距离eg 5 向后移动5行
      */
     public static void moveRow(HSSFSheet sheet,int startRowIndex,int moveCount){
-    	int lastRowNum = sheet.getLastRowNum();
-    	sheet.shiftRows(startRowIndex, lastRowNum, moveCount);
-    	
-    	//移动之后的范围
-    	startRowIndex += moveCount;
-    	lastRowNum += moveCount;
-    	//更新移动之后的行的公式
-    	String formula = "";
-    	for(int i=startRowIndex;i<lastRowNum;i++){
-    		HSSFRow row = sheet.getRow(i);
-    		for(int j=0;j<row.getLastCellNum();j++){
-    			HSSFCell cell = row.getCell(j);
-    			if(cell.getCellType()== cell.CELL_TYPE_FORMULA){
-    				//移动公式，引起的变化点是移动之前的行，下标从0开始
-    				formula = moveFormula(formula, moveCount,startRowIndex-moveCount);
-    				cell.setCellFormula(formula);
-    			}
-    		}
-    	}
+    	moveRow(sheet,startRowIndex,moveCount,startRowIndex-moveCount-1);
+//    	int lastRowNum = sheet.getLastRowNum();
+//    	sheet.shiftRows(startRowIndex, lastRowNum, moveCount);
+//    	
+//    	//移动之后的范围
+//    	startRowIndex += moveCount;
+//    	lastRowNum += moveCount;
+//    	//更新移动之后的行的公式
+//    	String formula = "";
+//    	for(int i=startRowIndex;i<lastRowNum;i++){
+//    		HSSFRow row = sheet.getRow(i);
+//    		for(int j=0;j<row.getLastCellNum();j++){
+//    			HSSFCell cell = row.getCell(j);
+//    			if(cell.getCellType()== cell.CELL_TYPE_FORMULA){
+//    				//移动公式，引起的变化点是移动之前的行，下标从0开始
+//    				formula = moveFormula(formula, moveCount,startRowIndex-moveCount);
+//    				cell.setCellFormula(formula);
+//    			}
+//    		}
+//    	}
     }
     
+    /**
+     * 移动行
+     * @param sheet   处理的sheet页
+     * @param startRowIndex 移动开始行
+     * @param moveCount  需要移动的行数,不支持负数的移动
+     * @param insertPoint 引起移动的插入点，用来移动公式
+     */
     public static void moveRow(HSSFSheet sheet,int startRowIndex,int moveCount,int insertPoint){
+    	if(moveCount <= 0)
+    		return;
+    	insertPoint = (insertPoint > 0 ? insertPoint : 0);
     	int lastRowNum = sheet.getLastRowNum();
     	sheet.shiftRows(startRowIndex, lastRowNum, moveCount);
     	
