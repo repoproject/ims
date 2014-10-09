@@ -14,7 +14,7 @@
 					<col column="machinename" label="设备名称" clickorderby="true" width="25%"></col>
 					<col column="machineno" label="序号S/N" clickorderby="true" width="25%"></col>
 					<col column="orderno" label="排序号" clickorderby="true" width="15%"></col>				
-					<col column="remark" label="备注" clickorderby="true" width="30%"></col>					
+					<col column="remark" label="备注" clickorderby="true" width="20%"></col>					
 				</display>
 				<sql>
 				
