@@ -3,6 +3,7 @@
  */
 package com.ims.report.excel;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 
 import com.ims.report.SaveReportData;
 import com.ims.report.config.Sheet;
+import com.ims.util.DBUtil;
 import com.ims.util.ExcelUtil;
 
 /**
@@ -56,7 +58,17 @@ public class DiscardSheet extends AbsRSheet implements ISheet {
 			cell = row.createCell(colIndex);
 		ExcelUtil.setCellValue(cell, this.endDate);
 	}
-
+	
+	/**
+	 * 得到数据对象
+	 */
+	@Override
+	protected List<Object> queryData(){
+		List<Object> data = new ArrayList<Object>();
+		data = DBUtil.query(this.sql,this.startDate,this.endDate);
+		return data;
+	}
+	
 	/**
 	 * 
 	 */

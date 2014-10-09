@@ -30,8 +30,7 @@
 							FROM
 								r_in_view vin
 							WHERE
-								vin.indate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								vin.indate BETWEEN ? AND ?
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -48,11 +47,10 @@
 							FROM
 								r_out_view o
 							WHERE
-								o.outdate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								o.outdate BETWEEN ? AND ?
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where a.rType =1 and date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?
+					where a.rType =1 
 					order by a.machineName asc  
 			
         </sql>
@@ -112,8 +110,7 @@
 							FROM
 								r_in_view vin
 							WHERE
-								vin.indate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								vin.indate BETWEEN ? AND ?
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -130,11 +127,10 @@
 							FROM
 								r_out_view o
 							WHERE
-								o.outdate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								o.outdate BETWEEN ? AND ?
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-		    where a.rType =2 and date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+		    where a.rType =2   
 		    order by a.machineName asc 
         </sql>
         <col index="1" type="">catno</col>
@@ -193,8 +189,7 @@
 							FROM
 								r_in_view vin
 							WHERE
-								vin.indate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								vin.indate BETWEEN ? AND ?
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -211,11 +206,10 @@
 							FROM
 								r_out_view o
 							WHERE
-								o.outdate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								o.outdate BETWEEN ? AND ?
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where  a.rType =3 and date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where  a.rType = 3   
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -274,8 +268,7 @@
 							FROM
 								r_in_view vin
 							WHERE
-								vin.indate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								vin.indate BETWEEN ? AND ?
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -292,11 +285,10 @@
 							FROM
 								r_out_view o
 							WHERE
-								o.outdate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								o.outdate BETWEEN ? AND ?
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where a.rType =4 and  date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where a.rType = 4   
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -355,8 +347,7 @@
 							FROM
 								r_in_view vin
 							WHERE
-								vin.indate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								vin.indate BETWEEN ? AND ?
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -373,11 +364,10 @@
 							FROM
 								r_out_view o
 							WHERE
-								o.outdate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								o.outdate BETWEEN ? AND ?
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where a.rType =5 and  date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where a.rType = 5   
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -436,8 +426,7 @@
 							FROM
 								r_in_view vin
 							WHERE
-								vin.indate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								vin.indate BETWEEN ? AND ?
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -454,11 +443,10 @@
 							FROM
 								r_out_view o
 							WHERE
-								o.outdate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								o.outdate BETWEEN ? AND ?
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where a.rType =6 and  date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where a.rType = 6   
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -517,8 +505,7 @@
 							FROM
 								r_in_view vin
 							WHERE
-								vin.indate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								vin.indate BETWEEN ? AND ?
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -535,11 +522,10 @@
 							FROM
 								r_out_view o
 							WHERE
-								o.outdate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								o.outdate BETWEEN ? AND ?
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where a.rType =7 and  date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where a.rType = 7   
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -598,8 +584,7 @@
 							FROM
 								r_in_view vin
 							WHERE
-								vin.indate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								vin.indate BETWEEN ? AND ?
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -616,11 +601,10 @@
 							FROM
 								r_out_view o
 							WHERE
-								o.outdate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								o.outdate BETWEEN ? AND ?
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where a.rType =8 and  date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where a.rType = 8   
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -679,8 +663,7 @@
 							FROM
 								r_in_view vin
 							WHERE
-								vin.indate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								vin.indate BETWEEN ? AND ?
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -697,11 +680,10 @@
 							FROM
 								r_out_view o
 							WHERE
-								o.outdate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								o.outdate BETWEEN ? AND ?
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where a.rType =9 and  date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where a.rType = 9   
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -760,8 +742,7 @@
 							FROM
 								r_in_view vin
 							WHERE
-								vin.indate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								vin.indate BETWEEN ? AND ?
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -778,11 +759,10 @@
 							FROM
 								r_out_view o
 							WHERE
-								o.outdate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								o.outdate BETWEEN ? AND ?
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where a.rType =20 and  date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where a.rType = 20   
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -841,8 +821,7 @@
 							FROM
 								r_in_view vin
 							WHERE
-								vin.indate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								vin.indate BETWEEN ? AND ?
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -859,11 +838,10 @@
 							FROM
 								r_out_view o
 							WHERE
-								o.outdate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								o.outdate BETWEEN ? AND ?
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where a.rType =11 and  date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where a.rType =11   
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -909,9 +887,9 @@
 					b.producer,b.dealer,null as catFrom
 				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
 				and (a.rType between 1 and 9) and a.reason='2'
+				and a.outdate BETWEEN ? AND ?
 				ORDER BY a.outDate ASC
 			)t
-			where  date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
         </sql>
         <col index="1" type="">rownum</col>
         <col index="2" type="">outDate</col>
@@ -937,9 +915,9 @@
 				round(getMoney(a.priceUnit,a.price,'0'),2) priceCNY,round(getMoney(a.priceUnit,a.price,'1'),2) priceUSD,a.projectCode
 				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
 				and (a.rType between 1 and 9) and a.reason='1'
+				and a.outdate BETWEEN ? AND ?
 				ORDER BY a.outDate ASC
 			) t
-			where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
         </sql>
         <col index="1" type="">section</col>
         <col index="2" type="">outDate</col>
@@ -974,8 +952,7 @@
 							FROM
 								r_in_view vin
 							WHERE
-								vin.indate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								vin.indate BETWEEN ? AND ?
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -992,11 +969,10 @@
 							FROM
 								r_out_view o
 							WHERE
-								o.outdate BETWEEN DATE('2014-01-01')
-							AND DATE('2015-01-01')
+								o.outdate BETWEEN ? AND ?
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
-					where (a.rType=10) and date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
+					where (a.rType=10)   
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -1042,9 +1018,9 @@
 					b.producer,b.dealer,null as catFrom
 				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
 				and (a.rType=10) and  a.reason='2'
+				and a.outdate BETWEEN ? AND ?
 				ORDER BY a.outDate ASC
 			)t
-			where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
         </sql>
         <col index="1" type="">rownum</col>
         <col index="2" type="">outDate</col>
@@ -1070,9 +1046,9 @@
 				round(getMoney(a.priceUnit,a.price,'0'),2) priceCNY,round(getMoney(a.priceUnit,a.price,'1'),2) priceUSD,a.projectCode
 				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
 				and (a.rType=10) and a.reason='1'
+				and a.outdate BETWEEN ? AND ?
 				ORDER BY a.outDate ASC
 			) t 
-			where date('2014-01-01') != ? and date('2014-01-01') != ?  and date('2014-01-01') != ?  and date('2014-01-01') != ?  
         </sql>
         <col index="1" type="">section</col>
         <col index="2" type="">outDate</col>

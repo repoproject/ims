@@ -3,6 +3,7 @@
  */
 package com.ims.report.excel;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +17,7 @@ import com.ims.model.Rate;
 import com.ims.model.sysEnum.MoneyType;
 import com.ims.report.SaveReportData;
 import com.ims.report.config.Sheet;
+import com.ims.util.DBUtil;
 import com.ims.util.ExcelUtil;
 
 /**
@@ -66,6 +68,15 @@ public class ValidationSheet extends AbsRSheet implements ISheet{
 		
 	}
 	
+	/**
+	 * 得到数据对象
+	 */
+	@Override
+	protected List<Object> queryData(){
+		List<Object> data = new ArrayList<Object>();
+		data = DBUtil.query(this.sql,this.startDate,this.endDate);
+		return data;
+	}
 
 	/**
 	 * 

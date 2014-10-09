@@ -3,6 +3,7 @@
  */
 package com.ims.report.excel;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ import com.ims.model.Rate;
 import com.ims.model.sysEnum.MoneyType;
 import com.ims.report.SaveReportData;
 import com.ims.report.config.Sheet;
+import com.ims.util.DBUtil;
 import com.ims.util.ExcelUtil;
 
 /**
@@ -111,6 +113,15 @@ public class R1Sheet extends AbsRSheet implements ISheet{
 		if(cellGBP == null)
 			cellGBP = rateRow.createCell(21);
 		ExcelUtil.setCellValue(cellGBP, rate.getValue(MoneyType.GBP));
+	}
+	
+	/**
+	 * 得到数据对象
+	 */
+	protected List<Object> queryData(){
+		List<Object> data = new ArrayList<Object>();
+		data = DBUtil.query(this.sql,this.startDate,this.endDate,this.startDate,this.endDate);
+		return data;
 	}
 
 	/**

@@ -259,15 +259,6 @@ public abstract class AbsRSheet implements ISheet {
 			logger.error(e.getMessage() + "合计出错，列：" + key + " 值  " + value.toString());
 		}
 	}
-
-	/**
-	 * 得到数据对象
-	 */
-	protected List<Object> queryData(){
-		List<Object> data = new ArrayList<Object>();
-		data = DBUtil.query(this.sql,this.startDate,this.endDate,this.startDate,this.endDate);
-		return data;
-	}
 	
 	/**
 	 * 格式化数据
@@ -285,6 +276,13 @@ public abstract class AbsRSheet implements ISheet {
 	 * 设置日期汇率
 	 */
 	protected abstract void setHeader();
+	
+	/**
+	 * 抽象方法子类实现，主要是没个统计sql的参数个数不一致，所以子类自己实现
+	 * @param params
+	 * @return
+	 */
+	protected abstract List<Object> queryData();
 	
 	/**
 	 * 
