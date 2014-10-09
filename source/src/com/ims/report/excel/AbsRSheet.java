@@ -145,7 +145,8 @@ public abstract class AbsRSheet implements ISheet {
 		}
 		
 		//设置最后一行数据
-		setFooterData(this.sheet.getRow(this.footerRowNum + rowCount-2));
+		int newFooterRowNum = (this.footerRowNum >= this.startRow + rowCount ? this.footerRowNum : this.startRow + rowCount);
+		setFooterData(this.sheet.getRow(newFooterRowNum));
 	}
 	
 	protected void getFooterData(List<Object> data){
