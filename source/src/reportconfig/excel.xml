@@ -26,11 +26,12 @@
 								SUM(vin.inCharges) inCharges,
 								SUM(vin.inInterlab) inInterlab,
 								SUM(vin.inSponsor) inSponsor,
-					      SUM(vin.inVendor) + SUM(vin.inCharges) + SUM(vin.inInterlab) + SUM(vin.inSponsor) inTotal
+					            SUM(vin.inVendor) + SUM(vin.inCharges) + SUM(vin.inInterlab) + SUM(vin.inSponsor) inTotal
 							FROM
 								r_in_view vin
 							WHERE
 								vin.indate BETWEEN ? AND ?
+							GROUP BY vin.catid
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -48,6 +49,7 @@
 								r_out_view o
 							WHERE
 								o.outdate BETWEEN ? AND ?
+                            GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
 					where a.rType =1 
@@ -106,11 +108,12 @@
 								SUM(vin.inCharges) inCharges,
 								SUM(vin.inInterlab) inInterlab,
 								SUM(vin.inSponsor) inSponsor,
-					      SUM(vin.inVendor) + SUM(vin.inCharges) + SUM(vin.inInterlab) + SUM(vin.inSponsor) inTotal
+					            SUM(vin.inVendor) + SUM(vin.inCharges) + SUM(vin.inInterlab) + SUM(vin.inSponsor) inTotal
 							FROM
 								r_in_view vin
 							WHERE
 								vin.indate BETWEEN ? AND ?
+							GROUP BY vin.catid
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -128,6 +131,7 @@
 								r_out_view o
 							WHERE
 								o.outdate BETWEEN ? AND ?
+                            GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
 		    where a.rType =2   
@@ -190,6 +194,7 @@
 								r_in_view vin
 							WHERE
 								vin.indate BETWEEN ? AND ?
+							GROUP BY vin.catid
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -207,6 +212,7 @@
 								r_out_view o
 							WHERE
 								o.outdate BETWEEN ? AND ?
+                            GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
 					where  a.rType = 3   
@@ -269,6 +275,7 @@
 								r_in_view vin
 							WHERE
 								vin.indate BETWEEN ? AND ?
+							GROUP BY vin.catid
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -286,6 +293,7 @@
 								r_out_view o
 							WHERE
 								o.outdate BETWEEN ? AND ?
+                            GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
 					where a.rType = 4   
@@ -348,6 +356,7 @@
 								r_in_view vin
 							WHERE
 								vin.indate BETWEEN ? AND ?
+							GROUP BY vin.catid
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -365,6 +374,7 @@
 								r_out_view o
 							WHERE
 								o.outdate BETWEEN ? AND ?
+                            GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
 					where a.rType = 5   
@@ -427,6 +437,7 @@
 								r_in_view vin
 							WHERE
 								vin.indate BETWEEN ? AND ?
+							GROUP BY vin.catid
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -444,6 +455,7 @@
 								r_out_view o
 							WHERE
 								o.outdate BETWEEN ? AND ?
+                            GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
 					where a.rType = 6   
@@ -506,6 +518,7 @@
 								r_in_view vin
 							WHERE
 								vin.indate BETWEEN ? AND ?
+							GROUP BY vin.catid
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -523,6 +536,7 @@
 								r_out_view o
 							WHERE
 								o.outdate BETWEEN ? AND ?
+                            GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
 					where a.rType = 7   
@@ -585,6 +599,7 @@
 								r_in_view vin
 							WHERE
 								vin.indate BETWEEN ? AND ?
+							GROUP BY vin.catid
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -602,6 +617,7 @@
 								r_out_view o
 							WHERE
 								o.outdate BETWEEN ? AND ?
+                            GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
 					where a.rType = 8   
@@ -664,6 +680,7 @@
 								r_in_view vin
 							WHERE
 								vin.indate BETWEEN ? AND ?
+							GROUP BY vin.catid
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -681,6 +698,7 @@
 								r_out_view o
 							WHERE
 								o.outdate BETWEEN ? AND ?
+                            GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
 					where a.rType = 9   
@@ -743,6 +761,7 @@
 								r_in_view vin
 							WHERE
 								vin.indate BETWEEN ? AND ?
+							GROUP BY vin.catid
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -760,6 +779,7 @@
 								r_out_view o
 							WHERE
 								o.outdate BETWEEN ? AND ?
+                            GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
 					where a.rType = 20   
@@ -822,6 +842,7 @@
 								r_in_view vin
 							WHERE
 								vin.indate BETWEEN ? AND ?
+							GROUP BY vin.catid
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -839,6 +860,7 @@
 								r_out_view o
 							WHERE
 								o.outdate BETWEEN ? AND ?
+                            GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
 					where a.rType =11   
@@ -953,6 +975,7 @@
 								r_in_view vin
 							WHERE
 								vin.indate BETWEEN ? AND ?
+							GROUP BY vin.catid
 					)i
 					on a.id = i.catid
 					LEFT JOIN
@@ -970,6 +993,7 @@
 								r_out_view o
 							WHERE
 								o.outdate BETWEEN ? AND ?
+                            GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
 					where (a.rType=10)   
