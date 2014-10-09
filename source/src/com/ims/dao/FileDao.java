@@ -25,7 +25,9 @@ public class FileDao {
 	 * @return
 	 */
 	public int insert(FileReport file){
-		setDate(file);
+		//setDate(file);
+		file.setMakeDate(new Date());
+		file.setModifyDate(new Date());
 		String sql = "insert into b_file(name,path,makedate,modifydate) values(?,?,?,?)";
 		int re = DBUtil.execute(sql, file.getName(),file.getPath(),file.getMakeDate(),file.getMakeDate());
 		return re;
@@ -35,9 +37,11 @@ public class FileDao {
 	 * 暂时不做任何数据上的更新，因为保存路径和文件名称不会改变
 	 * @return
 	 */
-	public int update(){
-		//TODO:
-		return 1;
+	public int update(FileReport file){
+		file.setModifyDate(new Date());
+		String sql = "update b_file set modifydate=? where name=?";
+		int re = DBUtil.execute(sql, file.getModifyDate(),file.getName());
+		return re;
 	}
 	
 	/**
@@ -46,10 +50,9 @@ public class FileDao {
 	 * @return
 	 */
 	public int saveOrUpdate(FileReport file){
-		String sql = "";
 		int re = 0;
 		if(exist(file.getName())){
-			re = update();
+			re = update(file);
 		}
 		else{
 			re = insert(file);
