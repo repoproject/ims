@@ -16,8 +16,9 @@
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -52,6 +53,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType =1 
 					order by a.machineName asc  
 			
@@ -98,8 +100,9 @@
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -134,6 +137,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 		    where a.rType =2   
 		    order by a.machineName asc 
         </sql>
@@ -179,8 +183,9 @@
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -215,6 +220,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where  a.rType = 3   
 			
         </sql>
@@ -260,8 +266,9 @@
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -296,6 +303,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 4   
 			
         </sql>
@@ -341,8 +349,9 @@
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -377,6 +386,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 5   
 			
         </sql>
@@ -422,8 +432,9 @@
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -458,6 +469,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 6   
 			
         </sql>
@@ -503,8 +515,9 @@
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -539,6 +552,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 7   
 			
         </sql>
@@ -584,8 +598,9 @@
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -620,6 +635,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 8   
 			
         </sql>
@@ -665,8 +681,9 @@
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -701,6 +718,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 9   
 			
         </sql>
@@ -746,8 +764,9 @@
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -782,6 +801,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 20   
 			
         </sql>
@@ -827,8 +847,9 @@
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -863,6 +884,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType =11   
 			
         </sql>
@@ -960,8 +982,9 @@
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -996,6 +1019,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where (a.rType=10)   
 			
         </sql>
