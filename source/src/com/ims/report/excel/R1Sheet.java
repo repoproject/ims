@@ -144,6 +144,7 @@ public class R1Sheet extends AbsRSheet implements ISheet{
 				Map<String, String> mRow = new HashMap<String, String>();
 				mRow.put("machineNo", String.valueOf(mechineSeq++));
 				mRow.put("catname", rowMap.get("machineName").toString());
+				mRow.put("rType", rowMap.get("rType").toString()); //用于备份数据，区分sheet页
 				//机器行添加到数据集中
 				data.add(i, mRow);
 				i++;
