@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-10-10 22:04:51
+Date: 2014-10-10 23:04:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -188,7 +188,7 @@ CREATE TABLE `b_person` (
 -- ----------------------------
 DROP TABLE IF EXISTS `b_report_discard`;
 CREATE TABLE `b_report_discard` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `catid` int(11) DEFAULT NULL,
   `flag` varchar(10) DEFAULT NULL,
   `startDate` date DEFAULT NULL,
@@ -275,7 +275,7 @@ INSERT INTO `b_report_r` VALUES ('2', '11', '201409', null, null, null, null, nu
 -- ----------------------------
 DROP TABLE IF EXISTS `b_report_validation`;
 CREATE TABLE `b_report_validation` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `catid` int(11) DEFAULT NULL,
   `flag` varchar(10) DEFAULT NULL,
   `startDate` date DEFAULT NULL,
@@ -293,11 +293,12 @@ CREATE TABLE `b_report_validation` (
   `makeDate` datetime DEFAULT NULL,
   `operator` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_report_validation
 -- ----------------------------
+INSERT INTO `b_report_validation` VALUES ('1', null, '201410', null, null, '', null, '', 'R1', 'Cell wash solution / NaOH', '2', '12.000000', '24.000000', '3.840000', '', '2014-10-10 23:01:13', '001');
 
 -- ----------------------------
 -- Table structure for b_var
