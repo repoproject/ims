@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-10-10 23:04:13
+Date: 2014-10-11 00:20:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -47,7 +47,7 @@ CREATE TABLE `b_cat` (
 -- ----------------------------
 -- Records of b_cat
 -- ----------------------------
-INSERT INTO `b_cat` VALUES ('137', '11183974216', 'ISE Cal Low', '', '0', '11', '10', '10', '2014-10-01 00:00:00', '11', '2014-10-31 00:00:00', '14.0000', '0', null, '0', '11', null, '', null, '2014-10-09 23:20:11', '2014-10-09 23:20:11');
+INSERT INTO `b_cat` VALUES ('137', '11183974216', 'ISE Cal Low', '', '0', '11', '8', '10', '2014-10-01 00:00:00', '11', '2014-10-31 00:00:00', '14.0000', '0', null, '0', '11', '1', 'Modular Reagent', null, '2014-10-09 23:20:11', '2014-10-11 00:01:10');
 INSERT INTO `b_cat` VALUES ('138', '04880285190', 'Cell wash solution / NaOH', '111', '0', '22', '8', '1', '2014-10-01 00:00:00', '1', '2014-10-31 00:00:00', '12.0000', '0', null, '0', '1', '1', '1', null, '2014-10-09 23:20:58', '2014-10-09 23:21:30');
 
 -- ----------------------------
@@ -67,7 +67,7 @@ CREATE TABLE `b_file` (
 -- ----------------------------
 -- Records of b_file
 -- ----------------------------
-INSERT INTO `b_file` VALUES ('4', 'Inventory listing 2014-10.xls', '\\reports\\', null, '2014-10-06 13:31:59', '2014-10-09 23:52:20');
+INSERT INTO `b_file` VALUES ('4', 'Inventory listing 2014-10.xls', '\\reports\\', null, '2014-10-06 13:31:59', '2014-10-11 00:18:46');
 
 -- ----------------------------
 -- Table structure for b_in
@@ -161,12 +161,13 @@ CREATE TABLE `b_out` (
   `makedate` datetime DEFAULT NULL COMMENT '创建日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='出库记录';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='出库记录';
 
 -- ----------------------------
 -- Records of b_out
 -- ----------------------------
 INSERT INTO `b_out` VALUES ('11', '1', '1', '04880285190', 'Cell wash solution / NaOH', '1', '111', '22', '0', '1', '2014-10-09 00:00:00', '12.0000', '0', null, '2', '1', '', '', '', '', '', '1', '2014-10-09 23:21:30', '2014-10-09 23:21:30');
+INSERT INTO `b_out` VALUES ('12', 'Modular Reagent', '1', '11183974216', 'ISE Cal Low', '10', '', '11', '0', '1', '2014-10-11 00:00:00', '14.0000', '0', null, '2', '2', '', '111', 'description', '1.Global sequestered harmonized lots', '11', '1', '2014-10-11 00:01:10', '2014-10-11 00:01:10');
 
 -- ----------------------------
 -- Table structure for b_person
@@ -210,7 +211,7 @@ CREATE TABLE `b_report_discard` (
   `makedate` datetime DEFAULT NULL,
   `operator` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_report_discard
@@ -224,6 +225,7 @@ CREATE TABLE `b_report_r` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `catid` int(11) DEFAULT NULL,
   `flag` varchar(10) DEFAULT NULL,
+  `rType` varchar(10) DEFAULT NULL,
   `startDate` date DEFAULT NULL,
   `endDate` date DEFAULT NULL,
   `catno` varchar(11) DEFAULT NULL,
@@ -262,13 +264,11 @@ CREATE TABLE `b_report_r` (
   `makedate` datetime DEFAULT NULL,
   `operator` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_report_r
 -- ----------------------------
-INSERT INTO `b_report_r` VALUES ('1', '201410', '201410', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
-INSERT INTO `b_report_r` VALUES ('2', '11', '201409', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for b_report_validation
@@ -293,12 +293,11 @@ CREATE TABLE `b_report_validation` (
   `makeDate` datetime DEFAULT NULL,
   `operator` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_report_validation
 -- ----------------------------
-INSERT INTO `b_report_validation` VALUES ('1', null, '201410', null, null, '', null, '', 'R1', 'Cell wash solution / NaOH', '2', '12.000000', '24.000000', '3.840000', '', '2014-10-10 23:01:13', '001');
 
 -- ----------------------------
 -- Table structure for b_var
