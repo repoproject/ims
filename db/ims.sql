@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-10-11 00:20:03
+Date: 2014-10-11 23:30:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -21,6 +21,7 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `b_cat`;
 CREATE TABLE `b_cat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `catid` varchar(255) NOT NULL COMMENT '物理编号，系统生成',
   `catno` varchar(50) NOT NULL COMMENT '货号',
   `catname` varchar(255) DEFAULT NULL COMMENT '物品名称',
   `seq` varchar(50) DEFAULT NULL COMMENT '编号，为全球统一编号预留',
@@ -42,13 +43,12 @@ CREATE TABLE `b_cat` (
   `makedate` datetime DEFAULT NULL,
   `modifydate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_cat
 -- ----------------------------
-INSERT INTO `b_cat` VALUES ('137', '11183974216', 'ISE Cal Low', '', '0', '11', '8', '10', '2014-10-01 00:00:00', '11', '2014-10-31 00:00:00', '14.0000', '0', null, '0', '11', '1', 'Modular Reagent', null, '2014-10-09 23:20:11', '2014-10-11 00:01:10');
-INSERT INTO `b_cat` VALUES ('138', '04880285190', 'Cell wash solution / NaOH', '111', '0', '22', '8', '1', '2014-10-01 00:00:00', '1', '2014-10-31 00:00:00', '12.0000', '0', null, '0', '1', '1', '1', null, '2014-10-09 23:20:58', '2014-10-09 23:21:30');
+INSERT INTO `b_cat` VALUES ('142', '20141011-11183974216-1sdf-CNY12300', '11183974216', 'ISE Cal Low', '', '0', '1sdf', '6', '1', '2014-10-01 00:00:00', '地方df', '2014-10-31 00:00:00', '123.0000', '0', null, '0', '都发到', '1', 'Modular Reagent', null, '2014-10-11 23:08:18', '2014-10-11 23:27:53');
 
 -- ----------------------------
 -- Table structure for b_file
@@ -67,7 +67,7 @@ CREATE TABLE `b_file` (
 -- ----------------------------
 -- Records of b_file
 -- ----------------------------
-INSERT INTO `b_file` VALUES ('4', 'Inventory listing 2014-10.xls', '\\reports\\', null, '2014-10-06 13:31:59', '2014-10-11 00:18:46');
+INSERT INTO `b_file` VALUES ('4', 'Inventory listing 2014-10.xls', '\\reports\\', null, '2014-10-06 13:31:59', '2014-10-11 23:28:58');
 
 -- ----------------------------
 -- Table structure for b_in
@@ -75,6 +75,7 @@ INSERT INTO `b_file` VALUES ('4', 'Inventory listing 2014-10.xls', '\\reports\\'
 DROP TABLE IF EXISTS `b_in`;
 CREATE TABLE `b_in` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '货号，试剂号耗材号',
+  `catid` varchar(255) DEFAULT NULL COMMENT '物理编号，系统生成',
   `catno` varchar(50) NOT NULL,
   `catName` varchar(255) DEFAULT NULL COMMENT '试剂名称，冗余，b_cat.name',
   `seq` varchar(50) DEFAULT NULL COMMENT '编号，为全球统一编号预留',
@@ -101,13 +102,12 @@ CREATE TABLE `b_in` (
   `makedate` datetime DEFAULT NULL COMMENT '产生日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=utf8 COMMENT='试剂表';
+) ENGINE=InnoDB AUTO_INCREMENT=145 DEFAULT CHARSET=utf8 COMMENT='试剂表';
 
 -- ----------------------------
 -- Records of b_in
 -- ----------------------------
-INSERT INTO `b_in` VALUES ('142', '11183974216', 'ISE Cal Low', '', '11', '0', '11', '11', '2014-10-01 00:00:00', '0', '2014-10-31 00:00:00', '10', null, '14.0000', '0', null, null, '2014-10-09 00:00:00', '', '10', '0', '1', '', '1', '2014-10-09 23:20:11', '2014-10-09 23:20:11');
-INSERT INTO `b_in` VALUES ('143', '04880285190', 'Cell wash solution / NaOH', '111', '22', '0', '1', '1', '2014-10-01 00:00:00', '0', '2014-10-31 00:00:00', '10', null, '12.0000', '0', null, null, '2014-10-09 00:00:00', '1', '1', '0', '1', '', '1', '2014-10-09 23:20:58', '2014-10-09 23:20:58');
+INSERT INTO `b_in` VALUES ('144', '20141011-11183974216-1sdf-CNY12300', '11183974216', 'ISE Cal Low', '', '1sdf', '0', '地方df', '都发到', '2014-10-01 00:00:00', '0', '2014-10-31 00:00:00', '10', null, '123.0000', '0', null, null, '2014-10-11 00:00:00', '', '1', '0', '1', '', '1', '2014-10-11 23:08:18', '2014-10-11 23:08:18');
 
 -- ----------------------------
 -- Table structure for b_machine
@@ -137,6 +137,7 @@ INSERT INTO `b_machine` VALUES ('9', 'E411', null, '3', null, '', '3');
 DROP TABLE IF EXISTS `b_out`;
 CREATE TABLE `b_out` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `catid` varchar(255) DEFAULT NULL COMMENT '物理编号，系统生成',
   `machineName` varchar(255) DEFAULT NULL COMMENT '设备名称',
   `machineNo` varchar(50) DEFAULT NULL COMMENT '设备编号',
   `catno` varchar(50) NOT NULL,
@@ -161,13 +162,13 @@ CREATE TABLE `b_out` (
   `makedate` datetime DEFAULT NULL COMMENT '创建日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='出库记录';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='出库记录';
 
 -- ----------------------------
 -- Records of b_out
 -- ----------------------------
-INSERT INTO `b_out` VALUES ('11', '1', '1', '04880285190', 'Cell wash solution / NaOH', '1', '111', '22', '0', '1', '2014-10-09 00:00:00', '12.0000', '0', null, '2', '1', '', '', '', '', '', '1', '2014-10-09 23:21:30', '2014-10-09 23:21:30');
-INSERT INTO `b_out` VALUES ('12', 'Modular Reagent', '1', '11183974216', 'ISE Cal Low', '10', '', '11', '0', '1', '2014-10-11 00:00:00', '14.0000', '0', null, '2', '2', '', '111', 'description', '1.Global sequestered harmonized lots', '11', '1', '2014-10-11 00:01:10', '2014-10-11 00:01:10');
+INSERT INTO `b_out` VALUES ('13', '20141011-11183974216-1sdf-CNY12300', 'Modular Reagent', '1', '11183974216', 'ISE Cal Low', '1', '', '1sdf', '0', '1', '2014-10-11 00:00:00', '123.0000', '0', null, '2', '1', '', '', '', '', '', '1', '2014-10-11 23:10:27', '2014-10-11 23:10:27');
+INSERT INTO `b_out` VALUES ('14', '20141011-11183974216-1sdf-CNY12300', 'Modular Reagent', '1', '11183974216', 'ISE Cal Low', '1', '', '1sdf', '0', '1', '2014-10-11 00:00:00', '123.0000', '0', null, '2', '2', '', '', '', '', '', '1', '2014-10-11 23:27:53', '2014-10-11 23:27:53');
 
 -- ----------------------------
 -- Table structure for b_person
@@ -211,7 +212,7 @@ CREATE TABLE `b_report_discard` (
   `makedate` datetime DEFAULT NULL,
   `operator` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_report_discard
@@ -264,7 +265,7 @@ CREATE TABLE `b_report_r` (
   `makedate` datetime DEFAULT NULL,
   `operator` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_report_r
@@ -293,7 +294,7 @@ CREATE TABLE `b_report_validation` (
   `makeDate` datetime DEFAULT NULL,
   `operator` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_report_validation
@@ -628,6 +629,49 @@ WHERE
 	) ;
 
 -- ----------------------------
+-- Function structure for getCatId
+-- ----------------------------
+DROP FUNCTION IF EXISTS `getCatId`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `getCatId`(`p_catNo` varchar(255), p_batchNo varchar(255),p_price decimal,p_priceUnit varchar(255)) RETURNS varchar(255) CHARSET utf8
+BEGIN
+	#Routine body goes here...
+    DECLARE v_catId,v_time,v_price,v_priceUnit VARCHAR(255);
+    -- time
+    set v_time = DATE_FORMAT(NOW(),'%Y%m%d');
+
+    -- catno
+    set p_catNo = REPLACE(IFNULL(p_catNo,'N/A'),' ','');
+    IF p_catNo = '' or LOWER(p_catNo) = 'null' THEN
+        set p_catNo = 'N/A';
+    end IF;
+
+    -- batchno
+    set p_batchNo = REPLACE(IFNULL(p_batchNo,'N/A'),' ','');
+    IF p_batchNo = '' or LOWER(p_batchNo) = 'null' THEN
+        set p_batchNo = 'N/A';
+    end IF;
+
+    -- priceunit
+    set v_priceUnit = getCodeName('money',p_priceUnit);
+    IF v_priceUnit = '' or LOWER(v_priceUnit) = 'null' or ISNULL(v_priceUnit) THEN
+        set v_priceUnit = 'N/A';
+    end IF;
+
+    -- price
+    IF p_price = 0 or ISNULL(p_price) THEN
+        set v_price = 'N/A';
+    ELSE
+        set v_price = CAST(ROUND(p_price*100) AS CHAR);
+    end IF;
+    
+    set v_catId = CONCAT(v_time,'-',p_catNo,'-',p_batchNo,'-',v_priceUnit,v_price);
+	  RETURN v_catId;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
 -- Function structure for getCodeName
 -- ----------------------------
 DROP FUNCTION IF EXISTS `getCodeName`;
@@ -674,14 +718,15 @@ END
 DELIMITER ;
 DROP TRIGGER IF EXISTS `tg_In_Insert`;
 DELIMITER ;;
-CREATE TRIGGER `tg_In_Insert` AFTER INSERT ON `b_in` FOR EACH ROW begin
+CREATE TRIGGER `tg_In_Insert` BEFORE INSERT ON `b_in` FOR EACH ROW begin
      declare cnt int;
+     set new.catid = getCatId(new.catno,new.batchno,new.price,new.priceunit);
      set cnt=(select count(id) from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
      if cnt > 0 then
          update b_cat set total = (total+new.num) where catno=catno and batchno=batchno and price=price;
      else
-         insert into b_cat(catno,      catname,      cattype,       batchno,      seq,       total      ,rtype      ,productdate,       producer,       catFrom  ,    expiredate      ,price      ,priceunit       ,localprice      ,dealer , makedate  ,modifydate       ,machinename)
-                values(new.catno,new.catname,new.cattype,new.batchno,new.seq,new.num,new.rtype,new.productdate,new.producer,new.catFrom,new.expiredate,new.price,new.priceunit,new.localprice,new.dealer, sysdate()   ,sysdate()    ,new.machinename);
+         insert into b_cat(catid,catno,      catname,      cattype,       batchno,      seq,       total      ,rtype      ,productdate,       producer,       catFrom  ,    expiredate      ,price      ,priceunit       ,localprice      ,dealer , makedate  ,modifydate       ,machinename)
+                values(new.catid,new.catno,new.catname,new.cattype,new.batchno,new.seq,new.num,new.rtype,new.productdate,new.producer,new.catFrom,new.expiredate,new.price,new.priceunit,new.localprice,new.dealer, sysdate()   ,sysdate()    ,new.machinename);
      end if;
 end
 ;;
@@ -743,11 +788,12 @@ DROP TRIGGER IF EXISTS `tg_Out_Insert`;
 DELIMITER ;;
 CREATE TRIGGER `tg_Out_Insert` BEFORE INSERT ON `b_out` FOR EACH ROW begin
      declare v_total,v_num int;
-     set v_total=(select total from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
+     set new.catid = getCatId(new.catno,new.batchno,new.price,new.priceunit);
+     set v_total=(select total from b_cat a where a.catid=new.catid);
      if v_total < new.num then
           set new.num = v_total;
      end if;
-     update b_cat set total = (v_total-new.num),modifydate=sysdate() ,machineName =new.machineName,machineNo=new.machineNo where catno=new.catno and batchno=new.batchno and price=new.price;
+     update b_cat set total = (v_total-new.num),modifydate=sysdate() ,machineName =new.machineName,machineNo=new.machineNo where catid=new.catid;
      
 end
 ;;
