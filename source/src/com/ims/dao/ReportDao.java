@@ -80,19 +80,19 @@ public class ReportDao {
 	private int saveR(Map<Object, Object> rowData){
 		Date now = new Date();
 		String sql = "insert into b_report_r " +
-		" (flag,rType,catno,machineNo,catname," +
+		" (catid,flag,rType,catno,machineNo,catname," +
 		"  opening,inVendor,inInterlab,inSponsor,inCharges,inTotal," +
 		"  outTrialTest,outValidation,outDiscard,outIntelLab,outSponsor,outOther,outTotal,closing," +
 		"  CNY,USD,SGD,EUR,GBP,localprice,totalAmount,remark," +
 		"  qtyIn,qtyOut,checkQty,checkAmt,pqtyIn,pqtyOut,cqtyIn,cqtyOut," +
 		"  makedate,operator) " +
-		" values (?,?,?,?,?," +
+		" values (?,?,?,?,?,?," +
 		" ?,?,?,?,?,?," +
 		" ?,?,?,?,?,?,?,?," +
 		" ?,?,?,?,?,?,?,?," +
 		" ?,?,?,?,?,?,?,?," +
 		" ?,?)";
-        int re = DBUtil.execute(sql, 
+        int re = DBUtil.execute(sql, rowData.get("id"),
 			DateTimeUtil.toDateString(now, "yyyyMM"),rowData.get("rType"),rowData.get("catno"),rowData.get("machineNo"),rowData.get("catname"),
 			
 			rowData.get("opening"),rowData.get("inVendor"),rowData.get("inInterlab"),rowData.get("inSponsor"),
@@ -132,9 +132,9 @@ public class ReportDao {
 	private int saveDiscard(Map<Object, Object> rowData){
 		Date now = new Date();
 		String sql = "insert into b_report_discard " +
-		" (flag,rownum,outDate,description,catno,price,currency,expiredate,qty,totalAmnt,rootCause,section,producer,dealer,catFrom,makedate,operator) " +
-		" values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        int re = DBUtil.execute(sql, 
+		" (catid,flag,rownum,outDate,description,catno,price,currency,expiredate,qty,totalAmnt,rootCause,section,producer,dealer,catFrom,makedate,operator) " +
+		" values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        int re = DBUtil.execute(sql, rowData.get("id"),
 			DateTimeUtil.toDateString(now, "yyyyMM"),
 			rowData.get("rownum"),
 			rowData.get("outDate"),
@@ -163,9 +163,9 @@ public class ReportDao {
 	private int saveValidation(Map<Object, Object> rowData){
 		Date now = new Date();
 		String sql = "insert into b_report_validation " +
-		" (flag,section,outdate,description,rType,catname,qty,priceCNY,totalCostCNY,totalCostUSD,projectCode,makedate,operator) " +
-		" values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        int re = DBUtil.execute(sql, 
+		" (catid,flag,section,outdate,description,rType,catname,qty,priceCNY,totalCostCNY,totalCostUSD,projectCode,makedate,operator) " +
+		" values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        int re = DBUtil.execute(sql,rowData.get("id"), 
 			DateTimeUtil.toDateString(now, "yyyyMM"),
 			rowData.get("section"),
 			rowData.get("outdate"),

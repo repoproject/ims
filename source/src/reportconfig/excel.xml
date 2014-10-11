@@ -925,7 +925,7 @@
     <Sheet name="Discard_CLab" dataRowNum="5" dataStartNum="5" footerRowNum="7" class="com.ims.report.excel.DiscardSheet">
         <sql>
 			select @rownum:=@rownum+1 rownum,t.* from(
-				select @rownum:=0 ,a.outDate,a.description,a.catno,
+				select @rownum:=0 ,b.id,a.outDate,a.description,a.catno,
 					a.price,getCodeName('money',a.priceUnit) currency,
 					b.expiredate,a.num qty,a.num*a.price totalAmnt,getCodeName('rootcause',a.cause) rootCause,a.section,
 					b.producer,b.dealer,null as catFrom
@@ -952,10 +952,10 @@
     </Sheet>
     <Sheet name="Validation_CLab" dataStartNum="4" dataRowNum="5" footerRowNum="6" class="com.ims.report.excel.ValidationSheet">
         <sql>
-			select t.section, t.outDate,t.description,t.rType,t.catname,t.qty,t.priceCNY,
+			select t.id,t.section, t.outDate,t.description,t.rType,t.catname,t.qty,t.priceCNY,
 			t.priceCNY*t.qty totalCostCNY,t.priceUSD*t.qty totalCostUSD,t.projectCode
 			from(
-				select a.section,a.outDate,a.description,getCodeName('rtype',b.rType) rType,a.catname,a.num qty,
+				select b.id,a.section,a.outDate,a.description,getCodeName('rtype',b.rType) rType,a.catname,a.num qty,
 				round(getMoney(a.priceUnit,a.price,'0'),2) priceCNY,round(getMoney(a.priceUnit,a.price,'1'),2) priceUSD,a.projectCode
 				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
 				and (a.rType between 1 and 9) and a.reason='1'
@@ -1060,7 +1060,7 @@
     <Sheet name="Discard_APLab" dataRowNum="5" dataStartNum="5" footerRowNum="7" class="com.ims.report.excel.DiscardSheet">
         <sql>
 			select @rownum:=@rownum+1 rownum,t.* from(
-				select @rownum:=0 ,a.outDate,a.description,a.catno,
+				select @rownum:=0 ,b.id,a.outDate,a.description,a.catno,
 					a.price,getCodeName('money',a.priceUnit) currency,
 					b.expiredate,a.num qty,a.num*a.price totalAmnt,getCodeName('rootcause',a.cause) rootCause,a.section,
 					b.producer,b.dealer,null as catFrom
@@ -1087,10 +1087,10 @@
     </Sheet>
     <Sheet name="Validation_APLab" dataStartNum="4" dataRowNum="5" footerRowNum="6" class="com.ims.report.excel.ValidationSheet">
         <sql>
-			select t.section, t.outDate,t.description,t.rType,t.catname,t.qty,t.priceCNY,
+			select t.id,t.section, t.outDate,t.description,t.rType,t.catname,t.qty,t.priceCNY,
 			t.priceCNY*t.qty totalCostCNY,t.priceUSD*t.qty totalCostUSD,t.projectCode
 			from(
-				select a.section,a.outDate,a.description,getCodeName('rtype',b.rType) rType,a.catname,a.num qty,
+				select b.id,a.section,a.outDate,a.description,getCodeName('rtype',b.rType) rType,a.catname,a.num qty,
 				round(getMoney(a.priceUnit,a.price,'0'),2) priceCNY,round(getMoney(a.priceUnit,a.price,'1'),2) priceUSD,a.projectCode
 				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
 				and (a.rType=10) and a.reason='1'
