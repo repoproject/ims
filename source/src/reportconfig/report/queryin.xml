@@ -86,13 +86,13 @@
 									 1=1
 								 and {#condition#}  ]]>
 					</value>
-					<condition name="txtbegin1" label="开始时间" labelposition="left">
+					<condition name="txtbegin1" label="起止时间" labelposition="left">
 							<value>
 								<![CDATA[(b_in.indate>=DATE('#data#'))]]>
 							</value>
 							<inputbox type="datepicker" dateformat="yyyy-MM-dd" styleproperty="title='针对入库时间'" jsvalidatetype="onsubmit" jsvalidate="isStartTimeLargerEnd1(#label#不能晚于结束时间);isDate(#label#格式不符合要求)"></inputbox>
 						</condition>
-						<condition name="txtend1" label="结束时间" labelposition="left">
+						<condition name="txtend1" label="-" labelposition="left">
 							<value>
 								<![CDATA[(b_in.indate<=DATE('#data#'))]]>
 							</value>
@@ -100,7 +100,7 @@
 						</condition>
 						
 						
-						<condition name="txtcatname" label="名 称" labelposition="left">
+						<condition name="txtcatname" label="名称" labelposition="left">
 						     <value>
 							<![CDATA[(trim(catname) like  '%#data#%' )]]>
 						</value>
@@ -128,16 +128,14 @@
 					    </typeprompt>
 						 </inputbox>											     
 					    </condition>
-                        
-					    <condition name="typename" label="类型" labelposition="left" br="true">						
-							<value> <![CDATA[(trim(cattype) = '#data#')]]>
-							</value>
-							<inputbox type="selectbox" >	
-							<option value="" label="全部"></option>						
-							<option dataset="@{select codename,code from d_code where codetype='cattype' order by code}" label="codename" value="code"></option>
-							</inputbox>
-						</condition>
-					    <condition name="txtinreason"   label="入库原因" labelposition="left"  >						
+					    <condition name="txtbatchno" label="批号" labelposition="left"  br="true">
+						     <value>
+							<![CDATA[(trim(batchno) like  '%#data#%' )]]>
+						</value>						     
+					    </condition>	
+					                            
+
+					    <condition name="txtinreason"   label="入库原因" labelposition="left"   >						
 							<value> <![CDATA[(trim(reason) = '#data#')]]>
 							</value>
 							<inputbox type="selectbox" >	
@@ -147,12 +145,12 @@
 						</condition>
 
 					    
-					    <condition name="txtproducer" label="生 产 商" labelposition="left">
+					    <condition name="txtproducer" label="生产商" labelposition="left">
 						     <value>
 							<![CDATA[(trim(producer) like  '%#data#%' )]]>
 						</value>						     
 					    </condition>	 
-					    <condition name="txtdealer" label="供 应 商" labelposition="left">
+					    <condition name="txtdealer" label="供应商" labelposition="left">
 						     <value>
 							<![CDATA[(trim(dealer) like  '%#data#%' )]]>
 						</value>						     
@@ -171,12 +169,15 @@
 						     </inputbox>	     
 					    </condition>
 					    							
-					
-					    <condition name="txtbatchno" label="批     号" labelposition="left"  >
-						     <value>
-							<![CDATA[(trim(batchno) like  '%#data#%' )]]>
-						</value>						     
-					    </condition>		
+					    <condition name="typename" label="类型" labelposition="left" >						
+							<value> <![CDATA[(trim(cattype) = '#data#')]]>
+							</value>
+							<inputbox type="selectbox" >	
+							<option value="" label="全部"></option>						
+							<option dataset="@{select codename,code from d_code where codetype='cattype' order by code}" label="codename" value="code"></option>
+							</inputbox>
+						</condition>				
+	
 						<condition name="txtrtype" label="所属R" labelposition="left">						
 							<value> <![CDATA[(trim(rtype) = '#data#')]]>
 							</value>

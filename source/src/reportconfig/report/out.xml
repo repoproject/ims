@@ -120,13 +120,13 @@
 						</value>
 					</condition>
 									
-					<condition name="txtbegin1" label="开始时间" labelposition="left">
+					<condition name="txtbegin1" label="起止时间" labelposition="left">
 							<value>
 								<![CDATA[(outdate>=DATE('#data#'))]]>
 							</value>
 							<inputbox type="datepicker" dateformat="yyyy-MM-dd" styleproperty="title='针对出库时间'" jsvalidatetype="onsubmit" jsvalidate="isStartTimeLargerEnd1(#label#不能晚于结束时间);isDate(#label#格式不符合要求)"></inputbox>
 						</condition>
-						<condition name="txtend1" label="结束时间" labelposition="left" >
+						<condition name="txtend1" label="-" labelposition="left" >
 							<value>
 								<![CDATA[(outdate<=DATE('#data#'))]]>
 							</value>
@@ -134,7 +134,7 @@
 						</condition>
 						
 						
-						<condition name="txtcatname1" label="名 称 " labelposition="left">
+						<condition name="txtcatname1" label="名称 " labelposition="left">
 						     <value>
 							<![CDATA[(trim(catname) like  '%#data#%' )]]>
 						</value>
@@ -154,7 +154,7 @@
 							<![CDATA[(trim(catno) like  '%#data#%' )]]>
 						</value>						     
 					    </condition>
-					    <condition name="txtbatchno1" label="批 号" labelposition="left"  >
+					    <condition name="txtbatchno1" label="批号" labelposition="left"  >
 						     <value>
 							<![CDATA[(trim(batchno) like  '%#data#%' )]]>
 						</value>						     
