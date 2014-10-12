@@ -10,14 +10,15 @@
      -->
     <Sheet name="R1-CHEM" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-			SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
+			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
 			ifnull(o.outDiscard,0) outDiscard,ifnull(o.outIntelLab,0) outIntelLab,ifnull(o.outOther,0) outOther,ifnull(o.outSponsor,0) outSponsor,ifnull(o.outTrialTest,0) outTrialTest,ifnull(o.outValidation,0) outValidation,ifnull(o.outTotal,0) outTotal,ifnull(a.total,0) closing,
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -52,6 +53,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType =1 
 					order by a.machineName asc  
 			
@@ -92,14 +94,15 @@
     </Sheet>
     <Sheet name="R2-LCMS_Micro" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-			SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
+			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
 			ifnull(o.outDiscard,0) outDiscard,ifnull(o.outIntelLab,0) outIntelLab,ifnull(o.outOther,0) outOther,ifnull(o.outSponsor,0) outSponsor,ifnull(o.outTrialTest,0) outTrialTest,ifnull(o.outValidation,0) outValidation,ifnull(o.outTotal,0) outTotal,ifnull(a.total,0) closing,
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -134,6 +137,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 		    where a.rType =2   
 		    order by a.machineName asc 
         </sql>
@@ -173,14 +177,15 @@
     </Sheet>
     <Sheet name="R3-Hema_Flow" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-			SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
+			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
 			ifnull(o.outDiscard,0) outDiscard,ifnull(o.outIntelLab,0) outIntelLab,ifnull(o.outOther,0) outOther,ifnull(o.outSponsor,0) outSponsor,ifnull(o.outTrialTest,0) outTrialTest,ifnull(o.outValidation,0) outValidation,ifnull(o.outTotal,0) outTotal,ifnull(a.total,0) closing,
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -215,6 +220,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where  a.rType = 3   
 			
         </sql>
@@ -254,14 +260,15 @@
     </Sheet>
     <Sheet name="R4-Variant" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-			SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
+			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
 			ifnull(o.outDiscard,0) outDiscard,ifnull(o.outIntelLab,0) outIntelLab,ifnull(o.outOther,0) outOther,ifnull(o.outSponsor,0) outSponsor,ifnull(o.outTrialTest,0) outTrialTest,ifnull(o.outValidation,0) outValidation,ifnull(o.outTotal,0) outTotal,ifnull(a.total,0) closing,
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -296,6 +303,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 4   
 			
         </sql>
@@ -335,14 +343,15 @@
     </Sheet>
     <Sheet name="R5-Oversea" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-			SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
+			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
 			ifnull(o.outDiscard,0) outDiscard,ifnull(o.outIntelLab,0) outIntelLab,ifnull(o.outOther,0) outOther,ifnull(o.outSponsor,0) outSponsor,ifnull(o.outTrialTest,0) outTrialTest,ifnull(o.outValidation,0) outValidation,ifnull(o.outTotal,0) outTotal,ifnull(a.total,0) closing,
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -377,6 +386,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 5   
 			
         </sql>
@@ -416,14 +426,15 @@
     </Sheet>
     <Sheet name="R6-PCR" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-			SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
+			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
 			ifnull(o.outDiscard,0) outDiscard,ifnull(o.outIntelLab,0) outIntelLab,ifnull(o.outOther,0) outOther,ifnull(o.outSponsor,0) outSponsor,ifnull(o.outTrialTest,0) outTrialTest,ifnull(o.outValidation,0) outValidation,ifnull(o.outTotal,0) outTotal,ifnull(a.total,0) closing,
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -458,6 +469,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 6   
 			
         </sql>
@@ -497,14 +509,15 @@
     </Sheet>
     <Sheet name="R7-Urine" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-			SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
+			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
 			ifnull(o.outDiscard,0) outDiscard,ifnull(o.outIntelLab,0) outIntelLab,ifnull(o.outOther,0) outOther,ifnull(o.outSponsor,0) outSponsor,ifnull(o.outTrialTest,0) outTrialTest,ifnull(o.outValidation,0) outValidation,ifnull(o.outTotal,0) outTotal,ifnull(a.total,0) closing,
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -539,6 +552,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 7   
 			
         </sql>
@@ -578,14 +592,15 @@
     </Sheet>
     <Sheet name="R8-Cent_Immu_Liai_Mini" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-			SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
+			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
 			ifnull(o.outDiscard,0) outDiscard,ifnull(o.outIntelLab,0) outIntelLab,ifnull(o.outOther,0) outOther,ifnull(o.outSponsor,0) outSponsor,ifnull(o.outTrialTest,0) outTrialTest,ifnull(o.outValidation,0) outValidation,ifnull(o.outTotal,0) outTotal,ifnull(a.total,0) closing,
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -620,6 +635,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 8   
 			
         </sql>
@@ -659,14 +675,15 @@
     </Sheet>
     <Sheet name="R9-Elisa" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-			SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
+			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
 			ifnull(o.outDiscard,0) outDiscard,ifnull(o.outIntelLab,0) outIntelLab,ifnull(o.outOther,0) outOther,ifnull(o.outSponsor,0) outSponsor,ifnull(o.outTrialTest,0) outTrialTest,ifnull(o.outValidation,0) outValidation,ifnull(o.outTotal,0) outTotal,ifnull(a.total,0) closing,
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -701,6 +718,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 9   
 			
         </sql>
@@ -740,14 +758,15 @@
     </Sheet>
     <Sheet name="Lab_Gen_Supplier" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-			SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
+			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
 			ifnull(o.outDiscard,0) outDiscard,ifnull(o.outIntelLab,0) outIntelLab,ifnull(o.outOther,0) outOther,ifnull(o.outSponsor,0) outSponsor,ifnull(o.outTrialTest,0) outTrialTest,ifnull(o.outValidation,0) outValidation,ifnull(o.outTotal,0) outTotal,ifnull(a.total,0) closing,
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -782,6 +801,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 20   
 			
         </sql>
@@ -821,14 +841,15 @@
     </Sheet>
     <Sheet name="CTM_Suppliers_DTW" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-			SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
+			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
 			ifnull(o.outDiscard,0) outDiscard,ifnull(o.outIntelLab,0) outIntelLab,ifnull(o.outOther,0) outOther,ifnull(o.outSponsor,0) outSponsor,ifnull(o.outTrialTest,0) outTrialTest,ifnull(o.outValidation,0) outValidation,ifnull(o.outTotal,0) outTotal,ifnull(a.total,0) closing,
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -863,6 +884,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType =11   
 			
         </sql>
@@ -903,7 +925,7 @@
     <Sheet name="Discard_CLab" dataRowNum="5" dataStartNum="5" footerRowNum="7" class="com.ims.report.excel.DiscardSheet">
         <sql>
 			select @rownum:=@rownum+1 rownum,t.* from(
-				select @rownum:=0 ,a.outDate,a.description,a.catno,
+				select @rownum:=0 ,b.id,a.outDate,a.description,a.catno,
 					a.price,getCodeName('money',a.priceUnit) currency,
 					b.expiredate,a.num qty,a.num*a.price totalAmnt,getCodeName('rootcause',a.cause) rootCause,a.section,
 					b.producer,b.dealer,null as catFrom
@@ -930,10 +952,10 @@
     </Sheet>
     <Sheet name="Validation_CLab" dataStartNum="4" dataRowNum="5" footerRowNum="6" class="com.ims.report.excel.ValidationSheet">
         <sql>
-			select t.section, t.outDate,t.description,t.rType,t.catname,t.qty,t.priceCNY,
+			select t.id,t.section, t.outDate,t.description,t.rType,t.catname,t.qty,t.priceCNY,
 			t.priceCNY*t.qty totalCostCNY,t.priceUSD*t.qty totalCostUSD,t.projectCode
 			from(
-				select a.section,a.outDate,a.description,getCodeName('rtype',b.rType) rType,a.catname,a.num qty,
+				select b.id,a.section,a.outDate,a.description,getCodeName('rtype',b.rType) rType,a.catname,a.num qty,
 				round(getMoney(a.priceUnit,a.price,'0'),2) priceCNY,round(getMoney(a.priceUnit,a.price,'1'),2) priceUSD,a.projectCode
 				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
 				and (a.rType between 1 and 9) and a.reason='1'
@@ -954,14 +976,15 @@
     </Sheet>
     <Sheet name="R10-Oncology" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-			SELECT a.id,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
+			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
 			ifnull(o.outDiscard,0) outDiscard,ifnull(o.outIntelLab,0) outIntelLab,ifnull(o.outOther,0) outOther,ifnull(o.outSponsor,0) outSponsor,ifnull(o.outTrialTest,0) outTrialTest,ifnull(o.outValidation,0) outValidation,ifnull(o.outTotal,0) outTotal,ifnull(a.total,0) closing,
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
 			ifnull(i.inTotal*p.localprice,0) qtyIn,ifnull(o.outTotal*p.localprice,0) qtyOut,
 			0 checkQty,0 checkAmt,
-			0 pqtyIn,0 pqtyOut,
-			ifnull(i.inTotal*p.localprice+0,0) cqtyIn,ifnull(o.outTotal*p.localprice+0,0) cqtyOut 
+			ifnull(q.asqtyin,0) pqtyIn,ifnull(q.asqtyout,0) pqtyOut,
+			ifnull(i.inTotal*p.localprice+ifnull(q.asqtyin,0),0) cqtyIn,
+			ifnull(o.outTotal*p.localprice+ifnull(q.asqtyout,0),0) cqtyOut 
 			from b_cat a LEFT JOIN
 					(
 							SELECT
@@ -996,6 +1019,7 @@
                             GROUP BY o.catid
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
+                    LEFT JOIN r_qty_view q ON a.id=q.catid
 					where (a.rType=10)   
 			
         </sql>
@@ -1036,7 +1060,7 @@
     <Sheet name="Discard_APLab" dataRowNum="5" dataStartNum="5" footerRowNum="7" class="com.ims.report.excel.DiscardSheet">
         <sql>
 			select @rownum:=@rownum+1 rownum,t.* from(
-				select @rownum:=0 ,a.outDate,a.description,a.catno,
+				select @rownum:=0 ,b.id,a.outDate,a.description,a.catno,
 					a.price,getCodeName('money',a.priceUnit) currency,
 					b.expiredate,a.num qty,a.num*a.price totalAmnt,getCodeName('rootcause',a.cause) rootCause,a.section,
 					b.producer,b.dealer,null as catFrom
@@ -1063,10 +1087,10 @@
     </Sheet>
     <Sheet name="Validation_APLab" dataStartNum="4" dataRowNum="5" footerRowNum="6" class="com.ims.report.excel.ValidationSheet">
         <sql>
-			select t.section, t.outDate,t.description,t.rType,t.catname,t.qty,t.priceCNY,
+			select t.id,t.section, t.outDate,t.description,t.rType,t.catname,t.qty,t.priceCNY,
 			t.priceCNY*t.qty totalCostCNY,t.priceUSD*t.qty totalCostUSD,t.projectCode
 			from(
-				select a.section,a.outDate,a.description,getCodeName('rtype',b.rType) rType,a.catname,a.num qty,
+				select b.id,a.section,a.outDate,a.description,getCodeName('rtype',b.rType) rType,a.catname,a.num qty,
 				round(getMoney(a.priceUnit,a.price,'0'),2) priceCNY,round(getMoney(a.priceUnit,a.price,'1'),2) priceUSD,a.projectCode
 				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
 				and (a.rType=10) and a.reason='1'

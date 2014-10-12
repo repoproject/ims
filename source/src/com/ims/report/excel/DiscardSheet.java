@@ -82,7 +82,7 @@ public class DiscardSheet extends AbsRSheet implements ISheet {
 	 */
 	@Override
 	protected void saveData(List<Object> data) {
-		SaveReportData save = new SaveReportData(SaveReportData.ReportType.R,data);
+		SaveReportData save = new SaveReportData(SaveReportData.ReportType.Discard,data);
 		Thread saveThread = new Thread(save, "saveReportData");
 		saveThread.start();
 	}

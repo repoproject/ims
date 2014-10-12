@@ -1,26 +1,27 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : gq
-Source Server Version : 50617
+Source Server         : mysql
+Source Server Version : 50510
 Source Host           : localhost:3306
 Source Database       : ims
 
 Target Server Type    : MYSQL
-Target Server Version : 50617
+Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2014-10-06 14:22:38
+Date: 2014-10-11 23:30:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for `b_cat`
+-- Table structure for b_cat
 -- ----------------------------
 DROP TABLE IF EXISTS `b_cat`;
 CREATE TABLE `b_cat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `catid` varchar(255) NOT NULL COMMENT '物理编号，系统生成',
   `catno` varchar(50) NOT NULL COMMENT '货号',
   `catname` varchar(255) DEFAULT NULL COMMENT '物品名称',
   `seq` varchar(50) DEFAULT NULL COMMENT '编号，为全球统一编号预留',
@@ -42,14 +43,15 @@ CREATE TABLE `b_cat` (
   `makedate` datetime DEFAULT NULL,
   `modifydate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=135 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_cat
 -- ----------------------------
+INSERT INTO `b_cat` VALUES ('142', '20141011-11183974216-1sdf-CNY12300', '11183974216', 'ISE Cal Low', '', '0', '1sdf', '6', '1', '2014-10-01 00:00:00', '地方df', '2014-10-31 00:00:00', '123.0000', '0', null, '0', '都发到', '1', 'Modular Reagent', null, '2014-10-11 23:08:18', '2014-10-11 23:27:53');
 
 -- ----------------------------
--- Table structure for `b_file`
+-- Table structure for b_file
 -- ----------------------------
 DROP TABLE IF EXISTS `b_file`;
 CREATE TABLE `b_file` (
@@ -65,14 +67,15 @@ CREATE TABLE `b_file` (
 -- ----------------------------
 -- Records of b_file
 -- ----------------------------
-INSERT INTO `b_file` VALUES ('4', 'Inventory listing 2014-10.xls', '\\reports\\', null, '2014-10-06 13:31:59', '2014-10-06 13:32:04');
+INSERT INTO `b_file` VALUES ('4', 'Inventory listing 2014-10.xls', '\\reports\\', null, '2014-10-06 13:31:59', '2014-10-11 23:28:58');
 
 -- ----------------------------
--- Table structure for `b_in`
+-- Table structure for b_in
 -- ----------------------------
 DROP TABLE IF EXISTS `b_in`;
 CREATE TABLE `b_in` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '货号，试剂号耗材号',
+  `catid` varchar(255) DEFAULT NULL COMMENT '物理编号，系统生成',
   `catno` varchar(50) NOT NULL,
   `catName` varchar(255) DEFAULT NULL COMMENT '试剂名称，冗余，b_cat.name',
   `seq` varchar(50) DEFAULT NULL COMMENT '编号，为全球统一编号预留',
@@ -99,14 +102,15 @@ CREATE TABLE `b_in` (
   `makedate` datetime DEFAULT NULL COMMENT '产生日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=140 DEFAULT CHARSET=utf8 COMMENT='试剂表';
+) ENGINE=InnoDB AUTO_INCREMENT=145 DEFAULT CHARSET=utf8 COMMENT='试剂表';
 
 -- ----------------------------
 -- Records of b_in
 -- ----------------------------
+INSERT INTO `b_in` VALUES ('144', '20141011-11183974216-1sdf-CNY12300', '11183974216', 'ISE Cal Low', '', '1sdf', '0', '地方df', '都发到', '2014-10-01 00:00:00', '0', '2014-10-31 00:00:00', '10', null, '123.0000', '0', null, null, '2014-10-11 00:00:00', '', '1', '0', '1', '', '1', '2014-10-11 23:08:18', '2014-10-11 23:08:18');
 
 -- ----------------------------
--- Table structure for `b_machine`
+-- Table structure for b_machine
 -- ----------------------------
 DROP TABLE IF EXISTS `b_machine`;
 CREATE TABLE `b_machine` (
@@ -128,11 +132,12 @@ INSERT INTO `b_machine` VALUES ('8', 'Bio-rad Controls for Modular', null, '12',
 INSERT INTO `b_machine` VALUES ('9', 'E411', null, '3', null, '', '3');
 
 -- ----------------------------
--- Table structure for `b_out`
+-- Table structure for b_out
 -- ----------------------------
 DROP TABLE IF EXISTS `b_out`;
 CREATE TABLE `b_out` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `catid` varchar(255) DEFAULT NULL COMMENT '物理编号，系统生成',
   `machineName` varchar(255) DEFAULT NULL COMMENT '设备名称',
   `machineNo` varchar(50) DEFAULT NULL COMMENT '设备编号',
   `catno` varchar(50) NOT NULL,
@@ -157,14 +162,16 @@ CREATE TABLE `b_out` (
   `makedate` datetime DEFAULT NULL COMMENT '创建日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='出库记录';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='出库记录';
 
 -- ----------------------------
 -- Records of b_out
 -- ----------------------------
+INSERT INTO `b_out` VALUES ('13', '20141011-11183974216-1sdf-CNY12300', 'Modular Reagent', '1', '11183974216', 'ISE Cal Low', '1', '', '1sdf', '0', '1', '2014-10-11 00:00:00', '123.0000', '0', null, '2', '1', '', '', '', '', '', '1', '2014-10-11 23:10:27', '2014-10-11 23:10:27');
+INSERT INTO `b_out` VALUES ('14', '20141011-11183974216-1sdf-CNY12300', 'Modular Reagent', '1', '11183974216', 'ISE Cal Low', '1', '', '1sdf', '0', '1', '2014-10-11 00:00:00', '123.0000', '0', null, '2', '2', '', '', '', '', '', '1', '2014-10-11 23:27:53', '2014-10-11 23:27:53');
 
 -- ----------------------------
--- Table structure for `b_person`
+-- Table structure for b_person
 -- ----------------------------
 DROP TABLE IF EXISTS `b_person`;
 CREATE TABLE `b_person` (
@@ -179,12 +186,13 @@ CREATE TABLE `b_person` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `b_report_discard`
+-- Table structure for b_report_discard
 -- ----------------------------
 DROP TABLE IF EXISTS `b_report_discard`;
 CREATE TABLE `b_report_discard` (
-  `id` int(11) NOT NULL,
-  `month` date DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `catid` int(11) DEFAULT NULL,
+  `flag` varchar(10) DEFAULT NULL,
   `startDate` date DEFAULT NULL,
   `endDate` date DEFAULT NULL,
   `rownum` int(11) DEFAULT NULL,
@@ -204,19 +212,21 @@ CREATE TABLE `b_report_discard` (
   `makedate` datetime DEFAULT NULL,
   `operator` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_report_discard
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `b_report_r`
+-- Table structure for b_report_r
 -- ----------------------------
 DROP TABLE IF EXISTS `b_report_r`;
 CREATE TABLE `b_report_r` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `month` date DEFAULT NULL,
+  `catid` int(11) DEFAULT NULL,
+  `flag` varchar(10) DEFAULT NULL,
+  `rType` varchar(10) DEFAULT NULL,
   `startDate` date DEFAULT NULL,
   `endDate` date DEFAULT NULL,
   `catno` varchar(11) DEFAULT NULL,
@@ -255,19 +265,20 @@ CREATE TABLE `b_report_r` (
   `makedate` datetime DEFAULT NULL,
   `operator` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_report_r
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `b_report_validation`
+-- Table structure for b_report_validation
 -- ----------------------------
 DROP TABLE IF EXISTS `b_report_validation`;
 CREATE TABLE `b_report_validation` (
-  `id` int(11) NOT NULL,
-  `month` date DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `catid` int(11) DEFAULT NULL,
+  `flag` varchar(10) DEFAULT NULL,
   `startDate` date DEFAULT NULL,
   `endDate` date DEFAULT NULL,
   `section` varchar(255) DEFAULT NULL,
@@ -283,14 +294,14 @@ CREATE TABLE `b_report_validation` (
   `makeDate` datetime DEFAULT NULL,
   `operator` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_report_validation
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `b_var`
+-- Table structure for b_var
 -- ----------------------------
 DROP TABLE IF EXISTS `b_var`;
 CREATE TABLE `b_var` (
@@ -311,7 +322,7 @@ INSERT INTO `b_var` VALUES ('outTime', '3', '出库后悔天数');
 INSERT INTO `b_var` VALUES ('stockthreshold', '10', '库存少于X件进行提醒的阈值');
 
 -- ----------------------------
--- Table structure for `d_catcode`
+-- Table structure for d_catcode
 -- ----------------------------
 DROP TABLE IF EXISTS `d_catcode`;
 CREATE TABLE `d_catcode` (
@@ -339,7 +350,7 @@ INSERT INTO `d_catcode` VALUES ('49', '595', '', 'Liquichek Immunology Control L
 INSERT INTO `d_catcode` VALUES ('50', '596', '', 'Liquichek Immunology Control Level 3(6x3ml)', '0', '6', '', null, 'E411');
 
 -- ----------------------------
--- Table structure for `d_code`
+-- Table structure for d_code
 -- ----------------------------
 DROP TABLE IF EXISTS `d_code`;
 CREATE TABLE `d_code` (
@@ -416,7 +427,7 @@ INSERT INTO `d_code` VALUES ('sex', '0', '女', null);
 INSERT INTO `d_code` VALUES ('sex', '1', '男', null);
 
 -- ----------------------------
--- Table structure for `d_codetype`
+-- Table structure for d_codetype
 -- ----------------------------
 DROP TABLE IF EXISTS `d_codetype`;
 CREATE TABLE `d_codetype` (
@@ -442,7 +453,7 @@ INSERT INTO `d_codetype` VALUES ('rootcause', 'Discard的rootcause', '由于Disc
 INSERT INTO `d_codetype` VALUES ('sections', 'Discard的Sections', '由于Discard原因出库时填写的sections / instruments');
 
 -- ----------------------------
--- Table structure for `d_dept`
+-- Table structure for d_dept
 -- ----------------------------
 DROP TABLE IF EXISTS `d_dept`;
 CREATE TABLE `d_dept` (
@@ -462,7 +473,7 @@ CREATE TABLE `d_dept` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `d_rate`
+-- Table structure for d_rate
 -- ----------------------------
 DROP TABLE IF EXISTS `d_rate`;
 CREATE TABLE `d_rate` (
@@ -490,7 +501,7 @@ INSERT INTO `d_rate` VALUES ('5', '0', 'CNY', '4', 'GBP', '0.104938', '2014-01-0
 INSERT INTO `d_rate` VALUES ('6', '0', 'CNY', '1', 'USD', '0.159631', '2014-08-01 00:00:00', '001', '2014-09-03 15:04:50', '2014-09-03 15:04:52');
 
 -- ----------------------------
--- Table structure for `d_task`
+-- Table structure for d_task
 -- ----------------------------
 DROP TABLE IF EXISTS `d_task`;
 CREATE TABLE `d_task` (
@@ -525,7 +536,7 @@ INSERT INTO `d_task` VALUES ('12', 'monthtask', '每月定时任务11月份', '1
 INSERT INTO `d_task` VALUES ('13', 'monthtask', '每月定时任务12月份', '12', null, '26', 'M', '00:00:00', null, null);
 
 -- ----------------------------
--- Table structure for `d_user`
+-- Table structure for d_user
 -- ----------------------------
 DROP TABLE IF EXISTS `d_user`;
 CREATE TABLE `d_user` (
@@ -553,7 +564,7 @@ INSERT INTO `d_user` VALUES ('5', '444', '李四', null, '四儿', '1', '0', '0'
 INSERT INTO `d_user` VALUES ('6', '444', '王五', null, '乌尔', '1', '1', '1', null, '辅导费', null);
 
 -- ----------------------------
--- Table structure for `d_var`
+-- Table structure for d_var
 -- ----------------------------
 DROP TABLE IF EXISTS `d_var`;
 CREATE TABLE `d_var` (
@@ -572,25 +583,96 @@ INSERT INTO `d_var` VALUES ('reportpath', '\\reports\\', '报表保存路径');
 INSERT INTO `d_var` VALUES ('taskserverip', '127.0.0.1', '任务服务器，多台服务器集群使用');
 
 -- ----------------------------
--- View structure for `r_in_view`
+-- View structure for r_in_view
 -- ----------------------------
 DROP VIEW IF EXISTS `r_in_view`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `r_in_view` AS select `b`.`id` AS `catid`,(case when (`a`.`reason` = '0') then `a`.`num` else 0 end) AS `inVendor`,(case when (`a`.`reason` = '1') then `a`.`num` else 0 end) AS `inInterlab`,(case when (`a`.`reason` = '2') then `a`.`num` else 0 end) AS `inSponsor`,(case when (`a`.`reason` = '3') then `a`.`num` else 0 end) AS `inCharges`,`a`.`inDate` AS `indate` from (`b_in` `a` join `b_cat` `b`) where ((`a`.`catno` = `b`.`catno`) and (`a`.`batchNo` = `b`.`batchno`) and (`a`.`price` = `b`.`price`)) ;
 
 -- ----------------------------
--- View structure for `r_out_view`
+-- View structure for r_out_view
 -- ----------------------------
 DROP VIEW IF EXISTS `r_out_view`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `r_out_view` AS select `b`.`id` AS `catid`,(case when (`a`.`reason` = '0') then `a`.`num` else 0 end) AS `outTrialTest`,(case when (`a`.`reason` = '1') then `a`.`num` else 0 end) AS `outValidation`,(case when (`a`.`reason` = '2') then `a`.`num` else 0 end) AS `outDiscard`,(case when (`a`.`reason` = '3') then `a`.`num` else 0 end) AS `outIntelLab`,(case when (`a`.`reason` = '4') then `a`.`num` else 0 end) AS `outSponsor`,(case when (`a`.`reason` = '5') then `a`.`num` else 0 end) AS `outOther`,`a`.`outDate` AS `outdate` from (`b_out` `a` join `b_cat` `b`) where ((`a`.`catno` = `b`.`catno`) and (`a`.`batchno` = `b`.`batchno`) and (`a`.`price` = `b`.`price`)) ;
 
 -- ----------------------------
--- View structure for `r_price_view`
+-- View structure for r_price_view
 -- ----------------------------
 DROP VIEW IF EXISTS `r_price_view`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `r_price_view` AS select `a`.`id` AS `catid`,(case when (`a`.`priceUnit` = '0') then `a`.`price` end) AS `CNY`,(case when (`a`.`priceUnit` = '1') then `a`.`price` end) AS `USD`,(case when (`a`.`priceUnit` = '2') then `a`.`price` end) AS `SGD`,(case when (`a`.`priceUnit` = '3') then `a`.`price` end) AS `EUR`,(case when (`a`.`priceUnit` = '4') then `a`.`price` end) AS `GBP`,(select round((`a`.`price` / `b`.`rate`),2) from `d_rate` `b` where (`b`.`foreignMoney` = `a`.`priceUnit`) order by `b`.`startDateTime` desc limit 1) AS `localPrice` from `b_cat` `a` ;
 
 -- ----------------------------
--- Function structure for `getCodeName`
+-- View structure for r_qty_view
+-- ----------------------------
+DROP VIEW IF EXISTS `r_qty_view`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `r_qty_view` AS SELECT
+	r.id,
+	r.catid,
+  r.flag,
+	CASE
+WHEN MONTH (NOW()) = 1 THEN
+	0
+ELSE
+	round(IFNULL(r.cqtyIn, 0),2)
+END asQtyIn,
+	CASE
+WHEN MONTH (NOW()) = 1 THEN
+	0
+ELSE
+	round(IFNULL(r.cqtyOut, 0),2)
+END asQtyOut
+FROM
+	b_report_r r
+WHERE
+	r.flag = DATE_FORMAT(
+		DATE_ADD(NOW(), INTERVAL - 1 MONTH),
+		'%Y%m'
+	) ;
+
+-- ----------------------------
+-- Function structure for getCatId
+-- ----------------------------
+DROP FUNCTION IF EXISTS `getCatId`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `getCatId`(`p_catNo` varchar(255), p_batchNo varchar(255),p_price decimal,p_priceUnit varchar(255)) RETURNS varchar(255) CHARSET utf8
+BEGIN
+	#Routine body goes here...
+    DECLARE v_catId,v_time,v_price,v_priceUnit VARCHAR(255);
+    -- time
+    set v_time = DATE_FORMAT(NOW(),'%Y%m%d');
+
+    -- catno
+    set p_catNo = REPLACE(IFNULL(p_catNo,'N/A'),' ','');
+    IF p_catNo = '' or LOWER(p_catNo) = 'null' THEN
+        set p_catNo = 'N/A';
+    end IF;
+
+    -- batchno
+    set p_batchNo = REPLACE(IFNULL(p_batchNo,'N/A'),' ','');
+    IF p_batchNo = '' or LOWER(p_batchNo) = 'null' THEN
+        set p_batchNo = 'N/A';
+    end IF;
+
+    -- priceunit
+    set v_priceUnit = getCodeName('money',p_priceUnit);
+    IF v_priceUnit = '' or LOWER(v_priceUnit) = 'null' or ISNULL(v_priceUnit) THEN
+        set v_priceUnit = 'N/A';
+    end IF;
+
+    -- price
+    IF p_price = 0 or ISNULL(p_price) THEN
+        set v_price = 'N/A';
+    ELSE
+        set v_price = CAST(ROUND(p_price*100) AS CHAR);
+    end IF;
+    
+    set v_catId = CONCAT(v_time,'-',p_catNo,'-',p_batchNo,'-',v_priceUnit,v_price);
+	  RETURN v_catId;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for getCodeName
 -- ----------------------------
 DROP FUNCTION IF EXISTS `getCodeName`;
 DELIMITER ;;
@@ -607,7 +689,7 @@ END
 DELIMITER ;
 
 -- ----------------------------
--- Function structure for `getMoney`
+-- Function structure for getMoney
 -- ----------------------------
 DROP FUNCTION IF EXISTS `getMoney`;
 DELIMITER ;;
@@ -636,14 +718,15 @@ END
 DELIMITER ;
 DROP TRIGGER IF EXISTS `tg_In_Insert`;
 DELIMITER ;;
-CREATE TRIGGER `tg_In_Insert` AFTER INSERT ON `b_in` FOR EACH ROW begin
+CREATE TRIGGER `tg_In_Insert` BEFORE INSERT ON `b_in` FOR EACH ROW begin
      declare cnt int;
+     set new.catid = getCatId(new.catno,new.batchno,new.price,new.priceunit);
      set cnt=(select count(id) from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
      if cnt > 0 then
          update b_cat set total = (total+new.num) where catno=catno and batchno=batchno and price=price;
      else
-         insert into b_cat(catno,      catname,      cattype,       batchno,      seq,       total      ,rtype      ,productdate,       producer,       catFrom  ,    expiredate      ,price      ,priceunit       ,localprice      ,dealer , makedate  ,modifydate       ,machinename)
-                values(new.catno,new.catname,new.cattype,new.batchno,new.seq,new.num,new.rtype,new.productdate,new.producer,new.catFrom,new.expiredate,new.price,new.priceunit,new.localprice,new.dealer, sysdate()   ,sysdate()    ,new.machinename);
+         insert into b_cat(catid,catno,      catname,      cattype,       batchno,      seq,       total      ,rtype      ,productdate,       producer,       catFrom  ,    expiredate      ,price      ,priceunit       ,localprice      ,dealer , makedate  ,modifydate       ,machinename)
+                values(new.catid,new.catno,new.catname,new.cattype,new.batchno,new.seq,new.num,new.rtype,new.productdate,new.producer,new.catFrom,new.expiredate,new.price,new.priceunit,new.localprice,new.dealer, sysdate()   ,sysdate()    ,new.machinename);
      end if;
 end
 ;;
@@ -705,11 +788,12 @@ DROP TRIGGER IF EXISTS `tg_Out_Insert`;
 DELIMITER ;;
 CREATE TRIGGER `tg_Out_Insert` BEFORE INSERT ON `b_out` FOR EACH ROW begin
      declare v_total,v_num int;
-     set v_total=(select total from b_cat a where a.catno=new.catno and a.batchno=new.batchno and a.price=new.price);
+     set new.catid = getCatId(new.catno,new.batchno,new.price,new.priceunit);
+     set v_total=(select total from b_cat a where a.catid=new.catid);
      if v_total < new.num then
           set new.num = v_total;
      end if;
-     update b_cat set total = (v_total-new.num),modifydate=sysdate() ,machineName =new.machineName,machineNo=new.machineNo where catno=new.catno and batchno=new.batchno and price=new.price;
+     update b_cat set total = (v_total-new.num),modifydate=sysdate() ,machineName =new.machineName,machineNo=new.machineNo where catid=new.catid;
      
 end
 ;;
