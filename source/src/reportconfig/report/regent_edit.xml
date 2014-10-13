@@ -16,7 +16,7 @@
 				
 				<col column="machinename" label="所属设备*"  br="true">
 
-						     <inputbox jsvalidate="isNotLongerThan20(#label#长度应小于等于20);" >
+						     <inputbox jsvalidate="isNotLongerThan100(#label#长度应小于等于100);" >
 						        <typeprompt width="-1" count="20">
 							       <promptcol label="machinename" matchmode="anywhere"></promptcol>
 							       <datasource>    
