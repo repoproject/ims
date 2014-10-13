@@ -1,27 +1,27 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : mysql
-Source Server Version : 50510
+Source Server         : gq
+Source Server Version : 50617
 Source Host           : localhost:3306
 Source Database       : ims
 
 Target Server Type    : MYSQL
-Target Server Version : 50510
+Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2014-10-11 23:30:31
+Date: 2014-10-13 23:18:13
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for b_cat
+-- Table structure for `b_cat`
 -- ----------------------------
 DROP TABLE IF EXISTS `b_cat`;
 CREATE TABLE `b_cat` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `catid` varchar(255) NOT NULL COMMENT '物理编号，系统生成',
+  `catid` varchar(255) DEFAULT NULL COMMENT '物理编号，系统生成',
   `catno` varchar(50) NOT NULL COMMENT '货号',
   `catname` varchar(255) DEFAULT NULL COMMENT '物品名称',
   `seq` varchar(50) DEFAULT NULL COMMENT '编号，为全球统一编号预留',
@@ -39,19 +39,19 @@ CREATE TABLE `b_cat` (
   `dealer` varchar(255) DEFAULT NULL,
   `machineNo` varchar(50) DEFAULT NULL,
   `machineName` varchar(255) DEFAULT NULL,
+  `orde` int(11) DEFAULT '99999' COMMENT '排序号',
   `operator` varchar(50) DEFAULT NULL,
   `makedate` datetime DEFAULT NULL,
   `modifydate` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=157 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_cat
 -- ----------------------------
-INSERT INTO `b_cat` VALUES ('142', '20141011-11183974216-1sdf-CNY12300', '11183974216', 'ISE Cal Low', '', '0', '1sdf', '6', '1', '2014-10-01 00:00:00', '地方df', '2014-10-31 00:00:00', '123.0000', '0', null, '0', '都发到', '1', 'Modular Reagent', null, '2014-10-11 23:08:18', '2014-10-11 23:27:53');
 
 -- ----------------------------
--- Table structure for b_file
+-- Table structure for `b_file`
 -- ----------------------------
 DROP TABLE IF EXISTS `b_file`;
 CREATE TABLE `b_file` (
@@ -62,15 +62,14 @@ CREATE TABLE `b_file` (
   `makedate` datetime DEFAULT NULL COMMENT '文件生成日期',
   `modifydate` datetime DEFAULT NULL COMMENT '文件修改日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_file
 -- ----------------------------
-INSERT INTO `b_file` VALUES ('4', 'Inventory listing 2014-10.xls', '\\reports\\', null, '2014-10-06 13:31:59', '2014-10-11 23:28:58');
 
 -- ----------------------------
--- Table structure for b_in
+-- Table structure for `b_in`
 -- ----------------------------
 DROP TABLE IF EXISTS `b_in`;
 CREATE TABLE `b_in` (
@@ -93,7 +92,7 @@ CREATE TABLE `b_in` (
   `localPrice` decimal(10,4) DEFAULT NULL COMMENT '本地货币单价，通过汇率转化',
   `taxRate` decimal(10,4) DEFAULT NULL COMMENT '税率',
   `inDate` datetime DEFAULT NULL COMMENT '入库日期',
-  `machineName` varchar(50) DEFAULT NULL COMMENT '设备编号',
+  `machineName` varchar(255) DEFAULT NULL COMMENT '设备编号',
   `rtype` varchar(50) DEFAULT NULL COMMENT 'R分类',
   `catFrom` varchar(50) DEFAULT NULL COMMENT '来源，oversea，local',
   `person` varchar(50) DEFAULT NULL COMMENT '入库人',
@@ -102,15 +101,14 @@ CREATE TABLE `b_in` (
   `makedate` datetime DEFAULT NULL COMMENT '产生日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=145 DEFAULT CHARSET=utf8 COMMENT='试剂表';
+) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8 COMMENT='试剂表';
 
 -- ----------------------------
 -- Records of b_in
 -- ----------------------------
-INSERT INTO `b_in` VALUES ('144', '20141011-11183974216-1sdf-CNY12300', '11183974216', 'ISE Cal Low', '', '1sdf', '0', '地方df', '都发到', '2014-10-01 00:00:00', '0', '2014-10-31 00:00:00', '10', null, '123.0000', '0', null, null, '2014-10-11 00:00:00', '', '1', '0', '1', '', '1', '2014-10-11 23:08:18', '2014-10-11 23:08:18');
 
 -- ----------------------------
--- Table structure for b_machine
+-- Table structure for `b_machine`
 -- ----------------------------
 DROP TABLE IF EXISTS `b_machine`;
 CREATE TABLE `b_machine` (
@@ -122,17 +120,14 @@ CREATE TABLE `b_machine` (
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   `orderNo` int(11) DEFAULT NULL COMMENT '排序号',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='设备机器表';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='设备机器表';
 
 -- ----------------------------
 -- Records of b_machine
 -- ----------------------------
-INSERT INTO `b_machine` VALUES ('6', 'Modular Reagent', null, '1', null, '', '1');
-INSERT INTO `b_machine` VALUES ('8', 'Bio-rad Controls for Modular', null, '12', null, '', '2');
-INSERT INTO `b_machine` VALUES ('9', 'E411', null, '3', null, '', '3');
 
 -- ----------------------------
--- Table structure for b_out
+-- Table structure for `b_out`
 -- ----------------------------
 DROP TABLE IF EXISTS `b_out`;
 CREATE TABLE `b_out` (
@@ -162,16 +157,14 @@ CREATE TABLE `b_out` (
   `makedate` datetime DEFAULT NULL COMMENT '创建日期',
   `modifydate` datetime DEFAULT NULL COMMENT '修改日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='出库记录';
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='出库记录';
 
 -- ----------------------------
 -- Records of b_out
 -- ----------------------------
-INSERT INTO `b_out` VALUES ('13', '20141011-11183974216-1sdf-CNY12300', 'Modular Reagent', '1', '11183974216', 'ISE Cal Low', '1', '', '1sdf', '0', '1', '2014-10-11 00:00:00', '123.0000', '0', null, '2', '1', '', '', '', '', '', '1', '2014-10-11 23:10:27', '2014-10-11 23:10:27');
-INSERT INTO `b_out` VALUES ('14', '20141011-11183974216-1sdf-CNY12300', 'Modular Reagent', '1', '11183974216', 'ISE Cal Low', '1', '', '1sdf', '0', '1', '2014-10-11 00:00:00', '123.0000', '0', null, '2', '2', '', '', '', '', '', '1', '2014-10-11 23:27:53', '2014-10-11 23:27:53');
 
 -- ----------------------------
--- Table structure for b_person
+-- Table structure for `b_person`
 -- ----------------------------
 DROP TABLE IF EXISTS `b_person`;
 CREATE TABLE `b_person` (
@@ -186,7 +179,7 @@ CREATE TABLE `b_person` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for b_report_discard
+-- Table structure for `b_report_discard`
 -- ----------------------------
 DROP TABLE IF EXISTS `b_report_discard`;
 CREATE TABLE `b_report_discard` (
@@ -212,14 +205,14 @@ CREATE TABLE `b_report_discard` (
   `makedate` datetime DEFAULT NULL,
   `operator` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_report_discard
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for b_report_r
+-- Table structure for `b_report_r`
 -- ----------------------------
 DROP TABLE IF EXISTS `b_report_r`;
 CREATE TABLE `b_report_r` (
@@ -265,14 +258,14 @@ CREATE TABLE `b_report_r` (
   `makedate` datetime DEFAULT NULL,
   `operator` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3109 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_report_r
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for b_report_validation
+-- Table structure for `b_report_validation`
 -- ----------------------------
 DROP TABLE IF EXISTS `b_report_validation`;
 CREATE TABLE `b_report_validation` (
@@ -294,14 +287,14 @@ CREATE TABLE `b_report_validation` (
   `makeDate` datetime DEFAULT NULL,
   `operator` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of b_report_validation
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for b_var
+-- Table structure for `b_var`
 -- ----------------------------
 DROP TABLE IF EXISTS `b_var`;
 CREATE TABLE `b_var` (
@@ -322,7 +315,7 @@ INSERT INTO `b_var` VALUES ('outTime', '3', '出库后悔天数');
 INSERT INTO `b_var` VALUES ('stockthreshold', '10', '库存少于X件进行提醒的阈值');
 
 -- ----------------------------
--- Table structure for d_catcode
+-- Table structure for `d_catcode`
 -- ----------------------------
 DROP TABLE IF EXISTS `d_catcode`;
 CREATE TABLE `d_catcode` (
@@ -336,21 +329,168 @@ CREATE TABLE `d_catcode` (
   `machineNo` int(11) DEFAULT NULL COMMENT '所属设备ID',
   `machinename` varchar(255) CHARACTER SET utf8 DEFAULT NULL COMMENT '所属设备名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=970 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of d_catcode
 -- ----------------------------
-INSERT INTO `d_catcode` VALUES ('44', '11183974216', '', 'ISE Cal Low', '0', '1', '', null, '');
-INSERT INTO `d_catcode` VALUES ('45', '04880455190', '', 'ISE Internal Standard', '0', '2', '', null, '');
-INSERT INTO `d_catcode` VALUES ('46', '04880285190', '111', 'Cell wash solution / NaOH', '0', '0', '', null, '1');
-INSERT INTO `d_catcode` VALUES ('47', '11970909216', 'rte', 'ALB', '0', '3', '', null, 'E411');
-INSERT INTO `d_catcode` VALUES ('48', '594', '', 'Liquichek Immunology Control Level 1(6x3ml)', '0', '4', '', null, '');
-INSERT INTO `d_catcode` VALUES ('49', '595', '', 'Liquichek Immunology Control Level 2(6x3ml)', '0', '5', '', null, '');
-INSERT INTO `d_catcode` VALUES ('50', '596', '', 'Liquichek Immunology Control Level 3(6x3ml)', '0', '6', '', null, 'E411');
+INSERT INTO `d_catcode` VALUES ('715', '11183974216', null, 'ISE Cal Low', '0', '1', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('716', '04880455190', null, 'ISE Internal Standard', '0', '2', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('717', '04880285190', null, 'Cell wash solution / NaOH', '0', '3', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('718', '11970909216', null, 'ALB', '0', '4', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('719', '11876805', null, 'ALT', '0', '5', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('720', '11876848216', null, 'AST', '0', '6', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('721', '11875418216', null, 'CREA Jaff', '0', '7', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('722', '11775685216', null, 'CREA ', '0', '8', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('723', '11876899216', null, 'GLUCOSE HK', '0', '9', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('724', '11557335216', null, 'Saline', '0', '10', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('725', '11822713190', null, 'T-Bil', '0', '11', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('726', '11929917', null, 'TP', '0', '12', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('727', '11729691216', null, 'UREA/BUN', '0', '13', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('728', '11489828216', null, 'ISE Compensator', '0', '14', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('729', '11489828216', null, 'ISE Compensator', '0', '15', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('730', '11730347216', null, 'P', '0', '16', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('731', '03121305122', null, 'CFAS PUC', '0', '17', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('732', '03121305122', null, 'CFAS PUC', '0', '18', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('733', '03121305122', null, 'CFAS PUC', '0', '19', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('734', '04714423190', null, 'LDL', '0', '20', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('735', '11555448216', null, 'Hitergent', '0', '21', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('736', '03032639122', null, 'ApoB', '0', '22', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('737', '03002209122', null, 'LDH', '0', '23', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('738', '11555430216', null, 'NaOH-D / Basic wash', '0', '24', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('739', '11555430216', null, 'NaOH-D / Basic wash', '0', '25', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('740', '04880480190', null, 'ISE Diluent', '0', '26', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('741', '10820652216', null, 'ISE Ref.', '0', '27', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('742', '11183982216', null, 'ISE Cal High', '0', '28', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('743', '11730240216', null, 'Calcium', '0', '29', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('744', '04880307190', null, 'Acid Wash (2L)', '0', '30', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('745', '04880307190', null, 'Acid Wash (2L)', '0', '31', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('746', '11355279216', null, 'C.f.a.s. Proteins', '0', '32', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('747', '11355279216', null, 'C.f.a.s. Proteins', '0', '33', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('748', '12173107122', null, 'ALP', '0', '34', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('749', '11730711216', null, 'TG', '0', '35', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('750', '12132672216', null, 'CK', '0', '36', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('751', '12016958216', null, 'GGT', '0', '37', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('752', '11875426216', null, 'Uric Acid', '0', '38', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('753', '11877801190', null, 'U/CSF Protein', '0', '39', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('754', '11491458216', null, 'CHOL', '0', '40', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('755', '11491458216', null, 'CHOL', '0', '41', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('756', '11551353216', null, 'Mg', '0', '42', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('757', '20751995190', null, 'AMM', '0', '43', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('758', '11555421216', null, 'SMS/Acid Wash for MOD (12x66mL)', '0', '44', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('759', '11821792216', null, 'Lipase', '0', '45', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('760', '03289885190', null, 'CO2', '0', '46', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('761', '03289885190', null, 'CO2', '0', '47', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('762', '04713214190 ', null, 'HDL-C Plus (Gen. 3)   ', '0', '48', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('763', '11876473316', null, 'AMY', '0', '49', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('764', '11876562316', null, 'Amylase Pancreatic 917/P ', '0', '50', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('765', '03576116190', null, 'Tina-quant Alpha1-Microglobulin', '0', '51', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('766', '03121291122', null, 'Precipath PUC', '0', '52', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('767', '11876996216', null, 'Fe', '0', '53', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('768', '11557599316', null, 'Tina-quant Alpha-1-antitrypsin', '0', '54', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('769', '03555941190', null, 'CFAS PAC', '0', '55', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('770', '03555941190', null, 'CFAS PAC', '0', '56', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('771', '11660519316', null, 'Prealbumin', '0', '57', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('772', '11660390216', null, 'Lp (a)', '0', '58', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('773', '11660390216', null, 'Lp (a)', '0', '59', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('774', '03032612122', null, 'Apo A1', '0', '60', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('775', '03015084122', null, 'Transferrin', '0', '61', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('776', '10759350360', null, 'CFAS core, lot 16652301', '0', '62', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('777', '12172623160', null, 'CFAS Lipids, lot 16651901', '0', '63', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('778', '12172623160', null, 'CFAS Lipids, lot 16651901', '0', '64', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('779', '12172623160', null, 'CFAS Lipids', '0', '65', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('780', '04975774190', null, 'Cystatin C', '0', '66', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('781', '04975774190', null, 'Cystatin C', '0', '67', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('782', '04975901190', null, 'Cystatin C calibrator', '0', '68', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('783', '04975901190', null, 'Cystatin C calibrator', '0', '69', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('784', '04975901190', null, 'Cystatin C calibrator', '0', '70', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('785', '04975936190', null, 'Cystatin C control', '0', '71', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('786', '03121313122', null, 'Precinorm PUC', '0', '72', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('787', '11972855216', null, 'hs-CRP', '0', '73', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('788', '11098985122', null, 'Precinorm Fructosamine Control 3*1mL', '0', '74', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('789', '11174118122', null, 'Precipath Fructosamine Control 3*1mL', '0', '75', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('790', '11930010216', null, 'Fructosamine 408 tests', '0', '76', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('791', '11098993122', null, 'Precimat Fructosamine Calibrator 3*1mL', '0', '77', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('792', 'LK016.H', null, 'Roche Hitachi 911/912/917/P Modular Freelite Kappa Kit, 2*50 tests', '0', '78', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('793', 'LK018.H', null, 'Roche Hitachi 911/912/917/P Modular Freelite Lambda Kit, 2*50 tests', '0', '79', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('794', 'LK016.H', null, 'Roche Hitachi 911/912/917/P Modular Freelite Kappa Kit, 2*50 tests', '0', '80', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('795', 'LK018.H', null, 'Roche Hitachi 911/912/917/P Modular Freelite Lambda Kit, 2*50 tests', '0', '81', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('796', 'LK016.H', null, 'Roche Hitachi 911/912/917/P Modular Freelite Kappa Kit, 2*50 tests', '0', '82', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('797', 'LK018.H', null, 'Roche Hitachi 911/912/917/P Modular Freelite Lambda Kit, 2*50 tests', '0', '83', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('798', '279-75401', null, 'NEFA C reagent', '0', '84', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('799', '12148331122', null, 'Preciset sTFR ', '0', '85', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('800', '12148315122', null, 'sTFR', '0', '86', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('801', '12148340122', null, 'sTFR  control   set', '0', '87', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('802', '11776312190', null, 'Alcohol', '0', '88', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('803', '12172828322', null, 'Preciset RF', '0', '89', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('804', '12172828322', null, 'Preciset RF', '0', '90', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('805', ',03004953122', null, ' RF Ⅱ', '0', '91', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('806', '11557629316', null, 'Haptoglobin', '0', '92', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('807', '11557629316', null, 'Haptoglobin', '0', '93', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('808', '2075880912', null, 'Acetaminophen Calibrator', '0', '94', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('809', '03255379190', null, 'Acetaminophen UNIV', '0', '95', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('810', '03255379190', null, 'Acetaminophen UNIV', '0', '96', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('811', '04521536190', null, 'TDM Control Set', '0', '97', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('812', '04999622190', null, 'Tina-quant albumin', '0', '98', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('813', '04999622190', null, 'Tina-quant albumin', '0', '99', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('814', '11660497216', null, 'Cerulopasmin', '0', '100', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('815', '11298500316', null, 'ISE Cleaning Solution', '0', '101', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('816', '12146401216   ', null, 'Iron Standard (Fe Standard) ', '0', '102', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('817', '', null, 'Diluent TCH  level -1 1.3ml ', '0', '103', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('818', '2210-02', null, 'total Protein  Assay System', '0', '104', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('819', '10641600001', null, 'Halogen Lamp', '0', '105', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('820', '11660551216', null, 'β2-M icroglobulin', '0', '106', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('821', '04956885190', null, 'C-reactive   Protein', '0', '107', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('822', '04956885190', null, 'C-reactive   Protein', '0', '108', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('823', '04956885190', null, 'C-reactive   Protein', '0', '109', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('824', '04956885190', null, 'C-reactive   Protein', '0', '110', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('825', '03507246190', null, 'Ig A', '0', '111', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('826', '03507378190', null, 'Ig G', '0', '112', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('827', '03507041190', null, 'Ig M', '0', '113', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('828', '121349443122', null, 'precipath U  plus', '0', '114', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('829', '12149435122', null, 'Precinorm U Plus', '0', '115', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('830', '12146398216 ', null, 'UIBC 917/P  ', '0', '116', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('831', '12217716001', null, 'D-Bil', '0', '117', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('832', '05589037190', null, 'Bilirubin  Direct', '0', '118', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('833', '1290008', null, 'NAG/Creatinine High control', '0', '119', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('834', '1290009', null, 'NAG/Creatinine Medium control', '0', '120', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('835', '1290010', null, 'NAG/Creatinine Low control', '0', '121', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('836', '1290008', null, 'NAG/Creatinine High control', '0', '122', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('837', '1290009', null, 'NAG/Creatinine Medium control', '0', '123', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('838', '1290010', null, 'NAG/Creatinine Low control', '0', '124', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('839', 'QQ010205', null, 'Ra a  Hu Alpha-2 -Macrolobulin', '0', '125', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('840', 'S2005', null, 'Buffer 1', '0', '126', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('841', 'S200630', null, 'Buffer 3', '0', '127', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('842', 'x090801', null, 'human serum protein calibration ', '0', '128', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('843', 'x093901', null, 'human serum protein  low control ', '0', '129', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('844', 'x0940', null, 'human serum protein  high control ', '0', '130', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('845', '11875051216', null, 'Tina-quant C4c', '0', '131', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('846', '11875078216', null, 'Tina-quant C3c', '0', '132', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('847', '04498666190', null, 'Cholinesterase-1160 test', '0', '133', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('848', '04498666190', null, 'Cholinesterase-1160 test', '0', '134', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('849', '04498666190', null, 'CHE2', '0', '135', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('850', '05061458190', null, 'CA2   R2', '0', '136', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('851', '05061431190', null, 'CA2   R1', '0', '137', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('852', '05061458190', null, 'CA2   R2', '0', '138', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('853', '05061431190', null, 'CA2   R1', '0', '139', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('854', '05061458190', null, 'CA2   R2', '0', '140', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('855', '05061431190', null, 'CA2   R1', '0', '141', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('856', '05061458190', null, 'CA2   R2', '0', '142', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('857', '05061431190', null, 'CA2   R1', '0', '143', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('858', '', null, 'shipping cost for CA2', '0', '144', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('859', '', null, 'NGSP Certification Qc Material20ml', '0', '145', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('860', '', null, 'NGSP QuarterlyMonitoring Qc Material 40ml', '0', '146', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('861', '466-26201', null, 'NEFA C Control SERA I', '0', '147', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('862', '462-26301', null, 'NEFA C Control SERA II', '0', '148', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('863', '10825468001', null, 'Sodium Electrode', '0', '149', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('864', '10825441001', null, 'potassium Electrode', '0', '150', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('865', '03149501001', null, 'reference  Eliectrode', '0', '151', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('866', '03246353001', null, 'chloride Electrode', '0', '152', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('867', '', null, 'Solomon  Park  Calibrator', '0', '153', null, null, 'Modular Reagent');
+INSERT INTO `d_catcode` VALUES ('868', '11800507001', null, 'Clean- liner  Elessys', '0', '154', null, null, 'Modular Reagent');
 
 -- ----------------------------
--- Table structure for d_code
+-- Table structure for `d_code`
 -- ----------------------------
 DROP TABLE IF EXISTS `d_code`;
 CREATE TABLE `d_code` (
@@ -427,7 +567,7 @@ INSERT INTO `d_code` VALUES ('sex', '0', '女', null);
 INSERT INTO `d_code` VALUES ('sex', '1', '男', null);
 
 -- ----------------------------
--- Table structure for d_codetype
+-- Table structure for `d_codetype`
 -- ----------------------------
 DROP TABLE IF EXISTS `d_codetype`;
 CREATE TABLE `d_codetype` (
@@ -453,7 +593,7 @@ INSERT INTO `d_codetype` VALUES ('rootcause', 'Discard的rootcause', '由于Disc
 INSERT INTO `d_codetype` VALUES ('sections', 'Discard的Sections', '由于Discard原因出库时填写的sections / instruments');
 
 -- ----------------------------
--- Table structure for d_dept
+-- Table structure for `d_dept`
 -- ----------------------------
 DROP TABLE IF EXISTS `d_dept`;
 CREATE TABLE `d_dept` (
@@ -473,7 +613,7 @@ CREATE TABLE `d_dept` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for d_rate
+-- Table structure for `d_rate`
 -- ----------------------------
 DROP TABLE IF EXISTS `d_rate`;
 CREATE TABLE `d_rate` (
@@ -501,7 +641,7 @@ INSERT INTO `d_rate` VALUES ('5', '0', 'CNY', '4', 'GBP', '0.104938', '2014-01-0
 INSERT INTO `d_rate` VALUES ('6', '0', 'CNY', '1', 'USD', '0.159631', '2014-08-01 00:00:00', '001', '2014-09-03 15:04:50', '2014-09-03 15:04:52');
 
 -- ----------------------------
--- Table structure for d_task
+-- Table structure for `d_task`
 -- ----------------------------
 DROP TABLE IF EXISTS `d_task`;
 CREATE TABLE `d_task` (
@@ -536,7 +676,7 @@ INSERT INTO `d_task` VALUES ('12', 'monthtask', '每月定时任务11月份', '1
 INSERT INTO `d_task` VALUES ('13', 'monthtask', '每月定时任务12月份', '12', null, '26', 'M', '00:00:00', null, null);
 
 -- ----------------------------
--- Table structure for d_user
+-- Table structure for `d_user`
 -- ----------------------------
 DROP TABLE IF EXISTS `d_user`;
 CREATE TABLE `d_user` (
@@ -564,7 +704,7 @@ INSERT INTO `d_user` VALUES ('5', '444', '李四', null, '四儿', '1', '0', '0'
 INSERT INTO `d_user` VALUES ('6', '444', '王五', null, '乌尔', '1', '1', '1', null, '辅导费', null);
 
 -- ----------------------------
--- Table structure for d_var
+-- Table structure for `d_var`
 -- ----------------------------
 DROP TABLE IF EXISTS `d_var`;
 CREATE TABLE `d_var` (
@@ -583,63 +723,39 @@ INSERT INTO `d_var` VALUES ('reportpath', '\\reports\\', '报表保存路径');
 INSERT INTO `d_var` VALUES ('taskserverip', '127.0.0.1', '任务服务器，多台服务器集群使用');
 
 -- ----------------------------
--- View structure for r_in_view
+-- View structure for `r_in_view`
 -- ----------------------------
 DROP VIEW IF EXISTS `r_in_view`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `r_in_view` AS select `b`.`id` AS `catid`,(case when (`a`.`reason` = '0') then `a`.`num` else 0 end) AS `inVendor`,(case when (`a`.`reason` = '1') then `a`.`num` else 0 end) AS `inInterlab`,(case when (`a`.`reason` = '2') then `a`.`num` else 0 end) AS `inSponsor`,(case when (`a`.`reason` = '3') then `a`.`num` else 0 end) AS `inCharges`,`a`.`inDate` AS `indate` from (`b_in` `a` join `b_cat` `b`) where ((`a`.`catno` = `b`.`catno`) and (`a`.`batchNo` = `b`.`batchno`) and (`a`.`price` = `b`.`price`)) ;
 
 -- ----------------------------
--- View structure for r_out_view
+-- View structure for `r_out_view`
 -- ----------------------------
 DROP VIEW IF EXISTS `r_out_view`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `r_out_view` AS select `b`.`id` AS `catid`,(case when (`a`.`reason` = '0') then `a`.`num` else 0 end) AS `outTrialTest`,(case when (`a`.`reason` = '1') then `a`.`num` else 0 end) AS `outValidation`,(case when (`a`.`reason` = '2') then `a`.`num` else 0 end) AS `outDiscard`,(case when (`a`.`reason` = '3') then `a`.`num` else 0 end) AS `outIntelLab`,(case when (`a`.`reason` = '4') then `a`.`num` else 0 end) AS `outSponsor`,(case when (`a`.`reason` = '5') then `a`.`num` else 0 end) AS `outOther`,`a`.`outDate` AS `outdate` from (`b_out` `a` join `b_cat` `b`) where ((`a`.`catno` = `b`.`catno`) and (`a`.`batchno` = `b`.`batchno`) and (`a`.`price` = `b`.`price`)) ;
 
 -- ----------------------------
--- View structure for r_price_view
+-- View structure for `r_price_view`
 -- ----------------------------
 DROP VIEW IF EXISTS `r_price_view`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `r_price_view` AS select `a`.`id` AS `catid`,(case when (`a`.`priceUnit` = '0') then `a`.`price` end) AS `CNY`,(case when (`a`.`priceUnit` = '1') then `a`.`price` end) AS `USD`,(case when (`a`.`priceUnit` = '2') then `a`.`price` end) AS `SGD`,(case when (`a`.`priceUnit` = '3') then `a`.`price` end) AS `EUR`,(case when (`a`.`priceUnit` = '4') then `a`.`price` end) AS `GBP`,(select round((`a`.`price` / `b`.`rate`),2) from `d_rate` `b` where (`b`.`foreignMoney` = `a`.`priceUnit`) order by `b`.`startDateTime` desc limit 1) AS `localPrice` from `b_cat` `a` ;
 
 -- ----------------------------
--- View structure for r_qty_view
+-- View structure for `r_qty_view`
 -- ----------------------------
 DROP VIEW IF EXISTS `r_qty_view`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER  VIEW `r_qty_view` AS SELECT
-	r.id,
-	r.catid,
-  r.flag,
-	CASE
-WHEN MONTH (NOW()) = 1 THEN
-	0
-ELSE
-	round(IFNULL(r.cqtyIn, 0),2)
-END asQtyIn,
-	CASE
-WHEN MONTH (NOW()) = 1 THEN
-	0
-ELSE
-	round(IFNULL(r.cqtyOut, 0),2)
-END asQtyOut
-FROM
-	b_report_r r
-WHERE
-	r.flag = DATE_FORMAT(
-		DATE_ADD(NOW(), INTERVAL - 1 MONTH),
-		'%Y%m'
-	) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `r_qty_view` AS select `r`.`id` AS `id`,`r`.`catid` AS `catid`,`r`.`flag` AS `flag`,(case when (month(now()) = 1) then 0 else round(ifnull(`r`.`cqtyIn`,0),2) end) AS `asQtyIn`,(case when (month(now()) = 1) then 0 else round(ifnull(`r`.`cqtyOut`,0),2) end) AS `asQtyOut` from `b_report_r` `r` where (`r`.`flag` = date_format((now() + interval -(1) month),'%Y%m')) ;
 
 -- ----------------------------
--- Function structure for getCatId
+-- Function structure for `getCatId`
 -- ----------------------------
 DROP FUNCTION IF EXISTS `getCatId`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` FUNCTION `getCatId`(`p_catNo` varchar(255), p_batchNo varchar(255),p_price decimal,p_priceUnit varchar(255)) RETURNS varchar(255) CHARSET utf8
 BEGIN
 	#Routine body goes here...
-    DECLARE v_catId,v_time,v_price,v_priceUnit VARCHAR(255);
-    -- time
-    set v_time = DATE_FORMAT(NOW(),'%Y%m%d');
-
+    DECLARE v_catId,v_price,v_priceUnit VARCHAR(255);
+ 
     -- catno
     set p_catNo = REPLACE(IFNULL(p_catNo,'N/A'),' ','');
     IF p_catNo = '' or LOWER(p_catNo) = 'null' THEN
@@ -665,14 +781,14 @@ BEGIN
         set v_price = CAST(ROUND(p_price*100) AS CHAR);
     end IF;
     
-    set v_catId = CONCAT(v_time,'-',p_catNo,'-',p_batchNo,'-',v_priceUnit,v_price);
+    set v_catId = CONCAT(p_catNo,'-',p_batchNo,'-',v_priceUnit,v_price);
 	  RETURN v_catId;
 END
 ;;
 DELIMITER ;
 
 -- ----------------------------
--- Function structure for getCodeName
+-- Function structure for `getCodeName`
 -- ----------------------------
 DROP FUNCTION IF EXISTS `getCodeName`;
 DELIMITER ;;
@@ -689,7 +805,7 @@ END
 DELIMITER ;
 
 -- ----------------------------
--- Function structure for getMoney
+-- Function structure for `getMoney`
 -- ----------------------------
 DROP FUNCTION IF EXISTS `getMoney`;
 DELIMITER ;;
