@@ -21,6 +21,7 @@
 					<col column="subtotal" label="小计(RMB)"  clickorderby="true" width="7%"></col>
 					<col column="expiredate" label="有效期" datatype="date{yyyy-MM-dd}" clickorderby="true" width="8%"></col>
 					<col column="ISEXP" label="提醒"  displaytype="hidden"></col>
+					<col column="Rname" label="R组" clickorderby="true" width="3%" />
 					<col column="dealer" label="供应商" clickorderby="true" width="11%"></col>
 					<col column="producer" label="生产商" clickorderby="true" width="11%"></col>
 				</display>
@@ -33,7 +34,7 @@
 					    </statitems>
 					    <subrow displaytype="page|report">
 						     <subcol property="sprop1" colspan="4" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
-						     <subcol property="sprop2" colspan="4" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
+						     <subcol property="sprop2" colspan="5" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
 						     <subcol property="sprop3" colspan="5" valuestyleproperty="bgcolor='#CCFAFF' align='right'"></subcol>
 					    </subrow>
 					    <format>
@@ -71,6 +72,7 @@
 									catno,
 									catname,
 									batchno,
+									rtype,(select codename from d_code where code=rtype and codetype='rtype')Rname,
 									round(
 										price / (
 											SELECT
@@ -170,7 +172,15 @@
 							<option value="" label="全部"></option>						
 							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
 							</inputbox>
-						</condition>						
+						</condition>	
+						<condition name="txtrtype" label="所属R" labelposition="left" br="true">						
+							<value> <![CDATA[(trim(rtype) = '#data#')]]>
+							</value>
+							<inputbox type="selectbox" >	
+							<option value="" label="全部"></option>						
+							<option dataset="@{select codename,code from d_code where codetype='rtype'}" label="codename" value="code"></option>
+							</inputbox>
+						</condition>											
 					   <condition name="txtproducer" label="生产商" labelposition="left">
 						     <value>
 							<![CDATA[(trim(producer) like  '%#data#%' )]]>
