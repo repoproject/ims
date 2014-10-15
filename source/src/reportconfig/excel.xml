@@ -955,10 +955,10 @@
 			select t.id,t.section, t.outDate,t.description,t.rType,t.catname,t.qty,t.priceCNY,
 			t.priceCNY*t.qty totalCostCNY,t.priceUSD*t.qty totalCostUSD,t.projectCode
 			from(
-				select b.id,a.section,a.outDate,a.description,getCodeName('rtype',b.rType) rType,a.catname,a.num qty,
+				select b.id,a.machineName section,a.outDate,a.description,getCodeName('rtype',b.rType) rType,a.catname,a.num qty,
 				round(getMoney(a.priceUnit,a.price,'0'),2) priceCNY,round(getMoney(a.priceUnit,a.price,'1'),2) priceUSD,a.projectCode
 				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
-				and (a.rType between 1 and 9) and a.reason='1'
+				and (a.rType between 1 and 9) and a.reason='1' 
 				and a.outdate BETWEEN ? AND ?
 				ORDER BY a.outDate ASC
 			) t
@@ -1090,7 +1090,7 @@
 			select t.id,t.section, t.outDate,t.description,t.rType,t.catname,t.qty,t.priceCNY,
 			t.priceCNY*t.qty totalCostCNY,t.priceUSD*t.qty totalCostUSD,t.projectCode
 			from(
-				select b.id,a.section,a.outDate,a.description,getCodeName('rtype',b.rType) rType,a.catname,a.num qty,
+				select b.id,a.machineName section,a.outDate,a.description,getCodeName('rtype',b.rType) rType,a.catname,a.num qty,
 				round(getMoney(a.priceUnit,a.price,'0'),2) priceCNY,round(getMoney(a.priceUnit,a.price,'1'),2) priceUSD,a.projectCode
 				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
 				and (a.rType=10) and a.reason='1'

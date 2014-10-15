@@ -20,7 +20,53 @@
 				</display>
 				<sql>
 					<value>
-						<![CDATA[SELECT DISTINCT b_cat.id, b_cat.catno, b_cat.catname, b_cat.batchno, b_cat.makedate, b_cat.makedate AS builtdate, CONCAT( date_format(b_cat.makedate, '%Y-%c-%d'), '新入库', b_in.num, '个批号为[', b_cat.batchno, ']的', b_cat.catname ) description FROM b_cat LEFT JOIN b_in ON b_in.price = b_cat.price AND b_in.catno = b_cat.catno AND b_in.batchNo = b_cat.batchno, b_var WHERE DATEDIFF( CURRENT_DATE (), b_cat.makedate ) <= b_var.bizValue AND DATEDIFF( CURRENT_DATE (), b_cat.makedate ) >= 0 AND b_var.bizkey = 'banchTime' AND NOT EXISTS ( SELECT 1 FROM b_cat b WHERE b.batchno = b_cat.batchno AND b_cat.makedate < CURRENT_DATE () - b_var.bizValue ) ORDER BY b_cat.makedate DESC]]>
+						<![CDATA[
+								SELECT DISTINCT
+									b_cat.id,
+									b_cat.catno,
+								IFNULL(b_in.num,0),
+									b_cat.catname,
+									b_cat.batchno,
+									b_cat.makedate,
+									b_cat.makedate AS builtdate,
+									CONCAT(
+										date_format(b_cat.makedate, '%Y-%c-%d'),
+										'新入库',
+										IFNULL(b_in.num,0),
+										'个批号为[',
+										b_cat.batchno,
+										']的',
+										b_cat.catname
+									) description
+								FROM
+									b_cat
+								LEFT JOIN b_in ON b_in.price = b_cat.price
+								AND b_in.catno = b_cat.catno
+								AND b_in.batchNo = b_cat.batchno,
+								 b_var
+								WHERE
+									DATEDIFF(
+										CURRENT_DATE (),
+										b_cat.makedate
+									) <= b_var.bizValue
+								AND DATEDIFF(
+									CURRENT_DATE (),
+									b_cat.makedate
+								) >= 0
+								AND b_var.bizkey = 'banchTime'
+								AND NOT EXISTS (
+									SELECT
+										1
+									FROM
+										b_cat b
+									WHERE
+										b.batchno = b_cat.batchno
+									AND b_cat.makedate < CURRENT_DATE () - b_var.bizValue
+								)
+								ORDER BY
+									b_cat.makedate DESC 
+
+]]>
 					</value>					
 				</sql>
 				<format>
@@ -104,7 +150,39 @@
 				</display>
 				<sql>
 					<value>
-						<![CDATA[SELECT * FROM ( SELECT  b1.id, b1.catno, b1.catname,sum(DISTINCT b1.total) alltotal,b1.expiredate as builtdate,b_var.bizValue,CONCAT(b1.catname,'的库存还剩',b1.total,'个！') description FROM b_cat b1 , b_cat b2,b_var where b1.catname=b2.catname and b_var.bizkey='stockthreshold' GROUP BY b1.catname ) K WHERE alltotal>=0 and alltotal<=bizValue ORDER BY alltotal asc ]]>
+						<![CDATA[
+								SELECT
+									*
+								FROM
+									(
+										SELECT
+											b1.id,
+											b1.catno,
+											b1.catname,
+											sum(DISTINCT b1.total) alltotal,
+											b1.expiredate AS builtdate,
+											b_var.bizValue,
+											CONCAT(
+												b1.catname,
+												'的库存还剩',
+												sum(DISTINCT b1.total) ,
+												'个！'
+											) description
+										FROM
+											b_cat b1,			
+											b_var
+										WHERE
+											 b_var.bizkey = 'stockthreshold'
+										GROUP BY
+											b1.catname
+									) K
+								WHERE
+									alltotal >= 0
+								AND alltotal <= bizValue
+								ORDER BY
+									alltotal ASC
+
+                       ]]>
 					</value>
 				</sql>
 				<format>

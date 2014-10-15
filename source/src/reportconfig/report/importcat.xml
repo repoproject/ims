@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
 	<page id="importcat2">
-		<report id="report1" title="库存导入和维护" rowselect="multiple-checkbox"  type="editablelist" pagesize="20">
+		<report id="report1" title="库存导入和维护" type="editablelist" cellresize="1" rowselect="multiple-checkbox" pagesize="13">
 			<display mouseoverbgcolor="CCCCCC">
 				<col column="id" label="序号" width="3%" />
 				<col column="cattype" label="类型" clickorderby="true"
@@ -31,7 +31,7 @@
 			<sql>
 				<select>
 					<value>
-					<![CDATA[SELECT id ,productDate,machineName,(select codename from d_code where code=catFrom and codetype='catFrom') catFrom,(select codename from d_code where code=cattype and codetype='cattype') cattype,rtype,(select codename from d_code where code=rtype and codetype='rtype')Rname, catno, catname, batchno, localprice, price,(select codename from d_code where code=priceUnit and codetype='money') priceUnit, total, expiredate,dealer, producer, CASE WHEN DATEDIFF(expiredate, CURRENT_DATE()) <= b_var.bizValue THEN "1" ELSE "0" END ISEXP FROM b_cat, b_var WHERE total > 0 AND bizkey = 'expireTime' and {#condition#} order by expiredate]]>
+					<![CDATA[SELECT id ,productDate,machineName,(select codename from d_code where code=catFrom and codetype='catFrom') catFrom,(select codename from d_code where code=cattype and codetype='cattype') cattype,rtype,(select codename from d_code where code=rtype and codetype='rtype')Rname, catno, catname, batchno, localprice, price,(select codename from d_code where code=priceUnit and codetype='money') priceUnit, total, expiredate,dealer, producer, CASE WHEN DATEDIFF(expiredate, CURRENT_DATE()) <= b_var.bizValue THEN "1" ELSE "0" END ISEXP FROM b_cat, b_var WHERE  bizkey = 'expireTime' and {#condition#} order by expiredate]]>
 				</value>
 					<condition name="txtid" hidden="true">
 						<value>
@@ -75,6 +75,22 @@
 							<![CDATA[(trim(batchno) like  '%#data#%' )]]>
 						</value>
 					</condition>
+					    <condition name="typename" label="  类型  " labelposition="left"  >						
+							<value> <![CDATA[(trim(cattype) = '#data#')]]>
+							</value>
+							<inputbox type="selectbox" >	
+							<option value="" label="全部"></option>						
+							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
+							</inputbox>
+						</condition>
+						<condition name="txtrtype" label="所属R" labelposition="left">						
+							<value> <![CDATA[(trim(rtype) = '#data#')]]>
+							</value>
+							<inputbox type="selectbox" >	
+							<option value="" label="全部"></option>						
+							<option dataset="@{select codename,code from d_code where codetype='rtype'}" label="codename" value="code"></option>
+							</inputbox>
+						</condition>					
 				</select>
 					<insert pageurl="report{cat_addedit.report1}" popupparams="{title:'新增库存',width:800,height:400}"></insert>
 					<update pageurl="report{cat_addedit.report1}" urlparams="txtid=@{id}"
