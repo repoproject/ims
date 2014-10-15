@@ -23,6 +23,7 @@
 		<item name="prompt-dialog-type" value="artdialog"/>
 		<!-- 提示组件类型 ymprompt;artdialog-->
 		<item name="default-dataimport-filepath" value="d:\test"/>
+		<item name="dataimport-batchupdate-size" value="1"/>
 	</system>
 	<datasources default="ds_mysql">
 		<datasource name="ds_mysql" type="com.wabacus.config.database.datasource.C3P0DataSource" dbtype="com.wabacus.config.database.type.MySql">
