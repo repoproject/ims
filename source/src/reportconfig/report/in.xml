@@ -27,7 +27,7 @@
 				<col column="{col-rowselect}" width="20"></col>
 					<col column="id" label="编号"  displaytype="hidden"/>
 					<col column="{sequence:1}" label="序号" width="3%"/>
-					<col column="cattype" label="类型"  clickorderby="true" width="3%"/>
+					<col column="cattypename" label="类型"  clickorderby="true" width="3%"/>
 					<col column="inDate" label="入库日期"  clickorderby="true" datatype="date{yyyy-MM-dd}" width="8%"/>
 					<col column="catname" label="名称"  clickorderby="true" width="12%"/>
 					<col column="catno" label="货号"  clickorderby="true" width="9%"/>
@@ -65,6 +65,7 @@
 											CODE = i.rtype
 										AND codetype = 'rtype'
 									) Rname,
+									i.rtype,
 									(
 										SELECT
 											codename
@@ -84,7 +85,8 @@
 										WHERE
 											CODE = i.cattype
 										AND codetype = 'cattype'
-									) cattype,
+									) cattypename,
+									i.cattype,
 									(
 										SELECT
 											codename
@@ -117,9 +119,26 @@
 							</value>
 							<inputbox type="datepicker" dateformat="yyyy-MM-dd" styleproperty="title='针对入库时间'" jsvalidatetype="onsubmit" jsvalidate="isDate(#label#格式不符合要求)"></inputbox>
 						</condition>
+					    <condition name="typename" label="类型" labelposition="left" >						
+							<value> <![CDATA[(trim(i.cattype) = '#data#')]]>
+							</value>
+							<inputbox type="selectbox" >	
+							<option value="" label="全部"></option>						
+							<option dataset="@{select codename,code from d_code where codetype='cattype' order by code}" label="codename" value="code"></option>
+							</inputbox>
+						</condition>				
 						
+					    <condition name="txtinreason"   label="入库原因" labelposition="left"   >						
+							<value> <![CDATA[(trim(reason) = '#data#')]]>
+							</value>
+							<inputbox type="selectbox" >	
+							<option value="" label="全部"></option>						
+							<option dataset="@{select codename ,code from d_code where codetype='inreason'}" label="codename" value="code"></option>
+							</inputbox>
+						</condition>
+
 					     <condition name="txtrtype" label="R组" labelposition="left" br="true" >						
-							<value> <![CDATA[(trim(rtype) = '#data#')]]>
+							<value> <![CDATA[(trim(i.rtype) = '#data#')]]>
 							</value>
 							<inputbox type="selectbox" >	
 							<option value="" label="全部"></option>						
