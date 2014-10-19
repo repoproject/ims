@@ -55,7 +55,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType =1 
-					order by a.machineName asc  
+					order by a.order asc
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -139,7 +139,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 		    where a.rType =2   
-		    order by a.machineName asc 
+		    order by a.order asc
         </sql>
         <col index="1" type="">catno</col>
         <col index="2" type="">machineNo</col>
@@ -222,6 +222,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 					where  a.rType = 3   
+		    order by a.order asc
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -305,6 +306,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 4   
+		    order by a.order asc
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -388,6 +390,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 5   
+		    order by a.order asc
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -470,7 +473,8 @@
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
-					where a.rType = 6   
+					where a.rType = 6  
+		    order by a.order asc 
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -554,6 +558,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 7   
+		    order by a.order asc
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -637,6 +642,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 8   
+		    order by a.order asc
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -720,6 +726,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 9   
+		    order by a.order asc
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -758,7 +765,7 @@
     </Sheet>
     <Sheet name="Lab_Gen_Supplier" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
         <sql>
-			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
+			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,null as machineNo,null as machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
 			ifnull(o.outDiscard,0) outDiscard,ifnull(o.outIntelLab,0) outIntelLab,ifnull(o.outOther,0) outOther,ifnull(o.outSponsor,0) outSponsor,ifnull(o.outTrialTest,0) outTrialTest,ifnull(o.outValidation,0) outValidation,ifnull(o.outTotal,0) outTotal,ifnull(a.total,0) closing,
 			p.CNY,p.EUR,p.GBP,p.SGD,p.USD,ifnull(p.localprice,0) localprice,ifnull(a.total*p.localprice,0) totalAmount,null as remark,
@@ -802,7 +809,8 @@
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
-					where a.rType = 20   
+					where a.rType = 20  
+		    order by a.order asc 
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -886,6 +894,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType =11   
+		    order by a.order asc
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -928,7 +937,7 @@
 				select @rownum:=0 ,b.id,a.outDate,a.description,a.catno,
 					a.price,getCodeName('money',a.priceUnit) currency,
 					b.expiredate,a.num qty,a.num*a.price totalAmnt,getCodeName('rootcause',a.cause) rootCause,a.section,
-					b.producer,b.dealer,null as catFrom
+					b.producer,b.dealer,getCodeName('catfrom',b.catfrom) as catFrom
 				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
 				and (a.rType between 1 and 9) and a.reason='2'
 				and a.outdate BETWEEN ? AND ?
@@ -1020,7 +1029,8 @@
 					)o on a.id=o.catid 
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
-					where (a.rType=10)   
+					where (a.rType=10)  
+		    order by a.order asc 
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -1063,7 +1073,7 @@
 				select @rownum:=0 ,b.id,a.outDate,a.description,a.catno,
 					a.price,getCodeName('money',a.priceUnit) currency,
 					b.expiredate,a.num qty,a.num*a.price totalAmnt,getCodeName('rootcause',a.cause) rootCause,a.section,
-					b.producer,b.dealer,null as catFrom
+					b.producer,b.dealer,getCodeName('catfrom',b.catfrom) as catFrom
 				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
 				and (a.rType=10) and  a.reason='2'
 				and a.outdate BETWEEN ? AND ?

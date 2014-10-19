@@ -30,12 +30,16 @@ import com.ims.util.SysVar;
  * @date   2014-9-7
  */
 public class InventoryReport implements Runnable{
+	
+	public static final String TEMPLATE_PATH = "conf/template/template.xls";
 	private static Logger logger = Logger.getLogger(InventoryReport.class);
 	private Date startDate;
 	private Date endDate;
 	private HSSFWorkbook wb;
 	private FileReport reportFile;
-	
+	private boolean backupData = false;
+
+
 	public InventoryReport(Date startDate){
 		this.startDate = startDate;
 		this.endDate = new Date();
@@ -58,7 +62,7 @@ public class InventoryReport implements Runnable{
 	 */
 	public void report(){
 		try {
-			FileInputStream fileInputStream = new FileInputStream(ExcelExport.class.getResource("").getPath() + "template.xls");
+			FileInputStream fileInputStream = new FileInputStream(InventoryReport.getTemplateFile());
 			this.wb = new HSSFWorkbook(fileInputStream);
 			this.createExcel();
 			
@@ -143,6 +147,18 @@ public class InventoryReport implements Runnable{
 		return  reportPath + fileName;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public static String getTemplateFile(){
+		return Sys.serverRootPath() + TEMPLATE_PATH;
+	}
 	
+	
+
+	public void setBackupData(boolean backupData) {
+		this.backupData = backupData;
+	}
 	
 }

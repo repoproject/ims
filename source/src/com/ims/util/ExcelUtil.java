@@ -175,10 +175,8 @@ public class ExcelUtil {
 				int rowNum = Integer.parseInt(numStr);
 				String sRowNum = String.valueOf(rowNum);
 				String tRowNum = String.valueOf(rowNum + moveRowCount);
-				numStr = "";
-				if(/*!sRowNumList.contains(sRowNum) && */rowNum>insertRowNum){
-//					sRowNumList.add(sRowNum);
-//					tRowNumList.add(tRowNum);
+				numStr = "";//及时清空
+				if(rowNum>insertRowNum){
 					sb.append(tRowNum);
 				}
 				else{
@@ -186,6 +184,7 @@ public class ExcelUtil {
 				}
 			}
 			else{
+				numStr = "";//及时清空
 				sb.append(s);
 			}
 		}

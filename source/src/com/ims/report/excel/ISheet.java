@@ -8,7 +8,10 @@ package com.ims.report.excel;
  * @date   2014-9-5
  */
 public interface ISheet {
+	
 	public void createSheet();
 	
 	public String getSheetName();
+	
+	public void isBackupData(boolean isBackup);
 }

@@ -7,9 +7,14 @@
 <title>Insert title here</title>
 <link href="themes/default/style.css" rel="stylesheet" type="text/css" media="screen"/>
 <link href="css/core.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="js/jquery-1.7.2.js" type="text/javascript"></script>
+<script src="js/localJS/excel.js" type="text/javascript"></script>
+<script>
+    contextPath = <%=request.getContextPath() %>;
+</script>
 </head>
 <body>
-    <form method="post" action="excel/ExcelExport">
+    <form method="post">
     <div>
     <br>
     <br>
@@ -17,7 +22,7 @@
     </div>
     <div class="panelBar">
             <div class="pages">
-                   <input class="button" type="submit" name="excel" value="生成报表" >
+                   <input id="report" class="button" type="button" name="excel" value="生成报表" >
             </div>
         </div>
     <div class="pageContent">

@@ -34,6 +34,7 @@ public class MonthReport {
 		Date endDate = new Date();
 			
 		InventoryReport reportor = new InventoryReport(startDate,endDate);
+		reportor.setBackupData(true);
 		reportor.run();
 
 		logger.info("生成报表成功");

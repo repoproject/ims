@@ -59,7 +59,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>ExcelExport</servlet-name>
-		<url-pattern>/excel/ExcelExport</url-pattern>
+		<url-pattern>/servlet/ExcelExport.htm</url-pattern>
 	</servlet-mapping>
 
 	<servlet-mapping>

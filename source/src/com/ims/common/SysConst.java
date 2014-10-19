@@ -29,6 +29,7 @@ public class SysConst {
 	 */
 	public class BizVar{
 		public static final String EXPIRE_TIME = "expireTime";
+		public static final String NO_MACHINE_ID = "-1";//无设备的设备标识
 	}
 
 }

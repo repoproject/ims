@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -130,7 +131,6 @@ public class R1Sheet extends AbsRSheet implements ISheet{
 	@Override
 	protected List<Object> formatData(List<Object> data) {
 		Map<String,String> mNoList = new HashMap<String,String>();
-		//机器序号从1开始 by gq 2014-9-29
 		int mechineSeq = 1;
 		String mName = "";
 		Map<Object, Object> rowMap = null;
@@ -165,6 +165,8 @@ public class R1Sheet extends AbsRSheet implements ISheet{
 		Thread saveThread = new Thread(save, "saveReportData");
 		saveThread.start();
 	}
+
+
 	
 	
 }

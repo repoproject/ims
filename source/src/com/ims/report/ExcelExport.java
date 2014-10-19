@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -29,9 +30,11 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataFormat;
 import org.apache.poi.ss.util.Region;
 
+import com.alibaba.fastjson.JSONObject;
 import com.ims.report.excel.R1Sheet;
 import com.ims.util.DateTimeUtil;
 import com.ims.util.ExcelUtil;
+import com.ims.util.Sys;
 import com.itextpdf.text.List;
 import com.wabacus.config.ConfigLoadManager;
 
@@ -55,11 +58,19 @@ public class ExcelExport  extends HttpServlet{
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		logger.info("enter excelExport");
-		String path = ExcelExport.class.getResource("").getPath() + "template.xls";
+		String path = InventoryReport.getTemplateFile();
 		logger.info("template:" + path);
         
 		//FileInputStream fileInputStream = new FileInputStream(path);
 		createExcel();
+		JSONObject json = new JSONObject();
+		json.put("result", "success");
+		
+		PrintWriter out = response.getWriter();
+		out.write(json.toString());
+		
+		
+		//request.getRequestDispatcher("/excel.jsp").forward(request, response);
 
 //		logger.info("Excel创建完毕，开始下载输出");
 //		response.setContentType("application/vnd.ms-excel");	
@@ -75,6 +86,7 @@ public class ExcelExport  extends HttpServlet{
 		Date endDate = DateTimeUtil.getDate("2014-10-26");
 			
 		InventoryReport reportor = new InventoryReport(startDate,endDate);
+		reportor.setBackupData(false);
 		reportor.run();
 //			Thread reportThread = new Thread(reportor);
 //			reportThread.start();
@@ -126,7 +138,7 @@ public class ExcelExport  extends HttpServlet{
 		System.out.println("test");
 		
 		try {
-			FileInputStream fileInputStream = new FileInputStream(ExcelExport.class.getResource("").getPath() + "template.xls");
+			FileInputStream fileInputStream = new FileInputStream(InventoryReport.getTemplateFile());// new FileInputStream(ExcelExport.class.getResource("").getPath() + "template.xls");
 			
 			ExcelExport testExcelExport = new ExcelExport();
 			testExcelExport.createExcel();

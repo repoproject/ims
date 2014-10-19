@@ -46,7 +46,10 @@ public abstract class AbsRSheet implements ISheet {
 	
 	protected Date startDate;
 	protected Date endDate;
+	protected boolean isBackupData = false;
 	
+	
+
 	/**
 	 * 指定开始时间到当期时间
 	 * @param sheet
@@ -83,6 +86,13 @@ public abstract class AbsRSheet implements ISheet {
 		this.startRow = sheetConfig.getDataStartNum()-1;
 		this.sql = sheetConfig.getSql();
 		this.cols = sheetConfig.getCols();
+	}
+	
+	/**
+	 * 是否备份数据
+	 */
+	public void isBackupData(boolean isBackup) {
+		this.isBackupData = isBackup;
 	}
 	
 	/**
@@ -268,7 +278,9 @@ public abstract class AbsRSheet implements ISheet {
 	protected List<Object> getData(){
 		List<Object> data = queryData();
 		data = formatData(data);
-		saveData(data);
+		if(this.isBackupData){
+		    saveData(data);
+		}
 		return data;
 	}
 
