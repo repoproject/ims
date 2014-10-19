@@ -8,7 +8,7 @@
         class：处理此Sheet的类
         sum:本列需要合计则设置为true
      -->
-    <Sheet name="R1-CHEM" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
+    <Sheet name="R1-CHEM" dataRowNum="9" dataStartNum="8" footerRowNum="11" class="com.ims.report.excel.R1Sheet">
         <sql>
 			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
@@ -92,7 +92,7 @@
         <col index="35" type="" sum="true">cqtyIn</col>
         <col index="36" type="" sum="true">cqtyOut</col>
     </Sheet>
-    <Sheet name="R2-LCMS_Micro" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
+    <Sheet name="R2-LCMS_Micro" dataRowNum="9" dataStartNum="8" footerRowNum="11" class="com.ims.report.excel.R1Sheet">
         <sql>
 			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
@@ -175,7 +175,7 @@
         <col index="35" type="" sum="true">cqtyIn</col>
         <col index="36" type="" sum="true">cqtyOut</col>
     </Sheet>
-    <Sheet name="R3-Hema_Flow" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
+    <Sheet name="R3-Hema_Flow" dataRowNum="9" dataStartNum="8" footerRowNum="11" class="com.ims.report.excel.R1Sheet">
         <sql>
 			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
@@ -259,7 +259,7 @@
         <col index="35" type="" sum="true">cqtyIn</col>
         <col index="36" type="" sum="true">cqtyOut</col>
     </Sheet>
-    <Sheet name="R4-Variant" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
+    <Sheet name="R4-Variant" dataRowNum="9" dataStartNum="8" footerRowNum="11" class="com.ims.report.excel.R1Sheet">
         <sql>
 			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
@@ -343,7 +343,7 @@
         <col index="35" type="" sum="true">cqtyIn</col>
         <col index="36" type="" sum="true">cqtyOut</col>
     </Sheet>
-    <Sheet name="R5-Oversea" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
+    <Sheet name="R5-Oversea" dataRowNum="9" dataStartNum="8" footerRowNum="11" class="com.ims.report.excel.R1Sheet">
         <sql>
 			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
@@ -427,7 +427,7 @@
         <col index="35" type="" sum="true">cqtyIn</col>
         <col index="36" type="" sum="true">cqtyOut</col>
     </Sheet>
-    <Sheet name="R6-PCR" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
+    <Sheet name="R6-PCR" dataRowNum="9" dataStartNum="8" footerRowNum="11" class="com.ims.report.excel.R1Sheet">
         <sql>
 			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
@@ -511,7 +511,7 @@
         <col index="35" type="" sum="true">cqtyIn</col>
         <col index="36" type="" sum="true">cqtyOut</col>
     </Sheet>
-    <Sheet name="R7-Urine" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
+    <Sheet name="R7-Urine" dataRowNum="9" dataStartNum="8" footerRowNum="11" class="com.ims.report.excel.R1Sheet">
         <sql>
 			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
@@ -595,7 +595,7 @@
         <col index="35" type="" sum="true">cqtyIn</col>
         <col index="36" type="" sum="true">cqtyOut</col>
     </Sheet>
-    <Sheet name="R8-Cent_Immu_Liai_Mini" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
+    <Sheet name="R8-Cent_Immu_Liai_Mini" dataRowNum="9" dataStartNum="8" footerRowNum="11" class="com.ims.report.excel.R1Sheet">
         <sql>
 			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
@@ -679,7 +679,7 @@
         <col index="35" type="" sum="true">cqtyIn</col>
         <col index="36" type="" sum="true">cqtyOut</col>
     </Sheet>
-    <Sheet name="R9-Elisa" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
+    <Sheet name="R9-Elisa" dataRowNum="9" dataStartNum="8" footerRowNum="11" class="com.ims.report.excel.R1Sheet">
         <sql>
 			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
@@ -763,7 +763,7 @@
         <col index="35" type="" sum="true">cqtyIn</col>
         <col index="36" type="" sum="true">cqtyOut</col>
     </Sheet>
-    <Sheet name="Lab_Gen_Supplier" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
+    <Sheet name="Lab_Gen_Supplier" dataRowNum="9" dataStartNum="8" footerRowNum="11" class="com.ims.report.excel.R1Sheet">
         <sql>
 			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,null as machineNo,null as machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
@@ -847,7 +847,7 @@
         <col index="35" type="" sum="true">cqtyIn</col>
         <col index="36" type="" sum="true">cqtyOut</col>
     </Sheet>
-    <Sheet name="CTM_Suppliers_DTW" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
+    <Sheet name="CTM_Suppliers_DTW" dataRowNum="9" dataStartNum="8" footerRowNum="11" class="com.ims.report.excel.R1Sheet">
         <sql>
 			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,
@@ -983,7 +983,7 @@
         <col index="9" type="" sum="true" >totalCostUSD</col>
         <col index="10" type="">projectCode</col>
     </Sheet>
-    <Sheet name="R10-Oncology" dataRowNum="9" dataStartNum="8" footerRowNum="10" class="com.ims.report.excel.R1Sheet">
+    <Sheet name="R10-Oncology" dataRowNum="9" dataStartNum="8" footerRowNum="11" class="com.ims.report.excel.R1Sheet">
         <sql>
 			SELECT a.id,a.rType,a.catno,a.catname,a.batchno,a.machineNo,a.machineName,ifnull(a.total,0)+ifnull(o.outTotal,0)-ifnull(i.inTotal,0) opening,
 			ifnull(i.inVendor,0) inVendor,ifnull(i.inCharges,0) inCharges,ifnull(i.inInterlab,0) inInterlab,ifnull(i.inSponsor,0) inSponsor, ifnull(i.inTotal,0) inTotal,

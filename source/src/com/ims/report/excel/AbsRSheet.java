@@ -203,11 +203,12 @@ public abstract class AbsRSheet implements ISheet {
 		for(int i = 1;i< dataRowCount;i++){
 			//数据模板行的下一行开始创建数据区
 			rowIndex = this.startRow + i;
-			if(rowIndex == this.dataRowNum - 1){
+			if(rowIndex <= this.dataRowNum){
 				continue;//模板行跳过
 			}
 			HSSFRow row = sheet.createRow(this.startRow + i);
 			ExcelUtil.copyRow(this.templateDataRow, row);
+//			ExcelUtil.insertRow(this.sheet, this.templateDataRow, rowIndex);
 		}
 	}
 	
