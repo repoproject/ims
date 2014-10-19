@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2014-10-19 19:05:01
+Date: 2014-10-19 19:54:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -77,7 +77,7 @@ INSERT INTO `b_cat` VALUES ('25', '21342.0-批号15-CNY46900', '21342', 'GP test
 INSERT INTO `b_cat` VALUES ('26', '21342.0-批号16-CNY99700', '21342', 'GP test kit Vitect 2革兰式阳性细菌鉴定卡', null, '0', '批号16', '0', '2', '2014-04-26 00:00:00', '生产商26', '2015-11-24 00:00:00', '996.9200', '0', '0.0000', '0', '供应商26', null, 'Micro Lab', '16', 'admin', '2014-10-16 19:59:07', '2014-10-16 19:59:07');
 INSERT INTO `b_cat` VALUES ('27', '55561.0-批号17-CNYN/A', '55561', 'ID Color Catalgent', null, '0', '批号17', '0', '2', '2014-04-27 00:00:00', '生产商27', '2015-11-25 00:00:00', '0.0000', '0', '0.0000', '0', '供应商27', null, 'Micro Lab', '17', 'admin', '2014-10-16 19:59:07', '2014-10-16 19:59:07');
 INSERT INTO `b_cat` VALUES ('28', '55561.0-批号18-CNY19100', '55561', 'ID Color Catalgent', null, '0', '批号18', '0', '2', '2014-04-28 00:00:00', '生产商28', '2015-11-26 00:00:00', '191.4500', '0', '0.0000', '0', '供应商28', null, 'Micro Lab', '18', 'admin', '2014-10-16 19:59:07', '2014-10-16 19:59:07');
-INSERT INTO `b_cat` VALUES ('29', '55635.0-批号19-CNYN/A', '55635', 'Oxidase Reagent', null, '0', '批号19', '0', '2', '2014-04-29 00:00:00', '生产商29', '2015-11-27 00:00:00', '0.0000', '0', '0.0000', '0', '供应商29', null, 'Micro Lab', '19', 'admin', '2014-10-16 19:59:07', '2014-10-16 19:59:07');
+INSERT INTO `b_cat` VALUES ('29', '55635.0-批号19-CNYN/A', '55635', 'Oxidase Reagent', '', '0', '批号19', '0', '2', '2014-04-29 00:00:00', '生产商29', '2015-11-27 00:00:00', '12.0000', '0', '0.0000', '0', '供应商29', '', 'Micro Lab', '19', 'admin', '2014-10-16 19:59:07', '2014-10-19 19:26:07');
 INSERT INTO `b_cat` VALUES ('30', '55635.0-批号20-CNY46500', '55635', 'Oxidase Reagent', null, '0', '批号20', '0', '2', '2014-04-30 00:00:00', '生产商30', '2015-11-28 00:00:00', '464.9600', '0', '0.0000', '0', '供应商30', null, 'Micro Lab', '20', 'admin', '2014-10-16 19:59:07', '2014-10-16 19:59:07');
 INSERT INTO `b_cat` VALUES ('31', '55635.0-批号21-CNY37500', '55635', 'Oxidase Reagent', null, '0', '批号21', '0', '2', '2014-05-01 00:00:00', '生产商31', '2015-11-29 00:00:00', '375.3800', '0', '0.0000', '0', '供应商31', null, 'Micro Lab', '21', 'admin', '2014-10-16 19:59:07', '2014-10-16 19:59:07');
 INSERT INTO `b_cat` VALUES ('32', '8546917.0-批号22-CNY147500', '8546917', 'Scatter Pack ', null, '0', '批号22', '0', '3', '2014-05-02 00:00:00', '生产商32', '2015-11-30 00:00:00', '1475.2100', '0', '0.0000', '0', '供应商32', null, 'COULTER LH750 - Hematology', '22', 'admin', '2014-10-16 19:59:07', '2014-10-16 19:59:07');
@@ -3498,7 +3498,7 @@ CREATE TABLE `d_user` (
   `remark` varchar(200) DEFAULT NULL,
   `birthday` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of d_user
@@ -3508,6 +3508,7 @@ INSERT INTO `d_user` VALUES ('2', '11', '111', null, '1111', '1', '1', '1', null
 INSERT INTO `d_user` VALUES ('4', '2222', '张三', null, '三', '1', '0', '0', null, '发的', null);
 INSERT INTO `d_user` VALUES ('5', '444', '李四', null, '四儿', '1', '0', '0', null, '所属省', null);
 INSERT INTO `d_user` VALUES ('6', '444', '王五', null, '乌尔', '1', '1', '1', null, '辅导费', null);
+INSERT INTO `d_user` VALUES ('7', null, '2', null, '2', '8888', '0', '0', null, '', null);
 
 -- ----------------------------
 -- Table structure for `d_var`
