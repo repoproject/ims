@@ -28,6 +28,7 @@
 				<col column="dealer" label="供应商" clickorderby="true" width="8%"></col>
 				<col column="producer" label="生产商" clickorderby="true" width="8%"></col>
 				<col column="{editablelist-edit}" label="修改" width="4%"></col>
+			
 			</display>
 			<sql>
 				<select>
