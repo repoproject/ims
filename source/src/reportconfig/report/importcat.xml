@@ -20,7 +20,8 @@
 					clickorderby="true" width="6%"></col>
 					<col column="productDate" label="生产日期" datatype="date{yyyy-MM-dd}"
 					clickorderby="true" width="6%"></col>
-				<col column="machineName" label="设备" clickorderby="true" width="8%"></col>
+				<col column="machineName" label="设备" clickorderby="true" width="5%"></col>
+				<col column="machineNo" label="设备号" clickorderby="true" width="5%"></col>
 				<col column="Rname" label="R组" clickorderby="true" width="3%" />
 				
 				<col column="catFrom" label="来源" clickorderby="true" width="5%"></col>
@@ -31,7 +32,7 @@
 			<sql>
 				<select>
 					<value>
-					<![CDATA[SELECT id ,productDate,machineName,(select codename from d_code where code=catFrom and codetype='catFrom') catFrom,(select codename from d_code where code=cattype and codetype='cattype') cattype,rtype,(select codename from d_code where code=rtype and codetype='rtype')Rname, catno, catname, batchno, localprice, price,(select codename from d_code where code=priceUnit and codetype='money') priceUnit, total, expiredate,dealer, producer, CASE WHEN DATEDIFF(expiredate, CURRENT_DATE()) <= b_var.bizValue THEN "1" ELSE "0" END ISEXP FROM b_cat, b_var WHERE  bizkey = 'expireTime' and {#condition#} order by expiredate]]>
+					<![CDATA[SELECT id ,productDate,machineName,machineNo,(select codename from d_code where code=catFrom and codetype='catFrom') catFrom,(select codename from d_code where code=cattype and codetype='cattype') cattype,rtype,(select codename from d_code where code=rtype and codetype='rtype')Rname, catno, catname, batchno, localprice, price,(select codename from d_code where code=priceUnit and codetype='money') priceUnit, total, expiredate,dealer, producer, CASE WHEN DATEDIFF(expiredate, CURRENT_DATE()) <= b_var.bizValue THEN "1" ELSE "0" END ISEXP FROM b_cat, b_var WHERE  bizkey = 'expireTime' and {#condition#} order by expiredate]]>
 				</value>
 					<condition name="txtid" hidden="true">
 						<value>

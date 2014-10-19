@@ -69,6 +69,14 @@
 							<![CDATA[(trim(batchno) like  '%#data#%' )]]>
 						</value>						     
 					    </condition>
+					    <condition name="typename" label="类型" labelposition="left">						
+							<value> <![CDATA[(trim(cattype) = '#data#')]]>
+							</value>
+							<inputbox type="selectbox" >	
+							<option value="" label="全部"></option>						
+							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
+							</inputbox>
+						</condition>					    
 						 <condition name="txtrtype" label="R组" labelposition="left">						
 							<value> <![CDATA[(trim(rtype) = '#data#')]]>
 							</value>
@@ -114,7 +122,7 @@
 					<value>
 						<![CDATA[SELECT id,cattype,(select codename from d_code where code=rtype and codetype='rtype')Rname,(select codename from d_code where codetype='cattype' and  code = cattype )typename,catno,catname,machinename,machineno,batchno,person,outdate,round(price,2) price,( SELECT codename FROM d_code WHERE CODE = priceUnit AND codetype = 'money' ) priceUnit,num,(select codename from d_code where code=reason and codetype='outreason') reason FROM b_out  where  1=1 and {#condition#}]]>
 					</value>
-					<condition name="txtid" hidden="true">
+					<condition name="txtid1" hidden="true">
 						<value>
 						<![CDATA[(ID = '#data#' )]]>
 						</value>
@@ -154,13 +162,55 @@
 							<![CDATA[(trim(catno) like  '%#data#%' )]]>
 						</value>						     
 					    </condition>
-					    <condition name="txtbatchno1" label="批号" labelposition="left"  >
+					    <condition name="txtbatchno1" label="批号" labelposition="left" br="true" >
 						     <value>
 							<![CDATA[(trim(batchno) like  '%#data#%' )]]>
 						</value>						     
 					    </condition>	
-					    
-                        <condition name="txtperson"  label="" labelposition="left" defaultvalue="session{nickname}" >
+					     <condition name="txtmachinename1" label="所属设备" labelposition="left"  >
+						     <value>
+							<![CDATA[(trim(machinename) like  '%#data#%' )]]>
+						</value>		
+						     <inputbox>
+						        <typeprompt width="-1" count="20">
+							       <promptcol label="machinename" matchmode="anywhere"></promptcol>
+							       <datasource>    
+							          <option dataset="@{SELECT machinename from b_machine where {#matchcondition#}}"></option> 
+                                   </datasource>
+						        </typeprompt>
+						     </inputbox>						
+										     
+					    </condition>
+					     <condition name="txtmachineno1" label="设备序号" labelposition="left"  >
+						     <value>
+							<![CDATA[(trim(machineno) like  '%#data#%' )]]>
+						</value>						     
+					    </condition>
+					    <condition name="typename1" label="类型" labelposition="left">						
+							<value> <![CDATA[(trim(cattype) = '#data#')]]>
+							</value>
+							<inputbox type="selectbox" >	
+							<option value="" label="全部"></option>						
+							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
+							</inputbox>
+						</condition>
+						 <condition name="txtrtype1" label="R组" labelposition="left">						
+							<value> <![CDATA[(trim(rtype) = '#data#')]]>
+							</value>
+							<inputbox type="selectbox" >	
+							<option value="" label="全部"></option>						
+							<option dataset="@{select codename,code from d_code where codetype='rtype' order by code}" label="codename" value="code"></option>
+							</inputbox>
+						</condition>
+					    <condition name="txtinreason1"   label="出库原因" labelposition="left" >						
+							<value> <![CDATA[(trim(reason) = '#data#')]]>
+							</value>
+							<inputbox type="selectbox" >	
+							<option value="" label="全部"></option>						
+							<option dataset="@{select codename ,code from d_code where codetype='outreason'}" label="codename" value="code"></option>
+							</inputbox>
+						</condition>					    						    
+                        <condition name="txtperson1"  label="" labelposition="left" defaultvalue="session{nickname}" >
 						   <inputbox type="textbox"  styleproperty="style=display:none"  ></inputbox>
 						     <value>
 							<![CDATA[(trim(person) like  '%#data#%' )]]>
