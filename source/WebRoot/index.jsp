@@ -103,10 +103,7 @@ $(function(){
 </head>
 
 <body scroll="no">
-	<div id="flashArea" style="display:none;">
-		<!--div id="closeFlash"></div-->
-		
-	</div>
+
 	
 	<div id="layout" >
 		<div id="header">

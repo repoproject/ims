@@ -5,7 +5,8 @@
 	<page id="importcat2">
 		<report id="report1" title="库存导入和维护" type="editablelist" cellresize="1" rowselect="multiple-checkbox" pagesize="13">
 			<display mouseoverbgcolor="CCCCCC">
-				<col column="id" label="序号" width="3%" />
+			<col column="{col-rowselect}" width="20"></col>
+				<col column="id" label="库ID" width="3%" />
 				<col column="cattype" label="类型" clickorderby="true"
 					width="3%"></col>
 				<col column="catname" label="名称" clickorderby="true" width="14%" />

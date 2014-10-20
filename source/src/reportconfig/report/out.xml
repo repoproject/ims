@@ -97,21 +97,21 @@
 				</value>
 			--></format>
 		</report>
-		<report id="report2" title="出库信息" subtitle="(只能修改和删除上月库存统计后本人的出库记录)" pagesize="12" rowselect="multiple-checkbox" type="editablelist" interceptor="com.ims.interceptor.Out">
+		<report id="report2" title="出库信息" subtitle="(只能修改和删除上月库存统计后本人的出库记录)" pagesize="13" rowselect="multiple-checkbox" type="editablelist" interceptor="com.ims.interceptor.Out">
 				<display mouseoverbgcolor="CCCCCC" >
-				<col column="{col-rowselect}" width="20"></col>    
+				<col column="{col-rowselect}" width="2%"></col>    
 					<col column="{sequence:1}" label="序号" width="3%"/>
 					<col column="id" label="编号"  displaytype="hidden"  />
-					<col column="typename" label="类型" clickorderby="true" width="3%"></col>
-					<col column="outdate" label="出库日期" clickorderby="true" datatype="date{yyyy-MM-dd}" width="6%"></col>
-					<col column="catno" label="货号"  clickorderby="true" width="8%"/>
-					<col column="catname" label="名称"  clickorderby="true" width="12%"/>
-					<col column="batchno" label="批号" clickorderby="true" width="8%"></col>
+					<col column="typename" label="类型" clickorderby="true" width="4%"></col>
+					<col column="outdate" label="出库日期" clickorderby="true" datatype="date{yyyy-MM-dd}" width="8%"></col>
+					<col column="catno" label="货号"  clickorderby="true" width="11%"/>
+					<col column="catname" label="名称"  clickorderby="true" width="14%"/>
+					<col column="batchno" label="批号" clickorderby="true" width="11%"></col>
 					<col column="price" label="单价" datatype="float" clickorderby="true" width="6%"></col>
 					<col column="priceUnit" label="货币"  clickorderby="true" width="3%"></col>
 					<col column="num" label="数量" datatype="int" clickorderby="true" width="5%"></col>
-					<col column="machinename" label="设备"  clickorderby="true" width="8%"/>
-					<col column="machineno" label="设备序号"  clickorderby="true" width="6%"/>
+					<col column="machinename" label="设备"  clickorderby="true" width="10%"/>
+					<col column="machineno" label="设备序号"  clickorderby="true" width="8%"/>
 					<col column="reason" label="出库原因" clickorderby="true" width="8%"></col>
 					<col column="person" label="出库人" displaytype="hidden"  />
 					<col column="Rname" label="R组"   clickorderby="true" width="3%"/>
@@ -215,9 +215,7 @@
 						     <value>
 							<![CDATA[(trim(person) like  '%#data#%' )]]>
 						</value>						     
-					    </condition>
-					     				    
-					    				    
+					    </condition> 
 				</select>	
 				<update pageurl="report{out_edit.report1}" urlparams="txtid=@{id}"
 						popupparams="{title:'更新出库',width:800,height:400}">

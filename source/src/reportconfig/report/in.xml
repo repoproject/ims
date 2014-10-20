@@ -6,7 +6,7 @@
 	    <header>
 			<![CDATA[<p align="center"><font size="6"><b>入库管理</b></font></p>]]>
 		</header>
-		<report id="report1" title="入库列表（只能增/删/改上次库存统计后还未出库的本人的入库操作）"  pagesize="13"  rowselect="multiple-checkbox" type="editablelist" interceptor="com.ims.interceptor.DeleteIn" >
+		<report id="report1" title="入库列表（只能增/删/改上次库存统计后还未出库的本人的入库操作）"  pagesize="13" cellresize="1"  rowselect="multiple-checkbox" type="editablelist" interceptor="com.ims.interceptor.DeleteIn" >
 
 					<interceptor>
 	  					     <beforedisplay-perrow><!-- 通过显示每条记录前置动作的返回值控制当前记录行是否只读 -->
@@ -24,21 +24,22 @@
 	  				    </interceptor>				
 				
 				<display mouseoverbgcolor="CCCCCC" >
-				<col column="{col-rowselect}" width="20"></col>
-					<col column="id" label="编号"  displaytype="hidden"/>
+				<col column="{col-rowselect}" width="10"></col>
+
 					<col column="{sequence:1}" label="序号" width="3%"/>
+					<col column="id" label="编号"  displaytype="hidden"/>					
 					<col column="cattypename" label="类型"  clickorderby="true" width="3%"/>
 					<col column="inDate" label="入库日期"  clickorderby="true" datatype="date{yyyy-MM-dd}" width="8%"/>
 					<col column="catname" label="名称"  clickorderby="true" width="12%"/>
-					<col column="catno" label="货号"  clickorderby="true" width="9%"/>
-					<col column="batchno" label="批号"  clickorderby="true" width="9%"/>
-					<col column="num" label="数量"  datatype="int" clickorderby="true" width="3%"/>
-					<col column="total" label="库存"  datatype="int" clickorderby="true" width="3%"/>
+					<col column="catno" label="货号"  clickorderby="true" width="10%"/>
+					<col column="batchno" label="批号"  clickorderby="true" width="10%"/>
+					<col column="num" label="数量"  datatype="int" clickorderby="true" width="4%"/>
+					<col column="total" label="库存"  datatype="int" clickorderby="true" width="4%"/>
 					<col column="price" label="单价"  datatype="float" clickorderby="true" width="6%"/>
 					<col column="priceUnit" label="货币"   clickorderby="true" width="3%"/>
-					<col column="Rname" label="R组"   clickorderby="true" width="3%"/>
-					<col column="dealer" label="供应商"  clickorderby="true" width="8%"/>
-					<col column="producer" label="生产商"  clickorderby="true" width="8%"/>
+					<col column="Rname" label="R组"   clickorderby="true" width="4%"/>
+					<col column="dealer" label="供应商"  clickorderby="true" width="9%"/>
+					<col column="producer" label="生产商"  clickorderby="true" width="9%"/>
 					<col column="reason" label="入库原因"  clickorderby="true" width="8%"/>
 					<col column="person" label="入库人"   displaytype="hidden"/>
 					<col column="{editablelist-edit}" label="修改" width="5%"></col>

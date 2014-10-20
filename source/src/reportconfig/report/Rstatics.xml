@@ -6,14 +6,14 @@
 		<header>
 			<![CDATA[<p align="center"><font size="6"><b>库存统计</b></font></p>]]>
 		</header>
-		<report id="report1" parenttitle="库存统计和下载页面" type="editablelist" cellresize="1" rowselect="multiple-checkbox" contextmenu="false"   pagesize="13">
+		<report id="report1" parenttitle="库存统计和下载页面" type="editablelist" cellresize="1"  contextmenu="false"   pagesize="13">
 
 				<display mouseoverbgcolor="CCCCCC" >
-					<col column="{col-rowselect}" width="20"></col>
+					
 				    <col column="{sequence:1}" label="序号" width="3%"/>
 					<col column="id" label="序号" width="5%" clickorderby="true" displaytype="hidden"/>
 					<col column="name" label="文件名称" clickorderby="true"  width="20%"></col>
-					<col column="path" label="路径" clickorderby="true"  width="20%"></col>
+					<col column="path" label="路径" clickorderby="true" displaytype="hidden"></col>
 					<col column="makedate" label="创建时间"  datatype="timestamp{yyyy-MM-dd HH:mm:ss}" clickorderby="true" width="15%"></col>
 					<col column="modifydate" label="修改时间" datatype="timestamp{yyyy-MM-dd HH:mm:ss}" clickorderby="true" width="15%"></col>
 					<col column="enclosure" label="附件" width="8%"></col>
