@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -43,6 +44,7 @@ public abstract class AbsRSheet implements ISheet {
 	protected List<Column> cols;
 
 	protected Map<Object, Object> footerData = null;
+	private int insertRowCount = 0;  //模板中还需要插入的行数
 	
 	protected Date startDate;
 	protected Date endDate;
@@ -117,12 +119,14 @@ public abstract class AbsRSheet implements ISheet {
 
 	
 	/**
-	 * 设置尾行
+	 * 创建数据区，设置数据行，尾行
 	 */
-	protected void moveFooter(int rowCount){
+	protected void createDataRegion(int rowCount){
 		int moveCount = rowCount-(this.footerRowNum-this.startRow);
-		ExcelUtil.moveRow(this.sheet, this.footerRowNum, moveCount,this.dataRowNum);
-		//this.sheet.shiftRows(this.footerRowNum, this.sheet.getLastRowNum(), moveCount);
+		if(moveCount <= 0)
+			return;
+		this.insertRowCount = moveCount;//设置需要插入的行
+		ExcelUtil.moveRow(this.sheet, this.footerRowNum, this.insertRowCount,this.dataRowNum);
 	}
 	
 	/**
@@ -132,19 +136,16 @@ public abstract class AbsRSheet implements ISheet {
 		logger.info("设置数据");
 		List<Object> data = getData();
 		int rowCount = data.size();
-		logger.info("到数据总数===" + rowCount);
+		logger.info("得到数据总数===" + rowCount);
 		if(rowCount == 0){
 			return ;
 		}
 		//得到footer数据
 		getFooterData(data);
-		
 		//得到数据之后先设置尾行,否则模板行会被覆盖
-		moveFooter(rowCount);
-		
-		//创建数据区域
 		createDataRegion(rowCount);
-		
+		//创建数据区域
+		fillData(rowCount);
 		Map<Object, Object> rowData = null;
 		for(int dataIndex=0,rowIndex=startRow;dataIndex<rowCount;dataIndex++,rowIndex++){
 			HSSFRow row = sheet.getRow(rowIndex);
@@ -153,12 +154,15 @@ public abstract class AbsRSheet implements ISheet {
 				row = sheet.createRow(rowIndex);
 			setRowData(row, rowData);
 		}
-		
 		//设置最后一行数据
 		int newFooterRowNum = (this.footerRowNum >= this.startRow + rowCount ? this.footerRowNum : this.startRow + rowCount);
 		setFooterData(this.sheet.getRow(newFooterRowNum));
 	}
 	
+	/**
+	 * 记录尾行的数据
+	 * @param data
+	 */
 	protected void getFooterData(List<Object> data){
 		if(data.size() > 0){
 			footerData = new HashMap<Object, Object>();
@@ -171,7 +175,7 @@ public abstract class AbsRSheet implements ISheet {
 	}
 	
 	/**
-	 * 
+	 * 填充尾行数据
 	 * @param footerRow
 	 */
 	protected void setFooterData(HSSFRow footerRow){
@@ -195,10 +199,10 @@ public abstract class AbsRSheet implements ISheet {
 	}
 	
 	/**
-	 * 
+	 * 填充数据
 	 * @param dataRowCount
 	 */
-	protected void createDataRegion(int dataRowCount){
+	protected void fillData(int dataRowCount){
 		int rowIndex=0;
 		for(int i = 1;i< dataRowCount;i++){
 			//数据模板行的下一行开始创建数据区
@@ -206,9 +210,8 @@ public abstract class AbsRSheet implements ISheet {
 			if(rowIndex <= this.dataRowNum){
 				continue;//模板行跳过
 			}
-			HSSFRow row = sheet.createRow(this.startRow + i);
+			HSSFRow row = sheet.createRow(rowIndex);
 			ExcelUtil.copyRow(this.templateDataRow, row);
-//			ExcelUtil.insertRow(this.sheet, this.templateDataRow, rowIndex);
 		}
 	}
 	

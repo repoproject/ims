@@ -29,6 +29,7 @@ public class ExcelUtil {
 	private static Logger logger = Logger.getLogger(ExcelUtil.class);
 	
 	public static final String ABSOLUTE_CHAR = "$";
+	public static final String RANGE_CHAR = ":";
 
 	/**
 	 * copy row
@@ -137,6 +138,21 @@ public class ExcelUtil {
 		return moveFormula(formula,moveRowCount,0);
 	}
 	
+	/**
+	 * 更新cell中的公式
+	 * @param cell         需要更新公式的cell
+	 * @param insertRowCount   插入行的总数，引起公式更新的原因
+	 * @param insertPoint      插入点，涉及到excel公式更新的算法
+	 */
+	public static void updateFormula(HSSFCell cell,int insertRowCount,int insertPoint){
+		if(cell.getCellType() != Cell.CELL_TYPE_FORMULA)
+			return;
+		String formula = cell.getCellFormula();
+		if(StringUtils.isBlank(formula))
+			return;
+		formula = moveFormula(formula, insertRowCount, insertPoint);
+		cell.setCellFormula(formula);
+	}
 
 	/**
 	 * 移动行公式
@@ -153,49 +169,64 @@ public class ExcelUtil {
 		List<String> tRowNumList = new ArrayList<String>();
 		StringBuilder sb = new StringBuilder();
 		char[] chs = formula.toCharArray();
-		boolean flag = false;
 		boolean isStable = false; //固定符号$标识
 		String numStr = "";
 		for(char c : chs){
 			String s = String.valueOf(c);
 			if(StringUtils.isNumeric(s)){
-				flag = true;
 				numStr = numStr + s;
+				continue;  //组合数字，知道下一位不是数字或者结束，标识一个完整的数据
 			}
 			else if(StringUtils.equals(s, ABSOLUTE_CHAR)){
 				isStable = true;
-				flag = false;
 			}
-			else{
-				isStable = false;
-				flag = false;
-			}
-			//是数字，并且不是被绝对引用，且numStr不是空（针对多位数），
-			if(flag && !isStable && !StringUtils.isBlank(numStr)){
-				int rowNum = Integer.parseInt(numStr);
-				String sRowNum = String.valueOf(rowNum);
-				String tRowNum = String.valueOf(rowNum + moveRowCount);
-				numStr = "";//及时清空
-				if(rowNum>insertRowNum){
-					sb.append(tRowNum);
+			//numStr不是空（针对多位数），表示一个完整数据
+			if(!StringUtils.isBlank(numStr)){
+				if(isStable){
+					sb.append(numStr);
+					isStable = false;
 				}
 				else{
-					sb.append(sRowNum);
+				    sb.append(calFormulaNum(numStr,moveRowCount,insertRowNum));
 				}
+				numStr = "";//及时清空
+			}
+			sb.append(s);
+		}
+		//防止最后是数字直接结束
+		if(!StringUtils.isBlank(numStr)){
+			if(isStable){
+				sb.append(numStr);
 			}
 			else{
-				numStr = "";//及时清空
-				sb.append(s);
+			    sb.append(calFormulaNum(numStr,moveRowCount,insertRowNum));
 			}
+			numStr = "";//及时清空
 		}
-		
-//		for(int i=0;i<sRowNumList.size();i++){
-//			String sRowNum = sRowNumList.get(i);
-//			String tRowNum = tRowNumList.get(i);
-//			formula = formula.replaceAll(sRowNum, tRowNum);
-//		}
 		formula = sb.toString();
 		return formula;
+	}
+	
+	/**
+	 * 计算公式中的行，导致行移动的插入才更新
+	 * @param numStr   公式中的数字
+	 * @param moveRowCount 移动行距
+	 * @param insertPoint  从0开始，遵守poi的规则
+	 * @return
+	 */
+	private static String calFormulaNum(String numStr,int moveRowCount,int insertPoint){
+		insertPoint++;//对应到公式中的行，从1开始
+		int rowNum = Integer.parseInt(numStr);
+		String sRowNum = String.valueOf(rowNum); //更新前公式中的行
+		String tRowNum = String.valueOf(rowNum + moveRowCount); //更新后公式中的行
+		String reRow = "";//计算新的公式中的数
+		if(insertPoint<=rowNum){ //上方或者本行插入，都要后移，所以需要更新公式
+			reRow = tRowNum;
+		}
+		else{ //
+			reRow = sRowNum;
+		}
+		return reRow;
 	}
 	
 

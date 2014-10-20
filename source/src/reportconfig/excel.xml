@@ -959,7 +959,7 @@
         <col index="13" type="">dealer</col>
         <col index="14" type="">catFrom</col>
     </Sheet>
-    <Sheet name="Validation_CLab" dataStartNum="4" dataRowNum="5" footerRowNum="6" class="com.ims.report.excel.ValidationSheet">
+    <Sheet name="Validation_CLab" dataStartNum="4" dataRowNum="5" footerRowNum="7" class="com.ims.report.excel.ValidationSheet">
         <sql>
 			select t.id,t.section, t.outDate,t.description,t.rType,t.catname,t.qty,t.priceCNY,
 			t.priceCNY*t.qty totalCostCNY,t.priceUSD*t.qty totalCostUSD,t.projectCode
@@ -1095,7 +1095,7 @@
         <col index="13" type="">dealer</col>
         <col index="14" type="">catFrom</col>
     </Sheet>
-    <Sheet name="Validation_APLab" dataStartNum="4" dataRowNum="5" footerRowNum="6" class="com.ims.report.excel.ValidationSheet">
+    <Sheet name="Validation_APLab" dataStartNum="4" dataRowNum="5" footerRowNum="7" class="com.ims.report.excel.ValidationSheet">
         <sql>
 			select t.id,t.section, t.outDate,t.description,t.rType,t.catname,t.qty,t.priceCNY,
 			t.priceCNY*t.qty totalCostCNY,t.priceUSD*t.qty totalCostUSD,t.projectCode
