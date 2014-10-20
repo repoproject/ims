@@ -81,4 +81,12 @@ public class SysVar {
 		}
 		return value;
 	}
+	
+	public static String noMachineName(){
+		return getBizValue("nomachinename");
+	}
+	
+	public static String noMachineNo(){
+		return getBizValue("nomachineno");
+	}
 }
