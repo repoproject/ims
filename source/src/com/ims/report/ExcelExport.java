@@ -4,39 +4,27 @@
 package com.ims.report;
 
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Date;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
-import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataFormat;
-import org.apache.poi.ss.util.Region;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ims.report.excel.R1Sheet;
-import com.ims.util.DateTimeUtil;
-import com.ims.util.ExcelUtil;
-import com.ims.util.Sys;
-import com.itextpdf.text.List;
-import com.wabacus.config.ConfigLoadManager;
+import com.ims.common.TaskData;
 
 /**
  * 行从1开始，列从0开始
@@ -60,37 +48,23 @@ public class ExcelExport  extends HttpServlet{
 		logger.info("enter excelExport");
 		String path = InventoryReport.getTemplateFile();
 		logger.info("template:" + path);
-        
-		//FileInputStream fileInputStream = new FileInputStream(path);
 		createExcel();
 		JSONObject json = new JSONObject();
 		json.put("result", "success");
 		
 		PrintWriter out = response.getWriter();
 		out.write(json.toString());
-		
-		
-		//request.getRequestDispatcher("/excel.jsp").forward(request, response);
-
-//		logger.info("Excel创建完毕，开始下载输出");
-//		response.setContentType("application/vnd.ms-excel");	
-//		
-//		ServletOutputStream out = response.getOutputStream();
-//		this.wb.write(out);
-//		out.flush();
-//		out.close();
 	}
 	
 	private void createExcel(){
-	    Date startDate=DateTimeUtil.getDate("2014-08-26");
-		Date endDate = DateTimeUtil.getDate("2014-10-26");
+		//获得上次报表时间
+		TaskData taskData = new TaskData();
+	    Date startDate=taskData.lastTaskDate();
+		Date endDate = new Date();
 			
 		InventoryReport reportor = new InventoryReport(startDate,endDate);
 		reportor.setBackupData(false);
 		reportor.run();
-//			Thread reportThread = new Thread(reportor);
-//			reportThread.start();
-			//r1.createSheet();
 	}
 	
 	
