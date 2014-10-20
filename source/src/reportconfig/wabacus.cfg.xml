@@ -109,6 +109,9 @@
 		<report-file>report/importcat.xml</report-file>
 		<report-file>report/cat_addedit.xml</report-file>
 		
+		<report-file>report/price0.xml</report-file>
+		<report-file>report/editprice0.xml</report-file>
+		
 		
 		<!--		<report-file>report/queryin.xml</report-file><report-file pattern="true">report/(report_)(\S*?)(\.xml)</report-file>
 		<report-file>report/in.xml</report-file>

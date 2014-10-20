@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications xmlns="http://www.wabacus.com"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
+	<page id="editprice0" js="/webresources/script/validate.js,/webresources/script/wabacus_api.js,webresources/script/wabacus_editsystem.js,/js/localJS/catadd.js">
+		<report id="report1" title="库存详细信息"  type="editabledetail" >
+			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
+				<col column="ID" displaytype="hidden">
+				</col>
+				<col column="catname" label="名称" >
+					<inputbox type="textbox" jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan200(#label#长度应小于等于200);" styleproperty="disabled='disabled'" >
+					    <typeprompt count="20"  callbackmethod="testTypePromptCallBack1">
+							 <promptcol label="catname" value="catname" title="名称" matchmode="anywhere"></promptcol>					    
+							 <promptcol label="catno" value="catno" title="货号" matchmode="anywhere"></promptcol>
+							 <promptcol label="seq" value="seq" title="编号" matchmode="anywhere"></promptcol>
+							      <datasource>
+							          <option dataset="@{select catno,catname,seq from d_catcode where {#matchcondition#}}"></option>       
+							      </datasource>
+					    </typeprompt>					
+					</inputbox>
+				</col>
+				<col column="catno" label="货号" br="true" >
+					<inputbox styleproperty="disabled='disabled'">
+
+					</inputbox>
+				</col>
+				
+				<col column="batchno" label="批号"  >
+					<inputbox  styleproperty="disabled='disabled'"/>
+				</col>
+				<col column="total" label="库存" br="true">
+				    <inputbox type="textbox"  styleproperty="disabled='disabled'"/>
+				</col>
+				
+				<col column="price" label="单价*" >
+				    <inputbox type="textbox" jsvalidate="isNotEmpty(#label#不允许为空);isposNumeric(#label#必须是大于等于0的数字)" />
+				</col>
+				<col column="priceUnit" label="货币" br="true">
+					<inputbox type="selectbox" >
+					    <option dataset="@{select codename,code from d_code where codetype='money'}" label="codename" value="code"></option>
+					</inputbox>
+				</col>
+
+				<col column="machineName" label="设备名称" >					
+					<inputbox  styleproperty="disabled='disabled'" >
+			        <typeprompt width="-1" count="200">
+				       <promptcol label="machinename" value="machinename" title="名称" matchmode="anywhere"></promptcol>					    
+							 <promptcol label="machineno" value="machineno" title="序号S/N" matchmode="anywhere"></promptcol>
+							      <datasource>
+							          <option dataset="@{select machineno,machinename from b_machine where {#matchcondition#}}"></option>       
+							      </datasource>
+			        </typeprompt>
+					</inputbox>
+                 </col>  
+				<col column="machineNo" label="序号S/N" br="true">
+					<inputbox styleproperty="disabled='disabled'" />
+				</col>
+
+				<col column="localprice" label="本地价格" displaytype="hidden">
+				    <inputbox type="textbox" />
+				</col>
+				
+                <col column="expiredate" label="过期日期"  datatype="date{yyyy-MM-dd}"   >
+					<inputbox type="datepicker" dateformat="yyyy-MM-dd" jsvalidate="isDate(#label#格式不符合要求)" styleproperty="disabled='disabled'"></inputbox>
+				</col>			
+				<col column="productdate" label="生产日期"  datatype="date{yyyy-MM-dd}"  br="true" >
+					<inputbox type="datepicker" dateformat="yyyy-MM-dd" jsvalidate="isDate(#label#格式不符合要求)" styleproperty="disabled='disabled'"></inputbox>
+				</col>
+
+                <col column="dealer" label="供应商">
+					<inputbox   jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);"  styleproperty="disabled='disabled'"/>
+				</col>		
+				<col column="producer" label="生产商" br="true" >
+					<inputbox jsvalidate="isNotLongerThan200(#label#列长度应小于等于200);"  styleproperty="disabled='disabled'"/>
+				</col>					
+
+			
+				<col column="rtype" label="所属R">
+					<inputbox type="selectbox"  styleproperty="disabled='disabled'" ><option dataset="@{select codename,code from d_code where codetype='rtype' order by code}" label="codename" value="code"></option>
+					</inputbox>
+				</col>				
+				<col column="catFrom" label="来源"  br="true">
+					<inputbox type="selectbox" styleproperty="disabled='disabled'"><option dataset="@{select codename,code from d_code where codetype='catfrom'}" label="codename" value="code"></option>
+					</inputbox>
+				</col>			
+
+				<col column="seq" label="编号" >
+					<inputbox type="textbox" styleproperty="disabled='disabled'"/>					
+				</col>			
+				<col column="cattype" label="类别" br="true">
+					<inputbox type="selectbox"  styleproperty="disabled='disabled'" >													
+							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
+					</inputbox>					
+				</col>	
+			</display>
+			<sql>
+				<select>
+					<value>
+						<![CDATA[
+                               SELECT
+									b_cat.id,
+									b_cat.catno,
+									b_cat.catname,
+									b_cat.seq,
+									b_cat.cattype,
+									b_cat.batchno,
+									b_cat.total,
+									b_cat.rType,
+									b_cat.productDate,
+									b_cat.producer,
+									b_cat.expiredate,
+									round(b_cat.price,2) price,
+									b_cat.priceUnit,
+									b_cat.localPrice,
+									b_cat.dealer,
+									b_cat.machineNo,
+									b_cat.machineName,
+									b_cat.operator,
+									b_cat.makedate,
+									b_cat.modifydate,
+									b_cat.catFrom
+									FROM
+									b_cat
+                                where  {#condition#}]]>
+					</value>
+					<condition name="txtid" hidden="true">
+						<value>
+						<![CDATA[(ID = '#data#' )]]>
+						</value>
+					</condition>
+				</select>
+				<insert>
+						INSERT INTO b_cat (
+							catno,
+							catname,
+							cattype,
+							batchno,
+							seq,
+							total,
+							rtype,
+							productdate,
+							producer,
+							catFrom,
+							expiredate,
+							price,
+							priceUnit,
+							localprice,
+							dealer,
+							machineName,
+							machineNo,
+							makedate,
+							modifydate
+						)
+						VALUES
+							(
+								trim(@{catno}),
+								trim(@{catname}),
+								trim(@{cattype}),
+								trim(@{batchno}),
+								trim(@{seq}),
+								trim(@{total}),
+								trim(@{rtype}),
+								trim(@{productdate}),
+								trim(@{producer}),
+								trim(@{catFrom}),
+								trim(@{expiredate}),
+								trim(@{price}),
+								trim(@{priceUnit}),
+								trim(@{localprice}),
+								trim(@{dealer}),
+							    trim(@{machineName}),
+							    trim(@{machineNo}),
+								sysdate(),
+								sysdate()
+							);							
+				</insert>
+				<update>
+				UPDATE b_cat
+					SET catno = trim(@{ catno }),
+					 catname = trim(@{ catname }),
+					 cattype = trim(@{ cattype }),
+					 batchno = trim(@{ batchno }),
+					 seq = trim(@{ seq }),
+					 total = trim(@{ total }),
+					 rtype = trim(@{ rtype }),
+					 productdate = trim(@{ productdate }),
+					 producer = trim(@{ producer }),
+					 catFrom = trim(@{ catFrom }),
+					 expiredate = trim(@{ expiredate }),
+					 price = trim(@{ price }),
+					 priceUnit = trim(@{ priceUnit }),
+					 localprice = trim(@{ localprice }),
+					 dealer = trim(@{dealer }),
+					 machineName = trim(@{machineName}),
+					 machineNo = trim(@{machineNo}),
+					 modifydate = sysdate()
+					where ID=@{ID__old};
+				</update>
+			</sql>
+
+		</report>
+	</page>
+	
+</applications>

@@ -322,6 +322,9 @@ function checkFlash(){
    
 		//库存导入
 		$("#importcat").html('<a href="ShowReport.wx?PAGEID=importcat" target="navTab" rel="userbaseinfo33" external="true" fresh="false">库存导入</a>');
+	
+		//修改单价
+		$("#price0").html('<a href="ShowReport.wx?PAGEID=price0" target="navTab" rel="userbaseinfo34" external="true" fresh="false">修改单价</a>');
 
 	}else{
 		
@@ -339,6 +342,9 @@ function checkFlash(){
 		
 		var temp4 = document.getElementById("importcat");
 		if(temp4) temp4.parentNode.removeChild(temp4);
+		
+		var temp5 = document.getElementById("price0");
+		if(temp5) temp5.parentNode.removeChild(temp5);
 		}
 	
 	//若浏览器端没装flash。提示安装

@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.ims.rule.InOutRule;
+import com.ims.util.SysVar;
 import com.wabacus.config.component.application.report.ReportBean;
 import com.wabacus.system.ReportRequest;
 import com.wabacus.system.buttons.EditableReportSQLButtonDataBean;
@@ -58,7 +59,23 @@ public class OutAdd extends AbsInterceptorDefaultAdapter  {
 		//出庫的数量
 		int outNum=0;
 
+		//所属R类型
+		String strRtype= "";
+		
+		
 		try {
+			
+			//如果是lab的耗材则不论界面如何填写设备名称和序号，都改为“所有设备”和-1
+			strRtype=mRowData.get("rtype").trim();
+			String strVar = SysVar.getBizValue("labrtype");
+			String strmachinename = SysVar.getBizValue("nomachinename");
+			String strmachineno = SysVar.getBizValue("nomachineno");
+			//
+			if(strRtype.equals(strVar))
+			{
+				mRowData.put("machinename", strmachinename);
+				mRowData.put("machineno", strmachineno);
+			}
 			// 货号
 			strcatno = mRowData.get("catno").trim();
 			//批号
