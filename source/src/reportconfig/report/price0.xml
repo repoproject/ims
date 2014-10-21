@@ -98,7 +98,7 @@
 				</select>
 					
 					<update pageurl="report{editprice0.report1}" urlparams="txtid=@{id}"
-						popupparams="{title:'修改单价',width:800,height:400}"></update>  
+						popupparams="{title:'修改零单价',width:800,height:400}"></update>  
 					<delete confirmessage="是否删除所选的记录？">
 						delete from b_cat where id=@{id__old};
 					  </delete>	

@@ -7,7 +7,7 @@
 	<resource key="dataimport.multifiles2"
 				 type="com.wabacus.config.resource.dataimport.DataImportRes"> 
 		<dataimport filetype="excel" filename="cat.xls" 
-			colnamerowindex="1" autodetect="false" keyfields="catno;batchno;price"  tablename="b_cat" importtype="append">
+			colnamerowindex="1" autodetect="false" keyfields="id;catno;batchno;price"  tablename="b_cat" importtype="append">
 			<columnmap type="name" matchmode="lazy"/>
 		</dataimport> 
 	</resource>

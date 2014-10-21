@@ -12,6 +12,7 @@
 					<col column="{sequence:1}" label="序号" width="3%"/>
 					<col column="machinename" label="设备名称"  clickorderby="true" width="8%"/>
 					<col column="machineno" label="设备序号"  clickorderby="true" width="8%"/>
+					<col column="cattype" label="类型"  clickorderby="true" width="4%"/>
 					<col column="catname" label="名称"  clickorderby="true" width="15%"/>
 					<col column="catno" label="货号"  clickorderby="true" width="8%" />					
 					<col column="batchno" label="批号" clickorderby="true" width="8%"></col>
@@ -56,7 +57,15 @@
 						     <value>
 							<![CDATA[(trim(machineno) like  '%#data#%' )]]>
 						</value>						     
-					    </condition>						  
+					    </condition>	
+					    <condition name="typename" label="类型" labelposition="left">						
+							<value> <![CDATA[(trim(cattype) = '#data#')]]>
+							</value>
+							<inputbox type="selectbox" >	
+							<option value="" label="全部"></option>						
+							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
+							</inputbox>
+						</condition>					    					  
 				</select>			
 			</sql>
 			<format><!--
