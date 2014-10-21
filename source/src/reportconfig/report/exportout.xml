@@ -6,9 +6,8 @@
 		<header>
 			<![CDATA[<p align="center"><font size="6"><b>导出出库信息</b></font></p>]]>
 		</header>		
-		<report id="report2" title="导出出库信息" rowselect="multiple-checkbox" type="editablelist" interceptor="com.ims.interceptor.QueryOut"  dataexport="richexcel|word" >
+		<report id="report2" title="导出出库信息"  type="editablelist" interceptor="com.ims.interceptor.QueryOut"  dataexport="richexcel|word" >
 				<display mouseoverbgcolor="CCCCCC" >
-				<col column="{col-rowselect}" width="20"></col>
 					<col column="id" label="编号"  displaytype="hidden"/>
 					<col column="{sequence:1}" label="序号" width="3%"/>
 					<col column="machinename" label="设备名称"  clickorderby="true" width="8%"/>
