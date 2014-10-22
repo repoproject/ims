@@ -173,7 +173,7 @@
 							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
 							</inputbox>
 						</condition>	
-						<condition name="txtrtype" label="所属R" labelposition="left" >						
+						<condition name="txtrtype" label="所属R" labelposition="left"  br="true">						
 							<value> <![CDATA[(trim(rtype) = '#data#')]]>
 							</value>
 							<inputbox type="selectbox" >	

@@ -29,7 +29,7 @@
 					<col column="name" label="姓名" clickorderby="true" width="15%"></col>
 					<col column="role" label="角色" clickorderby="true" width="15%"></col>
 					<col column="sex" label="性别" clickorderby="true" width="10%"></col>
-					<col column="remark" label="备注" clickorderby="true" width="20%"></col>					
+					<col column="remark" label="备注" clickorderby="true" width="30%"></col>					
 				</display>
 				<sql>
 				
@@ -58,7 +58,7 @@
 					<insert pageurl="report{user_edit.report1}" popupparams="{title:'新增用户',width:400,height:300}"></insert>
 					<update pageurl="report{user_edit.report1}" urlparams="txtid=@{id}"
 						popupparams="{title:'编辑用户',width:400,height:300}"></update>  
-					<delete confirmessage="是否删除[@{nickname}]对应的记录？">
+					<delete confirmessage="是否删除所选择的记录？">
 						delete from d_user where id=@{id__old};
 					  </delete>							
 				</sql>

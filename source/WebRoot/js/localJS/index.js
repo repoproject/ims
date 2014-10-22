@@ -323,8 +323,8 @@ function checkFlash(){
 		//库存导入
 		$("#importcat").html('<a href="ShowReport.wx?PAGEID=importcat" target="navTab" rel="userbaseinfo33" external="true" fresh="false">库存导入</a>');
 	
-		//修改单价
-		$("#price0").html('<a href="ShowReport.wx?PAGEID=price0" target="navTab" rel="userbaseinfo34" external="true" fresh="false">修改单价</a>');
+		//修改零单价
+		$("#price0").html('<a href="ShowReport.wx?PAGEID=price0" target="navTab" rel="userbaseinfo34" external="true" fresh="false">修改零单价</a>');
 
 	}else{
 		
