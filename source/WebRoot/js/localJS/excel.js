@@ -17,7 +17,7 @@ function report(){
 	$.post(url,function(result){
 		jsonObj = eval("(" + result + ")");
 		if(jsonObj.result == "success"){
-			alert("Éú³É±¨±í³É¹¦,ÇëÈ¥±¨±íÏÂÔØÒ³ÃæÏÂÔØ");
+			alert("InventoryæŠ¥è¡¨ç”ŸæˆæˆåŠŸï¼Œè¯·ä¸‹è½½ï¼");
 		}
 	});
 }

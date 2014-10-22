@@ -161,8 +161,8 @@ $(function(){
 									<li><a href="ShowReport.wx?PAGEID=queryexpired" target="navTab" rel="userbaseinfo23" external="true" fresh="false">查询过期</a></li>
 									<li><a href="ShowReport.wx?PAGEID=querycat" target="navTab" rel="userbaseinfo24" external="true" fresh="false">库存查询</a></li>
 									<li id="exportOut"></li>									 
-									 <li id="inventoryStatics"></li>									 
-									 <li><a href="ShowReport.wx?PAGEID=Rstatics" target="navTab" rel="userbaseinfo25" external="true" fresh="false">R统计</a></li>
+									 <li id="RStatics"></li>									 
+
 								</ul>
 							</li>
 							<li><a>基础信息维护</a>

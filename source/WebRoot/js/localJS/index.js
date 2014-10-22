@@ -312,7 +312,7 @@ function checkFlash(){
 		$("#exportOut").html('<a href="ShowReport.wx?PAGEID=exportout" target="navTab" rel="userbaseinfo25" external="true" fresh="false">导出出库</a>');
 
 		//R统计权限
-		$("#inventoryStatics").html('<a href="excel.jsp" target="navTab" rel="userbaseinfo26" external="true" fresh="false">库存统计</a>');
+		$("#RStatics").html('<a href="ShowReport.wx?PAGEID=Rstatics" target="navTab" rel="userbaseinfo25" external="true" fresh="false">库存统计</a>');
 		
 		
 		//用户管理权限
@@ -331,7 +331,7 @@ function checkFlash(){
 		var temp0 = document.getElementById("userManage");
 		if(temp0) temp0.parentNode.removeChild(temp0);
 
-		var temp1 = document.getElementById("inventoryStatics");
+		var temp1 = document.getElementById("RStatics");
 		if(temp1) temp1.parentNode.removeChild(temp1);
 		
 		var temp2 = document.getElementById("rateManage");
