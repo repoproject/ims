@@ -126,6 +126,7 @@ public abstract class AbsRSheet implements ISheet {
 		if(moveCount <= 0)
 			return;
 		this.insertRowCount = moveCount;//设置需要插入的行
+		//移动尾行开始的行及其后所有的行
 		ExcelUtil.moveRow(this.sheet, this.footerRowNum, this.insertRowCount,this.dataRowNum);
 	}
 	

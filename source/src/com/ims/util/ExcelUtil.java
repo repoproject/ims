@@ -301,7 +301,7 @@ public class ExcelUtil {
     }
     
     /**
-     * 移动行
+     * 移动行及其之后的行
      * @param sheet   处理的sheet页
      * @param startRowIndex 移动开始行
      * @param moveCount  需要移动的行数,不支持负数的移动
@@ -312,6 +312,7 @@ public class ExcelUtil {
     		return;
     	insertPoint = (insertPoint > 0 ? insertPoint : 0);
     	int lastRowNum = sheet.getLastRowNum();
+    	//shift会更新公式？
     	sheet.shiftRows(startRowIndex, lastRowNum, moveCount);
     	
     	//移动之后的范围
@@ -319,7 +320,7 @@ public class ExcelUtil {
     	lastRowNum += moveCount;
     	//更新移动之后的行的公式
     	String formula = "";
-    	for(int i=startRowIndex;i<lastRowNum;i++){
+    	for(int i=startRowIndex;i<startRowIndex+1;i++){
     		HSSFRow row = sheet.getRow(i);
     		for(int j=0;j<row.getLastCellNum();j++){
     			HSSFCell cell = row.getCell(j);
