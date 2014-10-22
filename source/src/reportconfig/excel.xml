@@ -55,7 +55,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType =1 
-					order by a.order asc
+					order by a.orderno asc
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -139,7 +139,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 		    where a.rType =2   
-		    order by a.order asc
+		    order by a.orderno asc
         </sql>
         <col index="1" type="">catno</col>
         <col index="2" type="">machineNo</col>
@@ -222,7 +222,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 					where  a.rType = 3   
-		    order by a.order asc
+		    order by a.orderno asc
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -306,7 +306,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 4   
-		    order by a.order asc
+		    order by a.orderno asc
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -390,7 +390,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 5   
-		    order by a.order asc
+		    order by a.orderno asc
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -474,7 +474,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 6  
-		    order by a.order asc 
+		    order by a.orderno asc 
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -558,7 +558,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 7   
-		    order by a.order asc
+		    order by a.orderno asc
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -642,7 +642,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 8   
-		    order by a.order asc
+		    order by a.orderno asc
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -726,7 +726,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 9   
-		    order by a.order asc
+		    order by a.orderno asc
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -810,7 +810,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType = 20  
-		    order by a.order asc 
+		    order by a.orderno asc 
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -894,7 +894,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 					where a.rType =11   
-		    order by a.order asc
+		    order by a.orderno asc
 			
         </sql>
         <col index="1" type="">catno</col>
@@ -1030,7 +1030,7 @@
 					LEFT JOIN r_price_view p ON a.id=p.catid
                     LEFT JOIN r_qty_view q ON a.id=q.catid
 					where (a.rType=10)  
-		    order by a.order asc 
+		    order by a.orderno asc 
 			
         </sql>
         <col index="1" type="">catno</col>
