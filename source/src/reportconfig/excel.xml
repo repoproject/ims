@@ -936,7 +936,7 @@
 			select @rownum:=@rownum+1 rownum,t.* from(
 				select @rownum:=0 ,b.id,a.outDate,a.description,a.catno,
 					a.price,getCodeName('money',a.priceUnit) currency,
-					b.expiredate,a.num qty,a.num*a.price totalAmnt,getCodeName('rootcause',a.cause) rootCause,a.section,
+					b.expiredate,a.num qty,a.num*a.price totalAmnt,a.cause as rootCause,a.section,
 					b.producer,b.dealer,getCodeName('catfrom',b.catfrom) as catFrom
 				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
 				and (a.rType between 1 and 9) and a.reason='2'
@@ -1072,7 +1072,7 @@
 			select @rownum:=@rownum+1 rownum,t.* from(
 				select @rownum:=0 ,b.id,a.outDate,a.description,a.catno,
 					a.price,getCodeName('money',a.priceUnit) currency,
-					b.expiredate,a.num qty,a.num*a.price totalAmnt,getCodeName('rootcause',a.cause) rootCause,a.section,
+					b.expiredate,a.num qty,a.num*a.price totalAmnt,a.cause as rootCause,a.section,
 					b.producer,b.dealer,getCodeName('catfrom',b.catfrom) as catFrom
 				from b_out a,b_cat b where a.catno=b.catno and a.batchno=b.batchno and a.price=b.price 
 				and (a.rType=10) and  a.reason='2'

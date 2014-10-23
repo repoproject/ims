@@ -21,7 +21,7 @@
 				<sql>
 					<select>
 						<value>
-							<![CDATA[SELECT id,name,makedate,modifydate,path,name as enclosure FROM b_file where 1=1 and {#condition#} order by id]]>
+							<![CDATA[SELECT id,name,makedate,modifydate,path,name as enclosure FROM b_file where 1=1 and {#condition#} order by makedate desc]]>
 						</value>
 					<condition name="txtbegin1" label="开始时间" labelposition="left">
 							<value>
@@ -47,7 +47,7 @@
 						</select>					
 				</sql>
 				<buttons buttonspacing ="5">
-			        <button name="button1" extends="${wabacus.button2.default}"  position="searchbox" label="生成报表" successprompt="生成成功" failedprompt="生成失败"  confirmessage="是否手动生成从上次统计时间到当前时间的Inventory报表？" positionorder="1"> 
+			        <button name="button1" extends="${wabacus.button2.default}"  position="searchbox" label="生成报表" successprompt="生成成功" failedprompt="生成失败"  confirmessage="是否要生成从上一次生成报表后到当前时间为止的Inventory报表？" positionorder="1"> 
 					
 					report();
 					
