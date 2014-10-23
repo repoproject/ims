@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=GB18030"
-    pageEncoding="GB18030"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page language="java" import="java.util.*,java.text.*" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>    
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=GB18030">
 <title>Insert title here</title>
@@ -22,15 +22,15 @@
     </div>
     <div class="panelBar">
             <div class="pages">
-                   <input id="report" class="button" type="button" name="excel" value="生成报表" >
+                   <input id="report" class="button" type="button" name="excel" value="鐢熸垚鎶ヨ〃" >
             </div>
         </div>
     <div class="pageContent">
 	 <table class="list" width="100%" border="1">
 		 <thead>
 			 <tr>
-				 <th width="100" align="center">日期</th>
-				 <th width="400" align="left">文件名称</th>
+				 <th width="100" align="center">鏃ユ湡</th>
+				 <th width="400" align="left">鏂囦欢鍚嶇О</th>
 			 </tr>
 		 </thead>
 	 	<tbody>

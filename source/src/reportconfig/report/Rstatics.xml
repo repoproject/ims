@@ -2,7 +2,7 @@
 <applications xmlns="http://www.wabacus.com"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
-	<page xmlns="http://www.wabacus.com" id="Rstatics" js="/webresources/script/validate.js"  css="/webresources/component/tiny_mce/themes/advanced/skins/o2k7/ui.css">
+	<page xmlns="http://www.wabacus.com" id="Rstatics" js="/webresources/script/validate.js,js/localJS/excel.js"  css="/webresources/component/tiny_mce/themes/advanced/skins/o2k7/ui.css">
 		<header>
 			<![CDATA[<p align="center"><font size="6"><b>库存统计</b></font></p>]]>
 		</header>
@@ -46,6 +46,13 @@
 						
 						</select>					
 				</sql>
+				<buttons buttonspacing ="5">
+			        <button name="button1" extends="${wabacus.button2.default}"  position="searchbox" label="生成报表" successprompt="生成成功" failedprompt="生成失败"  confirmessage="是否手动生成从上次统计时间到当前时间的Inventory报表？" positionorder="1"> 
+					
+					report();
+					
+					</button>
+			    </buttons>				
 				<format>
 				      <imports>
 						     <import>com.wabacus.util.*</import>
