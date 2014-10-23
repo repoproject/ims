@@ -5,6 +5,7 @@ package com.ims.dao;
 
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
@@ -29,7 +30,12 @@ public class FileDao {
 		file.setMakeDate(new Date());
 		file.setModifyDate(new Date());
 		String sql = "insert into b_file(name,path,makedate,modifydate) values(?,?,?,?)";
-		int re = DBUtil.execute(sql, file.getName(),file.getPath(),file.getMakeDate(),file.getMakeDate());
+		
+		String dateStr1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(file.getMakeDate());
+		String dateStr2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(file.getModifyDate());
+		
+		//int re = DBUtil.execute(sql, file.getName(),file.getPath(),file.getMakeDate(),file.getMakeDate());
+		int re = DBUtil.execute(sql, file.getName(),file.getPath(),dateStr1,dateStr2);
 		return re;
 	}
 	
@@ -40,7 +46,11 @@ public class FileDao {
 	public int update(FileReport file){
 		file.setModifyDate(new Date());
 		String sql = "update b_file set modifydate=? where name=?";
-		int re = DBUtil.execute(sql, file.getModifyDate(),file.getName());
+		//int re = DBUtil.execute(sql, file.getModifyDate(),file.getName());
+	
+		String dateStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(file.getModifyDate());
+
+		int re = DBUtil.execute(sql,dateStr,file.getName());
 		return re;
 	}
 	
