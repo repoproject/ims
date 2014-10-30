@@ -5,6 +5,7 @@ package com.ims.dao;
 
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
@@ -29,6 +30,8 @@ public class FileDao {
 		file.setMakeDate(new Date());
 		file.setModifyDate(new Date());
 		String sql = "insert into b_file(name,path,makedate,modifydate) values(?,?,?,?)";
+		
+		
 		int re = DBUtil.execute(sql, file.getName(),file.getPath(),file.getMakeDate(),file.getMakeDate());
 		return re;
 	}
@@ -41,6 +44,8 @@ public class FileDao {
 		file.setModifyDate(new Date());
 		String sql = "update b_file set modifydate=? where name=?";
 		int re = DBUtil.execute(sql, file.getModifyDate(),file.getName());
+	
+
 		return re;
 	}
 	

@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.lang.reflect.Constructor;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -116,6 +117,11 @@ public class InventoryReport implements Runnable{
 				Class clazz = Class.forName(config.getClassName());
 				Constructor constructor = clazz.getConstructor(HSSFSheet.class,Sheet.class,Date.class,Date.class);
 				ISheet sheetObj = (ISheet)constructor.newInstance(excelSheet,config,this.startDate,this.endDate);
+				
+				//String StrStart = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.startDate);
+				//String StrEnd = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(this.endDate);
+				
+				//ISheet sheetObj = (ISheet)constructor.newInstance(excelSheet,config,StrStart,StrEnd);
 				sheetObj.createSheet();
 			} catch (Exception e) {
 				logger.error("创建Excel的sheet失败，Sheet名称：" + config.getName() + "处理类" + config.getClassName());
