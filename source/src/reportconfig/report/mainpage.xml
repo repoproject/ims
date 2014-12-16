@@ -107,7 +107,42 @@
 				</display>
 				<sql>
 					<value>
-						<![CDATA[SELECT id,b.catno,b.catname,b.batchno,b.total,b.expiredate as builtdate,CONCAT(b.total,'个',b.batchno,'还剩',cast(DATEDIFF(b.expiredate,current_date()) as char(12)),'天过期！(',b.catname,')') description FROM b_cat b,b_var v where v.bizkey='expireTime' and DATEDIFF(b.expiredate,current_date())<=v.bizValue and DATEDIFF(b.expiredate,current_date())>=0 and  b.total>0 ]]>
+						<![CDATA[SELECT
+									id,
+									b.catno,
+									b.catname,
+									b.batchno,
+									b.total,
+									b.expiredate AS builtdate,
+									CONCAT(
+										IFNULL(b.total,0),
+										'个',
+										b.batchno,
+										'还剩',
+										cast(
+											DATEDIFF(
+												b.expiredate,
+												CURRENT_DATE ()
+											) AS CHAR (120)
+										),
+										'天过期！(',
+										b.catname,
+										')'
+									) description
+								FROM
+									b_cat b,
+									b_var v
+								WHERE
+									v.bizkey = 'expireTime'
+								AND DATEDIFF(
+									b.expiredate,
+									CURRENT_DATE ()
+								) <= v.bizValue
+								AND DATEDIFF(
+									b.expiredate,
+									CURRENT_DATE ()
+								) >= 0
+								AND b.total > 0]]>
 					</value>					
 				</sql>
 				<format>
@@ -125,11 +160,11 @@
 							description=description.replaceAll("</p>","");
 							if(rrequest.getShowtype()== Consts.DISPLAY_ON_PLAINEXCEL)
 							{
-								description=description+"  ["+builtdate+"]";
+								description=description;
 							}else
 							{
 								description="&nbsp;&nbsp;<span onmouseover=\"this.style.cursor='pointer'\"  onclick=\"wx_win('"+fulldesc+"',{width:400,height:200})\">"+description+"</span>";
-								description=description+"&nbsp;&nbsp;<font color='#505050'>["+builtdate+"]</font>";
+								description=description+"&nbsp;&nbsp;<font color='#505050'></font>";
 							}
 						}
 					]]>
@@ -234,12 +269,12 @@
 								CONCAT(
 									b_in.person,
 									'入库',
-									b_in.num,
+									IFNULL(b_in.num,0),
 									'个',
 									b_in.catName,
-									'(',
+									'批号为[',
 									b_in.batchNo,
-									')'
+									']'
 								) description
 							FROM
 								b_in,
@@ -260,12 +295,12 @@
 									CONCAT(
 										b_out.person,
 										'出库',
-										b_out.num,
+										IFNULL(b_out.num,0),
 										'个',
 										b_out.catName,
-										'(',
+										'批号为[',
 										b_out.batchNo,
-										')'
+										']'
 									) description
 								FROM
 									b_out,
