@@ -29,7 +29,7 @@ public class Out extends AbsInterceptorDefaultAdapter {
 			String style = rowDataBean.getRowstyleproperty();
 			if (style == null)
 				style = "";
-			style += " style='background:#CFDFF8'";
+			style += " style='background:#CFDFF8'";//有效期小于7天则红色提示
 			rowDataBean.setRowstyleproperty(style);
 		}
 		if (rowDataBean.getColData("ISEXP") != null
@@ -37,9 +37,16 @@ public class Out extends AbsInterceptorDefaultAdapter {
 			String style = rowDataBean.getRowstyleproperty();
 			if (style == null)
 				style = "";
-			style += " style='background:#FF0000'";
+			style += " style='background:#FF0000'";//有效期小于90天则黄色提示
 			rowDataBean.setRowstyleproperty(style);
-		}
+		}else if (rowDataBean.getColData("ISEXP") != null
+					&& rowDataBean.getColData("ISEXP").equals("2")) {
+				String style = rowDataBean.getRowstyleproperty();
+				if (style == null)
+					style = "";
+				style += " style='background:#FFFF00'";
+				rowDataBean.setRowstyleproperty(style);
+			}
 	}
 
 	/**

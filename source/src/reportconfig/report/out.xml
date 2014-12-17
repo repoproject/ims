@@ -29,7 +29,62 @@
 			<sql>
 				<select>
 					<value>
-						<![CDATA[SELECT id ,cattype,(select codename from d_code where codetype='cattype' and  code = cattype )typename,(select codename from d_code where code=rtype and codetype='rtype')Rname, catno, catname, batchno, round(localprice, 2) localprice, round(price, 2) price, ( SELECT codename FROM d_code WHERE CODE = priceUnit AND codetype = 'money' ) priceUnit, total, expiredate,dealer, producer, CASE WHEN DATEDIFF(expiredate, CURRENT_DATE()) <= b_var.bizValue THEN "1" ELSE "0" END ISEXP FROM b_cat, b_var WHERE total > 0 AND bizkey = 'expireTime' and {#condition#} order by expiredate]]>
+						<![CDATA[
+								SELECT
+									id,
+									cattype,
+									(
+										SELECT
+											codename
+										FROM
+											d_code
+										WHERE
+											codetype = 'cattype'
+										AND CODE = cattype
+									) typename,
+									(
+										SELECT
+											codename
+										FROM
+											d_code
+										WHERE
+											CODE = rtype
+										AND codetype = 'rtype'
+									) Rname,
+									catno,
+									catname,
+									batchno,
+									round(localprice, 2) localprice,
+									round(price, 2) price,
+									(
+										SELECT
+											codename
+										FROM
+											d_code
+										WHERE
+											CODE = priceUnit
+										AND codetype = 'money'
+									) priceUnit,
+									total,
+									expiredate,
+									dealer,
+									producer,
+								DATEDIFF(expiredate, CURRENT_DATE()) KK,
+									CASE
+								WHEN DATEDIFF(expiredate, CURRENT_DATE()) <= b_var.bizValue THEN
+									"1"
+								WHEN DATEDIFF(expiredate, CURRENT_DATE()) <= 90 THEN
+									"2"
+								ELSE
+								  "0"
+								END ISEXP
+								FROM
+									b_cat,
+									b_var
+								WHERE
+									total > 0
+								AND bizkey = 'expireTime'
+								and {#condition#} order by expiredate]]>
 					</value>
 					<condition name="txtid" hidden="true">
 						<value>

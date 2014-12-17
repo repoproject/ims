@@ -113,8 +113,10 @@
 									CASE
 								WHEN DATEDIFF(expiredate, CURRENT_DATE()) <= b_var.bizValue THEN
 									"1"
+								WHEN DATEDIFF(expiredate, CURRENT_DATE()) <= 90 THEN
+									"2"
 								ELSE
-									"0"
+								  "0"
 								END ISEXP
 								FROM
 									b_cat,
