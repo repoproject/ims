@@ -57,7 +57,7 @@ public class OutAdd extends AbsInterceptorDefaultAdapter  {
 		String strRDate = "";
 		
 		//出庫的数量
-		int outNum=0;
+		double outNum=0.0;
 
 		//所属R类型
 		String strRtype= "";
@@ -86,7 +86,7 @@ public class OutAdd extends AbsInterceptorDefaultAdapter  {
 			stroutdate = mRowData.get("outdate").trim();
 			
 			//出库数量
-			outNum = Integer.parseInt(mRowData.get("num").trim());
+			outNum = Double.valueOf(mRowData.get("num").trim());
 			
 
 			// 调用函数获取上个月R统计时间
@@ -97,7 +97,7 @@ public class OutAdd extends AbsInterceptorDefaultAdapter  {
 
 		} catch (Exception e) {
 			log.error("获得货号、批号、数量或者出库时间失败:" + mRowData.get("catno") + " "
-					+ mRowData.get("batchno") + " " + mRowData.get("outdate")+Integer.parseInt(mRowData.get("num").trim())+e.toString());
+					+ mRowData.get("batchno") + " " + mRowData.get("outdate")+Double.valueOf(mRowData.get("num").trim())+e.toString());
 		}
 
 		if (editbean instanceof EditableReportInsertDataBean) {
@@ -107,7 +107,7 @@ public class OutAdd extends AbsInterceptorDefaultAdapter  {
 		//修改时的业务规则判断
 		else if (editbean instanceof EditableReportUpdateDataBean) {
 			
-			int cattotal=0;
+			double cattotal=0.0;
 			try {
 				//调用函数获取库存数量
 				cattotal = InOutRule.getcatTotal(strcatno, strbatchno, strprice);

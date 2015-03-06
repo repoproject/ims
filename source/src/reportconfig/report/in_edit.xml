@@ -53,7 +53,7 @@
 				
 				
                 <col column="num" label="数量*" >
-					<inputbox  jsvalidate="isNotEmpty(#label#不允许为空);isPosNumber(#label#必须是大于0的整数)"  />
+					<inputbox  jsvalidate="isNotEmpty(#label#不允许为空);isposNumeric(#label#必须是大于等于0的数字)"  />
 				</col>
 				<col column="price" label="单价*"  br="true" >
 					<inputbox styleproperty="disabled='disabled'"  jsvalidate="isNotEmpty(#label#不允许为空);isposNumeric(#label#必须是大于等于0的数字)" />

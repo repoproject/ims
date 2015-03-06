@@ -45,10 +45,10 @@ public class OutEdit extends AbsInterceptorDefaultAdapter  {
 		String strRDate = "";
 		
 		//准备更新的出库的数量
-		int newoutNum=0;
+		double newoutNum=0;
 		
 		//库存量
-		int itotal=0;
+		double itotal=0.0;
 		
 		//出库人
 		String strperson="";
@@ -79,10 +79,10 @@ public class OutEdit extends AbsInterceptorDefaultAdapter  {
 			stroutdate = mRowData.get("outdate").trim();
 			
 			//出库数量
-			newoutNum = Integer.parseInt(mRowData.get("num").trim());
+			newoutNum = Double.valueOf(mRowData.get("num").trim());
 			
 			//目前剩余的库存
-			itotal = Integer.parseInt(mRowData.get("total").trim());
+			itotal = Double.valueOf(mRowData.get("total").trim());
 			
 			
 			//出库人
@@ -96,7 +96,7 @@ public class OutEdit extends AbsInterceptorDefaultAdapter  {
 
 		} catch (Exception e) {
 			log.error("获得货号、批号、数量或者出库时间失败:" + mRowData.get("catno") + " "
-					+ mRowData.get("batchno") + " " + mRowData.get("outdate")+Integer.parseInt(mRowData.get("num").trim())+e.toString());
+					+ mRowData.get("batchno") + " " + mRowData.get("outdate")+Double.valueOf(mRowData.get("num").trim())+e.toString());
 		}
 
 		if (editbean instanceof EditableReportInsertDataBean) {
@@ -106,7 +106,7 @@ public class OutEdit extends AbsInterceptorDefaultAdapter  {
 		//修改时的业务规则判断
 		else if (editbean instanceof EditableReportUpdateDataBean) {
 			
-			int oldoutnum=0;
+			double oldoutnum=0.0;
 			try {
 				//调用函数获取出库人本次更新前已经出库的数量
 				oldoutnum = InOutRule.getoutTotalofPerson(strcatno, strbatchno, strprice, strperson);

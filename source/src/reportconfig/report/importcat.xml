@@ -15,7 +15,7 @@
 				<col column="price" label="单价" datatype="float" clickorderby="true"
 					width="4%"></col>
 				<col column="priceUnit" label="货币" clickorderby="true" width="3%"></col>
-				<col column="total" label="库存" clickorderby="true" datatype="int"
+				<col column="total" label="库存" clickorderby="true" 
 					width="4%"></col>
 				<col column="expiredate" label="有效期" datatype="date{yyyy-MM-dd}"
 					clickorderby="true" width="6%"></col>

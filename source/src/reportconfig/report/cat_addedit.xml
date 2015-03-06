@@ -29,7 +29,7 @@
 					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);" />
 				</col>
 				<col column="total" label="库存*" br="true">
-				    <inputbox type="textbox" jsvalidate="isNotEmpty(#label#不允许为空);isPosNumber(#label#必须是大于0的整数)" />
+				    <inputbox type="textbox" jsvalidate="isNotEmpty(#label#不允许为空);isposNumeric(#label#必须是大于等于0的数字)" />
 				</col>
 				
 				<col column="price" label="单价*" >

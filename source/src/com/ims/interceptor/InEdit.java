@@ -56,7 +56,7 @@ public class InEdit extends AbsInterceptorDefaultAdapter {
 		String strRDate = "";
 		
 		//入库的数量
-		int inNum=0;
+		double inNum=0.0;
 
 		try {
 			// 货号
@@ -72,7 +72,7 @@ public class InEdit extends AbsInterceptorDefaultAdapter {
 			strindate = mRowData.get("indate").trim();
 			
 			//入库数量
-			inNum = Integer.parseInt(mRowData.get("num").trim());
+			inNum = Double.valueOf(mRowData.get("num").trim());
 			
 
 			// 调用函数获取上个月R统计时间
@@ -83,7 +83,7 @@ public class InEdit extends AbsInterceptorDefaultAdapter {
 
 		} catch (Exception e) {
 			log.error("获得货号、名称、数量或者入库时间失败:" + mRowData.get("catno") + " "
-					+ mRowData.get("catname") + " " + mRowData.get("indate")+Integer.parseInt(mRowData.get("num").trim())+e.toString());
+					+ mRowData.get("catname") + " " + mRowData.get("indate")+Double.valueOf(mRowData.get("num").trim())+e.toString());
 		}
 
 		if (editbean instanceof EditableReportInsertDataBean) {
@@ -110,7 +110,7 @@ public class InEdit extends AbsInterceptorDefaultAdapter {
 			}
 
 			//调用函数获取出库数量
-			int outNum=0;
+			double outNum=0.0;
 			
 			try {
 				outNum = InOutRule.getoutTotal(strcatno, strbatchno, strprice);
