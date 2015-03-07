@@ -52,8 +52,8 @@
 			        </typeprompt>
 					</inputbox>
                  </col>  
-				<col column="machineNo" label="序号S/N*" br="true">
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+				<col column="machineNo" label="序号S/N" br="true">
+					<inputbox jsvalidate="isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
 				</col>
 
 				<col column="localprice" label="本地价格" displaytype="hidden">
@@ -144,7 +144,7 @@
 							expiredate,
 							price,
 							priceUnit,
-							localprice,
+							
 							dealer,
 							machineName,
 							machineNo,
@@ -166,7 +166,7 @@
 								trim(@{expiredate}),
 								trim(@{price}),
 								trim(@{priceUnit}),
-								trim(@{localprice}),
+								
 								trim(@{dealer}),
 							    trim(@{machineName}),
 							    trim(@{machineNo}),
@@ -189,7 +189,7 @@
 					 expiredate = trim(@{ expiredate }),
 					 price = trim(@{ price }),
 					 priceUnit = trim(@{ priceUnit }),
-					 localprice = trim(@{ localprice }),
+					 
 					 dealer = trim(@{dealer }),
 					 machineName = trim(@{machineName}),
 					 machineNo = trim(@{machineNo}),
