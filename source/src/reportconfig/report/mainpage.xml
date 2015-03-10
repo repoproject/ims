@@ -32,7 +32,7 @@
 									CONCAT(
 										date_format(b_cat.makedate, '%Y-%c-%d'),
 										'新入库',
-										IFNULL(b_in.num,0),
+										IFNULL(round(b_in.num,2),0),
 										'个批号为[',
 										b_cat.batchno,
 										']的',
@@ -115,7 +115,7 @@
 									b.total,
 									b.expiredate AS builtdate,
 									CONCAT(
-										IFNULL(b.total,0),
+										IFNULL(round(b.total, 2), 0),
 										'个',
 										b.batchno,
 										'还剩',
@@ -269,7 +269,7 @@
 								CONCAT(
 									b_in.person,
 									'入库',
-									IFNULL(b_in.num,0),
+									IFNULL(round(b_in.num,2),0),
 									'个',
 									b_in.catName,
 									'批号为[',
@@ -295,7 +295,7 @@
 									CONCAT(
 										b_out.person,
 										'出库',
-										IFNULL(b_out.num,0),
+										IFNULL(ROUND(b_out.num,2),0),
 										'个',
 										b_out.catName,
 										'批号为[',

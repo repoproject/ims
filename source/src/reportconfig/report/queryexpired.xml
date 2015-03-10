@@ -22,7 +22,7 @@
                     <col column="price" label="原始单价"  clickorderby="true" width="3%"></col>
 					<col column="priceUnit" label="货币"  clickorderby="true" width="3%"></col>
 					<col column="localprice" label="单价（RMB）"  clickorderby="true" width="6%"></col>	
-					<col column="num" label="数量" datatype="int" clickorderby="true" width="3%"></col>
+					<col column="num" label="数量"  clickorderby="true" width="3%"></col>
 					<col column="subtotal" label="小计(RMB)"  clickorderby="true" width="4%"></col>	
 					<col column="cause" label="Root Causes" clickorderby="true" width="8%"></col>					    
 					<col column="section" label="Sections"  clickorderby="true" width="4%"></col>

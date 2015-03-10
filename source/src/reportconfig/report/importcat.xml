@@ -6,7 +6,7 @@
 		<report id="report1" title="库存导入和维护" type="editablelist" cellresize="1" rowselect="multiple-checkbox" pagesize="13">
 			<display mouseoverbgcolor="CCCCCC">
 			<col column="{col-rowselect}" width="20"></col>
-				<col column="id" label="库ID" width="3%" />
+				<col column="id" label="库ID" width="3%"  clickorderby="true" />
 				<col column="cattype" label="类型" clickorderby="true"
 					width="3%"></col>
 				<col column="catname" label="名称" clickorderby="true" width="14%" />
@@ -15,7 +15,7 @@
 				<col column="price" label="单价" datatype="float" clickorderby="true"
 					width="4%"></col>
 				<col column="priceUnit" label="货币" clickorderby="true" width="3%"></col>
-				<col column="total" label="库存" clickorderby="true" datatype="int"
+				<col column="total" label="库存" clickorderby="true" 
 					width="4%"></col>
 				<col column="expiredate" label="有效期" datatype="date{yyyy-MM-dd}"
 					clickorderby="true" width="6%"></col>

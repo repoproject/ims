@@ -17,7 +17,7 @@
                     <col column="price" label="原始单价"  clickorderby="true" width="6%"></col>
 					<col column="priceUnit" label="货币"  clickorderby="true" width="3%"></col>
 					<col column="localprice" label="单价(RMB)"  clickorderby="true" width="6%"></col>	
-					<col column="total" label="库存" clickorderby="true" datatype="int" width="5%"></col>
+					<col column="total" label="库存" clickorderby="true" width="5%"></col>
 					<col column="subtotal" label="小计(RMB)"  clickorderby="true" width="7%"></col>
 					<col column="expiredate" label="有效期" datatype="date{yyyy-MM-dd}" clickorderby="true" width="8%"></col>
 					<col column="ISEXP" label="提醒"  displaytype="hidden"></col>

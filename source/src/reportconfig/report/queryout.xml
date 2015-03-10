@@ -16,7 +16,7 @@
 					<col column="catname" label="名称"  clickorderby="true" width="15%"/>
 					<col column="catno" label="货号"  clickorderby="true" width="8%"/>
 					<col column="batchno" label="批号" clickorderby="true" width="8%"></col>
-					<col column="num" label="数量" datatype="int" clickorderby="true" width="5%"></col>
+					<col column="num" label="数量"  clickorderby="true" width="5%"></col>
 					<col column="machinename" label="所属设备"  clickorderby="true" width="8%"/>
 					<col column="machineno" label="设备序号"  clickorderby="true" width="8%"/>
 					<col column="reason" label="出库原因" clickorderby="true" width="10%"></col>

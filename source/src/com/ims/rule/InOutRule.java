@@ -71,9 +71,9 @@ public class InOutRule {
      * @param strprice 单价
      * @return
      */
-    public static int getcatTotal(String strcatno ,String strbatchno,	String strprice)
+    public static double getcatTotal(String strcatno ,String strbatchno,	String strprice)
     {
-        int itotal = 0;
+        double itotal = 0.0;
 
         String strtotal ="";
         try{
@@ -82,11 +82,11 @@ public class InOutRule {
         strtotal = DBUtil.getOneValue(sql, strcatno, strbatchno,
                 strprice);
         // 查询出结果
-        itotal = Integer.parseInt(strtotal);
+        itotal = Double.valueOf(strtotal);
         }
         catch(Exception e)
         {
-            log.error("字符串转int失败:" + Integer.parseInt(strtotal)+e.toString());
+            log.error("字符串转int失败:" + Double.valueOf(strtotal)+e.toString());
         }
         return itotal;
     }
@@ -97,9 +97,9 @@ public class InOutRule {
      * @param strprice 单价
      * @return 获取指定货号、批号和单价的已经出库数量
      */
-    public static int getoutTotal(String strcatno ,String strbatchno,	String strprice)
+    public static double getoutTotal(String strcatno ,String strbatchno,	String strprice)
     {
-        int itotal = 0;
+        double itotal = 0.0;
         String strtotal = "";
         try {
             // 查询库库存信息
@@ -108,11 +108,11 @@ public class InOutRule {
                     strprice);
 
             // 查询出结果
-            itotal = Integer.parseInt(strtotal);
+            itotal = Double.valueOf(strtotal);
 
         } catch (Exception e) {
 
-            log.error("字符串转int失败:" + Integer.parseInt(strtotal)+e.toString());
+            log.error("字符串转int失败:" + Double.valueOf(strtotal)+e.toString());
         }
         return itotal;
     }
@@ -125,9 +125,9 @@ public class InOutRule {
     * @param strperson 出库人
     * @return 获取指定货号、批号、单价和某个出库人的已经出库数量
     */
-   public static int getoutTotalofPerson(String strcatno ,String strbatchno,String strprice,String strperson)
+   public static double getoutTotalofPerson(String strcatno ,String strbatchno,String strprice,String strperson)
    {
-       int itotal = 0;
+       double itotal = 0;
        String strtotal = "";
        try {
            // 查询库库存信息
@@ -136,11 +136,11 @@ public class InOutRule {
                    strprice,strperson);
 
            // 查询出结果
-           itotal = Integer.parseInt(strtotal);
+           itotal = Double.valueOf(strtotal);
 
        } catch (Exception e) {
 
-           log.error("字符串转int失败:" + Integer.parseInt(strtotal)+e.toString());
+           log.error("字符串转int失败:" + Double.valueOf(strtotal)+e.toString());
        }
        return itotal;
    }
@@ -153,9 +153,9 @@ public class InOutRule {
     * @param strprice 单价
     * @return 获取指定货号、批号和单价的已经入库数量
     */
-   public static int getinTotal(String strcatno ,String strbatchno,	String strprice)
+   public static double getinTotal(String strcatno ,String strbatchno,	String strprice)
    {
-       int itotal = 0;
+       double itotal = 0;
        String strtotal = "";
        try {
            // 查询库库存信息
@@ -164,11 +164,11 @@ public class InOutRule {
                    strprice);
 
            // 查询出结果
-           itotal = Integer.parseInt(strtotal);
+           itotal = Double.valueOf(strtotal);
 
        } catch (Exception e) {
 
-           log.error("字符串转int失败:" + Integer.parseInt(strtotal)+e.toString());
+           log.error("字符串转int失败:" + Double.valueOf(strtotal)+e.toString());
        }
        return itotal;
    }
@@ -182,18 +182,18 @@ public class InOutRule {
    public static boolean IsExitBatchno(String strcatno ,String strbatchno)
    {
 	   String strtotal ="";
-	   int itotal=0;
+	   double itotal=0;
 	   try{
 		// 查询库库存信息
            String sql = "select count(id) from b_cat where catno=? and batchno=? ";
            strtotal = DBUtil.getOneValue(sql, strcatno, strbatchno);
 
            // 查询出结果
-           itotal = Integer.parseInt(strtotal);
+           itotal = Double.valueOf(strtotal);
 	   }
 	   catch (Exception e) {
 
-           log.error("字符串转int失败:" + Integer.parseInt(strtotal)+e.toString());
+           log.error("字符串转int失败:" + Double.valueOf(strtotal)+e.toString());
        }
 	   //不存在相同货号的试剂，需要提示
 	   if(itotal<=0)

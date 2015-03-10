@@ -59,8 +59,8 @@ public class DeleteIn extends AbsInterceptorDefaultAdapter {
 		String strbatchno = "";
 		// 单价
 		String strprice = "";
-		int total = 0;
-		int delNum = 0;
+		double total = 0.0;
+		double delNum = 0.0;
 
 		try {
 
@@ -74,7 +74,7 @@ public class DeleteIn extends AbsInterceptorDefaultAdapter {
 			strRDate = format.format(Rrundate);
 
 			// 入库的数量
-			delNum = Integer.parseInt(row.get("num"));
+			delNum = Double.valueOf(row.get("num"));
 
 			// 货号
 			strcatno = row.get("catno").trim();
@@ -87,7 +87,7 @@ public class DeleteIn extends AbsInterceptorDefaultAdapter {
 			total = InOutRule.getcatTotal(strcatno, strbatchno, strprice);
 
 		} catch (Exception e) {
-			log.error("获得入库时间、货号、名称、单价等失败:" + Integer.parseInt(row.get("num"))
+			log.error("获得入库时间、货号、名称、单价等失败:" + Double.valueOf(row.get("num"))
 					+ e.toString());
 		}
 
@@ -102,7 +102,7 @@ public class DeleteIn extends AbsInterceptorDefaultAdapter {
 			}	
 
 			// 调用函数获取出库数量
-			int outNum = 0;
+			double outNum = 0.0;
 
 			try {
 				//如果有出库记录则不能删除

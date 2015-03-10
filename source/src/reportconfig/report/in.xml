@@ -33,8 +33,8 @@
 					<col column="catname" label="名称"  clickorderby="true" width="12%"/>
 					<col column="catno" label="货号"  clickorderby="true" width="10%"/>
 					<col column="batchno" label="批号"  clickorderby="true" width="10%"/>
-					<col column="num" label="数量"  datatype="int" clickorderby="true" width="4%"/>
-					<col column="total" label="库存"  datatype="int" clickorderby="true" width="4%"/>
+					<col column="num" label="数量"   clickorderby="true" width="4%"/>
+					<col column="total" label="库存"   clickorderby="true" width="4%"/>
 					<col column="price" label="单价"  datatype="float" clickorderby="true" width="6%"/>
 					<col column="priceUnit" label="货币"   clickorderby="true" width="3%"/>
 					<col column="Rname" label="R组"   clickorderby="true" width="4%"/>

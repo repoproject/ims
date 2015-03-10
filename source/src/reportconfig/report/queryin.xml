@@ -17,7 +17,7 @@
 					<col column="catno" label="货号"  clickorderby="true" width="10%"/>
 					<col column="batchno" label="批号"  clickorderby="true" width="10%"/>
 					<col column="seq" label="编号"  clickorderby="true" width="8%"  displaytype="hidden" />
-					<col column="num" label="数量"  datatype="int" clickorderby="true" width="6%"/>
+					<col column="num" label="数量"   clickorderby="true" width="6%"/>
 					<col column="price" label="单价"  clickorderby="true" width="8%"/>
 					<col column="priceUnit" label="货币"   clickorderby="true" width="4%"/>
 					<col column="person" label="入库人"  clickorderby="true" width="4%"/>

@@ -43,7 +43,7 @@
 				</col>
 				
 				<col column="num" label="出库数量*" >
-				    <inputbox type="textbox" jsvalidate="isNotEmpty(#label#不允许为空);isPosNumber(#label#必须是大于0的整数)"  />
+				    <inputbox type="textbox" jsvalidate="isNotEmpty(#label#不允许为空);isposNumeric(#label#必须是大于等于0的数字)"  />
 				</col>
 				<col column="reason" label="出库原因"  br="true">
 					<inputbox type="selectbox" inlinecount="5">
