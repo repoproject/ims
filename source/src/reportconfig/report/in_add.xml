@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
 	<page id="in_add" js="/webresources/script/validate.js,/webresources/script/wabacus_api.js,webresources/script/wabacus_editsystem.js,/js/localJS/in_add.js"  css="/webresources/component/tiny_mce/themes/advanced/skins/o2k7/ui.css">
-		<report id="report1" title="入库信息（请录入不含税单价）" type="form" interceptor="com.ims.interceptor.InAdd">
+		<report id="report1" title="入库信息" type="form" interceptor="com.ims.interceptor.InAdd">
 			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
 				<col column="ID" displaytype="hidden">
 				</col>
@@ -57,11 +57,11 @@
                 <col column="num" label="数量*" >
 					<inputbox  jsvalidate="isNotEmpty(#label#不允许为空);isposNumeric(#label#必须是大于等于0的数字)"  />
 				</col>
-				<col column="price" label="单价*"  br="true" >
-					<inputbox styleproperty="title='请录入不含税单价'"  jsvalidate="isNotEmpty(#label#不允许为空);isposNumeric(#label#必须是大于等于0的数字)" />
+				<col column="price" label="单价*" displaytype="hidden" >
+					<inputbox styleproperty="title='请录入不含税单价'"   jsvalidate="isNotEmpty(#label#不允许为空);isposNumeric(#label#必须是大于等于0的数字)" />
 				</col>
 				
-				<col column="priceUnit" label="货币" >
+				<col column="priceUnit" label="货币" displaytype="hidden" >
 					<inputbox type="selectbox" stypeproperty="size='300'">
 					    <option dataset="@{select codename,code from d_code where codetype='money'}" label="codename" value="code"></option>
 					</inputbox>
@@ -114,7 +114,7 @@
 				</select>
 				<insert>
 					insert into b_in(cattype,    catno,   catname,  batchno,    seq,  productdate,    expiredate,  indate,  num    ,producer    ,dealer,  reason    ,person  ,price   ,priceUnit, rtype   ,catFrom  ,remark,   machinename,         operator  ,makedate, modifydate)
-					        values(@{cattype},@{catno},@{catname},@{batchno},@{seq},@{productdate},@{expiredate},@{indate},@{num},@{producer},@{dealer},@{reason},@{person},@{price},@{priceUnit},@{rtype},@{catFrom},@{remark},@{machinename},session{nickname}, sysdate(),sysdate());
+					        values(@{cattype},@{catno},@{catname},@{batchno},@{seq},@{productdate},@{expiredate},@{indate},@{num},@{producer},@{dealer},@{reason},@{person},0,@{priceUnit},@{rtype},@{catFrom},@{remark},@{machinename},session{nickname}, sysdate(),sysdate());
 				</insert>
 			</sql>
 			<buttons>

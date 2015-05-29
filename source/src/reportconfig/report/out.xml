@@ -16,8 +16,8 @@
 					<col column="catname" label="名称"  clickorderby="true" width="18%"/>
 					<col column="catno" label="货号"  clickorderby="true" width="12%"/>					
 					<col column="batchno" label="批号" clickorderby="true" width="12%"></col>		
-					<col column="price" label="单价" datatype="float" clickorderby="true" width="8%"></col>
-					<col column="priceUnit" label="货币"  clickorderby="true" width="3%"></col>					
+					<col column="price" label="单价" datatype="float" clickorderby="true"  width="8%" displaytype="hidden"></col>
+					<col column="priceUnit" label="货币"  clickorderby="true" width="3%" displaytype="hidden"></col>					
 					<col column="total" label="库存" clickorderby="true"  width="5%"></col>
 					<col column="expiredate" label="有效期" datatype="date{yyyy-MM-dd}" clickorderby="true" width="10%"></col>
 					<col column="Rname" label="R组"   clickorderby="true" width="6%"/>
@@ -162,8 +162,8 @@
 					<col column="catno" label="货号"  clickorderby="true" width="11%"/>
 					<col column="catname" label="名称"  clickorderby="true" width="14%"/>
 					<col column="batchno" label="批号" clickorderby="true" width="11%"></col>
-					<col column="price" label="单价" datatype="float" clickorderby="true" width="6%"></col>
-					<col column="priceUnit" label="货币"  clickorderby="true" width="3%"></col>
+					<col column="price" label="单价" datatype="float" clickorderby="true"  displaytype="hidden"></col>
+					<col column="priceUnit" label="货币"  clickorderby="true"  displaytype="hidden"></col>
 					<col column="num" label="数量"  clickorderby="true" width="5%"></col>
 					<col column="machinename" label="设备"  clickorderby="true" width="10%"/>
 					<col column="machineno" label="设备序号"  clickorderby="true" width="8%"/>

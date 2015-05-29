@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
 	<page id="in_edit" js="/webresources/script/validate.js,/webresources/script/wabacus_api.js,webresources/script/wabacus_editsystem.js,/js/localJS/in.js"  css="/webresources/component/tiny_mce/themes/advanced/skins/o2k7/ui.css">
-		<report id="report1" title="入库信息(不能修改名称、货号、批号和单价)" type="form" interceptor="com.ims.interceptor.InEdit">
+		<report id="report1" title="入库信息(不能修改名称、货号和批号)" type="form" interceptor="com.ims.interceptor.InEdit">
 			<display labelbgcolor="#f0f0f0" labelalign="right" valuealign="left">
 				<col column="ID" displaytype="hidden">
 				</col>
@@ -55,11 +55,11 @@
                 <col column="num" label="数量*" >
 					<inputbox  jsvalidate="isNotEmpty(#label#不允许为空);isposNumeric(#label#必须是大于等于0的数字)"  />
 				</col>
-				<col column="price" label="单价*"  br="true" >
+				<col column="price" label="单价*"  displaytype="hidden" >
 					<inputbox styleproperty="disabled='disabled'"  jsvalidate="isNotEmpty(#label#不允许为空);isposNumeric(#label#必须是大于等于0的数字)" />
 				</col>
 				
-				<col column="priceUnit" label="货币" >
+				<col column="priceUnit" label="货币" displaytype="hidden" >
 					<inputbox type="selectbox" stypeproperty="size='300'">
 					    <option dataset="@{select codename,code from d_code where codetype='money'}" label="codename" value="code"></option>
 					</inputbox>

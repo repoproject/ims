@@ -18,8 +18,8 @@
 					<col column="batchno" label="批号"  clickorderby="true" width="10%"/>
 					<col column="seq" label="编号"  clickorderby="true" width="8%"  displaytype="hidden" />
 					<col column="num" label="数量"   clickorderby="true" width="6%"/>
-					<col column="price" label="单价"  clickorderby="true" width="8%"/>
-					<col column="priceUnit" label="货币"   clickorderby="true" width="4%"/>
+					<col column="price" label="单价"  clickorderby="true" width="8%" displaytype="hidden"/>
+					<col column="priceUnit" label="货币"   clickorderby="true" width="4%" displaytype="hidden"/>
 					<col column="person" label="入库人"  clickorderby="true" width="4%"/>
 					<col column="reason" label="入库原因"  clickorderby="true" width="10%"/>
 					<col column="dealer" label="供应商"  clickorderby="true" width="8%"/>
