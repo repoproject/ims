@@ -19,17 +19,17 @@
 					<col column="Rname" label="R组" clickorderby="true" width="3%" />
 					<col column="machinename" label="设备"  clickorderby="true" width="6%"/>
 					<col column="machineno" label="设备序号"  clickorderby="true" width="4%"/>
-                    <col column="price" label="原始单价"  clickorderby="true" width="3%"></col>
-					<col column="priceUnit" label="货币"  clickorderby="true" width="3%"></col>
-					<col column="localprice" label="单价（RMB）"  clickorderby="true" width="6%"></col>	
+                    <col column="price" label="原始单价"  clickorderby="true" width="3%" displaytype="hidden"></col>
+					<col column="priceUnit" label="货币"  clickorderby="true" width="3%" displaytype="hidden"></col>
+					<col column="localprice" label="单价（RMB）"  clickorderby="true" width="6%" displaytype="hidden"></col>	
 					<col column="num" label="数量"  clickorderby="true" width="3%"></col>
-					<col column="subtotal" label="小计(RMB)"  clickorderby="true" width="4%"></col>	
+					<col column="subtotal" label="小计(RMB)"  clickorderby="true" width="4%" displaytype="hidden"></col>	
 					<col column="cause" label="Root Causes" clickorderby="true" width="8%"></col>					    
 					<col column="section" label="Sections"  clickorderby="true" width="4%"></col>
 					<col column="remark" label="备注" clickorderby="true" width="5%"></col>
 				</display>
-				   <subdisplay>
-					    <statitems><!-- 定义要用到的统计项 -->
+				<!--   <subdisplay>
+					    <statitems>
 						     <statitem property="item1" value="count(*)" datatype="int"></statitem>
 						     <statitem property="item2" value="max(localprice)" datatype="float"></statitem>
 						     <statitem property="item3" value="min(localprice)" datatype="float"></statitem>
@@ -53,6 +53,7 @@
 						</value>
 					    </format>
 				   </subdisplay> 
+				    -->
 			<sql>
 				<select>
 					<value>

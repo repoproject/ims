@@ -22,10 +22,10 @@
 				<col column="total" label="库存" br="true">
 				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
-				<col column="price" label="单价" >
+				<col column="price" label="单价" displaytype="hidden" >
 				    <inputbox type="textbox" styleproperty="disabled='disabled'" />
 				</col>
-				<col column="priceUnit" label="货币" br="true">
+				<col column="priceUnit" label="货币" br="true" displaytype="hidden">
 					<inputbox type="selectbox" styleproperty="disabled='disabled'">
 					    <option dataset="@{select codename,code from d_code where codetype='money'}" label="codename" value="code"></option>
 					</inputbox>
@@ -65,7 +65,15 @@
 					
 				</col>
 				<col column="machineno" label="序号S/N*" br="true">
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);" />
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);stripscript(#label#不能含有特殊字符);"  >
+			        <typeprompt width="-1" count="200">
+				       <promptcol label="machineNo" matchmode="anywhere"></promptcol>
+				       <datasource>    
+				          <option dataset="@{SELECT  distinct  machineNo FROM b_machine WHERE  {#matchcondition#}}"></option> 
+                        </datasource>
+			        </typeprompt>
+			     </inputbox>	
+					
 				</col>
 				<col column="person" label="出库人*" >
 					<inputbox type="textbox"  styleproperty="disabled='disabled'"  jsvalidate="isNotEmpty(#label#不允许为空);" defaultvalue="session{nickname}"></inputbox>

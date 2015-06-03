@@ -6,27 +6,27 @@
 		<header>
 			<![CDATA[<p align="center"><font size="6"><b>查询库存</b></font></p>]]>
 		</header>	
-		<report id="report1" title="库存信息（如有外币货物则按照当前最新汇率计算）"  pagesize="13"   type="editablelist" interceptor="com.ims.interceptor.Out" >
+		<report id="report1" title="库存信息（如有外币货物则按照当前最新汇率计算）"  pagesize="11"   type="editablelist" interceptor="com.ims.interceptor.Out" >
 				<display mouseoverbgcolor="CCCCCC" >
 					<col column="{sequence:1}" label="序号" width="3%"/>
 					<col column="typename" label="类型" clickorderby="true" width="4%"></col>
 					<col column="id" label="ID"  displaytype="hidden"/>
 					<col column="catname" label="名称"  clickorderby="true" width="16%"/>
-					<col column="catno" label="货号"  clickorderby="true" width="7%"/>					
-					<col column="batchno" label="批号" clickorderby="true" width="6%"></col>		
-                    <col column="price" label="原始单价"  clickorderby="true" width="6%"></col>
-					<col column="priceUnit" label="货币"  clickorderby="true" width="3%"></col>
-					<col column="localprice" label="单价(RMB)"  clickorderby="true" width="6%"></col>	
+					<col column="catno" label="货号"  clickorderby="true" width="10%"/>					
+					<col column="batchno" label="批号" clickorderby="true" width="10%"></col>		
+                    <col column="price" label="原始单价"  clickorderby="true" width="6%" displaytype="hidden"></col>
+					<col column="priceUnit" label="货币"  clickorderby="true" width="3%" displaytype="hidden"></col>
+					<col column="localprice" label="单价(RMB)"  clickorderby="true" width="6%" displaytype="hidden"></col>	
 					<col column="total" label="库存" clickorderby="true" width="5%"></col>
-					<col column="subtotal" label="小计(RMB)"  clickorderby="true" width="7%"></col>
+					<col column="subtotal" label="小计(RMB)"  clickorderby="true" width="7%" displaytype="hidden" ></col>
 					<col column="expiredate" label="有效期" datatype="date{yyyy-MM-dd}" clickorderby="true" width="8%"></col>
 					<col column="ISEXP" label="提醒"  displaytype="hidden"></col>
 					<col column="Rname" label="R组" clickorderby="true" width="3%" />
-					<col column="dealer" label="供应商" clickorderby="true" width="11%"></col>
-					<col column="producer" label="生产商" clickorderby="true" width="11%"></col>
+					<col column="dealer" label="供应商" clickorderby="true" width="8%"></col>
+					<col column="producer" label="生产商" clickorderby="true" width="8%"></col>
 				</display>
-				   <subdisplay>
-					    <statitems><!-- 定义要用到的统计项 -->
+				 <!--   <subdisplay>
+					    <statitems>
 						     <statitem property="item1" value="count(*)" datatype="int"></statitem>
 						     <statitem property="item2" value="max(localprice)" datatype="float"></statitem>
 						     <statitem property="item3" value="min(localprice)" datatype="float"></statitem>
@@ -49,7 +49,8 @@
 						]]>
 						</value>
 					    </format>
-				   </subdisplay> 				
+				   </subdisplay> 
+				   定义要用到的统计项 -->				
 			<sql>
 				<select>
 					<value>
