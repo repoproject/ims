@@ -177,7 +177,7 @@
 					    </condition> 
 					    <condition name="txtbatchno" label="批号" labelposition="left"  >
 						     <value>
-							<![CDATA[(trimi.(batchno) like  '%#data#%' )]]>
+							<![CDATA[(trim(i.batchno) like  '%#data#%' )]]>
 						</value>						     
 					    </condition>
 
