@@ -149,7 +149,7 @@
 						
 						<condition name="txtcatname" label="名称" labelposition="left">
 						     <value>
-							<![CDATA[(trim(catname) like  '%#data#%' )]]>
+							<![CDATA[(trim(i.catname) like  '%#data#%' )]]>
 						</value>
 						 <inputbox>
 					    <typeprompt count="20" >
@@ -163,7 +163,7 @@
 					    </condition>
                         <condition name="txtcatno" label="货号" labelposition="left">
 						     <value>
-							<![CDATA[(trim(catno) like  '%#data#%' )]]>
+							<![CDATA[(trim(i.catno) like  '%#data#%' )]]>
 						</value>
 						 <inputbox>
 					    <typeprompt count="20" >
@@ -177,7 +177,7 @@
 					    </condition> 
 					    <condition name="txtbatchno" label="批号" labelposition="left"  >
 						     <value>
-							<![CDATA[(trim(batchno) like  '%#data#%' )]]>
+							<![CDATA[(trimi.(batchno) like  '%#data#%' )]]>
 						</value>						     
 					    </condition>
 
@@ -186,7 +186,7 @@
                         <condition name="txtperson"  label="" labelposition="left" defaultvalue="session{nickname}" >
 						   <inputbox type="textbox"  styleproperty="style=display:none"  ></inputbox>
 						     <value>
-							<![CDATA[(trim(person) like  '%#data#%' )]]>
+							<![CDATA[(trim(i.person) like  '%#data#%' )]]>
 						</value>						     
 					    </condition>											    
 				</select>
