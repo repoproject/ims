@@ -92,6 +92,9 @@
 							<option dataset="@{select codename,code from d_code where codetype='cattype'}" label="codename" value="code"></option>
 					</inputbox>					
 				</col>	
+				<col column="orderno" label="排序号*" >
+				    <inputbox type="textbox" jsvalidate="isNotEmpty(#label#不允许为空);isposNumeric(#label#必须是大于等于0的数字)" />
+				</col>
 			</display>
 			<sql>
 				<select>
@@ -118,7 +121,8 @@
 									b_cat.operator,
 									b_cat.makedate,
 									b_cat.modifydate,
-									b_cat.catFrom
+									b_cat.catFrom,
+									b_cat.orderno
 									FROM
 									b_cat
                                 where  {#condition#}]]>
@@ -149,7 +153,8 @@
 							machineName,
 							machineNo,
 							makedate,
-							modifydate
+							modifydate,
+							orderno
 						)
 						VALUES
 							(
@@ -171,7 +176,9 @@
 							    trim(@{machineName}),
 							    trim(@{machineNo}),
 								sysdate(),
-								sysdate()
+								sysdate(),
+								trim(@{orderno})
+								
 							);							
 				</insert>
 				<update>
@@ -193,7 +200,8 @@
 					 dealer = trim(@{dealer }),
 					 machineName = trim(@{machineName}),
 					 machineNo = trim(@{machineNo}),
-					 modifydate = sysdate()
+					 modifydate = sysdate(),
+					 orderno = trim(@{orderno})
 					where ID=@{ID__old};
 				</update>
 			</sql>
