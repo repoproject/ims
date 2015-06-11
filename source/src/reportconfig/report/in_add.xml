@@ -17,8 +17,8 @@
 					    <option dataset="@{select codename,code from d_code where codetype='inreason'}" label="codename" value="code"></option>
 					</inputbox>
 				</col>
-				
-				<col column="catname" label="名称*" >
+
+				<col column="catname" label="名称*"  >
 					<inputbox type="textbox" jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan200(#label#长度应小于等于200);" >
 					    <typeprompt count="20"  callbackmethod="testTypePromptCallBack1">
 							 <promptcol label="catname" value="catname" title="名称" matchmode="anywhere"></promptcol>					    
@@ -31,11 +31,21 @@
 					    </typeprompt>					
 					</inputbox>
 				</col>
-				<col column="catno" label="货号*" br="true" >
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);" >
 
+				<col column="catno" label="货号*"  br="true">
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);" >
+					    <typeprompt count="20"  callbackmethod="testTypePromptCallBack1">
+							 <promptcol label="catname" value="catname" title="名称" matchmode="anywhere"></promptcol>					    
+							 <promptcol label="catno" value="catno" title="货号" matchmode="anywhere"></promptcol>
+							 <promptcol label="seq" value="seq" title="编号" matchmode="anywhere"></promptcol>
+							 <promptcol label="machinename" value="machinename" title="设备" matchmode="anywhere"></promptcol>
+							      <datasource>
+							          <option dataset="@{select catno,catname,seq,machinename from d_catcode where {#matchcondition#}}"></option>       
+							      </datasource>
+					    </typeprompt>	
 					</inputbox>
-				</col>
+				</col>				
+
 				
 				<col column="batchno" label="批号*"  >
 					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);" />
@@ -114,7 +124,7 @@
 				</select>
 				<insert>
 					insert into b_in(cattype,    catno,   catname,  batchno,    seq,  productdate,    expiredate,  indate,  num    ,producer    ,dealer,  reason    ,person  ,price   ,priceUnit, rtype   ,catFrom  ,remark,   machinename,         operator  ,makedate, modifydate)
-					        values(@{cattype},@{catno},@{catname},@{batchno},@{seq},@{productdate},@{expiredate},@{indate},@{num},@{producer},@{dealer},@{reason},@{person},0,@{priceUnit},@{rtype},@{catFrom},@{remark},@{machinename},session{nickname}, sysdate(),sysdate());
+					        values(@{cattype},@{catno},@{catname},@{batchno},@{seq},@{productdate},@{expiredate},@{indate},@{num},@{producer},@{dealer},@{reason},@{person},0,0,@{rtype},@{catFrom},@{remark},@{machinename},session{nickname}, sysdate(),sysdate());
 				</insert>
 			</sql>
 			<buttons>

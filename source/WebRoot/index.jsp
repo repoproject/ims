@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*,java.text.*" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" import="java.util.*,java.text.*" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	String username = "";
 	username = (session.getAttribute("username")).toString();
@@ -169,7 +169,7 @@ $(function(){
 								<ul>
 								    <li id="userManage"></li>
 								 <!--   <li id="rateManage"></li> -->
-								    <li id="importcat"></li>
+								  <li id="importcat"></li> 
 								  <!--   <li id="price0"></li> -->
 									<li><a href="ShowReport.wx?PAGEID=equip" target="navTab" rel="userbaseinfo35" external="true" fresh="false">设备信息管理</a></li>
 									<li><a href="ChangePWD.jsp" target="dialog" rel="changepassword" width="600" mask="true">修改密码</a></li>
