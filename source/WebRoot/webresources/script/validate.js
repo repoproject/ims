@@ -234,6 +234,22 @@ function isNotLongerThan20( strValue,boxObj,paramsObj )
 }
 
 /**
+ * 含空格后比较30个字符长度
+ * @param strValue
+ * @param boxObj
+ * @param paramsObj
+ * @return
+ */
+function isNotLongerThan30( strValue,boxObj,paramsObj )
+{
+	//strValue=trim(strValue);
+	if( strValue.length <= 30 )
+		return true;
+	else
+		return false;
+}
+
+/**
  * 自动去掉空格后比较20个字符长度
  * @param strValue
  * @param boxObj
