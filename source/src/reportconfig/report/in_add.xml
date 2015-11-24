@@ -33,7 +33,7 @@
 				</col>
 
 				<col column="catno" label="货号*"  br="true">
-					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);" >
+					<inputbox jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan30(#label#长度应小于等于30);" >
 					    <typeprompt count="20"  callbackmethod="testTypePromptCallBack1">
 							 <promptcol label="catname" value="catname" title="名称" matchmode="anywhere"></promptcol>					    
 							 <promptcol label="catno" value="catno" title="货号" matchmode="anywhere"></promptcol>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <applications xmlns="http://www.wabacus.com"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.wabacus.com ../xsd/wabacus.applications.xsd">
@@ -30,7 +30,7 @@
 				</col>
 				
 				<col column="catno" label="货号*" br="true">
-					<inputbox   jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan20(#label#长度应小于等于20);" />
+					<inputbox   jsvalidate="isNotEmpty(#label#不允许为空);isNotLongerThan30(#label#长度应小于等于30);" />
 				</col>		
 					
 				<col column="seq" label="编号" br="true" >

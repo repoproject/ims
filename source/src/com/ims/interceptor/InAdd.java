@@ -113,9 +113,9 @@ public class InAdd extends AbsInterceptorDefaultAdapter {
 					return WX_RETURNVAL_SKIP;
 				}else
 				{
-					//开始保存，则在客户端弹出一个确认操作提示窗口				
-				rrequest.getWResponse().getMessageCollector().confirm("key"+mRowData.get("no"),"请注意！批号为[" +  strbatchno + "]的["
-						+strcatname + "]是第一次入库，需要继续保存吗？");
+//					//开始保存，则在客户端弹出一个确认操作提示窗口				
+//				rrequest.getWResponse().getMessageCollector().confirm("key"+mRowData.get("no"),"请注意！批号为[" +  strbatchno + "]的["
+//						+strcatname + "]是第一次入库，需要继续保存吗？");
 				}
 			}
 			super.doSavePerRow(rrequest, rbean, mRowData, mParamValues,

@@ -1,4 +1,4 @@
-var seconds = 0;//保存在线时间秒数
+﻿var seconds = 0;//保存在线时间秒数
 var flag = 0;//保存报警图片状态
 var warningID = null;
 
@@ -308,8 +308,8 @@ function checkFlash(){
 	var role = $("#roleFlag").val();
 	//高级用户分配用户管理权限
 	if(role == 1){
-		//导出出库
-		$("#exportOut").html('<a href="ShowReport.wx?PAGEID=exportout" target="navTab" rel="userbaseinfo25" external="true" fresh="false">导出出库</a>');
+		//导出出库  要求去掉权限校验
+		//$("#exportOut").html('<a href="ShowReport.wx?PAGEID=exportout" target="navTab" rel="userbaseinfo25" external="true" fresh="false">导出出库</a>');
 
 		//R统计权限
 		$("#RStatics").html('<a href="ShowReport.wx?PAGEID=Rstatics" target="navTab" rel="userbaseinfo25" external="true" fresh="false">库存统计</a>');

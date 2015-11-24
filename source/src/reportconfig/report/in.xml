@@ -6,7 +6,7 @@
 	    <header>
 			<![CDATA[<p align="center"><font size="6"><b>入库管理</b></font></p>]]>
 		</header>
-		<report id="report1" title="入库列表（只能增/删/改上次库存统计后还未出库的本人的入库操作）"  pagesize="13" cellresize="1"  rowselect="multiple-checkbox" type="editablelist" interceptor="com.ims.interceptor.DeleteIn" >
+		<report id="report1" title="入库列表（只能增/删/改上次库存统计后还未出库的本人的入库操作）"  pagesize="13" cellresize="1"  rowselect="multiple-checkbox" type="editablelist" interceptor="com.ims.interceptor.DeleteIn" dataexport="richexcel" >
 
 					<interceptor>
 	  					     <beforedisplay-perrow><!-- 通过显示每条记录前置动作的返回值控制当前记录行是否只读 -->
